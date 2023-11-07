@@ -1,5 +1,5 @@
 import nltk
-nltk.download('popular')
+# nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import pickle
@@ -10,11 +10,14 @@ model = load_model('model.h5')
 import json
 import random
 
-PROJECT_PATH = r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\flask_shrink_gpt"
+# PROJECT_PATH = r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\flask_shrink_gpt"
 
-intents = json.loads(open(PROJECT_PATH + r"\data.json").read())
-words = pickle.load(open(PROJECT_PATH + r"\texts.pkl",'rb'))
-classes = pickle.load(open(PROJECT_PATH + r"\labels.pkl",'rb'))
+intents = json.loads(open("data.json").read())
+words = pickle.load(open("texts.pkl",'rb'))
+classes = pickle.load(open("labels.pkl",'rb'))
+# intents = json.loads(open(PROJECT_PATH + r"\data.json").read())
+# words = pickle.load(open(PROJECT_PATH + r"\texts.pkl",'rb'))
+# classes = pickle.load(open(PROJECT_PATH + r"\labels.pkl",'rb'))
 
 def clean_up_sentence(sentence):
     # tokenize the pattern - split words into array
@@ -83,5 +86,5 @@ def get_bot_response():
 
 
 if __name__ == "__main__":
-    app.debug = True
     app.run()
+    # app.run(host="0.0.0.0", port=3000, debug=True)
