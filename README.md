@@ -1,6 +1,6 @@
 # ShrinkGPT.github.io
 AI Shrink chat bot with GPT
-
+ 
 
 # Virtual Environment
 1) create a virtual environment
