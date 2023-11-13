@@ -1,35 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+# ShrinkGPT.github.io
+AI Shrink chat bot with GPT
 
-<head>
-  <meta charset="UTF-8">
-  <title>Chatbot</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="style.css">
-</head>
 
-<body>
-  <div class="container chat">
-    <div class="container bubble right">
-      <img src="psychiatrist.png" alt="Avatar" class="img-right">
-      <p>Hello. How are you today?</p>
-      <span class="time-left">11:00</span>
-    </div>
+# Virtual Environment
+1) create a virtual environment
+    * python -m virtualenv venv
+2) Activate the environment
+    * venv\Scripts\activate
+3) To deactivate
+    * deactivate
 
-    <div class="container darker bubble left">
-      <img src="therapist.png" alt="Avatar" class="img-left">
-      <p>Hey! I'm fine. Thanks for asking!</p>
-      <span class="time-right">11:01</span>
-    </div>
+# Install Environment
+pip install -r requirements.txt
 
-    <div class="container darker bubble left">
-      <img src="therapist.png" alt="Avatar" class="img-left">
-      <p><button><a href="<ENTER_HERE_PATH_TO_THE_REAL_WEBSITE_(WITH HTTPS)>">Lets start new session</a></button></p>
-      <span class="time-right">11:05</span>
-    </div>
-  </div>
 
-</body>
-</html>
+# Docker
+1) cd flask_shrink_gpt
+<!-- 2) docker build -t flask_shrink_gpt .
+3) docker run -dp 127.0.0.1:3000:3000 flask_shrink_gpt -->
