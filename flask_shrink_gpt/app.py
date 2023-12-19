@@ -1,3 +1,19 @@
+import os
+import base64
+from io import BytesIO
+from flask import Flask, render_template, redirect, url_for, flash, session, abort, request, send_file
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
+from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, PasswordField, SubmitField
+from werkzeug.utils import secure_filename
+from wtforms.validators import Length, EqualTo, InputRequired
+import onetimepass
+import pyqrcode
+
 import nltk
 # nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
@@ -9,6 +25,8 @@ from keras.models import load_model
 model = load_model('model.h5')
 import json
 import random
+from io import BytesIO
+import imageio as iio
 
 # PROJECT_PATH = r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\flask_shrink_gpt"
 
@@ -18,6 +36,66 @@ classes = pickle.load(open("labels.pkl",'rb'))
 # intents = json.loads(open(PROJECT_PATH + r"\data.json").read())
 # words = pickle.load(open(PROJECT_PATH + r"\texts.pkl",'rb'))
 # classes = pickle.load(open(PROJECT_PATH + r"\labels.pkl",'rb'))
+
+# create application instance
+env = os.environ.get('FLASK_ENV', 'dev')
+
+db = SQLAlchemy()
+
+app = Flask(__name__)
+app.static_folder = 'static'
+
+# initialize extensions
+bootstrap:Bootstrap = None
+lm:LoginManager = None
+
+app.config.from_object('config')
+
+db.init_app(app)
+
+class User(UserMixin, db.Model):
+    """User model."""
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), index=True)
+    name = db.Column(db.String(64))
+    lastname = db.Column(db.String(64))
+    image_data = db.Column(db.LargeBinary, nullable=True)
+    image_filename = db.Column(db.String(20), nullable=True, default='/static/image/default.png')
+    password_hash = db.Column(db.String(128))
+    otp_secret = db.Column(db.String(16))
+
+    def __init__(self, **kwargs):
+        super(User, self).__init__(**kwargs)
+        if self.otp_secret is None:
+            # generate a random secret
+            self.otp_secret = base64.b32encode(os.urandom(10)).decode('utf-8')
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def get_totp_uri(self):
+        return f'otpauth://totp/Shrink.io:{self.username}?secret={self.otp_secret}&issuer=Shrink.io'
+
+    def verify_totp(self, token):
+        return onetimepass.valid_totp(token, self.otp_secret)
+
+with app.app_context():
+    
+    # initialize extensions        
+    bootstrap = Bootstrap(app)
+    # db = SQLAlchemy(app)
+    lm = LoginManager(app)
+    
+    db.create_all()
 
 def clean_up_sentence(sentence):
     # tokenize the pattern - split words into array
@@ -69,22 +147,197 @@ def chatbot_response(msg):
     res = getResponse(ints, intents)
     return res
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html', err_msg=e), 404
 
-from flask import Flask, render_template, request
+@app.route("/chat")
+def chat():
+    if current_user.is_authenticated == False:
+        # if user is logged in we get out of here
+        return render_template('404.html', err_msg="Access Denied, Please Login First."), 404    
+    
+    user = User.query.filter_by(username=current_user.username).first()
+    if user is None:
+        return redirect(url_for('index'))
+    return render_template("chat.html", user=user)
 
-app = Flask(__name__)
-app.static_folder = 'static'
-
-@app.route("/")
-def home():
-    return render_template("index.html")
+@app.route("/profile", methods=['GET', 'POST'])
+def profile():
+    if current_user.is_authenticated == False:
+        # if user is logged in we get out of here
+        return render_template('404.html', err_msg="Access Denied, Please Login First."), 404
+    
+    user = User.query.filter_by(username=current_user.username).first()
+    if user is None:
+        return redirect(url_for('index'))
+    
+    form = ProfileForm(obj=user)
+    if form.validate_on_submit():
+        form.populate_obj(user)
+        
+        if form.image.data is not None:
+            image = form.image.data
+            # Read the binary data of the image
+            image_data = image.read()
+            image_filename = image.filename
+            
+            user.image_data = image_data
+            user.image_filename = image_filename
+        
+        db.session.add(user)
+        # Commit the changes
+        db.session.commit()
+        
+    return render_template("profile.html", user=user, form=form)
 
 @app.route("/get")
 def get_bot_response():
     userText = request.args.get('msg')
     return chatbot_response(userText)
 
+@lm.user_loader
+def load_user(user_id):
+    """User loader callback for Flask-Login."""
+    return User.query.get(int(user_id))
+
+
+class RegisterForm(FlaskForm):
+    """Registration form."""
+    username = StringField('Username', validators=[InputRequired(), Length(1, 64)])
+    name = StringField('Name', validators=[InputRequired(), Length(1, 64)])
+    lastname = StringField('Lastname', validators=[InputRequired(), Length(1, 64)])
+    image = FileField('Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!')])
+    password = PasswordField('Password', validators=[InputRequired()])
+    password_again = PasswordField('Password again', validators=[InputRequired(), EqualTo('password')])
+    submit = SubmitField('Register')
+
+
+class LoginForm(FlaskForm):
+    """Login form."""
+    username = StringField('Username', validators=[InputRequired(), Length(1, 64)])
+    password = PasswordField('Password', validators=[InputRequired()])
+    token = StringField('Token', validators=[InputRequired(), Length(6, 6)])
+    submit = SubmitField('Login')
+
+class ProfileForm(FlaskForm):
+    """Profile form."""
+    name = StringField('Name', validators=[Length(1, 64)])
+    lastname = StringField('Lastname', validators=[Length(1, 64)])
+    image = FileField('Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!')])
+    submit = SubmitField('Save')
+
+
+@app.route('/')
+def index():
+    return render_template('index.html', user=current_user)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    """User registration route."""
+    if current_user.is_authenticated:
+        # if user is logged in we get out of here
+        return redirect(url_for('index'))
+    
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is not None:
+            flash('Username already exists.')
+            return redirect(url_for('register'))
+        
+        # add image
+        image = form.image.data
+        # Read the binary data of the image
+        if image is not None:
+            image_data = image.read()
+        else:
+            image_data = iio.imread("/static/image/default.png")
+        image_filename = image_data.filename
+            
+        
+        # add new user to the database
+        user = User(username=form.username.data, password=form.password.data, name=form.name.data, lastname=form.lastname.data, image_data=image_data, image_filename=image_filename)
+        db.session.add(user)
+        db.session.commit()
+
+        # redirect to the two-factor auth page, passing username in session
+        session['username'] = user.username
+        return redirect(url_for('two_factor_setup'))
+    return render_template('register.html', form=form)
+
+
+@app.route('/twofactor')
+def two_factor_setup():
+    if 'username' not in session:
+        return redirect(url_for('index'))
+    user = User.query.filter_by(username=session['username']).first()
+    if user is None:
+        return redirect(url_for('index'))
+    # since this page contains the sensitive qrcode, make sure the browser
+    # does not cache it
+    return render_template('two-factor-setup.html'), 200, {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'}
+
+
+@app.route('/qrcode')
+def qrcode():
+    if 'username' not in session:
+        abort(404)
+    user = User.query.filter_by(username=session['username']).first()
+    if user is None:
+        abort(404)
+
+    # for added security, remove username from session
+    del session['username']
+
+    # render qrcode for FreeTOTP
+    url = pyqrcode.create(user.get_totp_uri())
+    stream = BytesIO()
+    url.svg(stream, scale=3)
+    return stream.getvalue(), 200, {
+        'Content-Type': 'image/svg+xml',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'}
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """User login route."""
+    if current_user.is_authenticated:
+        # if user is logged in we get out of here
+        return redirect(url_for('index'))
+        
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.verify_password(form.password.data) or \
+                not user.verify_totp(form.token.data):
+            flash('Invalid username, password or token.')
+            return redirect(url_for('login'))
+
+        # log user in
+        login_user(user)
+        flash('You are now logged in!')
+        return redirect(url_for('index'))
+    return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+def logout():
+    """User logout route."""
+    logout_user()
+    return redirect(url_for('index'))
+
+@app.route('/get_image/<string:username>')
+def get_image(username):
+    user = User.query.filter_by(username=username).first()
+    return send_file(BytesIO(user.image_data), mimetype='image/jpeg')
+
 
 if __name__ == "__main__":
-    # app.run()
     app.run(host="127.0.0.1", port=5000, debug=True)

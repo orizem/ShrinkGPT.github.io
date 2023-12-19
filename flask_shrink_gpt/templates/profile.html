@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Shrink.io - Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="font-size: 100px; text-align: center; padding: 10px;">Hello, {{ user.name.title() }} {{ user.lastname.title() }}</h1>
+    
+    <img src="{{ url_for('get_image', username=user.username) }}" alt="{{ user.image_filename }}" style="max-width: 30%; height: auto;">
+    
+    {{ wtf.quick_form(form) }}
+    
+    {% block page_content %}{% endblock %}
+</div>
+<div class="container">
+</br>
+</br>
+</br>
+</div>
+{% endblock %}
