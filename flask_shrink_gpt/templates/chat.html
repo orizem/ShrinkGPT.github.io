@@ -3,18 +3,22 @@
 
 {% block title %}Shrink.io - Chat{% endblock %}
 
-{% block content %}
+
+{% block page_content %}
 <head>
   <meta charset="UTF-8">
-  <title>Shrink.io</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat.css') }}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<div class="container body">    
+<!-- Left Side Menu -->
+{% with previous_chats=previous_chats %}
+ {% include "chat_side_navbar.html" %}
+{% endwith %}
+
+<div class="container body" style="padding-top:3vw">    
     
       <!-- partial:index.partial.html -->
       <section class="msger">

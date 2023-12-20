@@ -1,7 +1,7 @@
 import os
 import base64
 from io import BytesIO
-from flask import Flask, render_template, redirect, url_for, flash, session, abort, request, send_file
+from flask import Flask, render_template, redirect, url_for, flash, session, abort, request, send_file, Response
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
@@ -27,8 +27,9 @@ import json
 import random
 from io import BytesIO
 import imageio as iio
+import time
 
-# PROJECT_PATH = r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\flask_shrink_gpt"
+PROJECT_PATH = r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\flask_shrink_gpt"
 
 intents = json.loads(open("data.json").read())
 words = pickle.load(open("texts.pkl",'rb'))
@@ -160,7 +161,27 @@ def chat():
     user = User.query.filter_by(username=current_user.username).first()
     if user is None:
         return redirect(url_for('index'))
-    return render_template("chat.html", user=user)
+    
+    previous_chats = [
+        {"id": 1, "name": "Chat 1", "content": "Chat 1 Content..."},
+        {"id": 2, "name": "Chat 2", "content": "Chat 2 Content..."},
+        # Add more chat entries as needed
+    ]
+    return render_template("chat.html", user=user, previous_chats=previous_chats)
+
+@app.route('/get_chat/<int:chat_id>')
+def get_chat(chat_id):
+    previous_chats = [
+        {"id": 1, "name": "Chat 1", "content": "Chat 1 Content..."},
+        {"id": 2, "name": "Chat 2", "content": "Chat 2 Content..."},
+        # Add more chat entries as needed
+    ]
+    # Fetch chat content based on chat_id (you can modify this based on your data source)
+    chat = next((chat for chat in previous_chats if chat['id'] == chat_id), None)
+    if chat:
+        return render_template('chat_content.html', chat=chat)
+    else:
+        return render_template('404.html', err_msg="Chat not found"), 404
 
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
@@ -217,7 +238,7 @@ class LoginForm(FlaskForm):
     """Login form."""
     username = StringField('Username', validators=[InputRequired(), Length(1, 64)])
     password = PasswordField('Password', validators=[InputRequired()])
-    token = StringField('Token', validators=[InputRequired(), Length(6, 6)])
+    token = StringField('Token', validators=[InputRequired(), Length(6, 6)], render_kw={'autocomplete': 'off'})
     submit = SubmitField('Login')
 
 class ProfileForm(FlaskForm):
@@ -338,6 +359,33 @@ def get_image(username):
     user = User.query.filter_by(username=username).first()
     return send_file(BytesIO(user.image_data), mimetype='image/jpeg')
 
+def generate_slide_show():
+    i = 0
+    while True:
+        images = get_all_images()
+        image_name = images[i]
+        im = open(rf'{PROJECT_PATH}\static\image\\' + image_name, 'rb').read()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + im + b'\r\n')
+        i += 1
+        if i >= len(images):
+            i = 0
+        time.sleep(5)
+
+def get_all_images():
+    image_folder = rf'{PROJECT_PATH}\static\image'
+    images = [img for img in os.listdir(image_folder)
+              if img.startswith("WhatsApp") and
+              (img.endswith(".jpg") or
+              img.endswith(".jpeg") or
+              img.endswith("png"))]
+    return images
+
+@app.route('/slideshow')
+def slideshow():
+    return Response(generate_slide_show(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True) # public
+    # app.run(host="127.0.0.1", port=8080, debug=True)

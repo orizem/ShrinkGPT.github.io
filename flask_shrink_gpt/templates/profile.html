@@ -3,15 +3,23 @@
 
 {% block title %}Shrink.io - Profile{% endblock %}
 
-{% block content %}
-<div class="container">
-    <h1 style="font-size: 100px; text-align: center; padding: 10px;">Hello, {{ user.name.title() }} {{ user.lastname.title() }}</h1>
+{% block page_content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<div class="container sio-container">
+    <h1 class="sio-h1">Hello, {{ user.name.title() }} {{ user.lastname.title() }}</h1>
     
-    <img src="{{ url_for('get_image', username=user.username) }}" alt="{{ user.image_filename }}" style="max-width: 30%; height: auto;">
+    <img class="sio-img" src="{{ url_for('get_image', username=user.username) }}" alt="{{ user.image_filename }}">
     
-    {{ wtf.quick_form(form) }}
-    
-    {% block page_content %}{% endblock %}
+    <div class="sio-form">
+        {{ wtf.quick_form(form) }}
+    </div>
 </div>
 <div class="container">
 </br>
