@@ -1,0 +1,32 @@
+.sio-h1 {
+    font-size: 4vi; 
+    text-align: center;
+}
+
+.sio-container {
+    padding-top:5vw;
+}
+
+.sio-img {
+    max-width: 30%; 
+    height: auto;
+}
+
+.sio-form {
+    padding-top: 4vi;
+    width: 50%;
+}
+
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+    .sio-h1 {
+        padding-top: 10vi;
+        font-size: 4vi; 
+        text-align: center;
+    }
+
+    .sio-form {
+        padding-top: 15vi;
+        width: 100%;
+    }
+} 

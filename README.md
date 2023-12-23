@@ -15,6 +15,6 @@ pip install -r requirements.txt
 
 
 # Docker
-1) cd flask_shrink_gpt
-<!-- 2) docker build -t flask_shrink_gpt .
-3) docker run -dp 127.0.0.1:3000:3000 flask_shrink_gpt -->
+1) cd website
+<!-- 2) docker build -t website .
+3) docker run -dp 127.0.0.1:3000:3000 website -->

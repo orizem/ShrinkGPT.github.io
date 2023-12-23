@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Shrink.io - Page Not Found (404){% endblock %}
+
+{% block content %}
+<div class="container">
+    
+    <h2 style="font-size: 80px;">Page Not Found (404)</h2>
+    <p style="font-size: 30px;">{{ err_msg }}</p>
+
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
