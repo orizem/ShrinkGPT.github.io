@@ -14,12 +14,11 @@
 </head>
 
 <!-- Left Side Menu -->
-{% with previous_chats=previous_chats %}
+{% with previous_chats=user.chats %}
   {% include "chat_side_navbar.html" %}
 {% endwith %}
 
 <div class="container body" style="padding-top:3vw">    
-    
       <!-- partial:index.partial.html -->
       <section class="msger">
         <header class="msger-header">
@@ -29,13 +28,13 @@
     </header>
 
     <main class="msger-chat">
+      {% if chat_data == -1  %}
       <div class="msg left-msg">
         <div class="msg-img" style="background-image: url(https://marketplace.canva.com/EAFCO6pfthY/1/0/1600w/canva-blue-green-watercolor-linktree-background-F2CyNS5sQdM.jpg)"></div>
 
         <div class="msg-bubble">
           <div class="msg-info">
             <div class="msg-info-name">Shrink.io</div>
-            <div class="msg-info-time">12:45</div>
           </div>
 
           <div class="msg-text">
@@ -43,7 +42,7 @@
           </div>
         </div>
       </div>
-
+      {% endif %}
     </main>
 
     <form class="msger-inputarea">
@@ -65,19 +64,43 @@
     const PERSON_IMG = "{{ url_for('views.get_image', username=user.username) }}";
     const BOT_NAME = "Shrink.io";
     const PERSON_NAME = "You";
+    fisrtTime = 1;
+    chatId = -1;
 
+    // Load previous chats 
+    messages = {{ chat_data|tojson|safe }}
+    if (messages != -1) {
+      chatId = {{ chat_id }};
+      
+      for (var chat of messages) {
+        // alert(chat.text);
+
+        if (chat.identifier == "bot") {
+          var name =  BOT_NAME;
+          var img = BOT_IMG;
+          var side = "left";
+        }
+        else {
+          var name =  PERSON_NAME;
+          var img = PERSON_IMG;
+          var side = "right";
+        }
+        appendMessage(name, img, side, chat.text, chat.date_time);
+      }
+    }
+    
     msgerForm.addEventListener("submit", event => {
       event.preventDefault();
 
       const msgText = msgerInput.value;
       if (!msgText) return;
 
-      appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+      appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText, formatDate(new Date()));
       msgerInput.value = "";
       botResponse(msgText);
     });
 
-    function appendMessage(name, img, side, text) {
+    function appendMessage(name, img, side, text, time) {
       //   Simple solution for small apps
       const msgHTML = `
 <div class="msg ${side}-msg">
@@ -86,7 +109,7 @@
   <div class="msg-bubble">
     <div class="msg-info">
       <div class="msg-info-name">${name}</div>
-      <div class="msg-info-time">${formatDate(new Date())}</div>
+      <div class="msg-info-time">${time}</div>
     </div>
 
     <div class="msg-text">${text}</div>
@@ -94,21 +117,24 @@
 </div>
 `;
 
-      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+    msgerChat.insertAdjacentHTML("beforeend", msgHTML);
       msgerChat.scrollTop += 500;
     }
 
     function botResponse(rawText) {
-
+      dateTime = formatDate(new Date())
       // Bot Response
-      $.get("/get", { msg: rawText }).done(function (data) {
+      $.get("/get", { msg: rawText, fisrtTime: fisrtTime, dateTime: dateTime, chatId: chatId }).done(function (data) {
+        // Start of the chat conversation indication
+        if (fisrtTime == 1) {
+          fisrtTime = 0;
+        }
+
         console.log(rawText);
         console.log(data);
         const msgText = data;
-        appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-
+        appendMessage(BOT_NAME, BOT_IMG, "left", msgText, dateTime);
       });
-
     }
 
 

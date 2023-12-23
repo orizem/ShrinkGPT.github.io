@@ -3,33 +3,33 @@
 from time import sleep
 from os import listdir
 from io import BytesIO
+from json import dumps
 from flask import Blueprint, render_template
 from flask import render_template, redirect, url_for, request, send_file, Response
 from flask_login import current_user
 
 # LOCAL IMPORTS
-from .models import User
+from .models import User, Chat
 from .chatbot import ChatBot
 
 PROJECT_PATH = r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\website"
-SECRET_KEY = 'your_secret_key'
 
 views = Blueprint('views', __name__)
 chat_bot = ChatBot()
 
 # FUNCTIONS
 def generate_slide_show():
-    i = 0
+    images = get_all_images()
+    
+    # Instantly load image without sleep
+    with open(rf'{PROJECT_PATH}\static\image\{images[-1]}', 'rb') as img_file:
+        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + img_file.read() + b'\r\n') 
+        
     while True:
-        images = get_all_images()
-        image_name = images[i]
-        im = open(rf'{PROJECT_PATH}\static\image\{image_name}', 'rb').read()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + im + b'\r\n')
-        i += 1
-        if i >= len(images):
-            i = 0
-        sleep(5)
+        for image_name in images:
+            with open(rf'{PROJECT_PATH}\static\image\{image_name}', 'rb') as img_file:
+                yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + img_file.read() + b'\r\n') 
+            sleep(5)
 
 def get_all_images():
     image_folder = rf'{PROJECT_PATH}\static\image'
@@ -91,35 +91,74 @@ def chat():
     if user is None:
         return redirect(url_for('views.index'))
     
-    previous_chats = [
-        {"id": 1, "name": "Chat 1", "content": "Chat 1 Content..."},
-        {"id": 2, "name": "Chat 2", "content": "Chat 2 Content..."},
-        # Add more chat entries as needed
-    ]
-    return render_template("chat.html", user=user, previous_chats=previous_chats)
+    return render_template("chat.html", user=user, chat_data=-1)
 
 
 @views.route('/get_chat/<int:chat_id>')
 def get_chat(chat_id):
-    previous_chats = [
-        {"id": 1, "name": "Chat 1", "content": "Chat 1 Content..."},
-        {"id": 2, "name": "Chat 2", "content": "Chat 2 Content..."},
-        # Add more chat entries as needed
-    ]
-    # Fetch chat content based on chat_id (you can modify this based on your data source)
-    chat = next((chat for chat in previous_chats if chat['id'] == chat_id), None)
-    if chat:
-        return render_template('chat_content.html', chat=chat)
-    else:
-        return render_template('404.html', err_msg="Chat not found"), 404
+    if current_user.is_authenticated == False:
+        # if user is logged in we get out of here
+        return redirect(url_for('views.index')) # render_template('404.html', err_msg="Access Denied, Please Login First."), 404    
+    
+    user = User.query.filter_by(username=current_user.username).first()
+    if user is None:
+        return redirect(url_for('views.index'))
+    
+    chat_data = Chat.query.filter_by(user_id=current_user.id, id=chat_id).first()
+    if user is None:
+        return redirect(url_for('views.index'))
+    
+    return render_template("chat.html", user=user, chat_data=chat_data.chat, chat_id=chat_id)
 
 @views.route("/get")
 def get_bot_response():
-    userText = request.args.get('msg')
-    return chat_bot.chatbot_response(userText)
+    from .models import db
+    
+    user = User.query.filter_by(username=current_user.username).first()
+    if user is None:
+        return redirect(url_for('views.index'))
+    
+    chat_id = int(request.args.get('chatId'))
+    fisrt_time = request.args.get('fisrtTime')
+    user_msg = request.args.get('msg')
+    date_time = request.args.get('dateTime')
+    
+    if chat_id != -1:
+        current_chat = Chat.query.filter_by(user_id=current_user.id, id=chat_id).first()
+    else:   
+        if fisrt_time == "1":
+            welcome_response = {
+                "identifier": "bot", 
+                "text": f"Hi { user.name.title() }, welcome to Shrink.io! Go ahead and send me a message.", 
+                "date_time": date_time
+            }
+            new_chat = Chat(name=f"Chat_{len(user.chats)}", chat_json=dumps([welcome_response]), user_id=current_user.id)
+            db.session.add(new_chat)
+            db.session.commit()
+        current_chat = user.chats[-1]
+
+    existing_messages = current_chat.chat
+    
+    # TODO: Check for the real date time parameter for user (currently using the bot's time)
+    new_message = {"identifier": "user", "text": user_msg, "date_time": date_time}
+    existing_messages.append(new_message)
+    
+    bot_response = chat_bot.chatbot_response(user_msg)
+    new_message = {"identifier": "bot", "text": bot_response, "date_time": date_time}
+    existing_messages.append(new_message)
+    
+    current_chat.chat = existing_messages
+    
+    # Update chat history
+    db.session.add(current_chat)
+    db.session.commit()
+    return bot_response
 
 @views.route('/get_image/<string:username>')
 def get_image(username):
+    if current_user.username != username:
+        return redirect(url_for('views.index'))
+    
     user = User.query.filter_by(username=username).first()
     if (user is not None) and (user.image_data is not None):
         return send_file(BytesIO(user.image_data), mimetype='image/jpeg')

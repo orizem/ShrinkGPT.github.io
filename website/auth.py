@@ -33,11 +33,11 @@ def register():
             return redirect(url_for('auth.register'))
         
         # add image
-        image = form.image.data
         # Read the binary data of the image
-        if image is not None:
+        if form.image.data is not None:
+            image = form.image.data
             image_data = image.read()
-            image_filename = image_data.filename
+            image_filename = image.filename
         else:
             image_data = None
             image_filename = "default.png"

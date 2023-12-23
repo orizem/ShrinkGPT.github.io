@@ -1,5 +1,6 @@
 # models.py
 
+from json import loads, dumps
 from os import urandom
 from base64 import b32encode
 from onetimepass import valid_totp
@@ -20,6 +21,7 @@ class User(UserMixin, db.Model):
     image_filename = db.Column(db.String(20), nullable=True, default='/static/image/default.png')
     password_hash = db.Column(db.String(128))
     otp_secret = db.Column(db.String(16))
+    chats = db.relationship('Chat', backref=db.backref('chats', lazy=True)) # Creating a relationship with the User model
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -43,3 +45,30 @@ class User(UserMixin, db.Model):
 
     def verify_totp(self, token):
         return valid_totp(token, self.otp_secret)
+    
+class Chat(UserMixin, db.Model):
+    """Chat model."""
+    __tablename__ = 'chats'
+    id = db.Column(db.Integer, primary_key=True)
+    __name = db.Column(db.String(20), nullable=False)
+    chat_json = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    
+    def __init__(self, **kwargs):
+        super(Chat, self).__init__(**kwargs)
+        
+    @property
+    def chat(self):
+        return loads(self.chat_json) if self.chat_json else []
+
+    @chat.setter
+    def chat(self, value):
+        self.chat_json = dumps(value)
+        
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name):
+        self.__name = name
