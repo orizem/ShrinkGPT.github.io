@@ -14,7 +14,7 @@
 
 <div class="container sio-container">
     <h1 class="sio-h1">Hello, {{ user.name.title() }} {{ user.lastname.title() }}</h1>
-    <h2> {{ url_for('views.get_image', username=user.username) }} </h2>
+
     <img class="sio-img" src="{{ url_for('views.get_image', username=user.username) }}" alt="{{ user.image_filename }}">
     
     <div class="sio-form">

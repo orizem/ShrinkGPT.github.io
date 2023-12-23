@@ -12,11 +12,35 @@ from .models import User
 from .chatbot import ChatBot
 
 PROJECT_PATH = r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\website"
+SECRET_KEY = 'your_secret_key'
 
 views = Blueprint('views', __name__)
 chat_bot = ChatBot()
 
+# FUNCTIONS
+def generate_slide_show():
+    i = 0
+    while True:
+        images = get_all_images()
+        image_name = images[i]
+        im = open(rf'{PROJECT_PATH}\static\image\{image_name}', 'rb').read()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + im + b'\r\n')
+        i += 1
+        if i >= len(images):
+            i = 0
+        sleep(5)
 
+def get_all_images():
+    image_folder = rf'{PROJECT_PATH}\static\image'
+    images = [img for img in listdir(image_folder)
+              if img.startswith("WhatsApp") and
+              (img.endswith(".jpg") or
+              img.endswith(".jpeg") or
+              img.endswith("png"))]
+    return images
+
+# ROUTES
 @views.route('/')
 def index():
     return render_template('index.html', user=current_user)
@@ -94,33 +118,12 @@ def get_bot_response():
     userText = request.args.get('msg')
     return chat_bot.chatbot_response(userText)
 
-
 @views.route('/get_image/<string:username>')
 def get_image(username):
     user = User.query.filter_by(username=username).first()
-    return send_file(BytesIO(user.image_data), mimetype='image/jpeg')
-
-def generate_slide_show():
-    i = 0
-    while True:
-        images = get_all_images()
-        image_name = images[i]
-        im = open(rf'{PROJECT_PATH}\static\image\\' + image_name, 'rb').read()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + im + b'\r\n')
-        i += 1
-        if i >= len(images):
-            i = 0
-        sleep(5)
-
-def get_all_images():
-    image_folder = rf'{PROJECT_PATH}\static\image'
-    images = [img for img in listdir(image_folder)
-              if img.startswith("WhatsApp") and
-              (img.endswith(".jpg") or
-              img.endswith(".jpeg") or
-              img.endswith("png"))]
-    return images
+    if (user is not None) and (user.image_data is not None):
+        return send_file(BytesIO(user.image_data), mimetype='image/jpeg')
+    return send_file(rf"{PROJECT_PATH}\static\image\default.png", mimetype='image/jpeg')
 
 @views.route('/slideshow')
 def slideshow():

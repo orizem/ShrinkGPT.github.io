@@ -12,6 +12,8 @@ from flask_login import login_user, logout_user, current_user
 # LOCAL IMPORTS
 from .models import User, db
 
+PROJECT_PATH = r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\website"
+
 auth = Blueprint('auth', __name__)
     
 @auth.route('/register', methods=['GET', 'POST'])
@@ -35,13 +37,21 @@ def register():
         # Read the binary data of the image
         if image is not None:
             image_data = image.read()
+            image_filename = image_data.filename
         else:
-            image_data = imread("/static/image/default.png")
-        image_filename = image_data.filename
-            
+            image_data = None
+            image_filename = "default.png"
         
         # add new user to the database
-        user = User(username=form.username.data, password=form.password.data, name=form.name.data, lastname=form.lastname.data, image_data=image_data, image_filename=image_filename)
+        user_data = {
+            "username": form.username.data,
+            "password": form.password.data,
+            "name": form.name.data,
+            "lastname": form.lastname.data,
+            "image_data": image_data,
+            "image_filename": image_filename,
+        }
+        user = User(**user_data)
         db.session.add(user)
         db.session.commit()
 
