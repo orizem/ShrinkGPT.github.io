@@ -212,6 +212,28 @@ transform: translate(0, -9px) rotate(45deg);
   height: auto;
   z-index:3;
 }
+
+.prev-chat{
+  width: auto;
+  border-bottom: 1pt solid rgba(44, 44, 44, 0.5);
+  border-radius: 10pt;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.edit-chat-name { 
+  display: none;
+}
+
+.prev-chat:hover {
+  background-image: linear-gradient(to right, rgb(221, 219, 219), rgba(255,0,0,0));
+}
+
+.prev-chat:hover .edit-chat-name {
+  display: hidden;
+}
   
 /* Slide in animation */
 @-moz-keyframes slidein {

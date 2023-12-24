@@ -2,7 +2,7 @@
 
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, HiddenField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, InputRequired
 
 class RegisterForm(FlaskForm):
@@ -28,3 +28,8 @@ class ProfileForm(FlaskForm):
     lastname = StringField('Lastname', validators=[Length(1, 64)])
     image = FileField('Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!')])
     submit = SubmitField('Save')
+
+class ChatEdit(FlaskForm):
+    """Profile form."""
+    name = StringField('Name', validators=[Length(1, 20)])
+    

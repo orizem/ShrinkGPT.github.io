@@ -15,9 +15,56 @@
             $('#msb').toggleClass('msb-x');
         });
         
+         $(document).ready(function(){
+            $('.prev-chat').hover(function() {
+                $(this).find('.edit-chat-name').toggle();
+              }
+            );
+
+            $(".edit-chat-name").click(function () {
+                var $a = $(this).parent().find("a")
+                var id = $a.attr("id");
+                var $span = $(this);
+
+
+                $a.attr('href', function(_, currentHref) {
+                    return currentHref === '#' ? `/get_chat/${id}` : '#';
+                });
+
+                if ($a.attr('href') === '#') {
+                    $a.find("input").css("border", "2px solid #8a8a8a");
+                    $a.find("input").css("border-radius", "4px");
+                    $a.find("input").prop("readonly", false);
+
+                    // TODO: Fix replace icon makes display to be none
+                    //if ($span.hasClass("fa-edit")) {
+                    //    $span.removeClass("fa-edit");
+                    //}
+                    //$span.addClass("fa-thumbs-up");
+                }
+                else {
+                    $a.find("input").css("border", "none");
+                    $a.find("input").prop("readonly", true);
+
+                    if ($span.hasClass("fa-thumbs-up")) {
+                        $span.removeClass("fa-thumbs-up");
+                    }
+                    $span.addClass("fa-edit");
+
+                    new_name = $a.find("input").val()
+                    $.get("/chat-edit", { name: new_name, id: id }); /* Send request to change name of this chat */
+                }
+            });
+        });
+        
         function barIconAnimate(x) {
             x.classList.toggle("change");
         }
+        
+        function editChatName() {
+            
+        }
+
     </script>
 
 </head>
@@ -38,8 +85,8 @@
             <div class="brand-wrapper">
                 <!-- Brand -->
                 <div class="brand-name-wrapper">
-                    <a class="navbar-brand">
-                        Chat History
+                    <a class="navbar-brand" href="/chat">
+                        New Chat
                     </a>
                 </div>
             </div>
@@ -47,9 +94,15 @@
 
         <!-- Main Menu -->
         <div class="side-menu-container">
-            <ul class="nav navbar-nav" id="chat-list">
+            <ul class="nav navbar-nav">
                 {% for chat in previous_chats %}
-                    <li><a href="{{ url_for('views.get_chat', chat_id=chat.id) }}"><i class="fa-duotone fa-comments"></i> {{ chat.name }}</a></li>
+                    <li class="prev-chat" style="white-space: nowrap; padding-top:10pt; padding-bottom:10pt;">
+                        <a href="{{ url_for('views.get_chat', chat_id=chat.id) }}" id="{{ chat.id }}" style="display:inline;" draggable="false">
+                            <i class="fas fa-duotone fa-comments"></i> 
+                            {{ name_form.name(value=chat.name, style="all:unset; width:55%;", readonly=True) }}
+                        </a>     
+                        <span style="margin-left:0pt;" class="fas fa-edit edit-chat-name" style="display:inline;"></span>
+                    </li>
                 {% endfor %}
             </ul>
         </div><!-- /.navbar-collapse -->

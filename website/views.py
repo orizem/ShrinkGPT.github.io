@@ -83,6 +83,8 @@ def profile():
 
 @views.route("/chat")
 def chat():
+    from .forms import ChatEdit
+
     if current_user.is_authenticated == False:
         # if user is logged in we get out of here
         return render_template('404.html', err_msg="Access Denied, Please Login First."), 404    
@@ -91,11 +93,15 @@ def chat():
     if user is None:
         return redirect(url_for('views.index'))
     
-    return render_template("chat.html", user=user, chat_data=-1, chat_id=-1)
+    chat_name_form = ChatEdit()
+    
+    return render_template("chat.html", user=user, chat_data=-1, chat_id=-1, name_form=chat_name_form)
 
 
 @views.route('/get_chat/<int:chat_id>')
 def get_chat(chat_id):
+    from .forms import ChatEdit
+
     if current_user.is_authenticated == False:
         # if user is logged in we get out of here
         return redirect(url_for('views.index')) # render_template('404.html', err_msg="Access Denied, Please Login First."), 404    
@@ -108,7 +114,9 @@ def get_chat(chat_id):
     if chat_data is None:
         return redirect(url_for('views.chat'))
     
-    return render_template("chat.html", user=user, chat_data=chat_data.chat, chat_id=chat_id)
+    chat_name_form = ChatEdit()
+    
+    return render_template("chat.html", user=user, chat_data=chat_data.chat, chat_id=chat_id, name_form=chat_name_form)
 
 @views.route("/get")
 def get_bot_response():
@@ -153,6 +161,19 @@ def get_bot_response():
     db.session.add(current_chat)
     db.session.commit()
     return bot_response
+
+@views.route("/chat-edit")
+def get_chat_edit():
+    from .models import db
+    
+    name = request.args.get('name')
+    id = request.args.get('id')
+    
+    current_chat = Chat.query.filter_by(id=id).first()
+    current_chat.name = name
+    db.session.add(current_chat)
+    db.session.commit()
+    return ""
 
 @views.route('/get_image/<string:username>')
 def get_image(username):
