@@ -1,8 +1,7 @@
 body {
-    margin-top: 50px;
     background-color: #fff;
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 14pt;
     letter-spacing: 0.01em;
     color: #39464e;
   }
@@ -16,7 +15,7 @@ body {
   .msb {
     width: 200px;
     background-color: #F5F7F9;
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
     right: auto;
@@ -162,136 +161,155 @@ body {
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;  
   }
-  body.msb-x {
-  
-    .mcw, .mnb {
-      margin-left: 0;
-  -moz-animation: bodyslideout 300ms forwards;
-      -o-animation: bodyslideout 300ms forwards;
-      -webkit-animation: bodyslideout 300ms forwards;
-      animation: bodyslideout 300ms forwards;
-      -webkit-transform-style: preserve-3d;
-      transform-style: preserve-3d;
-    }
-    .msb {
-      -moz-animation: slideout 300ms forwards;
-      -o-animation: slideout 300ms forwards;
-      -webkit-animation: slideout 300ms forwards;
-      animation: slideout 300ms forwards;
-      -webkit-transform-style: preserve-3d;
-      transform-style: preserve-3d;
-    }
+
+  .msb-x.mcw, .msb-x.mnb {
+    margin-left: 0;
+    -moz-animation: bodyslideout 300ms forwards;
+    -o-animation: bodyslideout 300ms forwards;
+    -webkit-animation: bodyslideout 300ms forwards;
+    animation: bodyslideout 300ms forwards;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+  .msb-x.msb {
+    -moz-animation: slideout 300ms forwards;
+    -o-animation: slideout 300ms forwards;
+    -webkit-animation: slideout 300ms forwards;
+    animation: slideout 300ms forwards;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
   }
   
-    /* Slide in animation */
-    @-moz-keyframes slidein {
-      0% {
-        left: -200px;
-      }
-      100% {
-        left: 0;
-      }
-    }
-    @-webkit-keyframes slidein {
-      0% {
-        left: -200px;
-      }
-      100% {
-        left: 0;
-      }
-    }
-    @keyframes slidein {
-      0% {
-        left: -200px;
-      }
-      100% {
-        left: 0;
-      }
-    }
-    @-moz-keyframes slideout {
-      0% {
-        left: 0;
-      }
-      100% {
-        left: -200px;
-      }
-    }
-    @-webkit-keyframes slideout {
-      0% {
-        left: 0;
-      }
-      100% {
-        left: -200px;
-      }
-    }
-    @keyframes slideout {
-      0% {
-        left: 0;
-      }
-      100% {
-        left: -200px;
-      }
-    }
-  
-    @-moz-keyframes bodyslidein {
-      0% {
-        left: 0;
-      }
-      100% {
-        margin-left: 200px;
-      }
-    }
-    @-webkit-keyframes bodyslidein {
-      0% {
-        left: 0;
-      }
-      100% {
-        left:0
-      }
-    }
-    @keyframes bodyslidein {
-      0% {
-        margin-left: 0;
-      }
-      100% {
-        margin-left: 200px;
-      }
-    }
-    @-moz-keyframes bodyslideout {
-      0% {
-        margin-left: 200px;
-      }
-      100% {
-        margin-right: 0;
-      }
-    }
-    @-webkit-keyframes bodyslideout {
-      0% {
-        margin-left: 200px;
-      }
-      100% {
-        margin-left: 0;
-      }
-    }
-    @keyframes bodyslideout {
-      0% {
-        margin-left: 200px;
-      }
-      100% {
-        margin-left: 0;
-      }
-    }
 
-
-
-      /* Add styles for the left menu */
-.left-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 200px; /* Adjust the width as needed */
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-y: auto; /* Enable scrolling if content exceeds the height */
+.bars-container {
+display: inline-block;
+cursor: pointer;
 }
+
+.bar1 , .bar2 , .bar3 {
+width: 21px;
+height: 3px;
+background: #333;
+margin: 6px 0;
+transition: 0.4s;
+}
+
+.change .bar1 {
+transform: translate(0, 9px) rotate(-45deg);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+transform: translate(0, -9px) rotate(45deg);
+}
+
+.slide-button {
+  position: absolute;
+  top: 40pt;
+  left: 10pt;
+  width: auto;
+  height: auto;
+  z-index:3;
+}
+  
+/* Slide in animation */
+@-moz-keyframes slidein {
+  0% {
+    left: -200px;
+  }
+  100% {
+    left: 0;
+  }
+}
+@-webkit-keyframes slidein {
+  0% {
+    left: -200px;
+  }
+  100% {
+    left: 0;
+  }
+}
+@keyframes slidein {
+  0% {
+    left: -200px;
+  }
+  100% {
+    left: 0;
+  }
+}
+@-moz-keyframes slideout {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -200px;
+  }
+}
+@-webkit-keyframes slideout {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -200px;
+  }
+}
+@keyframes slideout {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -200px;
+  }
+}
+
+@-moz-keyframes bodyslidein {
+  0% {
+    left: 0;
+  }
+  100% {
+    margin-left: 200px;
+  }
+}
+@-webkit-keyframes bodyslidein {
+  0% {
+    left: 0;
+  }
+  100% {
+    left:0
+  }
+}
+@keyframes bodyslidein {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: 200px;
+  }
+}
+@-moz-keyframes bodyslideout {
+  0% {
+    margin-left: 200px;
+  }
+  100% {
+    margin-right: 0;
+  }
+}
+@-webkit-keyframes bodyslideout {
+  0% {
+    margin-left: 200px;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+@keyframes bodyslideout {
+  0% {
+    margin-left: 200px;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+
+
