@@ -105,8 +105,8 @@ def get_chat(chat_id):
         return redirect(url_for('views.index'))
     
     chat_data = Chat.query.filter_by(user_id=current_user.id, id=chat_id).first()
-    if user is None:
-        return redirect(url_for('views.index'))
+    if chat_data is None:
+        return redirect(url_for('views.chat'))
     
     return render_template("chat.html", user=user, chat_data=chat_data.chat, chat_id=chat_id)
 

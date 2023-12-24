@@ -1,30 +1,33 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block page_content %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        (function(){
-            $('#msbo').on('click', function(){
-              $('body').toggleClass('msb-x');
-            });
-        }());
+    
+    <script type="text/javascript">
+        $(document).on('click', '#msbo', function(){
+            //alert("hii");
+            $('#msb').toggleClass('msb-x');
+        });
     </script>
+
+    <style>
+        .msb-x {
+            visibility: hidden;
+        }
+    </style>
 </head>
 
-<nav class="mnb navbar navbar-default navbar-fixed left-menu" style="padding-top:30pt; margin:0;">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <div style="padding: 15px 0;">
-                <a href="#" id="msbo"><i class="ic fa fa-bars"></i></a>
-            </div>
-        </div>
+<div class="left-menu" style="z-index: 1; height:auto; width:auto">
+    <div style="padding-top:30pt; padding-left:3pt; margin:0;">
+        <a href="#" id="msbo"><i class="ic fa fa-bars"></i></a>
     </div>
-</nav>
+</div>
 
 <!--msb: main sidebar-->
 <div class="msb left-menu" id="msb" style="padding-top:65pt;">
@@ -34,13 +37,11 @@
             <div class="brand-wrapper">
                 <!-- Brand -->
                 <div class="brand-name-wrapper">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand">
                         Chat History
                     </a>
                 </div>
-
             </div>
-
         </div>
 
         <!-- Main Menu -->
