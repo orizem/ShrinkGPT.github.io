@@ -91,7 +91,7 @@ def chat():
     if user is None:
         return redirect(url_for('views.index'))
     
-    return render_template("chat.html", user=user, chat_data=-1)
+    return render_template("chat.html", user=user, chat_data=-1, chat_id=-1)
 
 
 @views.route('/get_chat/<int:chat_id>')
