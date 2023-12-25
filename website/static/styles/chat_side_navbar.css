@@ -227,6 +227,10 @@ transform: translate(0, -9px) rotate(45deg);
   display: none;
 }
 
+.edit-chat-name.fa-thumbs-up { 
+  display: inline;
+}
+
 .prev-chat:hover {
   background-image: linear-gradient(to right, rgb(221, 219, 219), rgba(255,0,0,0));
 }

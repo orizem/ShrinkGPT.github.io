@@ -21,9 +21,11 @@
               }
             );
 
+            // Edit name of chat conversation by sending the new name to the server throw GET call for chat-edit
             $(".edit-chat-name").click(function () {
                 var $a = $(this).parent().find("a")
                 var id = $a.attr("id");
+                var name = $a.attr("name");
                 var $span = $(this);
 
 
@@ -36,33 +38,31 @@
                     $a.find("input").css("border-radius", "4px");
                     $a.find("input").prop("readonly", false);
 
+                    
                     // TODO: Fix replace icon makes display to be none
-                    //if ($span.hasClass("fa-edit")) {
-                    //    $span.removeClass("fa-edit");
-                    //}
-                    //$span.addClass("fa-thumbs-up");
+                    //$span.removeClass('fa-edit').addClass("fa-thumbs-up");
                 }
-                else {
+                else {                    
                     $a.find("input").css("border", "none");
                     $a.find("input").prop("readonly", true);
-
-                    if ($span.hasClass("fa-thumbs-up")) {
-                        $span.removeClass("fa-thumbs-up");
-                    }
-                    $span.addClass("fa-edit");
+                    
+                    //$span.removeClass("fa-thumbs-up").addClass("fa-edit");
 
                     new_name = $a.find("input").val()
-                    $.get("/chat-edit", { name: new_name, id: id }); /* Send request to change name of this chat */
+
+                    /* Send request to change name of this chat  
+                     * Make the call only if the name was changed 
+                     */
+                    if (new_name != name) {
+                        $.get("/chat-edit", { name: new_name, id: id }); 
+                        $a.attr('name', new_name);
+                    }
                 }
             });
         });
         
         function barIconAnimate(x) {
             x.classList.toggle("change");
-        }
-        
-        function editChatName() {
-            
         }
 
     </script>
@@ -97,7 +97,7 @@
             <ul class="nav navbar-nav">
                 {% for chat in previous_chats %}
                     <li class="prev-chat" style="white-space: nowrap; padding-top:10pt; padding-bottom:10pt;">
-                        <a href="{{ url_for('views.get_chat', chat_id=chat.id) }}" id="{{ chat.id }}" style="display:inline;" draggable="false">
+                        <a href="{{ url_for('views.get_chat', chat_id=chat.id) }}" id="{{ chat.id }}" style="display:inline;" name={{ chat.name }} draggable="false">
                             <i class="fas fa-duotone fa-comments"></i> 
                             {{ name_form.name(value=chat.name, style="all:unset; width:55%;", readonly=True) }}
                         </a>     
