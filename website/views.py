@@ -11,10 +11,9 @@ from flask_login import current_user
 # LOCAL IMPORTS
 from .models import User, Chat
 from .chatbot import ChatBot
+from config import PROJECT_PATH
 
-PROJECT_PATH = r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\website"
-
-views = Blueprint('views', __name__)
+views = Blueprint("views", __name__)
 chat_bot = ChatBot()
 
 # FUNCTIONS
@@ -22,17 +21,17 @@ def generate_slide_show():
     images = get_all_images()
     
     # Instantly load image without sleep
-    with open(rf'{PROJECT_PATH}\static\image\{images[-1]}', 'rb') as img_file:
-        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + img_file.read() + b'\r\n') 
+    with open(rf"{PROJECT_PATH}\static\image\{images[-1]}", "rb") as img_file:
+        yield (b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + img_file.read() + b"\r\n") 
         
     while True:
         for image_name in images:
-            with open(rf'{PROJECT_PATH}\static\image\{image_name}', 'rb') as img_file:
-                yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + img_file.read() + b'\r\n') 
+            with open(rf"{PROJECT_PATH}\static\image\{image_name}", "rb") as img_file:
+                yield (b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + img_file.read() + b"\r\n") 
             sleep(5)
 
 def get_all_images():
-    image_folder = rf'{PROJECT_PATH}\static\image'
+    image_folder = rf"{PROJECT_PATH}\static\image"
     images = [img for img in listdir(image_folder)
               if img.startswith("WhatsApp") and
               (img.endswith(".jpg") or
@@ -41,26 +40,26 @@ def get_all_images():
     return images
 
 # ROUTES
-@views.route('/')
+@views.route("/")
 def index():
-    return render_template('index.html', user=current_user)
+    return render_template("index.html", user=current_user)
 
 @views.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html', err_msg=e), 404
+    return render_template("404.html", err_msg=e), 404
 
-@views.route("/profile", methods=['GET', 'POST'])
+@views.route("/profile", methods=["GET", "POST"])
 def profile():
     from .models import db
     from .forms import ProfileForm
     
     if current_user.is_authenticated == False:
         # if user is logged in we get out of here
-        return render_template('404.html', err_msg="Access Denied, Please Login First."), 404
+        return render_template("404.html", err_msg="Access Denied, Please Login First."), 404
     
     user = User.query.filter_by(username=current_user.username).first()
     if user is None:
-        return redirect(url_for('views.index'))
+        return redirect(url_for("views.index"))
     
     form = ProfileForm(obj=user)
     if form.validate_on_submit():
@@ -87,32 +86,33 @@ def chat():
 
     if current_user.is_authenticated == False:
         # if user is logged in we get out of here
-        return render_template('404.html', err_msg="Access Denied, Please Login First."), 404    
+        return render_template("404.html", err_msg="Access Denied, Please Login First."), 404    
     
     user = User.query.filter_by(username=current_user.username).first()
     if user is None:
-        return redirect(url_for('views.index'))
+        return redirect(url_for("views.index"))
     
     chat_name_form = ChatEdit()
     
     return render_template("chat.html", user=user, chat_data=-1, chat_id=-1, name_form=chat_name_form)
 
 
-@views.route('/get_chat/<int:chat_id>')
+@views.route("/get_chat/<int:chat_id>")
 def get_chat(chat_id):
     from .forms import ChatEdit
 
     if current_user.is_authenticated == False:
         # if user is logged in we get out of here
-        return redirect(url_for('views.index')) # render_template('404.html', err_msg="Access Denied, Please Login First."), 404    
+        return redirect(url_for("views.index")) # render_template("404.html", err_msg="Access Denied, Please Login First."), 404    
     
     user = User.query.filter_by(username=current_user.username).first()
     if user is None:
-        return redirect(url_for('views.index'))
+        return redirect(url_for("views.index"))
     
+    # Prevent from other users to access
     chat_data = Chat.query.filter_by(user_id=current_user.id, id=chat_id).first()
     if chat_data is None:
-        return redirect(url_for('views.chat'))
+        return redirect(url_for("views.chat"))
     
     chat_name_form = ChatEdit()
     
@@ -124,12 +124,12 @@ def get_bot_response():
     
     user = User.query.filter_by(username=current_user.username).first()
     if user is None:
-        return redirect(url_for('views.index'))
+        return redirect(url_for("views.index"))
     
-    chat_id = int(request.args.get('chatId'))
-    fisrt_time = request.args.get('fisrtTime')
-    user_msg = request.args.get('msg')
-    date_time = request.args.get('dateTime')
+    chat_id = int(request.args.get("chatId"))
+    fisrt_time = request.args.get("fisrtTime")
+    user_msg = request.args.get("msg")
+    date_time = request.args.get("dateTime")
     
     if chat_id != -1:
         current_chat = Chat.query.filter_by(user_id=current_user.id, id=chat_id).first()
@@ -166,25 +166,34 @@ def get_bot_response():
 def get_chat_edit():
     from .models import db
     
-    name = request.args.get('name')
-    id = request.args.get('id')
+    user = User.query.filter_by(username=current_user.username).first()
+    if user is None:
+        return redirect(url_for("views.index"))
     
-    current_chat = Chat.query.filter_by(id=id).first()
+    name = request.args.get("name")
+    id = request.args.get("id")
+    
+    # Prevent from other users to access
+    current_chat = Chat.query.filter_by(user_id=user.id, id=id).first()
+    if current_chat is None:
+        return redirect(url_for("views.index"))
+    
     current_chat.name = name
     db.session.add(current_chat)
     db.session.commit()
     return ""
 
-@views.route('/get_image/<string:username>')
+@views.route("/get_image/<string:username>")
 def get_image(username):
     if current_user.username != username:
-        return redirect(url_for('views.index'))
+        return redirect(url_for("views.index"))
     
+    # Prevent from other users to access
     user = User.query.filter_by(username=username).first()
     if (user is not None) and (user.image_data is not None):
-        return send_file(BytesIO(user.image_data), mimetype='image/jpeg')
-    return send_file(rf"{PROJECT_PATH}\static\image\default.png", mimetype='image/jpeg')
+        return send_file(BytesIO(user.image_data), mimetype="image/jpeg")
+    return send_file(rf"{PROJECT_PATH}\static\image\default.png", mimetype="image/jpeg")
 
-@views.route('/slideshow')
+@views.route("/slideshow")
 def slideshow():
-    return Response(generate_slide_show(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(generate_slide_show(), mimetype="multipart/x-mixed-replace; boundary=frame")

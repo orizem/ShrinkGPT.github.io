@@ -4,22 +4,22 @@ import pickle
 import random
 import numpy as np
 
-# nltk.download('popular')
+# nltk.download("popular")
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 
 class ChatBot:
     def __init__(self):
         self.lemmatizer = WordNetLemmatizer()
-        self.model = load_model('model.h5')
+        self.model = load_model("model.h5")
         self.intents = json.loads(open("data.json").read())
-        self.words = pickle.load(open("texts.pkl",'rb'))
-        self.classes = pickle.load(open("labels.pkl",'rb'))
+        self.words = pickle.load(open("texts.pkl","rb"))
+        self.classes = pickle.load(open("labels.pkl","rb"))
         
 
 # intents = json.loads(open(PROJECT_PATH + r"\data.json").read())
-# words = pickle.load(open(PROJECT_PATH + r"\texts.pkl",'rb'))
-# classes = pickle.load(open(PROJECT_PATH + r"\labels.pkl",'rb'))
+# words = pickle.load(open(PROJECT_PATH + r"\texts.pkl","rb"))
+# classes = pickle.load(open(PROJECT_PATH + r"\labels.pkl","rb"))
 
 
     def clean_up_sentence(self, sentence):
@@ -59,11 +59,11 @@ class ChatBot:
         return return_list
 
     def getResponse(self, ints, intents_json):
-        tag = ints[0]['intent']
-        list_of_intents = intents_json['intents']
+        tag = ints[0]["intent"]
+        list_of_intents = intents_json["intents"]
         for i in list_of_intents:
-            if(i['tag']== tag):
-                result = random.choice(i['responses'])
+            if(i["tag"]== tag):
+                result = random.choice(i["responses"])
                 break
         return result
 

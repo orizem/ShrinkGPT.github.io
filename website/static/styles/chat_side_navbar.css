@@ -8,12 +8,12 @@ body {
   
   .navbar-default {
     background-color: #FFF;
-    margin-left: 200px;
+    margin-left: 150pt;
   }
   
   /*main side bar*/
   .msb {
-    width: 200px;
+    width: 150pt;
     background-color: #F5F7F9;
     position: absolute;
     left: 0;
@@ -108,7 +108,7 @@ body {
   
   /*main content wrapper*/
   .mcw {
-    margin-left: 200px;
+    margin-left: 150pt;
     position: relative;
     min-height: 100%;
     
@@ -242,7 +242,7 @@ transform: translate(0, -9px) rotate(45deg);
 /* Slide in animation */
 @-moz-keyframes slidein {
   0% {
-    left: -200px;
+    left: -150pt;
   }
   100% {
     left: 0;
@@ -250,7 +250,7 @@ transform: translate(0, -9px) rotate(45deg);
 }
 @-webkit-keyframes slidein {
   0% {
-    left: -200px;
+    left: -150pt;
   }
   100% {
     left: 0;
@@ -258,7 +258,7 @@ transform: translate(0, -9px) rotate(45deg);
 }
 @keyframes slidein {
   0% {
-    left: -200px;
+    left: -150pt;
   }
   100% {
     left: 0;
@@ -269,7 +269,7 @@ transform: translate(0, -9px) rotate(45deg);
     left: 0;
   }
   100% {
-    left: -200px;
+    left: -150pt;
   }
 }
 @-webkit-keyframes slideout {
@@ -277,7 +277,7 @@ transform: translate(0, -9px) rotate(45deg);
     left: 0;
   }
   100% {
-    left: -200px;
+    left: -150pt;
   }
 }
 @keyframes slideout {
@@ -285,7 +285,7 @@ transform: translate(0, -9px) rotate(45deg);
     left: 0;
   }
   100% {
-    left: -200px;
+    left: -150pt;
   }
 }
 
@@ -294,7 +294,7 @@ transform: translate(0, -9px) rotate(45deg);
     left: 0;
   }
   100% {
-    margin-left: 200px;
+    margin-left: 150pt;
   }
 }
 @-webkit-keyframes bodyslidein {
@@ -310,12 +310,12 @@ transform: translate(0, -9px) rotate(45deg);
     margin-left: 0;
   }
   100% {
-    margin-left: 200px;
+    margin-left: 150pt;
   }
 }
 @-moz-keyframes bodyslideout {
   0% {
-    margin-left: 200px;
+    margin-left: 150pt;
   }
   100% {
     margin-right: 0;
@@ -323,7 +323,7 @@ transform: translate(0, -9px) rotate(45deg);
 }
 @-webkit-keyframes bodyslideout {
   0% {
-    margin-left: 200px;
+    margin-left: 150pt;
   }
   100% {
     margin-left: 0;
@@ -331,11 +331,22 @@ transform: translate(0, -9px) rotate(45deg);
 }
 @keyframes bodyslideout {
   0% {
-    margin-left: 200px;
+    margin-left: 150pt;
   }
   100% {
     margin-left: 0;
   }
 }
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .fa-comments {
+    display: none;
+  }
+
+  .side-menu-container {
+    width: 85%;
+    margin-left: 11pt;
+  }
+} 
 
 

@@ -13,11 +13,15 @@ from keras.layers import Dense, Activation, Dropout
 import random
 import tensorflow as tf
 
+# LOCAL IMPORTS
+from config import PROJECT_PATH
+
+
 words=[]
 classes = []
 documents = []
 ignore_words = ['?', '!']
-data_file = open(r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\website\data.json").read()
+data_file = open(rf"{PROJECT_PATH}\data.json").read()
 intents = json.loads(data_file)
 
 

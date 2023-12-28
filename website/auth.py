@@ -12,25 +12,23 @@ from flask_login import login_user, logout_user, current_user
 # LOCAL IMPORTS
 from .models import User, db
 
-PROJECT_PATH = r"C:\Users\User\Documents\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\website"
-
-auth = Blueprint('auth', __name__)
+auth = Blueprint("auth", __name__)
     
-@auth.route('/register', methods=['GET', 'POST'])
+@auth.route("/register", methods=["GET", "POST"])
 def register():
     """User registration route."""
     from .forms import RegisterForm
     
     if current_user.is_authenticated:
         # if user is logged in we get out of here
-        return redirect(url_for('views.index'))
+        return redirect(url_for("views.index"))
     
     form = RegisterForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None:
-            flash('Username already exists.')
-            return redirect(url_for('auth.register'))
+            flash("Username already exists.")
+            return redirect(url_for("auth.register"))
         
         # add image
         # Read the binary data of the image
@@ -56,74 +54,74 @@ def register():
         db.session.commit()
 
         # redirect to the two-factor auth page, passing username in session
-        session['username'] = user.username
-        return redirect(url_for('auth.two_factor_setup'))
-    return render_template('register.html', form=form)
+        session["username"] = user.username
+        return redirect(url_for("auth.two_factor_setup"))
+    return render_template("register.html", form=form)
 
 
-@auth.route('/twofactor')
+@auth.route("/twofactor")
 def two_factor_setup():
-    if 'username' not in session:
-        return redirect(url_for('views.index'))
-    user = User.query.filter_by(username=session['username']).first()
+    if "username" not in session:
+        return redirect(url_for("views.index"))
+    user = User.query.filter_by(username=session["username"]).first()
     if user is None:
-        return redirect(url_for('views.index'))
+        return redirect(url_for("views.index"))
     # since this page contains the sensitive qrcode, make sure the browser
     # does not cache it
-    return render_template('two-factor-setup.html'), 200, {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'}
+    return render_template("two-factor-setup.html"), 200, {
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0"}
 
 
-@auth.route('/qrcode')
+@auth.route("/qrcode")
 def qrcode():
-    if 'username' not in session:
+    if "username" not in session:
         abort(404)
-    user = User.query.filter_by(username=session['username']).first()
+    user = User.query.filter_by(username=session["username"]).first()
     if user is None:
         abort(404)
 
     # for added security, remove username from session
-    del session['username']
+    del session["username"]
 
     # render qrcode for FreeTOTP
     url = pyqrcode.create(user.get_totp_uri())
     stream = BytesIO()
     url.svg(stream, scale=3)
     return stream.getvalue(), 200, {
-        'Content-Type': 'image/svg+xml',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'}
+        "Content-Type": "image/svg+xml",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0"}
 
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route("/login", methods=["GET", "POST"])
 def login():
     """User login route."""
     from .forms import LoginForm
     
     if current_user.is_authenticated:
         # if user is logged in we get out of here
-        return redirect(url_for('views.index'))
+        return redirect(url_for("views.index"))
         
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.verify_password(form.password.data) or \
                 not user.verify_totp(form.token.data):
-            flash('Invalid username, password or token.')
-            return redirect(url_for('auth.login'))
+            flash("Invalid username, password or token.")
+            return redirect(url_for("auth.login"))
 
         # log user in
         login_user(user)
-        flash('You are now logged in!')
-        return redirect(url_for('views.index'))
-    return render_template('login.html', form=form)
+        flash("You are now logged in!")
+        return redirect(url_for("views.index"))
+    return render_template("login.html", form=form)
 
 
-@auth.route('/logout')
+@auth.route("/logout")
 def logout():
     """User logout route."""
     logout_user()
-    return redirect(url_for('views.index'))
+    return redirect(url_for("views.index"))

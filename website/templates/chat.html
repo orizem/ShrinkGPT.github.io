@@ -18,7 +18,7 @@
   {% include "chat_side_navbar.html" %}
 {% endwith %}
 
-<div class="container body" style="padding-top:3vw">    
+<div class="container body" style="padding-top:3vw;width: calc(100% - 1%);">    
       <!-- partial:index.partial.html -->
       <section class="msger">
         <header class="msger-header">
@@ -112,7 +112,7 @@
       <div class="msg-info-time">${time}</div>
     </div>
 
-    <div class="msg-text">${text}</div>
+    <div class="msg-text" style="word-break: break-all;">${text}</div>
   </div>
 </div>
 `;
@@ -149,8 +149,6 @@
 
       return `${h.slice(-2)}:${m.slice(-2)}`;
     }
-
-
 
   </script>
 
