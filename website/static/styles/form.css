@@ -17,6 +17,13 @@
     width: 50%;
 }
 
+.grid-container {
+    padding-top: 50pt;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
 /*Shrinking for mobile*/
 @media (max-width: 768px) {
     .sio-h1 {

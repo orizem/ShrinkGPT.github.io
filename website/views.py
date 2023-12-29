@@ -7,6 +7,7 @@ from json import dumps
 from flask import Blueprint, render_template
 from flask import render_template, redirect, url_for, request, send_file, Response
 from flask_login import current_user
+from typing import List, Union
 
 # LOCAL IMPORTS
 from .models import User, Chat
@@ -17,8 +18,8 @@ views = Blueprint("views", __name__)
 chat_bot = ChatBot()
 
 # FUNCTIONS
-def generate_slide_show():
-    images = get_all_images()
+def generate_slide_show(start_with: Union[str, List]): 
+    images = get_all_images(start_with=start_with)
     
     # Instantly load image without sleep
     with open(rf"{PROJECT_PATH}\static\image\{images[-1]}", "rb") as img_file:
@@ -30,13 +31,19 @@ def generate_slide_show():
                 yield (b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + img_file.read() + b"\r\n") 
             sleep(5)
 
-def get_all_images():
-    image_folder = rf"{PROJECT_PATH}\static\image"
-    images = [img for img in listdir(image_folder)
-              if img.startswith("WhatsApp") and
-              (img.endswith(".jpg") or
-              img.endswith(".jpeg") or
-              img.endswith("png"))]
+def get_all_images(start_with: Union[str, List]):
+    IMAGE_PATH = rf"{PROJECT_PATH}\static\image"
+    
+    if not isinstance(start_with, list):
+       start_with = [start_with]
+    
+    images = []
+    for sw in start_with:
+        images = images + [img for img in listdir(IMAGE_PATH)
+                if img.lower().startswith(sw) and
+                (img.endswith(".jpg") or
+                img.endswith(".jpeg") or
+                img.endswith(".png"))]
     return images
 
 # ROUTES
@@ -194,6 +201,30 @@ def get_image(username):
         return send_file(BytesIO(user.image_data), mimetype="image/jpeg")
     return send_file(rf"{PROJECT_PATH}\static\image\default.png", mimetype="image/jpeg")
 
-@views.route("/slideshow")
-def slideshow():
-    return Response(generate_slide_show(), mimetype="multipart/x-mixed-replace; boundary=frame")
+@views.route("/slideshow/")
+@views.route("/slideshow/<string:start_with>")
+def slideshow_sw(start_with: str=""):
+    """Slideshow 
+    Using this route (`/slideshow`) will return a slideshow of images located in the `static/image` folder.
+    If you want to choose what all file names should start with, use `/slideshow/<START_WITH>`.
+    The start with parameter can also be passed as a list separated by semicolon (`;`).
+
+    Parameters
+    ----------
+    start_with : str
+        A string or list of strings that the desired 
+        images file name should start with.
+        This is optional.
+        Using only /slideshow will return all images 
+        located in the `static/image` folder.
+    Returns
+    -------
+    Response
+        Response of the desired images.
+    """
+    if len(start_with) > 2:
+        if (start_with[0] == "[") & (start_with[-1] == "]"):
+            start_with = start_with[1:-1].split(";")
+        else:
+            start_with = start_with
+    return Response(generate_slide_show(start_with=start_with), mimetype="multipart/x-mixed-replace; boundary=frame")

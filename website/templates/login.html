@@ -10,8 +10,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<div class="sio-form">
-    <h1>Login</h1>
-    {{ wtf.quick_form(form) }}
+<div class="grid-container">
+    <div class="sio-form grid-child">
+        <h1>Login</h1>
+        {{ wtf.quick_form(form) }}
+    </div>
+    
+    <div class="w3-container grid-child" style="padding-bottom:50vh">
+        <img src='/slideshow/[man;woman;bot]' style='width: 30vw; height: 30vw;'/>
+    </div>
 </div>
 {% endblock %}
