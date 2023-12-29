@@ -105,7 +105,7 @@ def chat():
 
 
 @views.route("/get_chat/<int:chat_id>")
-def get_chat(chat_id):
+def get_chat(chat_id: int):
     from .forms import ChatEdit
 
     if current_user.is_authenticated == False:
@@ -191,7 +191,8 @@ def get_chat_edit():
     return ""
 
 @views.route("/get_image/<string:username>")
-def get_image(username):
+def get_image(username: str):
+    
     if current_user.username != username:
         return redirect(url_for("views.index"))
     
