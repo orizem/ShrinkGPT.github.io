@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat_side_navbar.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
     <script type="text/javascript">
         $(document).on('click', '#msbo', function(){
             $('#msb').toggleClass('msb-x');
@@ -88,7 +87,7 @@
 </div>
 
 <!--msb: main sidebar-->
-<div class="msb" id="msb" style="padding-top:65pt;">
+<div class="msb" id="msb" style="padding-top:65pt; background:#222;">
     <nav class="navbar navbar-default" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -110,9 +109,8 @@
                         <a href="{{ url_for('views.get_chat', chat_id=chat.id) }}" id="{{ chat.id }}" style="display:inline;" name={{ chat.name }} draggable="false">
                             <i class="fas fa-duotone fa-comments"></i> 
                             {{ name_form.name(value=chat.name, style="all:unset; width:55%;", class="name_input", readonly=True) }}
-                        </a>     
-                        <!-- <span style="margin-left:0pt;" class="fas fa-edit edit-chat-name" style="display:inline;"></span> -->
-                        <button id="editButton" style="margin-left: 0pt;" class="fas fa-edit edit-chat-name" style="display: inline;"></button>
+                        </a>
+                        <button id="editButton" style="margin-left: 0pt;" class="fas fa-edit edit-chat-name" style="display: inline; color: white;"></button>
                     </li>
                 {% endfor %}
             </ul>

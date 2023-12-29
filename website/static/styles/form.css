@@ -12,7 +12,7 @@ body {
 
     color: white;
   
-  }
+}
 
 .sio-h1 {
     font-size: 4vi; 
@@ -94,12 +94,12 @@ body {
     user-select: auto;
 }
 
-.btn:hover:not(:disabled), #image:hover:not(:disabled) {
+.btn:hover:not(:disabled) {
     filter: brightness(0.9);
     -webkit-filter: brightness(0.9);
 }
 
-.btn:disabled, #image:disabled {
+.btn:disabled {
     cursor: auto;
 }
 
@@ -115,10 +115,26 @@ body {
 }
 
 .slideshow-login img {
+    width: 300pt; 
+    height: auto;
     border-radius: 10%;
     box-shadow: 
         rgb(0, 255, 204) 4px 10px 0px -1px,
         rgb(255, 255, 204) 0px -2px 0px 2.3px;
+
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+
+    user-select: none;
+    touch-action: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .slideshow-login img:hover {
@@ -143,5 +159,10 @@ body {
     .grid-container-fr {
         padding: 0;
         display: block;    
+    }
+
+    .slideshow-login img {
+        width: 180pt;
+        height: auto;
     }
 }

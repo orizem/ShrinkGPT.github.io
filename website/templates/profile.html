@@ -10,15 +10,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#image').change(function() {
+              displayImage();
+            });
+          });
+        
+          function displayImage() {
+            var input = $('#image')[0];
+            var title = $('#previewH3');
+            var preview = $('#previewImage');
+        
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+        
+              reader.onload = function (e) {
+                preview.attr('src', e.target.result);
+                preview.css('display', 'block');
+                title.css('display', 'block');
+              };
+        
+              reader.readAsDataURL(input.files[0]);
+            }
+          }
+    </script>
 </head>
 
-<div class="container sio-container">
+<div class="grid-container">
     <h1 class="sio-h1">Hello, {{ user.name.title() }} {{ user.lastname.title() }}</h1>
 
-    <img class="sio-img" src="{{ url_for('views.get_image', username=user.username) }}" alt="{{ user.image_filename }}">
-    
+    <div class="slideshow-login">
+        <img class="sio-img" src="{{ url_for('views.get_image', username=user.username) }}" alt="{{ user.image_filename }}">
+    </div>
+
     <div class="sio-form">
         {{ wtf.quick_form(form) }}
+    </div>
+
+    </br>
+    <div class="slideshow-login">
+        <h3 id="previewH3" style="display: none; padding-right:10pt;">Image preview:</h3>
+        <img id="previewImage" style="display: none;">
     </div>
 </div>
 <div class="container">

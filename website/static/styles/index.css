@@ -47,13 +47,22 @@ h1 {
   -webkit-text-fill-color: transparent;
   animation: shine 100s linear infinite;
 }
-@keyframes shine {
-  from {
-    background-position: center 0;
-  }
-  to {
-    background-position: center 200%;
-  }
+
+img {
+  width: 30vw;
+  height: 30vw;
+  border-radius: 10%;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .pad-top {
@@ -65,6 +74,37 @@ p {
   letter-spacing: 1px;
   font-size:14px;
   color: #333333;
+}
+
+.title {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.title-lg {
+  font-size: 200px; 
+  text-align: center;
+  padding: 3vw;
+
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+.title-sm {
+  font-size: 80px;
+  text-align: center;
 }
 
 .header {
@@ -134,6 +174,14 @@ p {
 .parallax > use:nth-child(4) {
   animation-delay: -5s;
   animation-duration: 20s;
+}
+@keyframes shine {
+  from {
+    background-position: center 0;
+  }
+  to {
+    background-position: center 200%;
+  }
 }
 @keyframes move-forever {
   0% {

@@ -18,7 +18,7 @@
   {% include "chat_side_navbar.html" %}
 {% endwith %}
 
-<div class="container body" style="padding-top:3vw;width: calc(100% - 1%);">    
+<div class="container body" style="padding-top:3vw;width: calc(100% - 1%); padding-top:30pt;">    
       <!-- partial:index.partial.html -->
       <section class="msger">
         <header class="msger-header">
@@ -46,7 +46,8 @@
     </main>
 
     <form class="msger-inputarea">
-      <input type="text" class="msger-input" id="textInput" placeholder="Enter your message...">
+        <!-- <input type="text" class="msger-input" id="textInput" placeholder="Enter your message..."> -->
+        <textarea id="w3review" class="msger-input" id="textInput" name="w3review" rows="2" cols="20"></textarea>
       <button type="submit" class="msger-send-btn">Send</button>
     </form>
   </section>
