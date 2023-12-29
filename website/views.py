@@ -203,7 +203,7 @@ def get_image(username):
 
 @views.route("/slideshow/")
 @views.route("/slideshow/<string:start_with>")
-def slideshow_sw(start_with: str=""):
+def slideshow(start_with: str=""):
     """Slideshow 
     Using this route (`/slideshow`) will return a slideshow of images located in the `static/image` folder.
     If you want to choose what all file names should start with, use `/slideshow/<START_WITH>`.
@@ -211,17 +211,17 @@ def slideshow_sw(start_with: str=""):
 
     Parameters
     ----------
-    start_with : str
+    start_with : str, optional
         A string or list of strings that the desired 
         images file name should start with.
-        This is optional.
         Using only /slideshow will return all images 
-        located in the `static/image` folder.
+        located in the `static/image` folder, by default "".
     Returns
     -------
     Response
         Response of the desired images.
     """
+    start_with = start_with.lower()
     if len(start_with) > 2:
         if (start_with[0] == "[") & (start_with[-1] == "]"):
             start_with = start_with[1:-1].split(";")
