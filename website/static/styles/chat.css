@@ -24,8 +24,6 @@ html {
   align-items: center;
   height: 100vh;
   width: 90%;
-  font-family: Helvetica, sans-serif;
-  padding-left: 23%;
 }
 
 body {
@@ -190,10 +188,11 @@ textarea {
 
 /*Shrinking for mobile*/
 @media (max-width: 768px) {
+  /* .body { } */
   .body {
-    padding-left: 36%;
+    padding: 0;
+    margin: 0;
   }
-
   .msg-bubble {
     max-width: 180pt;
   }
@@ -201,15 +200,16 @@ textarea {
 
 @media (max-width: 568px) {
   .body {
-    padding-left: 5%;
-    height: 90vh;
+    padding: 0;
+    margin: 0;
+    height: 95vh;
   }
   
   .msger {
     display: flex;
     flex-flow: column wrap;
     justify-content: space-between;
-    width: 95%;
+    width: 100%;
   }
   
   .msger-chat {

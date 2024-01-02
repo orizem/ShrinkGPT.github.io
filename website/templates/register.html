@@ -37,16 +37,14 @@
 </head>
 
 <div class="grid-container">
-    <div class="sio-form">
+    <div class="sio-form grid-child">
         <h1>Register</h1>
         {{ wtf.quick_form(form) }}
-        </br>
-        <div class="slideshow-login">
-            <h3 id="previewH3" style="display: none; padding-right:10pt;">Image preview:</h3>
-            <img id="previewImage" style="display: none;">
-        </div>
     </div>
-    <br>
+    <div class="slideshow-login" style="padding-top:10pt;">
+        <h3 id="previewH3" style="display: none; padding-right:10pt;">Image preview:</h3>
+        <img id="previewImage" style="display: none;">
+    </div>
     <div class="alert alert-danger" role="alert">Note: The next page will show sensitive information. Make sure nobody can see your screen before pressing the Register button.</div>
 </div>
 {% endblock %}

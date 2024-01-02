@@ -1,5 +1,6 @@
 # init.py
 
+# import os
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
@@ -10,7 +11,8 @@ from .views import page_not_found
 
 # create application instance
 # env = os.environ.get("FLASK_ENV", "dev")
-    
+# env = os.environ.get("FLASK_APP", "main.py")
+
 def create_app():
     app = Flask(__name__)
     app.static_folder = "static"

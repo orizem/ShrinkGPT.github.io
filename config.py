@@ -7,3 +7,5 @@ PROJECT_PATH = rf"{os.getcwd()}\website"
 SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL", f"sqlite:///{PROJECT_PATH}\\db.sqlite")
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SESSION_TYPE = "filesystem"
+SERVER_KEY_PASS = "f'A8m??`2TBE@e!"
+SERVER_CHALLENGE_PASS = "KWi/8N*?S5^i5#u"

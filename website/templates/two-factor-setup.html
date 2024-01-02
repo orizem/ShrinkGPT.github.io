@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<div class="container sio-container">
-    <h1>Two Factor Authentication Setup</h1>
-    <p>You are almost done! Please start FreeOTP on your smartphone and scan the following QR Code with it:</p>
-    <p><img id="qrcode" src="{{ url_for('auth.qrcode') }}"></p>
-    <p>I'm done, take me to the <a href="{{ url_for('auth.login') }}">Login</a> page!</p>
+<div class="grid-container">
+    <div class="container sio-container grid-child">
+        <h1>Two Factor Authentication Setup</h1>
+        <p>You are almost done! Please start FreeOTP on your smartphone and scan the following QR Code with it:</p>
+        <p><img id="qrcode" src="{{ url_for('auth.qrcode') }}"></p>
+        <p>I'm done, take me to the <a href="{{ url_for('auth.login') }}">Login</a> page!</p>
+    </div>
 </div>
 {% endblock %}
