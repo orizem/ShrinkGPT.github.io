@@ -1,50 +1,18 @@
 # views.py
 
-from time import sleep
-from os import listdir
 from io import BytesIO
 from json import dumps
 from flask import Blueprint, render_template
-from flask import render_template, redirect, url_for, request, send_file, Response
+from flask import Response, render_template, redirect, url_for, send_file, request
 from flask_login import current_user
-from typing import List, Union
 
 # LOCAL IMPORTS
 from .models import User, Chat
 from .chatbot import ChatBot
-from config import PROJECT_PATH
+from .utils import generate_slide_show, safe_send_default_image
 
 views = Blueprint("views", __name__)
 chat_bot = ChatBot()
-
-# FUNCTIONS
-def generate_slide_show(start_with: Union[str, List]): 
-    images = get_all_images(start_with=start_with)
-    
-    # Instantly load image without sleep
-    with open(rf"{PROJECT_PATH}\static\image\{images[-1]}", "rb") as img_file:
-        yield (b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + img_file.read() + b"\r\n") 
-        
-    while True:
-        for image_name in images:
-            with open(rf"{PROJECT_PATH}\static\image\{image_name}", "rb") as img_file:
-                yield (b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + img_file.read() + b"\r\n") 
-            sleep(5)
-
-def get_all_images(start_with: Union[str, List]):
-    IMAGE_PATH = rf"{PROJECT_PATH}\static\image"
-    
-    if not isinstance(start_with, list):
-       start_with = [start_with]
-    
-    images = []
-    for sw in start_with:
-        images = images + [img for img in listdir(IMAGE_PATH)
-                if img.lower().startswith(sw) and
-                (img.endswith(".jpg") or
-                img.endswith(".jpeg") or
-                img.endswith(".png"))]
-    return images
 
 # ROUTES
 @views.route("/")
@@ -200,7 +168,8 @@ def get_image(username: str):
     user = User.query.filter_by(username=username).first()
     if (user is not None) and (user.image_data is not None):
         return send_file(BytesIO(user.image_data), mimetype="image/jpeg")
-    return send_file(rf"{PROJECT_PATH}\static\image\default.png", mimetype="image/jpeg")
+    
+    return safe_send_default_image()
 
 @views.route("/slideshow/")
 @views.route("/slideshow/<string:start_with>")
