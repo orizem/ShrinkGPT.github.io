@@ -3,6 +3,7 @@ AI Shrink chat bot with GPT
  
 
 # Virtual Environment
+! Use python 3.9.7
 1) create a virtual environment
     * python -m virtualenv venv
 2) Activate the environment
@@ -11,7 +12,8 @@ AI Shrink chat bot with GPT
     * deactivate
 
 # Install Environment
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 
 
 # Docker
