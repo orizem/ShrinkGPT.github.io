@@ -11,8 +11,7 @@ os.environ["OPENAI_API_KEY"] = gpt_constants.APIKEY
 
 query = sys.argv[1]
 
-# loader = TextLoader("data.txt")
-loader = DirectoryLoader("static\gpt", glob="*.json")
+loader = DirectoryLoader("static\gpt", glob="*.txt")
 index = VectorstoreIndexCreator().from_loaders([loader])
 
 print(index.query(query, llm=ChatOpenAI()))
