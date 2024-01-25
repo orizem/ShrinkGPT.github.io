@@ -1,3 +1,5 @@
+# config.py 
+
 import yaml
 
 class NotInConfigException(Exception):

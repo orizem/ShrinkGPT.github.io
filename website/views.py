@@ -2,6 +2,7 @@
 
 from io import BytesIO
 from json import dumps
+from typing import Callable
 from flask import Blueprint, render_template
 from flask import Response, render_template, redirect, url_for, send_file, request
 from flask_login import current_user
@@ -15,6 +16,35 @@ from .text2speech import Text2Speech
 views = Blueprint("views", __name__)
 chat_bot = ChatBot()
 
+# DECORATORS
+def restricted_route_decorator(func: Callable):
+    """Restricted Route Decorator 
+    Check if the user session is valid, if not,
+    it redirected to 404.
+    In addition, the decorator check if the user exists,
+    if not, will be redirected to index page.   
+    
+    Must define endpoint for each route using this decorator.
+    The decorator should be right above the function in 
+    order to run properly.
+
+    Parameters
+    ----------
+    func : Callable
+        The function to wrap with authentication checking.
+    """
+    def wrapped(*args, **kwargs):
+        if (current_user == None) or (current_user.is_authenticated == False):
+            return render_template("404.html", err_msg="The page you where looking for could not be found."), 404  
+        
+        user = User.query.filter_by(username=current_user.username).first()
+        if user is None:
+            return redirect(url_for("views.index"))
+        
+        res = func(*args, **kwargs)
+        return res
+    return wrapped
+
 # ROUTES
 @views.route("/")
 def index():
@@ -24,19 +54,13 @@ def index():
 def page_not_found(e):
     return render_template("404.html", err_msg=e), 404
 
-@views.route("/profile", methods=["GET", "POST"])
+@views.route("/profile", methods=["GET", "POST"], endpoint="profile")
+@restricted_route_decorator
 def profile():
     from .models import db
     from .forms import ProfileForm
     
-    if current_user.is_authenticated == False:
-        # if user is logged in we get out of here
-        return render_template("404.html", err_msg="Access Denied, Please Login First."), 404
-    
     user = User.query.filter_by(username=current_user.username).first()
-    if user is None:
-        return redirect(url_for("views.index"))
-    
     form = ProfileForm(obj=user)
     if form.validate_on_submit():
         form.populate_obj(user)
@@ -56,35 +80,24 @@ def profile():
         
     return render_template("profile.html", user=user, form=form)
 
-@views.route("/chat")
+@views.route("/chat", endpoint="chat")
+@restricted_route_decorator
 def chat():
     from .forms import ChatEdit
 
-    if current_user.is_authenticated == False:
-        # if user is logged in we get out of here
-        return render_template("404.html", err_msg="Access Denied, Please Login First."), 404    
-    
     user = User.query.filter_by(username=current_user.username).first()
-    if user is None:
-        return redirect(url_for("views.index"))
-    
     chat_name_form = ChatEdit()
     
     return render_template("chat.html", user=user, chat_data=-1, chat_id=-1, name_form=chat_name_form)
 
 
-@views.route("/get_chat/<int:chat_id>")
+@views.route("/get_chat/<int:chat_id>", endpoint="get_chat")
+@restricted_route_decorator
 def get_chat(chat_id: int):
     from .forms import ChatEdit
 
-    if current_user.is_authenticated == False:
-        # if user is logged in we get out of here
-        return redirect(url_for("views.index")) # render_template("404.html", err_msg="Access Denied, Please Login First."), 404    
-    
     user = User.query.filter_by(username=current_user.username).first()
-    if user is None:
-        return redirect(url_for("views.index"))
-    
+
     # Prevent from other users to access
     chat_data = Chat.query.filter_by(user_id=current_user.id, id=chat_id).first()
     if chat_data is None:
@@ -94,13 +107,12 @@ def get_chat(chat_id: int):
     
     return render_template("chat.html", user=user, chat_data=chat_data.chat, chat_id=chat_id, name_form=chat_name_form)
 
-@views.route("/get")
+@views.route("/get", endpoint="get")
+@restricted_route_decorator
 def get_bot_response():
     from .models import db
     
     user = User.query.filter_by(username=current_user.username).first()
-    if user is None:
-        return redirect(url_for("views.index"))
     
     chat_id = int(request.args.get("chatId"))
     fisrt_time = request.args.get("fisrtTime")
@@ -138,13 +150,12 @@ def get_bot_response():
     db.session.commit()
     return bot_response
 
-@views.route("/chat-edit")
+@views.route("/chat-edit", endpoint="chat-edit")
+@restricted_route_decorator
 def get_chat_edit():
     from .models import db
     
     user = User.query.filter_by(username=current_user.username).first()
-    if user is None:
-        return redirect(url_for("views.index"))
     
     name = request.args.get("name")
     id = request.args.get("id")
@@ -200,7 +211,8 @@ def slideshow(start_with: str=""):
             start_with = start_with
     return Response(generate_slide_show(start_with=start_with), mimetype="multipart/x-mixed-replace; boundary=frame")
 
-@views.route("/text2speech/<string:text>")
+@views.route("/text2speech/<string:text>", endpoint="text2speech")
+@restricted_route_decorator
 def text2speech(text: str=""):
     try:
         speech = Text2Speech()
