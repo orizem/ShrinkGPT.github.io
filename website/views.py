@@ -10,6 +10,7 @@ from flask_login import current_user
 from .models import User, Chat
 from .chatbot import ChatBot
 from .utils import generate_slide_show, safe_send_default_image
+from .text2speech import Text2Speech
 
 views = Blueprint("views", __name__)
 chat_bot = ChatBot()
@@ -198,3 +199,12 @@ def slideshow(start_with: str=""):
         else:
             start_with = start_with
     return Response(generate_slide_show(start_with=start_with), mimetype="multipart/x-mixed-replace; boundary=frame")
+
+@views.route("/text2speech/<string:text>")
+def text2speech(text: str=""):
+    try:
+        speech = Text2Speech()
+        speech.say(text)
+    except:
+        pass
+    return Response()

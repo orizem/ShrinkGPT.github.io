@@ -101,6 +101,13 @@
       botResponse(msgText);
     });
 
+    function requestTextTwoSpeech(text) { 
+      fetch(`/text2speech/${text}`) 
+        .then(response => response.json()) 
+        .then(data => console.log(data)) 
+        .catch(error => console.error(error)); 
+    } 
+
     function appendMessage(name, img, side, text, time) {
       //   Simple solution for small apps
       const msgHTML = `
@@ -114,6 +121,9 @@
     </div>
 
     <div class="msg-text" style="word-break: break-all;">${text}</div>
+    <div style="text-align: right; font-size:10pt;">
+      <button style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="requestTextTwoSpeech('${text.replace(/\"/g, "")}')">►</button>
+    </div>
   </div>
 </div>
 `;
