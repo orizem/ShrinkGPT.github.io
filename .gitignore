@@ -13,6 +13,7 @@ __pycache__/
 # My ignored
 offline
 .vscode
+requirements_copy.txt
 
 # Distribution / packaging
 .Python
