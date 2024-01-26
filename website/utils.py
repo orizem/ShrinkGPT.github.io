@@ -57,6 +57,15 @@ def safe_send_default_image():
     return "Error", 404
 
 def get_current_user():
+    """Get Current User
+    Search the flask login current user.
+
+    Returns
+    -------
+    User | None
+        The model of flask login current user.
+        Returns None if was not found.
+    """
     user = User.query.filter_by(username=current_user.username).first()
     return user
 
