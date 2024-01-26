@@ -2,9 +2,12 @@
 
 import yaml
 
+# LOCAL IMPORTS
+from config import PROJECT_PATH
+
 class NotInConfigException(Exception):
-    def __init__(self, message="Could not found in config file."):
-        self.message = message
+    def __init__(self, key):
+        self.message = f"Could not found the key `{key}` in the config file."
         super().__init__(self.message)  
 
 class ConfigFileException(Exception):
@@ -18,10 +21,10 @@ class Config():
         
     def __read_config(self):
         try:
-            with open("config.yaml", "r") as f:
+            with open(rf"{PROJECT_PATH}\config.yaml", "r") as f:
                 self.__config = yaml.load(f, Loader=yaml.FullLoader)
         except:
-            ConfigFileException
+            raise ConfigFileException
     
     def read(self, *args):
         """Read
@@ -36,14 +39,17 @@ class Config():
             an error if was not found.
         """
         res = self.__config
+        key_not_found = None
         try:
             for a in args:
+                key_not_found = a
                 res = res[a]
         except:
-            raise NotInConfigException
+            raise NotInConfigException(key=key_not_found)
         return res
   
 # # DEBUGGING  
 # if __name__ == "__main__":
 #     c = Config()
 #     print(c.read("text2speech", "male"))
+#     print(c.read("auth"))

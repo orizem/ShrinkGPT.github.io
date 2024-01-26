@@ -16,6 +16,11 @@ from .text2speech import Text2Speech
 views = Blueprint("views", __name__)
 chat_bot = ChatBot()
 
+# HANDLERS
+def get_user():
+    user = User.query.filter_by(username=current_user.username).first()
+    return user
+
 # DECORATORS
 def restricted_route_decorator(func: Callable):
     """Restricted Route Decorator 
@@ -37,7 +42,7 @@ def restricted_route_decorator(func: Callable):
         if (current_user == None) or (current_user.is_authenticated == False):
             return render_template("404.html", err_msg="The page you where looking for could not be found."), 404  
         
-        user = User.query.filter_by(username=current_user.username).first()
+        user = get_user()
         if user is None:
             return redirect(url_for("views.index"))
         
@@ -60,7 +65,7 @@ def profile():
     from .models import db
     from .forms import ProfileForm
     
-    user = User.query.filter_by(username=current_user.username).first()
+    user = get_user()
     form = ProfileForm(obj=user)
     if form.validate_on_submit():
         form.populate_obj(user)
@@ -85,7 +90,7 @@ def profile():
 def chat():
     from .forms import ChatEdit
 
-    user = User.query.filter_by(username=current_user.username).first()
+    user = get_user()
     chat_name_form = ChatEdit()
     
     return render_template("chat.html", user=user, chat_data=-1, chat_id=-1, name_form=chat_name_form)
@@ -96,8 +101,7 @@ def chat():
 def get_chat(chat_id: int):
     from .forms import ChatEdit
 
-    user = User.query.filter_by(username=current_user.username).first()
-
+    user = get_user()
     # Prevent from other users to access
     chat_data = Chat.query.filter_by(user_id=current_user.id, id=chat_id).first()
     if chat_data is None:
@@ -112,7 +116,7 @@ def get_chat(chat_id: int):
 def get_bot_response():
     from .models import db
     
-    user = User.query.filter_by(username=current_user.username).first()
+    user = get_user()
     
     chat_id = int(request.args.get("chatId"))
     fisrt_time = request.args.get("fisrtTime")
@@ -155,7 +159,7 @@ def get_bot_response():
 def get_chat_edit():
     from .models import db
     
-    user = User.query.filter_by(username=current_user.username).first()
+    user = get_user()
     
     name = request.args.get("name")
     id = request.args.get("id")
