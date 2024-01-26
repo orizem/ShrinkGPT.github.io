@@ -28,6 +28,7 @@ class __Config():
     
     def read(self, *args):
         """Read
+        
         Reads a config param base on its location.
         The order of the arguments is the order of 
         the parameter location in the config.yaml file.

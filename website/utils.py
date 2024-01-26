@@ -32,6 +32,36 @@ def __get_all_images(start_with: Union[str, List]):
 
 # PUBLIC
 def generate_slide_show(start_with: Union[str, List]): 
+    """Generate Slide Show
+    
+    Generate a slideshow of images.
+
+    This generator function yields frames 
+    of images for creating a slideshow. 
+    It starts with the specified image or 
+    list of images and continues in a loop, 
+    adding a delay of 5 seconds
+    between each image.
+
+    Parameters
+    ----------
+    start_with : Union[str, List]
+        The starting image or list of images 
+        for the slideshow.
+
+    Yields
+    ------
+    bytes
+        Frames of images in the form of bytes 
+        with appropriate HTTP headers for streaming.
+
+    Notes
+    -----
+    - The images are read from the 'static/image' directory in the project path.
+    - The slideshow continues indefinitely, looping through the specified images.
+    - Deprecated images are removed from the list to prevent errors.
+
+    """
     images = __get_all_images(start_with=start_with)
     
     # Instantly load image without sleep
@@ -49,6 +79,26 @@ def generate_slide_show(start_with: Union[str, List]):
                 images = list(set(images) - {image_name})
 
 def safe_send_default_image():
+    """Safe Send Default Image
+    
+    Safely send the default image file.
+    This function ensures that the 
+    default image file is served securely.
+    It checks if the provided path is 
+    within the expected base path to 
+    prevent directory traversal.
+
+    Returns
+    -------
+    send_file or tuple
+        If the path is safe, the default 
+        image file is sent using Flask's 
+        `send_file` function.
+        If the path is not safe, a tuple 
+        with an error message and HTTP 
+        status code 404 is returned.
+
+    """
     base = rf"{PROJECT_PATH}\static\image"
     safepath = realpath(rf"{PROJECT_PATH}\static\image\default.png")
     prefix = commonpath((base, safepath))
@@ -58,6 +108,7 @@ def safe_send_default_image():
 
 def get_current_user():
     """Get Current User
+    
     Search the flask login current user.
 
     Returns
@@ -71,6 +122,7 @@ def get_current_user():
 
 def restricted_route_decorator(func: Callable):
     """Restricted Route Decorator 
+    
     Check if the user session is valid, if not,
     it redirected to 404.
     In addition, the decorator check if the user exists,
@@ -87,7 +139,8 @@ def restricted_route_decorator(func: Callable):
     """
     def wrapped(*args, **kwargs):
         if (current_user == None) or (current_user.is_authenticated == False):
-            return render_template("404.html", err_msg="The page you where looking for could not be found."), 404  
+            msg = "The page you where looking for could not be found."
+            return render_template("404.html", err_msg=msg), 404  
         
         user = get_current_user()
         if user is None:

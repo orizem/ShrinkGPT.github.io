@@ -2,6 +2,7 @@
 
 from io import BytesIO
 from json import dumps
+from typing import Any
 from flask import Blueprint, Response, render_template, redirect, url_for, send_file, request
 from flask_login import current_user
 
@@ -17,15 +18,56 @@ chat_bot = ChatBot()
 # ROUTES
 @views.route("/")
 def index():
+    """Index
+    
+    Handle GET request for the index page.
+    Display the index page with user information.
+
+    Returns
+    -------
+    render_template
+        Renders the 'index.html' template with user information.
+    """
     return render_template("index.html", user=current_user)
 
 @views.errorhandler(404)
 def page_not_found(e):
+    """Page Not Found
+    
+    Handle 404 errors.
+    Render a custom 404 page with an error message.
+
+    Parameters
+    ----------
+    e : Exception
+        The exception object representing the 404 error.
+
+    Returns
+    -------
+    render_template
+        Renders the '404.html' template with the provided error message.
+
+    """
     return render_template("404.html", err_msg=e), 404
 
 @views.route("/profile", methods=["GET", "POST"], endpoint="profile")
 @restricted_route_decorator
 def profile():
+    """Profile
+    
+    Handle GET and POST requests for the profile page.
+    Display user profile information and allow users to update their profiles.
+
+    Returns
+    -------
+    render_template
+        Renders the 'profile.html' template with user information and a profile form.
+
+    Notes
+    -----
+    This endpoint requires the user to be authenticated.
+
+    """
     from .models import db
     from .forms import ProfileForm
     
@@ -52,6 +94,24 @@ def profile():
 @views.route("/chat", endpoint="chat")
 @restricted_route_decorator
 def chat():
+    """
+    Chat
+    Handle GET request for the Chat page.
+    Display the Chat page with user 
+    information and an empty chat form.
+
+    Returns
+    -------
+    render_template
+        Renders the 'chat.html' template with 
+        user information, no specific chat data, 
+        no chat ID, and an empty chat name form.
+
+    Notes
+    -----
+    This endpoint requires the user to be authenticated.
+
+    """
     from .forms import ChatEdit
 
     user = get_current_user()
@@ -63,6 +123,36 @@ def chat():
 @views.route("/get_chat/<int:chat_id>", endpoint="get_chat")
 @restricted_route_decorator
 def get_chat(chat_id: int):
+    """Get Chat
+    
+    Handle GET request to retrieve chat information.
+    Retrieve and display information about a specific chat.
+
+    Parameters
+    ----------
+    chat_id : int
+        The identifier of the chat to be retrieved.
+
+    Returns
+    -------
+    render_template
+        Renders the 'chat.html' template with user 
+        information, chat data, chat ID, and a 
+        chat name form.
+
+    Raises
+    ------
+    Redirect
+        Redirects to the chat page if the current user 
+        is not authorized to access the specified chat 
+        or if the chat does not exist.
+
+    Notes
+    -----
+    This endpoint requires the user to be authenticated 
+    and have the necessary permissions to access 
+    the specified chat.
+    """
     from .forms import ChatEdit
 
     user = get_current_user()
@@ -120,7 +210,31 @@ def get_bot_response():
 
 @views.route("/chat-edit", endpoint="chat-edit")
 @restricted_route_decorator
-def get_chat_edit():
+def get_chat_edit() -> Any:
+    """Get Chat Edit
+    
+    Handle GET request for Chat Edit endpoint.
+    Edit the name of a chat by the name and chat 
+    id in the request arguments.
+
+    Returns
+    -------
+    Any
+        An empty string.
+
+    Raises
+    ------
+    Redirect
+        Redirects to the index page if the current 
+        user is not authorized to edit the chat or 
+        if the chat does not exist.
+
+    Notes
+    -----
+    This endpoint requires the user to be authenticated 
+    and have the necessary permissions to edit the 
+    chat name.
+    """
     from .models import db
     
     user = get_current_user()
@@ -139,8 +253,22 @@ def get_chat_edit():
     return ""
 
 @views.route("/get_image/<string:username>")
-def get_image(username: str):
+def get_image(username: str) -> Any:
+    """Get Image
     
+    Returns the profile image of the current user.
+
+    Parameters
+    ----------
+    username : str
+        The user name to search.
+
+    Returns
+    -------
+    Any
+        User image.
+    """
+    # Make sure the user sent the request correctly
     if current_user.username != username:
         return redirect(url_for("views.index"))
     
@@ -155,6 +283,7 @@ def get_image(username: str):
 @views.route("/slideshow/<string:start_with>")
 def slideshow(start_with: str=""):
     """Slideshow 
+    
     Using this route (`/slideshow`) will return a slideshow of images located in the `static/image` folder.
     If you want to choose what all file names should start with, use `/slideshow/<START_WITH>`.
     The start with parameter can also be passed as a list separated by semicolon (`;`).
