@@ -37,8 +37,14 @@
             <div class="msg-info-name">Shrink.io</div>
           </div>
 
+          {% set welcome_msg = "Hi " + user.name.title() + ", welcome to Shrink.io! Go ahead and send me a message." %}
+
           <div class="msg-text">
-            Hi {{ user.name.title() }}, welcome to Shrink.io! Go ahead and send me a message.
+            {{ welcome_msg }}
+          </div>
+          <div style="text-align: right; font-size:10pt;">
+            <button style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" 
+                    onclick="requestTextTwoSpeech('{{ welcome_msg }}')">►</button>
           </div>
         </div>
       </div>
@@ -102,7 +108,7 @@
     });
 
     function requestTextTwoSpeech(text) { 
-      fetch(`/text2speech/${text}`) 
+      fetch(`/text2speech/${text.replace(/\"/g, "")}`) 
         .then(response => response.json()) 
         .then(data => console.log(data)) 
         .catch(error => console.error(error)); 
@@ -122,7 +128,7 @@
 
     <div class="msg-text" style="word-break: break-all;">${text}</div>
     <div style="text-align: right; font-size:10pt;">
-      <button style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="requestTextTwoSpeech('${text.replace(/\"/g, "")}')">►</button>
+      <button style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="requestTextTwoSpeech('${text}')">►</button>
     </div>
   </div>
 </div>
