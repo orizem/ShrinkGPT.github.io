@@ -5,17 +5,17 @@ import yaml
 # LOCAL IMPORTS
 from config import PROJECT_PATH
 
-class NotInConfigException(Exception):
+class __NotInConfigException(Exception):
     def __init__(self, key):
         self.message = f"Could not found the key `{key}` in the config file."
         super().__init__(self.message)  
 
-class ConfigFileException(Exception):
+class __ConfigFileException(Exception):
     def __init__(self, message="Could not load the config file."):
         self.message = message
         super().__init__(self.message)  
 
-class Config():
+class __Config():
     def __init__(self):
         self.__read_config()
         
@@ -24,7 +24,7 @@ class Config():
             with open(rf"{PROJECT_PATH}\config.yaml", "r") as f:
                 self.__config = yaml.load(f, Loader=yaml.FullLoader)
         except:
-            raise ConfigFileException
+            raise __ConfigFileException
     
     def read(self, *args):
         """Read
@@ -45,8 +45,10 @@ class Config():
                 key_not_found = a
                 res = res[a]
         except:
-            raise NotInConfigException(key=key_not_found)
+            raise __NotInConfigException(key=key_not_found)
         return res
+    
+config = __Config()
   
 # # DEBUGGING  
 # if __name__ == "__main__":

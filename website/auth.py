@@ -8,12 +8,11 @@ from flask import  render_template, redirect, url_for, flash, session
 from flask_login import login_user, logout_user, current_user
 
 # LOCAL IMPORTS
-from .config import Config
+from .config import config
 from .models import User, db
 from .utils import restricted_route_decorator
 
 auth = Blueprint("auth", __name__)
-config = Config()
 
 AUTH = config.read("auth", "AUTH")
 STREAM_AUTH = AUTH
