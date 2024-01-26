@@ -2,7 +2,6 @@
 
 from io import BytesIO
 from json import dumps
-from typing import Callable
 from flask import Blueprint, Response, render_template, redirect, url_for, send_file, request
 from flask_login import current_user
 

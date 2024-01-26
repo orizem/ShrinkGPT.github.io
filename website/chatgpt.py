@@ -2,14 +2,16 @@
 
 import os
 import sys
-import gpt_constants
 
 from langchain.document_loaders import TextLoader, DirectoryLoader
 from langchain.indexes import VectorstoreIndexCreator
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 
-os.environ["OPENAI_API_KEY"] = gpt_constants.APIKEY
+# LOCAL IMPORTS
+from .config import config
+
+os.environ["OPENAI_API_KEY"] = config.read("GPT", "APIKEY")
 
 query = sys.argv[1]
 

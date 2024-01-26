@@ -9,3 +9,6 @@ auth:
     Expires: 0
   STREAM:
     Content-Type: image/svg+xml
+
+GPT:
+  APIKEY: "SET A KEY"
