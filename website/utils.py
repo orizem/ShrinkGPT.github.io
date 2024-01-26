@@ -2,11 +2,16 @@
 
 from os import listdir
 from time import sleep
-from flask import send_file
+from typing import Callable
 from typing import List, Union
+from flask_login import current_user
 from os.path import realpath, commonpath
+from flask import render_template, redirect, url_for, send_file
 
 # LOCAL IMPORTS
+from .models import User
+
+# PROJECT IMPORTS
 from config import PROJECT_PATH
 
 # PRIVATE
@@ -50,3 +55,35 @@ def safe_send_default_image():
     if prefix == base:
         return send_file(rf"{base}\default.png", mimetype="image/jpeg")
     return "Error", 404
+
+def get_current_user():
+    user = User.query.filter_by(username=current_user.username).first()
+    return user
+
+def restricted_route_decorator(func: Callable):
+    """Restricted Route Decorator 
+    Check if the user session is valid, if not,
+    it redirected to 404.
+    In addition, the decorator check if the user exists,
+    if not, will be redirected to index page.   
+    
+    Must define endpoint for each route using this decorator.
+    The decorator should be right above the function in 
+    order to run properly.
+
+    Parameters
+    ----------
+    func : Callable
+        The function to wrap with authentication checking.
+    """
+    def wrapped(*args, **kwargs):
+        if (current_user == None) or (current_user.is_authenticated == False):
+            return render_template("404.html", err_msg="The page you where looking for could not be found."), 404  
+        
+        user = get_current_user()
+        if user is None:
+            return redirect(url_for("views.index"))
+        
+        res = func(*args, **kwargs)
+        return res
+    return wrapped

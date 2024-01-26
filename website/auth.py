@@ -3,7 +3,6 @@
 import pyqrcode
 
 from io import BytesIO
-from typing import Callable
 from flask import Blueprint, render_template
 from flask import  render_template, redirect, url_for, flash, session
 from flask_login import login_user, logout_user, current_user
@@ -11,6 +10,7 @@ from flask_login import login_user, logout_user, current_user
 # LOCAL IMPORTS
 from .config import Config
 from .models import User, db
+from .utils import restricted_route_decorator
 
 auth = Blueprint("auth", __name__)
 config = Config()
@@ -18,34 +18,6 @@ config = Config()
 AUTH = config.read("auth", "AUTH")
 STREAM_AUTH = AUTH
 STREAM_AUTH.update(config.read("auth", "STREAM"))
-
-# DECORATORS
-def auth_restricted_route_decorator(func: Callable):
-    """Restricted Route Decorator 
-    Check if the user session is valid, if not,
-    it redirected to 404.
-    In addition, the decorator check if the user exists,
-    if not, will be redirected to index page.   
-    
-    Must define endpoint for each route using this decorator.
-    The decorator should be right above the function in 
-    order to run properly.
-
-    Parameters
-    ----------
-    func : Callable
-        The function to wrap with authentication checking.
-    """
-    def wrapped(*args, **kwargs):
-        if "username" not in session:
-            return redirect(url_for("views.index"))
-        user = User.query.filter_by(username=session["username"]).first()
-        if user is None:
-            return redirect(url_for("views.index"))
-        
-        res = func(*args, **kwargs)
-        return res
-    return wrapped
 
 # ROUTES    
 @auth.route("/register", methods=["GET", "POST"])
@@ -94,13 +66,13 @@ def register():
 
 
 @auth.route("/twofactor", endpoint="twofactor")
-@auth_restricted_route_decorator
+@restricted_route_decorator
 def two_factor_setup():
     return render_template("two-factor-setup.html"), 200, AUTH
 
 
 @auth.route("/qrcode", endpoint="qrcode")
-@auth_restricted_route_decorator
+@restricted_route_decorator
 def qrcode():
     user = User.query.filter_by(username=session["username"]).first()
 

@@ -3,52 +3,17 @@
 from io import BytesIO
 from json import dumps
 from typing import Callable
-from flask import Blueprint, render_template
-from flask import Response, render_template, redirect, url_for, send_file, request
+from flask import Blueprint, Response, render_template, redirect, url_for, send_file, request
 from flask_login import current_user
 
 # LOCAL IMPORTS
 from .models import User, Chat
 from .chatbot import ChatBot
-from .utils import generate_slide_show, safe_send_default_image
+from .utils import generate_slide_show, safe_send_default_image, get_current_user, restricted_route_decorator
 from .text2speech import Text2Speech
 
 views = Blueprint("views", __name__)
 chat_bot = ChatBot()
-
-# HANDLERS
-def get_user():
-    user = User.query.filter_by(username=current_user.username).first()
-    return user
-
-# DECORATORS
-def restricted_route_decorator(func: Callable):
-    """Restricted Route Decorator 
-    Check if the user session is valid, if not,
-    it redirected to 404.
-    In addition, the decorator check if the user exists,
-    if not, will be redirected to index page.   
-    
-    Must define endpoint for each route using this decorator.
-    The decorator should be right above the function in 
-    order to run properly.
-
-    Parameters
-    ----------
-    func : Callable
-        The function to wrap with authentication checking.
-    """
-    def wrapped(*args, **kwargs):
-        if (current_user == None) or (current_user.is_authenticated == False):
-            return render_template("404.html", err_msg="The page you where looking for could not be found."), 404  
-        
-        user = get_user()
-        if user is None:
-            return redirect(url_for("views.index"))
-        
-        res = func(*args, **kwargs)
-        return res
-    return wrapped
 
 # ROUTES
 @views.route("/")
@@ -65,7 +30,7 @@ def profile():
     from .models import db
     from .forms import ProfileForm
     
-    user = get_user()
+    user = get_current_user()
     form = ProfileForm(obj=user)
     if form.validate_on_submit():
         form.populate_obj(user)
@@ -90,7 +55,7 @@ def profile():
 def chat():
     from .forms import ChatEdit
 
-    user = get_user()
+    user = get_current_user()
     chat_name_form = ChatEdit()
     
     return render_template("chat.html", user=user, chat_data=-1, chat_id=-1, name_form=chat_name_form)
@@ -101,7 +66,7 @@ def chat():
 def get_chat(chat_id: int):
     from .forms import ChatEdit
 
-    user = get_user()
+    user = get_current_user()
     # Prevent from other users to access
     chat_data = Chat.query.filter_by(user_id=current_user.id, id=chat_id).first()
     if chat_data is None:
@@ -116,7 +81,7 @@ def get_chat(chat_id: int):
 def get_bot_response():
     from .models import db
     
-    user = get_user()
+    user = get_current_user()
     
     chat_id = int(request.args.get("chatId"))
     fisrt_time = request.args.get("fisrtTime")
@@ -159,7 +124,7 @@ def get_bot_response():
 def get_chat_edit():
     from .models import db
     
-    user = get_user()
+    user = get_current_user()
     
     name = request.args.get("name")
     id = request.args.get("id")
