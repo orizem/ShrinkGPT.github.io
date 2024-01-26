@@ -165,6 +165,15 @@ def get_chat(chat_id: int):
     
     return render_template("chat.html", user=user, chat_data=chat_data.chat, chat_id=chat_id, name_form=chat_name_form)
 
+import html
+
+def html_encode(text):
+    return html.escape(text)
+
+def html_decode(text):
+    return html.unescape(text)
+
+
 @views.route("/get", endpoint="get")
 @restricted_route_decorator
 def get_bot_response():
@@ -206,7 +215,7 @@ def get_bot_response():
     # Update chat history
     db.session.add(current_chat)
     db.session.commit()
-    return bot_response
+    return html_encode(bot_response)
 
 @views.route("/chat-edit", endpoint="chat-edit")
 @restricted_route_decorator
