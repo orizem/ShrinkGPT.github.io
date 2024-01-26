@@ -1,5 +1,7 @@
 # utils.py
 
+import html
+
 from os import listdir
 from time import sleep
 from typing import Callable
@@ -149,3 +151,9 @@ def restricted_route_decorator(func: Callable):
         res = func(*args, **kwargs)
         return res
     return wrapped
+
+def html_encode(text):
+    return html.escape(text)
+
+def html_decode(text):
+    return html.unescape(text)

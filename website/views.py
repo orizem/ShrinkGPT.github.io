@@ -3,14 +3,14 @@
 from io import BytesIO
 from json import dumps
 from typing import Any
-from flask import Blueprint, Response, render_template, redirect, url_for, send_file, request
 from flask_login import current_user
+from flask import Blueprint, Response, render_template, redirect, url_for, send_file, request
 
 # LOCAL IMPORTS
-from .models import User, Chat
 from .chatbot import ChatBot
-from .utils import generate_slide_show, safe_send_default_image, get_current_user, restricted_route_decorator
+from .models import User, Chat
 from .text2speech import Text2Speech
+from .utils import generate_slide_show, safe_send_default_image, get_current_user, restricted_route_decorator, html_encode
 
 views = Blueprint("views", __name__)
 chat_bot = ChatBot()
@@ -164,14 +164,6 @@ def get_chat(chat_id: int):
     chat_name_form = ChatEdit()
     
     return render_template("chat.html", user=user, chat_data=chat_data.chat, chat_id=chat_id, name_form=chat_name_form)
-
-import html
-
-def html_encode(text):
-    return html.escape(text)
-
-def html_decode(text):
-    return html.unescape(text)
 
 
 @views.route("/get", endpoint="get")
