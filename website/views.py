@@ -7,10 +7,10 @@ from flask_login import current_user
 from flask import Blueprint, Response, render_template, redirect, url_for, send_file, request
 
 # LOCAL IMPORTS
-from .chatbot import ChatBot
 from .models import User, Chat
-from .text2speech import Text2Speech
-from .utils import generate_slide_show, safe_send_default_image, get_current_user, restricted_route_decorator, html_encode
+from .utils.chatbot import ChatBot
+from .utils.text2speech import Text2Speech
+from .utils.utils import generate_slide_show, safe_send_default_image, get_current_user, restricted_route_decorator, html_encode
 
 views = Blueprint("views", __name__)
 chat_bot = ChatBot()

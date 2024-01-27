@@ -11,7 +11,7 @@ from os.path import realpath, commonpath
 from flask import render_template, redirect, url_for, send_file
 
 # LOCAL IMPORTS
-from .models import User
+from ..models import User
 
 # PROJECT IMPORTS
 from config import PROJECT_PATH

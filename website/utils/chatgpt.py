@@ -9,7 +9,7 @@ from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 
 # LOCAL IMPORTS
-from .config import config
+from ..config.config import config
 
 os.environ["OPENAI_API_KEY"] = config.read("GPT", "APIKEY")
 

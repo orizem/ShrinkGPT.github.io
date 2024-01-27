@@ -5,7 +5,7 @@ import pyttsx3
 from typing import Literal
 
 # LOCAL IMPORTS
-from .config import config
+from ..config.config import config
 
 class Text2Speech():
     def __init__(self, gender:Literal["male", "female"]="female"):
