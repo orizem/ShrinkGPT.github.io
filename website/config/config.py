@@ -3,8 +3,8 @@
 import yaml
 
 # LOCAL IMPORTS
-from config import PROJECT_PATH
-
+# from config import PROJECT_PATH
+PROJECT_PATH = r"D:\Program Files\MEGA\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\website"
 class __NotInConfigException(Exception):
     def __init__(self, key):
         self.message = f"Could not found the key `{key}` in the config file."
@@ -41,16 +41,21 @@ class __Config():
         """
         res = self.__config
         key_not_found = None
-        try:
-            for a in args:
+        list_keys_not_found = []
+        for a in args:
+            try:
                 key_not_found = a
                 res = res[a]
-        except:
-            raise __NotInConfigException(key=key_not_found)
+            except:
+                list_keys_not_found.append(key_not_found)
+                # raise __NotInConfigException(key=key_not_found)
+        if len(list_keys_not_found) > 0:
+            print(f"Keys not found: {', '.join(list_keys_not_found)}")
+            return None
         return res
     
 config = __Config()
-  
+config.read("auth","AUTH","Prasgma")
 # # DEBUGGING  
 # if __name__ == "__main__":
 #     c = Config()

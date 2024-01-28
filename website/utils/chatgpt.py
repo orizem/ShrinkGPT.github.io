@@ -11,7 +11,7 @@ from langchain.chat_models import ChatOpenAI
 # LOCAL IMPORTS
 from ..config.config import config
 
-os.environ["OPENAI_API_KEY"] = config.read("GPT", "APIKEY")
+os.environ["OPENAI_API_KEY"] = config.read("GPT", "API_KEY")
 
 query = sys.argv[1]
 

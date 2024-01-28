@@ -4,11 +4,10 @@ import html
 
 from os import listdir
 from time import sleep
-from typing import Callable
-from typing import List, Union
+from typing import List, Union, Callable
 from flask_login import current_user
 from os.path import realpath, commonpath
-from flask import render_template, redirect, url_for, send_file
+from flask import render_template, redirect, url_for, send_file, Response
 
 # LOCAL IMPORTS
 from ..models import User
@@ -47,7 +46,7 @@ def generate_slide_show(start_with: Union[str, List]):
 
     Parameters
     ----------
-    start_with : Union[str, List]
+    start_with : str | List
         The starting image or list of images 
         for the slideshow.
 
