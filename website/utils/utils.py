@@ -7,7 +7,7 @@ from time import sleep
 from typing import List, Union, Callable
 from flask_login import current_user
 from os.path import realpath, commonpath
-from flask import render_template, redirect, url_for, send_file, Response
+from flask import render_template, redirect, url_for, send_file, session
 
 # LOCAL IMPORTS
 from ..models import User
@@ -142,11 +142,40 @@ def restricted_route_decorator(func: Callable):
         if (current_user == None) or (current_user.is_authenticated == False):
             msg = "The page you where looking for could not be found."
             return render_template("404.html", err_msg=msg), 404  
-        
         user = get_current_user()
+        
         if user is None:
             return redirect(url_for("views.index"))
+
+        res = func(*args, **kwargs)
+        return res
+    return wrapped
+
+def restricted_route_decorator2(func: Callable):
+    """Restricted Route Decorator 
+    
+    Check if the user session is valid, if not,
+    it redirected to 404.
+    In addition, the decorator check if the user exists,
+    if not, will be redirected to index page.   
+    
+    Must define endpoint for each route using this decorator.
+    The decorator should be right above the function in 
+    order to run properly.
+
+    Parameters
+    ----------
+    func : Callable
+        The function to wrap with authentication checking.
+    """
+    def wrapped(*args, **kwargs):
+        if "username" not in session:
+            return redirect(url_for("views.index"))
+        user = User.query.filter_by(username=session["username"]).first()
         
+        if user is None:
+            return redirect(url_for("views.index"))
+
         res = func(*args, **kwargs)
         return res
     return wrapped

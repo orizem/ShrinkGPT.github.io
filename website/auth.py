@@ -10,7 +10,7 @@ from flask_login import login_user, logout_user, current_user
 # LOCAL IMPORTS
 from .models import User, db
 from .config.config import config
-from .utils.utils import restricted_route_decorator
+from .utils.utils import restricted_route_decorator, restricted_route_decorator2
 
 auth = Blueprint("auth", __name__)
 
@@ -64,14 +64,14 @@ def register():
     return render_template("register.html", form=form)
 
 
-@auth.route("/twofactor", endpoint="twofactor")
-@restricted_route_decorator
+@auth.route("/two_factor_setup", endpoint="two_factor_setup")
+@restricted_route_decorator2
 def two_factor_setup():
-    return render_template("two-factor-setup.html"), 200, AUTH
+    return render_template("two-factor-setup.html"), 200#, AUTH
 
 
 @auth.route("/qrcode", endpoint="qrcode")
-@restricted_route_decorator
+@restricted_route_decorator2
 def qrcode():
     user = User.query.filter_by(username=session["username"]).first()
 
