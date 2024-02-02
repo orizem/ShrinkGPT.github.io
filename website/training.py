@@ -16,7 +16,7 @@ from keras.layers import Dense, Activation, Dropout
 import random
 import tensorflow as tf
 
-# LOCAL IMPORTS
+# PROJECT IMPORTS
 from config import PROJECT_PATH
 
 

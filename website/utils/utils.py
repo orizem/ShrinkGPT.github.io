@@ -14,12 +14,12 @@ from flask import render_template, redirect, url_for, send_file, session
 from ..models import User
 
 # PROJECT IMPORTS
-from config import PROJECT_PATH
+from config import WEBSITE_PATH
 
 
 # PRIVATE
 def __get_all_images(start_with: Union[str, List]):
-    IMAGE_PATH = rf"{PROJECT_PATH}\static\image"
+    IMAGE_PATH = rf"{WEBSITE_PATH}\static\image"
 
     if not isinstance(start_with, list):
         start_with = [start_with]
@@ -70,7 +70,7 @@ def generate_slide_show(start_with: Union[str, List]):
     images = __get_all_images(start_with=start_with)
 
     # Instantly load image without sleep
-    with open(rf"{PROJECT_PATH}\static\image\{images[-1]}", "rb") as img_file:
+    with open(rf"{WEBSITE_PATH}\static\image\{images[-1]}", "rb") as img_file:
         yield (
             b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + img_file.read() + b"\r\n"
         )
@@ -79,7 +79,7 @@ def generate_slide_show(start_with: Union[str, List]):
         for image_name in images:
             try:
                 with open(
-                    rf"{PROJECT_PATH}\static\image\{image_name}", "rb"
+                    rf"{WEBSITE_PATH}\static\image\{image_name}", "rb"
                 ) as img_file:
                     yield (
                         b"--frame\r\nContent-Type: image/jpeg\r\n\r\n"
@@ -113,8 +113,8 @@ def safe_send_default_image():
         status code 404 is returned.
 
     """
-    base = rf"{PROJECT_PATH}\static\image"
-    safepath = realpath(rf"{PROJECT_PATH}\static\image\default.png")
+    base = rf"{WEBSITE_PATH}\static\image"
+    safepath = realpath(rf"{WEBSITE_PATH}\static\image\default.png")
     prefix = commonpath((base, safepath))
     if prefix == base:
         return send_file(rf"{base}\default.png", mimetype="image/jpeg")

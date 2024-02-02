@@ -10,14 +10,17 @@ import numpy as np
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 
+# PROJECT IMPORTS
+from config import PROJECT_PATH
+
 
 class ChatBot:
     def __init__(self):
         self.lemmatizer = WordNetLemmatizer()
-        self.model = load_model("model.h5")
-        self.intents = json.loads(open("data.json").read())
-        self.words = pickle.load(open("texts.pkl", "rb"))
-        self.classes = pickle.load(open("labels.pkl", "rb"))
+        self.model = load_model(rf"{PROJECT_PATH}\model.h5")
+        self.intents = json.loads(open(rf"{PROJECT_PATH}\data.json").read())
+        self.words = pickle.load(open(rf"{PROJECT_PATH}\texts.pkl", "rb"))
+        self.classes = pickle.load(open(rf"{PROJECT_PATH}\labels.pkl", "rb"))
 
     # intents = json.loads(open(PROJECT_PATH + r"\data.json").read())
     # words = pickle.load(open(PROJECT_PATH + r"\texts.pkl","rb"))

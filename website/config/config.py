@@ -2,8 +2,8 @@
 
 import yaml
 
-# LOCAL IMPORTS
-from config import PROJECT_PATH
+# PROJECT IMPORTS
+from config import WEBSITE_PATH
 
 
 class __NotInConfigException(Exception):
@@ -24,7 +24,7 @@ class __Config:
 
     def __read_config(self):
         try:
-            with open(rf"{PROJECT_PATH}\config\config.yaml", "r") as f:
+            with open(rf"{WEBSITE_PATH}\config\config.yaml", "r") as f:
                 self.__config = yaml.load(f, Loader=yaml.FullLoader)
         except:
             raise __ConfigFileException
