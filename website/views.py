@@ -329,6 +329,7 @@ def slideshow(start_with: str = ""):
         images file name should start with.
         Using only /slideshow will return all images
         located in the `static/image` folder, by default "".
+
     Returns
     -------
     Response
