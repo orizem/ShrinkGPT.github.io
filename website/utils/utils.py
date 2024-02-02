@@ -1,6 +1,7 @@
 # utils.py
 
 import html
+import functools
 
 from os import listdir
 from time import sleep
@@ -121,7 +122,7 @@ def get_current_user():
     user = User.query.filter_by(username=current_user.username).first()
     return user
 
-def restricted_route_decorator(func: Callable):
+def restricted_route_decorator(check_session:bool):
     """Restricted Route Decorator 
     
     Check if the user session is valid, if not,
@@ -138,47 +139,29 @@ def restricted_route_decorator(func: Callable):
     func : Callable
         The function to wrap with authentication checking.
     """
-    def wrapped(*args, **kwargs):
-        if (current_user == None) or (current_user.is_authenticated == False):
-            msg = "The page you where looking for could not be found."
-            return render_template("404.html", err_msg=msg), 404  
-        user = get_current_user()
-        
-        if user is None:
-            return redirect(url_for("views.index"))
-
-        res = func(*args, **kwargs)
-        return res
-    return wrapped
-
-def restricted_route_decorator2(func: Callable):
-    """Restricted Route Decorator 
-    
-    Check if the user session is valid, if not,
-    it redirected to 404.
-    In addition, the decorator check if the user exists,
-    if not, will be redirected to index page.   
-    
-    Must define endpoint for each route using this decorator.
-    The decorator should be right above the function in 
-    order to run properly.
-
-    Parameters
-    ----------
-    func : Callable
-        The function to wrap with authentication checking.
-    """
-    def wrapped(*args, **kwargs):
-        if "username" not in session:
-            return redirect(url_for("views.index"))
-        user = User.query.filter_by(username=session["username"]).first()
-        
-        if user is None:
-            return redirect(url_for("views.index"))
-
-        res = func(*args, **kwargs)
-        return res
-    return wrapped
+    def decorator(func: Callable):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            if check_session == True:
+                if "username" not in session:
+                    return redirect(url_for("views.index"))
+                user = User.query.filter_by(username=session["username"]).first()
+                
+                if user is None:
+                    return redirect(url_for("views.index"))
+            else:
+                if (current_user == None) or (current_user.is_authenticated == False):
+                    msg = "The page you where looking for could not be found."
+                    return render_template("404.html", err_msg=msg), 404  
+                user = get_current_user()
+                
+                if user is None:
+                    return redirect(url_for("views.index"))
+                
+            res = func(*args, **kwargs)
+            return res
+        return wrapper
+    return decorator
 
 def html_encode(text):
     return html.escape(text)

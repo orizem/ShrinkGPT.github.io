@@ -10,12 +10,12 @@ from flask_login import login_user, logout_user, current_user
 # LOCAL IMPORTS
 from .models import User, db
 from .config.config import config
-from .utils.utils import restricted_route_decorator, restricted_route_decorator2
+from .utils.utils import restricted_route_decorator
 
 auth = Blueprint("auth", __name__)
 
-AUTH = config.read("auth", "AUTH")
-STREAM_AUTH = AUTH
+AUTH: dict = config.read("auth", "AUTH")
+STREAM_AUTH: dict = AUTH
 STREAM_AUTH.update(config.read("auth", "STREAM"))
 
 # ROUTES    
@@ -65,13 +65,17 @@ def register():
 
 
 @auth.route("/two_factor_setup", endpoint="two_factor_setup")
-@restricted_route_decorator2
+@restricted_route_decorator(check_session=True)
 def two_factor_setup():
-    return render_template("two-factor-setup.html"), 200#, AUTH
-
+    print(AUTH)
+    return render_template("two-factor-setup.html"), 200, {
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0",
+        }
 
 @auth.route("/qrcode", endpoint="qrcode")
-@restricted_route_decorator2
+@restricted_route_decorator(check_session=True)
 def qrcode():
     user = User.query.filter_by(username=session["username"]).first()
 

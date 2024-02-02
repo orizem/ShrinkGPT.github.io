@@ -51,7 +51,7 @@ def page_not_found(e):
     return render_template("404.html", err_msg=e), 404
 
 @views.route("/profile", methods=["GET", "POST"], endpoint="profile")
-@restricted_route_decorator
+@restricted_route_decorator(check_session=False)
 def profile():
     """Profile
     
@@ -92,7 +92,7 @@ def profile():
     return render_template("profile.html", user=user, form=form)
 
 @views.route("/chat", endpoint="chat")
-@restricted_route_decorator
+@restricted_route_decorator(check_session=False)
 def chat():
     """
     Chat
@@ -121,7 +121,7 @@ def chat():
 
 
 @views.route("/get_chat/<int:chat_id>", endpoint="get_chat")
-@restricted_route_decorator
+@restricted_route_decorator(check_session=False)
 def get_chat(chat_id: int):
     """Get Chat
     
@@ -167,7 +167,7 @@ def get_chat(chat_id: int):
 
 
 @views.route("/get", endpoint="get")
-@restricted_route_decorator
+@restricted_route_decorator(check_session=False)
 def get_bot_response():
     from .models import db
     
@@ -210,7 +210,7 @@ def get_bot_response():
     return html_encode(bot_response)
 
 @views.route("/chat-edit", endpoint="chat-edit")
-@restricted_route_decorator
+@restricted_route_decorator(check_session=False)
 def get_chat_edit() -> Any:
     """Get Chat Edit
     
@@ -310,7 +310,7 @@ def slideshow(start_with: str=""):
     return Response(generate_slide_show(start_with=start_with), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 @views.route("/text2speech/<string:text>", endpoint="text2speech")
-@restricted_route_decorator
+@restricted_route_decorator(check_session=False)
 def text2speech(text: str=""):
     try:
         speech = Text2Speech()

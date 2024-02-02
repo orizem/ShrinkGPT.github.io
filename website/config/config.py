@@ -55,7 +55,6 @@ class __Config():
         return res
     
 config = __Config()
-config.read("auth","AUTH","Prasgma")
 # # DEBUGGING  
 # if __name__ == "__main__":
 #     c = Config()
