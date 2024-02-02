@@ -6,9 +6,9 @@ auth:
   AUTH:
     Cache-Control: no-cache, no-store, must-revalidate
     Pragma: no-cache
-    Expires: 0
+    Expires: "0"
   STREAM:
     Content-Type: image/svg+xml
 
 GPT:
-  API_KEY: "SET A KEY"
+  API_KEY: "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" # "SET A KEY"
