@@ -1,0 +1,21 @@
+website.utils.text2speech package
+=================================
+
+Submodules
+----------
+
+website.utils.text2speech.text2speech module
+--------------------------------------------
+
+.. automodule:: website.utils.text2speech.text2speech
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: website.utils.text2speech
+   :members:
+   :undoc-members:
+   :show-inheritance:

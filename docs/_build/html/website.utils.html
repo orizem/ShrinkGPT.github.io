@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html  lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <title>website.utils package</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="main module" href="main.html" />
+  <link rel="prev" title="website package" href="website.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <span class="site-name">Shrink.io</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="modules.html#shrinkgpt-github-io">shrinkgpt.github.io</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="website.html" class="reference internal ">website package</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 current">
+            
+              <a href="#" class="reference internal current">website.utils package</a>
+            
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#submodules" class="reference internal">Submodules</a></li>
+                
+                  <li class="toctree-l2"><a href="#module-website.utils.chatbot" class="reference internal">website.utils.chatbot module</a></li>
+                
+                  <li class="toctree-l2"><a href="#website-utils-chatgpt-module" class="reference internal">website.utils.chatgpt module</a></li>
+                
+                  <li class="toctree-l2"><a href="#module-website.utils.text2speech" class="reference internal">website.utils.text2speech module</a></li>
+                
+                  <li class="toctree-l2"><a href="#module-website.utils.utils" class="reference internal">website.utils.utils module</a></li>
+                
+                  <li class="toctree-l2"><a href="#module-website.utils" class="reference internal">Module contents</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="main.html" class="reference internal ">main module</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="config.html" class="reference internal ">config module</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="modules.html">ShrinkGPT.github.io</a> &raquo;</li>
+    
+    <li>website.utils package</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="website.html"
+       title="previous chapter">← website package</a>
+  </li>
+  <li class="next">
+    <a href="main.html"
+       title="next chapter">main module →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <section id="website-utils-package">
+<h1>website.utils package<a class="headerlink" href="#website-utils-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-website.utils.chatbot">
+<span id="website-utils-chatbot-module"></span><h2>website.utils.chatbot module<a class="headerlink" href="#module-website.utils.chatbot" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="website.utils.chatbot.ChatBot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.utils.chatbot.</span></span><span class="sig-name descname"><span class="pre">ChatBot</span></span><a class="reference internal" href="_modules/website/utils/chatbot.html#ChatBot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.chatbot.ChatBot" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="website.utils.chatbot.ChatBot.bow">
+<span class="sig-name descname"><span class="pre">bow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">words</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_details</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/chatbot.html#ChatBot.bow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.chatbot.ChatBot.bow" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="website.utils.chatbot.ChatBot.chatbot_response">
+<span class="sig-name descname"><span class="pre">chatbot_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/chatbot.html#ChatBot.chatbot_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.chatbot.ChatBot.chatbot_response" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="website.utils.chatbot.ChatBot.clean_up_sentence">
+<span class="sig-name descname"><span class="pre">clean_up_sentence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/chatbot.html#ChatBot.clean_up_sentence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.chatbot.ChatBot.clean_up_sentence" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="website.utils.chatbot.ChatBot.getResponse">
+<span class="sig-name descname"><span class="pre">getResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intents_json</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/chatbot.html#ChatBot.getResponse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.chatbot.ChatBot.getResponse" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="website.utils.chatbot.ChatBot.predict_class">
+<span class="sig-name descname"><span class="pre">predict_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/chatbot.html#ChatBot.predict_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.chatbot.ChatBot.predict_class" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="website-utils-chatgpt-module">
+<h2>website.utils.chatgpt module<a class="headerlink" href="#website-utils-chatgpt-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-website.utils.text2speech">
+<span id="website-utils-text2speech-module"></span><h2>website.utils.text2speech module<a class="headerlink" href="#module-website.utils.text2speech" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="website.utils.text2speech.Text2Speech">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.utils.text2speech.</span></span><span class="sig-name descname"><span class="pre">Text2Speech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'male'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'female'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'female'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="website.utils.text2speech.Text2Speech.say">
+<span class="sig-name descname"><span class="pre">say</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech.say"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech.say" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="website.utils.text2speech.Text2Speech.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech.stop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-website.utils.utils">
+<span id="website-utils-utils-module"></span><h2>website.utils.utils module<a class="headerlink" href="#module-website.utils.utils" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="website.utils.utils.generate_slide_show">
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">generate_slide_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_with</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#generate_slide_show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.generate_slide_show" title="Link to this definition">¶</a></dt>
+<dd><p>Generate Slide Show</p>
+<p>Generate a slideshow of images.</p>
+<p>This generator function yields frames
+of images for creating a slideshow.
+It starts with the specified image or
+list of images and continues in a loop,
+adding a delay of 5 seconds
+between each image.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>start_with<span class="classifier">str | List</span></dt><dd><p>The starting image or list of images
+for the slideshow.</p>
+</dd>
+</dl>
+</section>
+<section id="yields">
+<h3>Yields<a class="headerlink" href="#yields" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>bytes</dt><dd><p>Frames of images in the form of bytes
+with appropriate HTTP headers for streaming.</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The images are read from the ‘static/image’ directory in the project path.</p></li>
+<li><p>The slideshow continues indefinitely, looping through the specified images.</p></li>
+<li><p>Deprecated images are removed from the list to prevent errors.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.utils.utils.get_current_user">
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_current_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_current_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_current_user" title="Link to this definition">¶</a></dt>
+<dd><p>Get Current User</p>
+<p>Search the flask login current user.</p>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>User | None</dt><dd><p>The model of flask login current user.
+Returns None if was not found.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.utils.utils.html_decode">
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">html_decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#html_decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.html_decode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.utils.utils.html_encode">
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">html_encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#html_encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.html_encode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.utils.utils.restricted_route_decorator">
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">restricted_route_decorator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">check_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#restricted_route_decorator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.restricted_route_decorator" title="Link to this definition">¶</a></dt>
+<dd><p>Restricted Route Decorator</p>
+<p>Check if the user session is valid, if not,
+it redirected to 404.
+In addition, the decorator check if the user exists,
+if not, will be redirected to index page.</p>
+<p>Must define endpoint for each route using this decorator.
+The decorator should be right above the function in
+order to run properly.</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>func<span class="classifier">Callable</span></dt><dd><p>The function to wrap with authentication checking.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.utils.utils.safe_send_default_image">
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">safe_send_default_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#safe_send_default_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.safe_send_default_image" title="Link to this definition">¶</a></dt>
+<dd><p>Safe Send Default Image</p>
+<p>Safely send the default image file.
+This function ensures that the
+default image file is served securely.
+It checks if the provided path is
+within the expected base path to
+prevent directory traversal.</p>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>send_file or tuple</dt><dd><p>If the path is safe, the default
+image file is sent using Flask’s
+<cite>send_file</cite> function.
+If the path is not safe, a tuple
+with an error message and HTTP
+status code 404 is returned.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-website.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-website.utils" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="website.html"
+       title="previous chapter">← website package</a>
+  </li>
+  <li class="next">
+    <a href="main.html"
+       title="next chapter">main module →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2024, Ori Tsemach, Eldar Garrett, Sahar Amar.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 7.2.6 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>

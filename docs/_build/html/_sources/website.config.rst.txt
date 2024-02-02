@@ -1,0 +1,21 @@
+website.config package
+======================
+
+Submodules
+----------
+
+website.config.config module
+----------------------------
+
+.. automodule:: website.config.config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: website.config
+   :members:
+   :undoc-members:
+   :show-inheritance:
