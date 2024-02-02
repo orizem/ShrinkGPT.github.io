@@ -1,196 +1,197 @@
 body {
-    background-color: #fff;
-    font-family: Arial, sans-serif;
-    font-size: 14pt;
-    letter-spacing: 0.01em;
-    color: #fff;
-  }
-  
-  .navbar-default {
-    background-color: #fff;
-    margin-left: 150pt;
-  }
-  
-  /*main side bar*/
-  .msb {
-    width: 150pt;
-    background-color: #F5F7F9;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: auto;
-    min-height: 100%;
-    overflow-y: auto;
-    white-space: nowrap;
-    height: 100%;
-    z-index: 1;
-    .navbar {
-      border: none;
-      margin-left: 0;
-      background-color: inherit;
-    }
-    .navbar-header {
-      width: 100%;
-      border-bottom: 1px solid #e7e7e7;
-      margin-bottom: 20px;
-      background: #fff;
-    }
-    .navbar-nav {
-      .panel {
-        border: 0 none;
-        box-shadow: none;
-        margin: 0;
-        background: inherit;
-      }
-      li {
-        display: block;
-        width: 100%;
-        a {
-          padding: 15px;
-          color: #ffffff;
-          .glyphicon, .fa {
-            margin-right: 8px;
-          }
-        }
-      }
-    }
-    .nb {
-      padding-top: 5px;
-      padding-left: 10px;
-      margin-bottom: 30px;
-      overflow: hidden;
-      
-    }
-  }
-  ul.nv,
-  ul.ns {
-    position: relative;
-    padding: 0;
-    list-style: none;  
-  }
-  .nv {  
-    li {
-      display: block;
-      position: relative;
-      
-      &::before {
-        clear: both;
-        content: "";      
-        display: table;
-      }
-      a {
-        color: #444;
-        padding: 10px 25px;
-        display: block;
-        vertical-align: middle;
-        
-        .ic {
-          font-size: 16px;
-          margin-right: 5px;
-          font-weight: 300;
-          display: inline-block;
-        }
-      }
-    }
-    /*ns: nav-sub*/
-    .ns {
-      li {
-        a {
-          padding: 10px 50px;
-        }
-      }
-      
-    }
-    
-  }
-  
-  
-  /*main content wrapper*/
-  .mcw {
-    margin-left: 150pt;
-    position: relative;
-    min-height: 100%;
-    
-    /*content view*/
-    .cv {
-    }
-  }
-  
-  
-  /*globals*/
-  a,
-  a:focus,
-  a:hover {
-   text-decoration: none;
-  }
-  
-  .inbox {
-    .container-fluid {
-      padding-left: 0;
-      padding-right: 0;
-    }
-    
-    ul, li {
-      margin: 0;
-      padding: 0;
-    }
-    ul {    
-      li {
-        list-style: none;
-        a {
-          display: block;
-          padding: 10px 20px;
-        }
-      }
-    }
-  }
-  .msb, .mnb {
-      -moz-animation: slidein 300ms forwards;
-      -o-animation: slidein 300ms forwards;
-      -webkit-animation: slidein 300ms forwards;
-      animation: slidein 300ms forwards;
-      -webkit-transform-style: preserve-3d;
-      transform-style: preserve-3d;  
-  }
-  .mcw {
-      -moz-animation: bodyslidein 300ms forwards;
-      -o-animation: bodyslidein 300ms forwards;
-      -webkit-animation: bodyslidein 300ms forwards;
-      animation: bodyslidein 300ms forwards;
-      -webkit-transform-style: preserve-3d;
-      transform-style: preserve-3d;  
-  }
-
-  .msb-x.mcw, .msb-x.mnb {
-    margin-left: 0;
-    -moz-animation: bodyslideout 300ms forwards;
-    -o-animation: bodyslideout 300ms forwards;
-    -webkit-animation: bodyslideout 300ms forwards;
-    animation: bodyslideout 300ms forwards;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-  }
-  .msb-x.msb {
-    -moz-animation: slideout 300ms forwards;
-    -o-animation: slideout 300ms forwards;
-    -webkit-animation: slideout 300ms forwards;
-    animation: slideout 300ms forwards;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-  }
-
-.bars-container {
-display: inline-block;
-cursor: pointer;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14pt;
+  letter-spacing: 0.01em;
+  color: #fff;
 }
 
-.bar1 , .bar2 , .bar3 {
+.navbar-default {
+  background-color: #fff;
+  margin-left: 150pt;
+}
+
+/*main side bar*/
+.msb {
+  width: 150pt;
+  background-color: #f5f7f9;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: auto;
+  min-height: 100%;
+  overflow-y: auto;
+  white-space: nowrap;
+  height: 100%;
+  z-index: 1;
+  .navbar {
+    border: none;
+    margin-left: 0;
+    background-color: inherit;
+  }
+  .navbar-header {
+    width: 100%;
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 20px;
+    background: #fff;
+  }
+  .navbar-nav {
+    .panel {
+      border: 0 none;
+      box-shadow: none;
+      margin: 0;
+      background: inherit;
+    }
+    li {
+      display: block;
+      width: 100%;
+      a {
+        padding: 15px;
+        color: #ffffff;
+        .glyphicon,
+        .fa {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+  .nb {
+    padding-top: 5px;
+    padding-left: 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
+  }
+}
+ul.nv,
+ul.ns {
+  position: relative;
+  padding: 0;
+  list-style: none;
+}
+.nv {
+  li {
+    display: block;
+    position: relative;
+
+    &::before {
+      clear: both;
+      content: "";
+      display: table;
+    }
+    a {
+      color: #444;
+      padding: 10px 25px;
+      display: block;
+      vertical-align: middle;
+
+      .ic {
+        font-size: 16px;
+        margin-right: 5px;
+        font-weight: 300;
+        display: inline-block;
+      }
+    }
+  }
+  /*ns: nav-sub*/
+  .ns {
+    li {
+      a {
+        padding: 10px 50px;
+      }
+    }
+  }
+}
+
+/*main content wrapper*/
+.mcw {
+  margin-left: 150pt;
+  position: relative;
+  min-height: 100%;
+
+  /*content view*/
+  .cv {
+  }
+}
+
+/*globals*/
+a,
+a:focus,
+a:hover {
+  text-decoration: none;
+}
+
+.inbox {
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+  }
+  ul {
+    li {
+      list-style: none;
+      a {
+        display: block;
+        padding: 10px 20px;
+      }
+    }
+  }
+}
+.msb,
+.mnb {
+  -moz-animation: slidein 300ms forwards;
+  -o-animation: slidein 300ms forwards;
+  -webkit-animation: slidein 300ms forwards;
+  animation: slidein 300ms forwards;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.mcw {
+  -moz-animation: bodyslidein 300ms forwards;
+  -o-animation: bodyslidein 300ms forwards;
+  -webkit-animation: bodyslidein 300ms forwards;
+  animation: bodyslidein 300ms forwards;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.msb-x.mcw,
+.msb-x.mnb {
+  margin-left: 0;
+  -moz-animation: bodyslideout 300ms forwards;
+  -o-animation: bodyslideout 300ms forwards;
+  -webkit-animation: bodyslideout 300ms forwards;
+  animation: bodyslideout 300ms forwards;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.msb-x.msb {
+  -moz-animation: slideout 300ms forwards;
+  -o-animation: slideout 300ms forwards;
+  -webkit-animation: slideout 300ms forwards;
+  animation: slideout 300ms forwards;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.bars-container {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.bar1,
+.bar2,
+.bar3 {
   width: 21px;
   height: 3px;
   background: #fff;
   margin: 6px 0;
   transition: 0.4s;
-  border-radius:3px;
+  border-radius: 3px;
   box-shadow: 1px 1px 1px 1px #444;
 }
 
@@ -198,7 +199,9 @@ cursor: pointer;
   transform: translate(0, 9px) rotate(-45deg);
 }
 
-.change .bar2 {opacity: 0;}
+.change .bar2 {
+  opacity: 0;
+}
 
 .change .bar3 {
   transform: translate(0, -9px) rotate(45deg);
@@ -210,10 +213,10 @@ cursor: pointer;
   left: 10pt;
   width: auto;
   height: auto;
-  z-index:2;
+  z-index: 2;
 }
 
-.prev-chat{
+.prev-chat {
   width: auto;
   border-bottom: 1pt solid rgba(44, 44, 44, 0.5);
   border-radius: 10pt;
@@ -223,23 +226,27 @@ cursor: pointer;
   user-select: none; /* Standard syntax */
 }
 
-.edit-chat-name { 
+.edit-chat-name {
   display: none;
 }
 
-.edit-chat-name.fa-thumbs-up { 
+.edit-chat-name.fa-thumbs-up {
   display: inline;
 }
 
 .prev-chat:hover {
   /* rgb(221, 219, 219), rgba(255,0,0,0)*/
-  background-image: linear-gradient(to right, rgb(105, 105, 105), rgb(105, 105, 105));
+  background-image: linear-gradient(
+    to right,
+    rgb(105, 105, 105),
+    rgb(105, 105, 105)
+  );
 }
 
 .prev-chat:hover .edit-chat-name {
   display: hidden;
 }
-  
+
 /* Slide in animation */
 @-moz-keyframes slidein {
   0% {
@@ -303,7 +310,7 @@ cursor: pointer;
     left: 0;
   }
   100% {
-    left:0
+    left: 0;
   }
 }
 @keyframes bodyslidein {
@@ -348,6 +355,4 @@ cursor: pointer;
     width: 85%;
     margin-left: 11pt;
   }
-} 
-
-
+}

@@ -27,7 +27,11 @@ html {
 }
 
 body {
-  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+  background: linear-gradient(
+    60deg,
+    rgba(84, 58, 183, 1) 0%,
+    rgba(0, 172, 193, 1) 100%
+  );
   background-size: auto;
   background-attachment: fixed;
   color: white;
@@ -149,14 +153,14 @@ body {
 }
 .msger-send-btn {
   margin-left: 10px;
-  background: rgb(0, 172,193);
+  background: rgb(0, 172, 193);
   color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.23s;
 }
 .msger-send-btn:hover {
-  background: rgb(0, 156,178);
+  background: rgb(0, 156, 178);
 }
 
 .msger-chat {
@@ -179,10 +183,10 @@ textarea {
 }
 @keyframes move-forever {
   0% {
-   transform: translate3d(-90px,0,0);
+    transform: translate3d(-90px, 0, 0);
   }
-  100% { 
-    transform: translate3d(85px,0,0);
+  100% {
+    transform: translate3d(85px, 0, 0);
   }
 }
 
@@ -196,7 +200,7 @@ textarea {
   .msg-bubble {
     max-width: 180pt;
   }
-} 
+}
 
 @media (max-width: 568px) {
   .body {
@@ -204,22 +208,22 @@ textarea {
     margin: 0;
     height: 95vh;
   }
-  
+
   .msger {
     display: flex;
     flex-flow: column wrap;
     justify-content: space-between;
     width: 100%;
   }
-  
+
   .msger-chat {
     width: 100%;
   }
-  
+
   .msger-header {
     width: 100%;
   }
-  
+
   .msger-input {
     width: 100%;
   }
@@ -227,6 +231,4 @@ textarea {
   .msg-bubble {
     max-width: 140pt;
   }
-} 
-
-
+}

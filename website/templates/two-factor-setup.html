@@ -1,23 +1,60 @@
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block title %}Shrink.io - Two Factor Authenticator{% endblock %}
-
-{% block page_content %}
+{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
+title %}Shrink.io - Two Factor Authenticator{% endblock %} {% block page_content
+%}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"
+  />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='styles/form.css') }}"
+  />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <div class="grid-container">
-    <div class="container sio-container grid-child" style="width:70%; height:120%;
-    background: rgba(255, 255, 255, 0.2); border-radius:10pt; text-align:center">
-        <h1>Two Factor Authentication Setup</h1>
-        <p>You are almost done! Please start FreeOTP on your smartphone and scan the following QR Code with it:</p>
-        <p><img id="qrcode" src="{{ url_for('auth.qrcode') }}" style="background: rgba(255, 255, 255, 0.8); padding:3pt; border-radius:5pt;"></p>
-        <p>I'm done, take me to the <a href="{{ url_for('auth.login') }}" style="background: rgba(255, 255, 255, 0.8); padding:3pt; border-radius:5pt; font-weight:bold">Login</a> page!</p>
-    </div>
+  <div
+    class="container sio-container grid-child"
+    style="
+      width: 70%;
+      height: 120%;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10pt;
+      text-align: center;
+    "
+  >
+    <h1>Two Factor Authentication Setup</h1>
+    <p>
+      You are almost done! Please start FreeOTP on your smartphone and scan the
+      following QR Code with it:
+    </p>
+    <p>
+      <img
+        id="qrcode"
+        src="{{ url_for('auth.qrcode') }}"
+        style="
+          background: rgba(255, 255, 255, 0.8);
+          padding: 3pt;
+          border-radius: 5pt;
+        "
+      />
+    </p>
+    <p>
+      I'm done, take me to the
+      <a
+        href="{{ url_for('auth.login') }}"
+        style="
+          background: rgba(255, 255, 255, 0.8);
+          padding: 3pt;
+          border-radius: 5pt;
+          font-weight: bold;
+        "
+        >Login</a
+      >
+      page!
+    </p>
+  </div>
 </div>
 {% endblock %}

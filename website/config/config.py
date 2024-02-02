@@ -1,42 +1,45 @@
-# config.py 
+# config.py
 
 import yaml
 
 # LOCAL IMPORTS
 from config import PROJECT_PATH
 
+
 class __NotInConfigException(Exception):
     def __init__(self, key):
         self.message = f"Could not found the key `{key}` in the config file."
-        super().__init__(self.message)  
+        super().__init__(self.message)
+
 
 class __ConfigFileException(Exception):
     def __init__(self, message="Could not load the config file."):
         self.message = message
-        super().__init__(self.message)  
+        super().__init__(self.message)
 
-class __Config():
+
+class __Config:
     def __init__(self):
         self.__read_config()
-        
+
     def __read_config(self):
         try:
             with open(rf"{PROJECT_PATH}\config\config.yaml", "r") as f:
                 self.__config = yaml.load(f, Loader=yaml.FullLoader)
         except:
             raise __ConfigFileException
-    
+
     def read(self, *args):
         """Read
-        
+
         Reads a config param base on its location.
-        The order of the arguments is the order of 
+        The order of the arguments is the order of
         the parameter location in the config.yaml file.
 
         Returns
         -------
         Any
-            The value of the requested parameter or raises 
+            The value of the requested parameter or raises
             an error if was not found.
         """
         res = self.__config
@@ -53,9 +56,10 @@ class __Config():
             print(f"Keys not found: {', '.join(list_keys_not_found)}")
             return None
         return res
-    
+
+
 config = __Config()
-# # DEBUGGING  
+# # DEBUGGING
 # if __name__ == "__main__":
 #     c = Config()
 #     print(c.read("text2speech", "male"))

@@ -13,6 +13,7 @@ from .views import page_not_found
 # env = os.environ.get("FLASK_ENV", "dev")
 # env = os.environ.get("FLASK_APP", "main.py")
 
+
 def create_app():
     app = Flask(__name__)
     app.static_folder = "static"
@@ -26,7 +27,7 @@ def create_app():
     login_manager.init_app(app)
 
     from .models import User
-    
+
     create_database(app)
 
     @login_manager.user_loader
@@ -39,12 +40,15 @@ def create_app():
 
     # blueprint for auth routes in our app
     from .auth import auth as auth_blueprint
+
     app.register_blueprint(auth_blueprint)
 
     # blueprint for non-auth parts of app
     from .views import views as views_blueprint
+
     app.register_blueprint(views_blueprint)
     return app
+
 
 def create_database(app):
     with app.app_context():

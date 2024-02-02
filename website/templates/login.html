@@ -1,23 +1,30 @@
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block page_content %}
+{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
+page_content %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"
+  />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='styles/form.css') }}"
+  />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <div class="grid-container-fr">
-    <div class="sio-form grid-child">
-        <h1>Login</h1>
-        {{ wtf.quick_form(form) }}
-    </div>
-    
-    <div class="w3-container grid-child slideshow-login" style="padding-top:10pt;">
-        <img src="/slideshow/[man;woman;bot]"/>
-    </div>
+  <div class="sio-form grid-child">
+    <h1>Login</h1>
+    {{ wtf.quick_form(form) }}
+  </div>
+
+  <div
+    class="w3-container grid-child slideshow-login"
+    style="padding-top: 10pt"
+  >
+    <img src="/slideshow/[man;woman;bot]" />
+  </div>
 </div>
 {% endblock %}

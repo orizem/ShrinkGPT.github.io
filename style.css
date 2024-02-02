@@ -34,7 +34,7 @@
 .container img.right {
   float: right;
   margin-left: 20px;
-  margin-right:0;
+  margin-right: 0;
 }
 
 /* Style time text */
@@ -49,7 +49,7 @@
   color: #999;
 }
 
-.chat{
+.chat {
   flex: content;
   position: absolute;
   top: 50%;
@@ -63,17 +63,16 @@
 .bubble {
   --r: 25px; /* the radius */
   --t: 30px; /* the size of the tail */
-  
+
   max-width: 300px;
-  padding: calc(3*var(--r)/3);
-  -webkit-mask: 
-    radial-gradient(var(--t) at var(--_d) 0,#0000 98%,#000 102%)
-      var(--_d) 100%/calc(100% - var(--r)) var(--t) no-repeat,
-    conic-gradient(at var(--r) var(--r),#000 75%,#0000 0) 
-      calc(var(--r)/-2) calc(var(--r)/-2) padding-box, 
-    radial-gradient(50% 50%,#000 98%,#0000 101%) 
-      0 0/var(--r) var(--r) space padding-box;
-  background: linear-gradient(135deg,#FE6D00,#1384C5) border-box;
+  padding: calc(3 * var(--r) / 3);
+  -webkit-mask: radial-gradient(var(--t) at var(--_d) 0, #0000 98%, #000 102%)
+      var(--_d) 100% / calc(100% - var(--r)) var(--t) no-repeat,
+    conic-gradient(at var(--r) var(--r), #000 75%, #0000 0) calc(var(--r) / -2)
+      calc(var(--r) / -2) padding-box,
+    radial-gradient(50% 50%, #000 98%, #0000 101%) 0 0 / var(--r) var(--r) space
+      padding-box;
+  background: linear-gradient(135deg, #fe6d00, #1384c5) border-box;
   color: #fff;
 }
 .left {
@@ -91,12 +90,12 @@
 .img-right {
   float: right;
   margin-left: 20px;
-  margin-right:0; 
+  margin-right: 0;
 }
 .img-left {
   float: left;
   margin-left: 0;
-  margin-right:20px;
+  margin-right: 20px;
 }
 
 button {
@@ -107,14 +106,14 @@ button {
   background-color: lightgreen;
 }
 
-button a{
+button a {
   color: white;
   text-shadow: 2px 2px 4px black;
   font-size: 22px;
   text-decoration: none;
 }
 
-button:hover{
+button:hover {
   text-shadow: 2px 2px 4px black;
   background-color: red;
 }
