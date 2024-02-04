@@ -56,3 +56,4 @@ Feel free to explore, contribute, and let ShrinkGPT guide you on your virtual th
   span {
     -webkit-text-stroke: 0.4px #3b3b3b;
     text-stroke: 1px #
+</style>
