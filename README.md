@@ -47,13 +47,3 @@ Our documentation is powered by Sphinx and is essential for understanding and co
 Feel free to explore, contribute, and let ShrinkGPT guide you on your virtual therapy journey! 🌈✨
 
 </div>
-
-<style>
-  div:hover {
-    box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  span {
-    -webkit-text-stroke: 0.4px #3b3b3b;
-    text-stroke: 1px #
-</style>
