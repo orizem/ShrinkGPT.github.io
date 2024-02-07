@@ -17,7 +17,8 @@ import random
 import tensorflow as tf
 
 # PROJECT IMPORTS
-from config import PROJECT_PATH
+#from config import PROJECT_PATH
+PROJECT_PATH= r"C:\Users\user\Desktop\FinalProject\ShrinkGPT.github.io"
 
 
 words = []
