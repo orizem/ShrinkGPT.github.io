@@ -1,5 +1,6 @@
 # views.py
 
+from flask import flash
 from io import BytesIO
 from json import dumps
 from typing import Any
@@ -318,3 +319,21 @@ def text2speech(text: str=""):
     except:
         pass
     return Response()
+
+@views.route('/review', methods=['GET', 'POST'])
+def reviews():
+    from .forms import ReviewForm
+    from .models import db, Reviews
+    review_form = ReviewForm()
+    if review_form.validate_on_submit() and current_user.is_authenticated:
+        review = Reviews(title=review_form.title.data,
+                        content=review_form.content.data,
+                        stars=review_form.stars.data,
+                        user_id=None if review_form.anonymous.data else current_user.id)
+        db.session.add(review)
+        db.session.commit()
+        flash('Your review has been posted!', 'success')
+        return redirect(url_for('views.reviews'))
+
+    reviews = Reviews.query.all()
+    return render_template('review.html', title='Reviews', review_form=review_form, reviews=reviews)

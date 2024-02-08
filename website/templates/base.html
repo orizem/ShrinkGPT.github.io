@@ -25,6 +25,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('views.reviews') }}">Reviews</a></li>
                 {% if current_user.is_authenticated %}
                 <li><a href="{{ url_for('views.profile') }}">{{ current_user.username.title() }}</a></li>
                 <li><a href="{{ url_for('views.chat') }}">Chat</a></li>

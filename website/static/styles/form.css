@@ -165,3 +165,36 @@ body {
         height: auto;
     }
 }
+
+/* Individual Star Style */
+.star {
+    display: inline-block;
+    width: 30px; /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
+    background-size: cover;
+}
+
+.empty-star {
+    background-image: url('../image/empty_star.jpg');
+}
+
+.filled-star {
+    background-image: url('../image/full_star.jpg');
+}
+
+/* Style for the star rating input field */
+.star-rating input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    opacity: 0;
+    display: inline-block;
+    width: 20%; /* Each star represents 20% */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 0;
+}

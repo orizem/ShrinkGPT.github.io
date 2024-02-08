@@ -1,4 +1,4 @@
-# models.py
+    # models.py
 
 from json import loads, dumps
 from os import urandom
@@ -22,6 +22,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     otp_secret = db.Column(db.String(16))
     chats = db.relationship("Chat", backref=db.backref("chats", lazy=True)) # Creating a relationship with the User model
+    reviews = db.relationship('Reviews', backref='user', lazy=True)
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -72,3 +73,12 @@ class Chat(UserMixin, db.Model):
     @name.setter
     def name(self, name):
         self.__name = name
+
+class Reviews(db.Model):
+    """Reviews model."""
+    __tablename__ = "reviews"
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(127), nullable=False)
+    content = db.Column(db.String(255), nullable=False)
+    stars = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)  # nullable=True - Assuming anonymity is allowed

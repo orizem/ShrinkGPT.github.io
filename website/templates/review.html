@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<div class="container">
+    <h1>Service Reviews</h1>
+    {% if current_user.is_authenticated %}
+        <h2>Write a Review</h2>
+        <form method="post" action="{{ url_for('views.reviews') }}">
+            {{ review_form.hidden_tag() }}
+            {{ wtf.quick_form(review_form) }}
+        </form>
+    {% endif %}
+    <h2>Customer Reviews</h2>
+    {% for review in reviews %}
+        <div>
+            <h3>{{ "Anonymous" if review.user_id is none else review.user.username }}: {{ review.title }}</h3>
+            <p>{{ review.content }}</p>
+            <div>
+                {% for i in range(1, 6) %}
+                    {% if i <= review.stars %}
+                        <span class="star filled-star"></span>
+                    {% else %}
+                        <span class="star empty-star"></span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ratingInputs = document.querySelectorAll('.star-rating input');
+        ratingInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const rating = this.value;
+                this.parentNode.style.backgroundPosition = `0 -${50 * rating}px`;
+            });
+        });
+    });
+    </script>
+    
+{% endblock %}

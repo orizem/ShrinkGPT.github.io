@@ -2,8 +2,8 @@
 
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, HiddenField, PasswordField, SubmitField
-from wtforms.validators import Length, EqualTo, InputRequired
+from wtforms import StringField, HiddenField, PasswordField, SubmitField, TextAreaField, SelectField, BooleanField, RadioField
+from wtforms.validators import Length, EqualTo, InputRequired, DataRequired
 
 class RegisterForm(FlaskForm):
     """Registration form."""
@@ -33,3 +33,9 @@ class ChatEdit(FlaskForm):
     """Profile form."""
     name = StringField("Name", validators=[Length(1, 20)])
     
+class ReviewForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired(), Length(min=2, max=100)])
+    content = TextAreaField('Review', validators=[DataRequired(), Length(min=2, max=255)])
+    stars = RadioField('Rating', choices=[(1, '1 Star'), (2, '2 Stars'), (3, '3 Stars'), (4, '4 Stars'), (5, '5 Stars')], coerce=int)
+    anonymous = BooleanField('Publish Anonymously')
+    submit = SubmitField('Submit Review')
