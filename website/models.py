@@ -1,5 +1,7 @@
     # models.py
 
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from json import loads, dumps
 from os import urandom
 from base64 import b32encode
@@ -78,7 +80,9 @@ class Reviews(db.Model):
     """Reviews model."""
     __tablename__ = "reviews"
     id = db.Column(db.Integer, primary_key=True)
+    submitted_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)  # nullable=True - Assuming anonymity is allowed
     title = db.Column(db.String(127), nullable=False)
     content = db.Column(db.String(255), nullable=False)
     stars = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)  # nullable=True - Assuming anonymity is allowed
+    

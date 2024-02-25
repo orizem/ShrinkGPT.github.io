@@ -9,32 +9,70 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <div class="container">
+    <h1>.</h1>
     <h1>Service Reviews</h1>
     {% if current_user.is_authenticated %}
         <h2>Write a Review</h2>
         <form method="post" action="{{ url_for('views.reviews') }}">
             {{ review_form.hidden_tag() }}
-            {{ wtf.quick_form(review_form) }}
+            <div>
+                {{ review_form.title.label }}<br>
+                <p class="txtblock">{{ review_form.title(size=32) }}</p>
+            </div>
+            <div>
+                {{ review_form.content.label }}<br>
+                <p class="txtblock">{{ review_form.content(cols=32, rows=4) }}</p>
+            </div>
+            <div class="star-rating form-stars">
+                {{ review_form.stars.label }}<br>
+                {% for subfield in review_form.stars %}
+                    {{ subfield(id="star_" ~ loop.index) }} 
+                    <label for="star_{{ loop.index }}">
+                        <span class="star empty-star"></span>
+                    </label>
+                {% endfor %}
+            </div>
+            <div>
+                {{ review_form.anonymous.label }}
+                {{ review_form.anonymous }}
+            </div>
+            <div class="submitBtn">{{ review_form.submit() }}</div>
         </form>
     {% endif %}
     <h2>Customer Reviews</h2>
     {% for review in reviews %}
-        <div>
-            <h3>{{ "Anonymous" if review.user_id is none else review.user.username }}: {{ review.title }}</h3>
-            <p>{{ review.content }}</p>
-            <div>
-                {% for i in range(1, 6) %}
-                    {% if i <= review.stars %}
-                        <span class="star filled-star"></span>
-                    {% else %}
-                        <span class="star empty-star"></span>
-                    {% endif %}
-                {% endfor %}
-            </div>
+    <div>
+        <div class="div_for_picture_name_title">
+            {% if review.user_id is none %}
+                <!-- Anonymous User -->
+                <img class="review_user_picture" src="{{ url_for('static', filename='image/anonymous.png') }}" alt="Anonymous User">
+                <h3 class="review_usersName  _title">Anonymous: {{ review.title }}</h3>
+            {% else %}
+                {% if review.user.image_data %}
+                    <!-- User with Custom Picture -->
+                    <img class="review_user_picture" src="{{ url_for('views.get_image', username=review.user.username) }}" alt="{{ review.user.username }}'s Image">
+                {% else %}
+                    <!-- Default Picture -->
+                    <img class="review_user_picture" src="{{ url_for('static', filename='image/default.png') }}" alt="Default User Image">
+                {% endif %}
+                <h3 class="review_usersName_title">{{ review.user.username }}: {{ review.title }}</h3>
+            {% endif %}
         </div>
-    {% endfor %}
+        <p>{{ review.content }}</p>
+        <p>Reviewed on: {{ review.submitted_at.strftime('%d.%m.%Y - %H:%M') }}</p>
+        <div>
+            {% for i in range(1, 6) %}
+                {% if i <= review.stars %}
+                    <span class="star filled-star"></span>
+                {% else %}
+                    <span class="star empty-star"></span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
 </div>
-<script>
+<script>/* script for display the rating as stars in the published reviews, empty and filled based on  the rating */
     document.addEventListener("DOMContentLoaded", function() {
         const ratingInputs = document.querySelectorAll('.star-rating input');
         ratingInputs.forEach(input => {
@@ -45,5 +83,32 @@
         });
     });
     </script>
-    
+    <script>/* script for display the rating-RadioField as stars, empty and filled based on the rating */
+        document.addEventListener("DOMContentLoaded", function() {
+            const starLabels = document.querySelectorAll('.star-rating label');
+        
+            function updateStars(clickedIndex) {
+                const starInputs = document.querySelectorAll('.star-rating input[type="radio"]');
+                starInputs.forEach((input, index) => {
+                    const label = input.nextElementSibling;
+                    const starSpan = label.querySelector('.star');
+                    if (index <= clickedIndex) {
+                        starSpan.classList.remove('empty-star');
+                        starSpan.classList.add('filled-star');
+                    } else {
+                        starSpan.classList.remove('filled-star');
+                        starSpan.classList.add('empty-star');
+                    }
+                });
+            }
+            starLabels.forEach((label, index) => {
+                label.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default action
+                    updateStars(index - 1); // Adjust index for 0-based
+                    const associatedInput = document.querySelector('#' + this.getAttribute('for'));
+                    associatedInput.checked = true; // Manually set the radio button as checked
+                });
+            });
+        });
+        </script>
 {% endblock %}
