@@ -7,22 +7,61 @@ from config import WEBSITE_PATH
 
 
 class __NotInConfigException(Exception):
+    """Not In Config Exception
+
+    This exception occurs when the key can not be found in the config.
+    If you get this exception, try looking at the `config.yaml` file
+    to see if you used the correct path.
+
+    Parameters
+    ----------
+    Exception : Exception
+        Base exception.
+    """
+
     def __init__(self, key):
         self.message = f"Could not found the key `{key}` in the config file."
         super().__init__(self.message)
 
 
 class __ConfigFileException(Exception):
+    """Config File Exception
+
+    This exception occurs when the config file can not be loaded.
+    If you get this exception, try looking at the path of the `config.yaml` file.
+
+    Parameters
+    ----------
+    Exception : Exception
+        Base exception.
+    """
+
     def __init__(self, message="Could not load the config file."):
         self.message = message
         super().__init__(self.message)
 
 
 class __Config:
+    """Config
+
+    Class for reading the config yaml file and handles
+    reading the values from the output.
+    """
+
     def __init__(self):
         self.__read_config()
 
     def __read_config(self):
+        """Read Config Summary
+
+        Private method that reads the `config.yaml` file
+        and stores it in a private variable.
+
+        Raises
+        ------
+        __ConfigFileException
+            This exception raises if no `config.yaml` file was found.
+        """
         try:
             with open(rf"{WEBSITE_PATH}\config\config.yaml", "r") as f:
                 self.__config = yaml.load(f, Loader=yaml.FullLoader)
@@ -36,6 +75,12 @@ class __Config:
         The order of the arguments is the order of
         the parameter location in the config.yaml file.
 
+        Args
+        ----
+        *param (str):
+            Keys for reaching a value in the config,
+            act like a path.
+
         Returns
         -------
         Any
@@ -43,18 +88,14 @@ class __Config:
             an error if was not found.
         """
         res = self.__config
-        key_not_found = None
-        list_keys_not_found = []
         for a in args:
-            try:
-                key_not_found = a
+            # Trying to find the next key in the current path
+            if a in res:
                 res = res[a]
-            except:
-                list_keys_not_found.append(key_not_found)
+            else:
                 # raise __NotInConfigException(key=key_not_found)
-        if len(list_keys_not_found) > 0:
-            print(f"Keys not found: {', '.join(list_keys_not_found)}")
-            return None
+                print(f"Key not found: {a}")
+                return None
         return res
 
 

@@ -17,7 +17,7 @@ from flask import (
 # LOCAL IMPORTS
 from .models import User, Chat
 from .utils.chatbot import ChatBot
-from .utils.text2speech import Text2Speech
+from .utils.text2speech import Text2Speech, speak
 from .utils.utils import (
     generate_slide_show,
     safe_send_default_image,
@@ -44,6 +44,22 @@ def index():
         Renders the 'index.html' template with user information.
     """
     return render_template("index.html", user=current_user)
+
+
+# ROUTES
+@views.route("/presentation")
+def presentation():
+    """Presentation
+
+    Handle GET request for the presentation page.
+    Display the presentation page with user information.
+
+    Returns
+    -------
+    render_template
+        Renders the 'presentation.html' template with user information.
+    """
+    return render_template("presentation.html", user=current_user)
 
 
 @views.errorhandler(404)
@@ -310,12 +326,12 @@ def get_image(username: str) -> Any:
     if (user is not None) and (user.image_data is not None):
         image_path = user.image_data
         base_path = BytesIO(image_path)
-        
+
         safe_path = realpath(image_path)
-        common_base = commonpath([base_path, safe_path]) 
+        common_base = commonpath([base_path, safe_path])
         if common_base != base_path:
             return redirect(url_for("views.index"))
-        
+
         return send_file(safe_path, mimetype="image/jpeg")
 
     return safe_send_default_image()
@@ -359,8 +375,7 @@ def slideshow(start_with: str = ""):
 @restricted_route_decorator(check_session=False)
 def text2speech(text: str = ""):
     try:
-        speech = Text2Speech()
-        speech.say(text)
+        speak(text)
     except:
         pass
     return Response()
