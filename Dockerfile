@@ -1,14 +1,19 @@
-# syntax=docker/dockerfile:1
-FROM --platform=$BUILDPLATFORM python:3.9.7 AS builder
+# Use an official Python runtime as a parent image
+FROM python:3.9.7-slim-buster
 
-WORKDIR /ShrinkGPT.github.io
-COPY . /ShrinkGPT.github.io
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip3 install --upgrade pip
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip3 install -r requirements.txt
+# Set the working directory in the container to /app
+WORKDIR /app
 
-ENV NAME venv
+# Add the current directory contents into the container at /app
+ADD . /app
 
-EXPOSE 8080
-CMD ["python3", "main.py"]
+RUN /usr/local/bin/python -m pip install --upgrade pip
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 5000 available to the world outside this container
+EXPOSE 5000
+
+# Run main.py when the container launches
+CMD ["python", "main.py"]

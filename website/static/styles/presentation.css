@@ -1,0 +1,211 @@
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+@import url("https://fonts.googleapis.com/css?family=Montserrat:900");
+
+body {
+  /* background: radial-gradient(ellipse at bottom, #022227 0%, #ffffff 100%); */
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  max-width: 100%;
+  background: linear-gradient(
+    60deg,
+    rgba(84, 58, 183, 1) 0%,
+    rgba(0, 172, 193, 1) 100%
+  );
+  background-size: auto;
+  background-attachment: fixed;
+  /* overflow: hidden; */
+}
+
+.resizing {
+  white-space: nowrap;
+  max-height: 100%; /* Adjust as needed */
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 2px;
+  font-size: 50px;
+  margin: 0;
+  color: white;
+  /* background:url('../image/wallpapers/22422-3840x2160-desktop-4k-leaf-background-image.jpg'); */
+  /* background:url('../image/wallpapers/asters-patterns-backgrounds-surface-wallpaper-preview.jpg'); */
+  /* background:url('../image/wallpapers/background-6650672_1280.jpg'); */
+  /* background:url('../image/wallpapers/bokeh-flowers-leaves-pattern-wallpaper-preview.jpg'); */
+  /* background:url('../image/wallpapers/colors-texture-pattern-artwork-wallpaper-preview.jpg'); */
+  /* background:url('../image/wallpapers/desktop-wallpaper-pattern-texture-blue-pink-leaf.jpg'); */
+  /* background:url('../image/wallpapers/flowers-background-pattern-vector-wallpaper-preview.jpg'); */
+  /* background:url('../image/wallpapers/LEAVES-hd.png'); */
+  /* background:url('../image/wallpapers/pattern-vector-texture-gold-wallpaper-preview.jpg'); */
+  /* background:url('../image/wallpapers/tropical-flower-pattern-seamless-flowers-blossom-flowers-nature-background-vector-illustration-61142748.jpg'); */
+  /* background:url('../image/wallpapers/w0061_1s_Palm-Leaves-Tropical-Wallpaper-for-Walls-Palms-Over-Diamonds_Repeating-Pattern-Sample-1.webp'); */
+  /* background:url('../image/wallpapers/watermelon-3712515_1280.webp'); */
+  background: url("../image/wallpapers/triangle-pattern-texture-wallpaper-preview.jpg");
+  background-size: auto 200%;
+  background-clip: text;
+  -webkit-text-stroke-width: 0.1vi;
+  -webkit-text-stroke-color: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 100s linear infinite;
+}
+
+img {
+  width: 30vw;
+  height: 30vw;
+  border-radius: 10%;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.pad-top {
+  padding-top: 5vw;
+}
+
+p {
+  font-family: "Lato", sans-serif;
+  letter-spacing: 1px;
+  font-size: 14px;
+  color: #333333;
+}
+
+.title {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.title-lg {
+  font-size: 200px;
+  text-align: center;
+  padding: 3vw;
+
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+.title-sm {
+  font-size: 80px;
+  text-align: center;
+}
+
+.header {
+  position: relative;
+  text-align: center;
+  /* background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%); */
+  color: rgb(233, 233, 233);
+  stroke: rgb(233, 233, 233);
+  stroke-width: 0.7;
+}
+.logo {
+  width: 50px;
+  fill: white;
+  padding-right: 15px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.inner-header {
+  height: 65vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  /*Flexbox for containers*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.waves {
+  position: relative;
+  width: 100%;
+  height: 15vh;
+  margin-bottom: -7px; /*Fix for safari gap*/
+  min-height: 100px;
+  max-height: 150px;
+}
+
+.content {
+  position: relative;
+  height: 20vh;
+  text-align: center;
+  background-color: white;
+  -webkit-text-stroke-width: 0px;
+}
+
+/* Animation */
+
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes shine {
+  from {
+    background-position: center 0;
+  }
+  to {
+    background-position: center 200%;
+  }
+}
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .waves {
+    height: 40px;
+    min-height: 40px;
+  }
+  .content {
+    height: 30vh;
+  }
+
+  .pad-top {
+    padding-top: 15vw;
+  }
+}

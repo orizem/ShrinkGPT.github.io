@@ -19,7 +19,7 @@ from zoneinfo import ZoneInfo
 # LOCAL IMPORTS
 from .models import User, Chat
 from .utils.chatbot import ChatBot
-from .utils.text2speech import Text2Speech
+from .utils.text2speech import Text2Speech, speak
 from .utils.utils import (
     generate_slide_show,
     safe_send_default_image,
@@ -46,6 +46,22 @@ def index():
         Renders the 'index.html' template with user information.
     """
     return render_template("index.html", user=current_user)
+
+
+# ROUTES
+@views.route("/presentation")
+def presentation():
+    """Presentation
+
+    Handle GET request for the presentation page.
+    Display the presentation page with user information.
+
+    Returns
+    -------
+    render_template
+        Renders the 'presentation.html' template with user information.
+    """
+    return render_template("presentation.html", user=current_user)
 
 
 @views.errorhandler(404)
@@ -361,8 +377,7 @@ def slideshow(start_with: str = ""):
 @restricted_route_decorator(check_session=False)
 def text2speech(text: str = ""):
     try:
-        speech = Text2Speech()
-        speech.say(text)
+        speak(text)
     except:
         pass
     return Response()

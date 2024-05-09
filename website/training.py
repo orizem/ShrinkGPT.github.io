@@ -16,15 +16,12 @@ from keras.layers import Dense, Activation, Dropout
 import random
 import tensorflow as tf
 
-# PROJECT IMPORTS
-from config import PROJECT_PATH
-
 
 words = []
 classes = []
 documents = []
 ignore_words = ["?", "!"]
-data_file = open(rf"{PROJECT_PATH}\data.json").read()
+data_file = open(r"..\data.json").read()
 intents = json.loads(data_file)
 
 

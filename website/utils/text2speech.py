@@ -9,6 +9,15 @@ from ..config.config import config
 
 
 class Text2Speech:
+    """ Text Two Speech
+    
+    Class for speech the provided text.
+    
+    Parameters:
+    ----------
+    gender: Literal["male", "female"], default "female"
+        The gender of the person speaks.
+    """    
     def __init__(self, gender: Literal["male", "female"] = "female"):
         self.__engine = pyttsx3.init()
 
@@ -27,6 +36,10 @@ class Text2Speech:
 
     def stop(self):
         self.__engine.stop()
+        
+def speak(text):
+    speech = Text2Speech()
+    speech.say(text)
 
     # TODO: Add functionality for pause also, with the button icon changed
 
