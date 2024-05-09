@@ -12,6 +12,7 @@ __pycache__/
 
 # My ignored
 offline
+.sqlite
 .vscode
 requirements_copy.txt
 

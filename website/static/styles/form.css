@@ -4,27 +4,23 @@ body {
   width: 100vw;
   margin: 0;
   max-width: 100%;
-  background: linear-gradient(
-    60deg,
-    rgba(84, 58, 183, 1) 0%,
-    rgba(0, 172, 193, 1) 100%
-  );
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
   background-size: auto;
   background-attachment: fixed;
   color: white;
 }
 
 .sio-h1 {
-  font-size: 4vi;
+  font-size: 4vi; 
   text-align: center;
 }
 
 .sio-container {
-  padding-top: 5pt;
+  padding-top:5pt;
 }
 
 .sio-img {
-  max-width: 30%;
+  max-width: 30%; 
   height: auto;
 }
 
@@ -46,21 +42,20 @@ body {
   grid-gap: 20px;
 }
 
-.btn,
-#image {
+.btn, #image {
   appearance: button;
-  background-color: #1899d6;
+  background-color: #1899D6;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
   box-sizing: border-box;
-  color: #ffffff;
+  color: #FFFFFF;
   cursor: pointer;
   display: inline-block;
-  font-family: din-round, sans-serif;
+  font-family: din-round,sans-serif;
   font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: .8px;
   line-height: 20px;
   margin: 0;
   outline: none;
@@ -70,7 +65,7 @@ body {
   text-transform: uppercase;
   touch-action: manipulation;
   transform: translateZ(0);
-  transition: filter 0.2s;
+  transition: filter .2s;
   user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
@@ -78,10 +73,9 @@ body {
   width: 100%;
 }
 
-.btn:after,
-#image:after {
+.btn:after, #image:after {
   background-clip: padding-box;
-  background-color: #1cb0f6;
+  background-color: #1CB0F6;
   bottom: -4px;
   content: "";
   left: 0;
@@ -91,10 +85,8 @@ body {
   z-index: -1;
 }
 
-.btn:main,
-#image:main,
-.btn:focus,
-#image:focus {
+.btn:main, #image:main,
+.btn:focus, #image:focus {
   user-select: auto;
 }
 
@@ -107,8 +99,7 @@ body {
   cursor: auto;
 }
 
-.btn:active,
-#image:active {
+.btn:active, #image:active {
   border-width: 4px 0 0;
   background: none;
 }
@@ -120,11 +111,12 @@ body {
 }
 
 .slideshow-login img {
-  width: 300pt;
+  width: 300pt; 
   height: auto;
   border-radius: 10%;
-  box-shadow: rgb(0, 255, 204) 4px 10px 0px -1px,
-    rgb(255, 255, 204) 0px -2px 0px 2.3px;
+  box-shadow: 
+      rgb(0, 255, 204) 4px 10px 0px -1px,
+      rgb(255, 255, 204) 0px -2px 0px 2.3px;
 
   -webkit-user-drag: none;
   -khtml-user-drag: none;
@@ -142,33 +134,95 @@ body {
 }
 
 .slideshow-login img:hover {
-  box-shadow: rgb(0, 255, 204) 4px 10px 10px -1px,
-    rgb(255, 255, 204) 0px -2px 5px 2.3px;
+  box-shadow: 
+      rgb(0, 255, 204) 4px 10px 10px -1px,
+      rgb(255, 255, 204) 0px -2px 5px 2.3px;
 }
 
 /*Shrinking for mobile*/
 @media (max-width: 768px) {
   .sio-h1 {
-    font-size: 4vi;
-    text-align: center;
+      font-size: 4vi; 
+      text-align: center;
   }
 
   .sio-form {
-    padding-top: 30pt;
-    width: 100%;
+      padding-top: 30pt;
+      width: 100%;
   }
 
   .grid-container-fr {
-    padding: 0;
-    display: block;
+      padding: 0;
+      display: block;    
   }
 
   .grid-container {
-    padding-top: 0;
+      padding-top: 0;   
   }
 
   .slideshow-login img {
-    width: 180pt;
-    height: auto;
+      width: 180pt;
+      height: auto;
   }
 }
+/*Style for reviews:*/
+/* Stars in Displayed Reviews and Review Form */
+.star {
+  display: inline-block;
+  width: 30px; /* Base size for stars */
+  height: 30px; /* Base size for stars */
+  background-size: cover;
+}
+
+.empty-star { background-image: url('../image/empty_star.jpg'); }
+.filled-star { background-image: url('../image/full_star.jpg'); }
+
+div.star-rating.form-stars label {
+  display: inline-block;
+  width: 64px; /* Adjust this width to ensure enough space for scaled stars */
+  height: 50px; /* Optionally adjust height if needed */
+  cursor: pointer; /* To show clickable cursor on hover */
+}
+/* Increased specificity for scaling stars in the review form */
+div.star-rating.form-stars span.star {
+  transform: scale(2.3);
+  transform-origin: left;
+}
+
+/* Style for the star rating input field */
+.star-rating input {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  opacity: 0;
+  display: inline-block;
+  width: 20%; /* Each star represents 20% */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.txtblock{
+  color: black;
+}
+.submitBtn{ 
+  font-size: 25px;
+  color: black;
+}
+
+.div_for_picture_name_title{
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+}
+.review_user_picture{
+  width: 60px;
+   height: 60px;
+}
+.review_usersName_title{
+  margin-left: 2%;
+}
+/*End of Style for reviews.*/

@@ -7,6 +7,8 @@ from onetimepass import valid_totp
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 db = SQLAlchemy()
 
@@ -28,6 +30,7 @@ class User(UserMixin, db.Model):
     chats = db.relationship(
         "Chat", backref=db.backref("chats", lazy=True)
     )  # Creating a relationship with the User model
+    reviews = db.relationship("Reviews", backref="user", lazy=True)
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -80,3 +83,17 @@ class Chat(UserMixin, db.Model):
     @name.setter
     def name(self, name):
         self.__name = name
+
+
+class Reviews(db.Model):
+    """Reviews model."""
+
+    __tablename__ = "reviews"
+    id = db.Column(db.Integer, primary_key=True)
+    submitted_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(
+        db.Integer, db.ForeignKey("users.id"), nullable=True
+    )  # nullable=True - Assuming anonymity is allowed
+    title = db.Column(db.String(127), nullable=False)
+    content = db.Column(db.String(255), nullable=False)
+    stars = db.Column(db.Integer, nullable=False)
