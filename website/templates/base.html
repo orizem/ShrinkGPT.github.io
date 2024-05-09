@@ -48,6 +48,7 @@ Demo{% endblock %}
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{ url_for('views.reviews') }}">Reviews</a></li>
         {% if current_user.is_authenticated %}
         <li>
           <a href="{{ url_for('views.profile') }}"

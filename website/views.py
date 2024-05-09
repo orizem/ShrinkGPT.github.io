@@ -12,7 +12,9 @@ from flask import (
     url_for,
     send_file,
     request,
+    flash,
 )
+from zoneinfo import ZoneInfo
 
 # LOCAL IMPORTS
 from .models import User, Chat
@@ -310,12 +312,12 @@ def get_image(username: str) -> Any:
     if (user is not None) and (user.image_data is not None):
         image_path = user.image_data
         base_path = BytesIO(image_path)
-        
+
         safe_path = realpath(image_path)
-        common_base = commonpath([base_path, safe_path]) 
+        common_base = commonpath([base_path, safe_path])
         if common_base != base_path:
             return redirect(url_for("views.index"))
-        
+
         return send_file(safe_path, mimetype="image/jpeg")
 
     return safe_send_default_image()
@@ -364,3 +366,61 @@ def text2speech(text: str = ""):
     except:
         pass
     return Response()
+
+
+@views.route('/review', methods=['GET', 'POST'])
+def reviews():
+    """Review
+    
+    Handle GET and POST requests for the review page.
+    Display previous user's reviews and allow logged in users to post reviews.
+
+    Returns
+    -------
+    render_template
+        Renders the 'review.html' template with review form.
+
+    Notes
+    -----
+    the post method requires the user to be authenticated.
+
+    """
+    from .forms import ReviewForm
+    from .models import db, Reviews
+    review_form = ReviewForm()
+    if review_form.validate_on_submit() and current_user.is_authenticated:
+        review = Reviews(title=review_form.title.data,
+                        content=review_form.content.data,
+                        stars=review_form.stars.data,
+                        user_id=None if review_form.anonymous.data else current_user.id)
+        db.session.add(review)
+        db.session.commit()
+        flash('Your review has been posted!', 'success')
+        return redirect(url_for('views.reviews'))
+    reviews = Reviews.query.all()
+    local_timezone = ZoneInfo("Asia/Jerusalem")
+    for review in reviews:
+        review.submitted_at = review.submitted_at.astimezone(local_timezone)
+    return render_template('review.html', title='Reviews', review_form=review_form, reviews=reviews)
+
+@views.route('/user_image/<filename>')
+def user_image(filename):
+    """Get Image
+    
+    Returns the profile image of the current user.
+
+    Parameters
+    ----------
+    filename : str
+        The file name to search.
+
+    Returns
+    -------
+    Any
+        filename image.
+    """
+    user = User.query.filter_by(image_filename=filename).first()
+    if user and user.image_data:
+        return Response(user.image_data, mimetype='image/png')  # Adjust mimetype as necessary
+    else:
+        return url_for('static', filename='image/default.png')  # Fallback to default image
