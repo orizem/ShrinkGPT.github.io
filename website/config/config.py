@@ -4,7 +4,7 @@ import yaml
 
 # LOCAL IMPORTS
 # from config import PROJECT_PATH
-PROJECT_PATH = r"C:\Users\redkn\Final project AI\ShrinkGPT.github.io"
+PROJECT_PATH = r"D:\Program Files\MEGA\MEGA\MEGAsync\Study\Python\ShrinkGPT.github.io\website"
 class __NotInConfigException(Exception):
     def __init__(self, key):
         self.message = f"Could not found the key `{key}` in the config file."
@@ -21,7 +21,7 @@ class __Config():
         
     def __read_config(self):
         try:
-            with open(rf"{PROJECT_PATH}\website\config\config.yaml", "r") as f:
+            with open(rf"{PROJECT_PATH}\config\config.yaml", "r") as f:
                 self.__config = yaml.load(f, Loader=yaml.FullLoader)
         except:
             raise __ConfigFileException
