@@ -1,7 +1,11 @@
 # views.py
+import os
+
 from io import BytesIO
 from json import dumps
 from typing import Any
+from openai import OpenAI
+from dotenv import load_dotenv
 from flask_login import current_user
 from os.path import realpath, commonpath
 from flask import (
@@ -27,9 +31,16 @@ from .utils.utils import (
     restricted_route_decorator,
     html_encode,
 )
+from .utils.gpt import format_chat_history_for_gpt, GPT_MESSAGES
+
+load_dotenv()
 
 views = Blueprint("views", __name__)
 chat_bot = ChatBot()
+tts = Text2Speech()
+
+# Load OpenAI API key from environment variable
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
 # ROUTES
@@ -241,12 +252,19 @@ def get_bot_response():
         current_chat = user.chats[-1]
 
     existing_messages = current_chat.chat
-
     # TODO: Check for the real date time parameter for user (currently using the bot's time)
     new_message = {"identifier": "user", "text": user_msg, "date_time": date_time}
     existing_messages.append(new_message)
 
-    bot_response = chat_bot.chatbot_response(user_msg)
+    chat_history = [format_chat_history_for_gpt(__chat) for __chat in existing_messages]
+
+    # Prepare messages for OpenAI API
+    messages = GPT_MESSAGES + chat_history
+
+    # Interact with OpenAI GPT-4
+    response = client.chat.completions.create(model="gpt-4o", messages=messages)
+    bot_response = response.choices[0].message.content
+
     new_message = {"identifier": "bot", "text": bot_response, "date_time": date_time}
     existing_messages.append(new_message)
 
@@ -383,10 +401,10 @@ def text2speech(text: str = ""):
     return Response()
 
 
-@views.route('/review', methods=['GET', 'POST'])
+@views.route("/review", methods=["GET", "POST"])
 def reviews():
     """Review
-    
+
     Handle GET and POST requests for the review page.
     Display previous user's reviews and allow logged in users to post reviews.
 
@@ -402,26 +420,32 @@ def reviews():
     """
     from .forms import ReviewForm
     from .models import db, Reviews
+
     review_form = ReviewForm()
     if review_form.validate_on_submit() and current_user.is_authenticated:
-        review = Reviews(title=review_form.title.data,
-                        content=review_form.content.data,
-                        stars=review_form.stars.data,
-                        user_id=None if review_form.anonymous.data else current_user.id)
+        review = Reviews(
+            title=review_form.title.data,
+            content=review_form.content.data,
+            stars=review_form.stars.data,
+            user_id=None if review_form.anonymous.data else current_user.id,
+        )
         db.session.add(review)
         db.session.commit()
-        flash('Your review has been posted!', 'success')
-        return redirect(url_for('views.reviews'))
+        flash("Your review has been posted!", "success")
+        return redirect(url_for("views.reviews"))
     reviews = Reviews.query.all()
     local_timezone = ZoneInfo("Asia/Jerusalem")
     for review in reviews:
         review.submitted_at = review.submitted_at.astimezone(local_timezone)
-    return render_template('review.html', title='Reviews', review_form=review_form, reviews=reviews)
+    return render_template(
+        "review.html", title="Reviews", review_form=review_form, reviews=reviews
+    )
 
-@views.route('/user_image/<filename>')
+
+@views.route("/user_image/<filename>")
 def user_image(filename):
     """Get Image
-    
+
     Returns the profile image of the current user.
 
     Parameters
@@ -436,6 +460,8 @@ def user_image(filename):
     """
     user = User.query.filter_by(image_filename=filename).first()
     if user and user.image_data:
-        return Response(user.image_data, mimetype='image/png')  # Adjust mimetype as necessary
+        # Adjust mimetype as necessary
+        return Response(user.image_data, mimetype="image/png")
     else:
-        return url_for('static', filename='image/default.png')  # Fallback to default image
+        # Fallback to default image
+        return url_for("static", filename="image/default.png")
