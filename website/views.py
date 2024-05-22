@@ -1,11 +1,8 @@
 # views.py
-import os
 
 from io import BytesIO
 from json import dumps
 from typing import Any
-from openai import OpenAI
-from dotenv import load_dotenv
 from flask_login import current_user
 from os.path import realpath, commonpath
 from flask import (
@@ -31,16 +28,11 @@ from .utils.utils import (
     restricted_route_decorator,
     html_encode,
 )
-from .utils.gpt import format_chat_history_for_gpt, GPT_MESSAGES
-
-load_dotenv()
+from .utils.gpt import format_chat_history_for_gpt, GPT_MESSAGES, client, __gpt_uploaded_files
 
 views = Blueprint("views", __name__)
 chat_bot = ChatBot()
 tts = Text2Speech()
-
-# Load OpenAI API key from environment variable
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
 # ROUTES
