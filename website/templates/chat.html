@@ -60,7 +60,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
                 width: 20pt;
                 height: 20pt;
               "
-              onclick="requestTextTwoSpeech('{{ welcome_msg }}')"
+              onclick="requestTextToSpeech('{{ welcome_msg }}')"
             >
               ►
             </button>
@@ -133,7 +133,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
           botResponse(msgText);
         });
 
-        // function requestTextTwoSpeech(text) {
+        // function requestTextToSpeech(text) {
         //   // fetch(`/text2speech/${text}`)
         //   //   .then(response => response.json())
         //   //   .then(data => console.log(data))
@@ -148,15 +148,37 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         //   msg.lang = 'en';
         //   speechSynthesis.speak(msg);
         // }
-        function requestTextTwoSpeech(event, text) {
+
+        // =============== [ Text To Speech ] ===============
+
+        var audio = new Audio();
+        var playingTarget = null;
+
+        function toggleTextToSpeech(event, text) {
+          var button = event.target; // Get the button element that was clicked
+
+          if (playingTarget === button) {
+            stopTextToSpeech(button);
+          } else {
+            if (playingTarget)
+              stopTextToSpeech(playingTarget);
+
+            playingTarget = button
+            requestTextToSpeech(button, text);
+          }
+        }
+
+        function requestTextToSpeech(button, text) {
           try{
             stopTextToSpeech(); // Stop any previous audio
           }
           catch{}
-
+          
           var msg = new SpeechSynthesisUtterance();
           var voices = window.speechSynthesis.getVoices();
-          var button = event.target; // Get the button element that was clicked
+          
+          // Change the button text to "Stop TTS"
+          button.innerText = '||';
           
           msg.voice = voices[10]; 
           msg.volume = 1; // From 0 to 1
@@ -165,13 +187,10 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
           msg.text = text;
           msg.lang = 'en';
           
-          // Create an audio element
-          var audio = new Audio();
-          
           // When the utterance ends, capture the audio
           msg.onend = function(event) {
-            var blob = new Blob([event.audioData], {type: 'audio/wav'});
-            audio.src = URL.createObjectURL(blob);
+            button.innerText = "►";
+            playingTarget = null;
           };
           
           // Speak the utterance
@@ -181,11 +200,29 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
           audio.play();
         }
 
-        function stopTextToSpeech() {
+        function stopTextToSpeech(button) {
           speechSynthesis.cancel(); // Cancel the current speech synthesis
           audio.pause(); // Pause the audio element
           audio.currentTime = 0; // Reset the audio element
+
+          if (button){
+            // Change the button text to "Start TTS"
+            button.innerText = '►';
+            playingTarget = null;
+          }
+          else{
+            var buttons = document.querySelectorAll('#btn-tts');
+            
+            // Loop through each button and log its text content
+            buttons.forEach(function(button) {
+              button.innerText = "►"
+            });
+          }
+          
         }
+
+        // ============= [ End Text To Speech ] ===============
+
 
         function appendMessage(name, img, side, text, time) {
           //   Simple solution for small apps
@@ -201,8 +238,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
 
         <div class="msg-text" style="word-break: break-all;">${text}</div>
         <div style="text-align: right; font-size:10pt;">
-          <button  style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="stopTextToSpeech()">||</button>
-          <button style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="requestTextTwoSpeech(event, '${text.replace(/\"/g, "").replace(/\'/g, "")}')">►</button>
+          <button id="btn-tts" style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="toggleTextToSpeech(event, '${text.replace(/\"/g, "").replace(/\'/g, "")}')">►</button>
         </div>
       </div>
     </div>
