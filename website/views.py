@@ -28,7 +28,12 @@ from .utils.utils import (
     restricted_route_decorator,
     html_encode,
 )
-from .utils.gpt import format_chat_history_for_gpt, GPT_MESSAGES, client, __gpt_uploaded_files
+from .utils.gpt import (
+    format_chat_history_for_gpt,
+    GPT_MESSAGES,
+    client,
+    __gpt_uploaded_files,
+)
 
 views = Blueprint("views", __name__)
 tts = Text2Speech()
@@ -337,14 +342,7 @@ def get_image(username: str) -> Any:
     if (user is not None) and (user.image_data is not None):
         image_path = user.image_data
         base_path = BytesIO(image_path)
-
-        safe_path = realpath(image_path)
-        common_base = commonpath([base_path, safe_path])
-        if common_base != base_path:
-            return redirect(url_for("views.index"))
-
-        return send_file(safe_path, mimetype="image/jpeg")
-
+        return send_file(base_path, mimetype="image/jpeg")
     return safe_send_default_image()
 
 
@@ -426,7 +424,7 @@ def reviews():
         return redirect(url_for("views.reviews"))
     reviews = Reviews.query.all()
 
-    jerusalem_tz = pytz.timezone('Asia/Jerusalem')
+    jerusalem_tz = pytz.timezone("Asia/Jerusalem")
     local_timezone = datetime.now(jerusalem_tz)
 
     for review in reviews:
