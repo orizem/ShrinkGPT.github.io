@@ -130,11 +130,45 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
           botResponse(msgText);
         });
 
+        // function requestTextTwoSpeech(text) {
+        //   // fetch(`/text2speech/${text}`)
+        //   //   .then(response => response.json())
+        //   //   .then(data => console.log(data))
+        //   //   .catch(error => console.error(error));
+        //   var msg = new SpeechSynthesisUtterance();
+        //   var voices = window.speechSynthesis.getVoices();
+        //   msg.voice = voices[10]; 
+        //   msg.volume = 1; // From 0 to 1
+        //   msg.rate = 1.8; // From 0.1 to 10
+        //   msg.pitch = 2; // From 0 to 2
+        //   msg.text = text;
+        //   msg.lang = 'en';
+        //   speechSynthesis.speak(msg);
+        // }
         function requestTextTwoSpeech(text) {
-          fetch(`/text2speech/${text}`)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
+          var msg = new SpeechSynthesisUtterance();
+          var voices = window.speechSynthesis.getVoices();
+          msg.voice = voices[10]; 
+          msg.volume = 1; // From 0 to 1
+          msg.rate = 1.8; // From 0.1 to 10
+          msg.pitch = 2; // From 0 to 2
+          msg.text = text;
+          msg.lang = 'en';
+
+          // Create an audio element
+          var audio = new Audio();
+
+          // When the utterance ends, capture the audio
+          msg.onend = function(event) {
+            var blob = new Blob([event.audioData], {type: 'audio/wav'});
+            audio.src = URL.createObjectURL(blob);
+          };
+
+          // Speak the utterance
+          speechSynthesis.speak(msg);
+
+          // Play the audio
+          audio.play();
         }
 
         function appendMessage(name, img, side, text, time) {
@@ -151,7 +185,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
 
         <div class="msg-text" style="word-break: break-all;">${text}</div>
         <div style="text-align: right; font-size:10pt;">
-          <button style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="requestTextTwoSpeech('${text.replace(/\"/g, "")}')">►</button>
+          <button style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="requestTextTwoSpeech('${text.replace(/\"/g, "").replace(/\'/g, "")}')">►</button>
         </div>
       </div>
     </div>
