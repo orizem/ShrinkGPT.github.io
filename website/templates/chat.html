@@ -85,6 +85,9 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
   <!-- partial -->
   <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
   <script>
+        try{
+            stopTextToSpeech(); // Stop any previous audio
+        } catch{}
 
         const msgerForm = get(".msger-inputarea");
         const msgerInput = get(".msger-input");
@@ -145,30 +148,43 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         //   msg.lang = 'en';
         //   speechSynthesis.speak(msg);
         // }
-        function requestTextTwoSpeech(text) {
+        function requestTextTwoSpeech(event, text) {
+          try{
+            stopTextToSpeech(); // Stop any previous audio
+          }
+          catch{}
+
           var msg = new SpeechSynthesisUtterance();
           var voices = window.speechSynthesis.getVoices();
+          var button = event.target; // Get the button element that was clicked
+          
           msg.voice = voices[10]; 
           msg.volume = 1; // From 0 to 1
           msg.rate = 1.8; // From 0.1 to 10
           msg.pitch = 2; // From 0 to 2
           msg.text = text;
           msg.lang = 'en';
-
+          
           // Create an audio element
           var audio = new Audio();
-
+          
           // When the utterance ends, capture the audio
           msg.onend = function(event) {
             var blob = new Blob([event.audioData], {type: 'audio/wav'});
             audio.src = URL.createObjectURL(blob);
           };
-
+          
           // Speak the utterance
           speechSynthesis.speak(msg);
-
+          
           // Play the audio
           audio.play();
+        }
+
+        function stopTextToSpeech() {
+          speechSynthesis.cancel(); // Cancel the current speech synthesis
+          audio.pause(); // Pause the audio element
+          audio.currentTime = 0; // Reset the audio element
         }
 
         function appendMessage(name, img, side, text, time) {
@@ -185,7 +201,8 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
 
         <div class="msg-text" style="word-break: break-all;">${text}</div>
         <div style="text-align: right; font-size:10pt;">
-          <button style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="requestTextTwoSpeech('${text.replace(/\"/g, "").replace(/\'/g, "")}')">►</button>
+          <button  style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="stopTextToSpeech()">||</button>
+          <button style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="requestTextTwoSpeech(event, '${text.replace(/\"/g, "").replace(/\'/g, "")}')">►</button>
         </div>
       </div>
     </div>
@@ -221,6 +238,11 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
 
           return `${h.slice(-2)}:${m.slice(-2)}`;
         }
+
+        // Attach an event listener to the beforeunload event to stop TTS on page unload
+        window.addEventListener('beforeunload', function(event) {
+          stopTextToSpeech();
+        });
   </script>
 </div>
 {% endblock %}
