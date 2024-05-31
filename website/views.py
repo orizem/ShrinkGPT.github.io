@@ -15,11 +15,11 @@ from flask import (
     request,
     flash,
 )
-from zoneinfo import ZoneInfo
+from datetime import datetime
+import pytz
 
 # LOCAL IMPORTS
 from .models import User, Chat
-from .utils.chatbot import ChatBot
 from .utils.text2speech import Text2Speech, speak
 from .utils.utils import (
     generate_slide_show,
@@ -31,7 +31,6 @@ from .utils.utils import (
 from .utils.gpt import format_chat_history_for_gpt, GPT_MESSAGES, client, __gpt_uploaded_files
 
 views = Blueprint("views", __name__)
-chat_bot = ChatBot()
 tts = Text2Speech()
 
 
@@ -426,9 +425,12 @@ def reviews():
         flash("Your review has been posted!", "success")
         return redirect(url_for("views.reviews"))
     reviews = Reviews.query.all()
-    local_timezone = ZoneInfo("Asia/Jerusalem")
+
+    jerusalem_tz = pytz.timezone('Asia/Jerusalem')
+    local_timezone = datetime.now(jerusalem_tz)
+
     for review in reviews:
-        review.submitted_at = review.submitted_at.astimezone(local_timezone)
+        review.submitted_at = review.submitted_at.astimezone(local_timezone.tzinfo)
     return render_template(
         "review.html", title="Reviews", review_form=review_form, reviews=reviews
     )
