@@ -254,7 +254,7 @@ a:hover {
 /* Slide in animation */
 @-moz-keyframes slidein {
   0% {
-    left: -150pt;
+    left: -200pt;
   }
   100% {
     left: 0;
@@ -262,7 +262,7 @@ a:hover {
 }
 @-webkit-keyframes slidein {
   0% {
-    left: -150pt;
+    left: -200pt;
   }
   100% {
     left: 0;
@@ -270,7 +270,7 @@ a:hover {
 }
 @keyframes slidein {
   0% {
-    left: -150pt;
+    left: -200pt;
   }
   100% {
     left: 0;
@@ -281,7 +281,7 @@ a:hover {
     left: 0;
   }
   100% {
-    left: -150pt;
+    left: -200pt;
   }
 }
 @-webkit-keyframes slideout {
@@ -289,7 +289,7 @@ a:hover {
     left: 0;
   }
   100% {
-    left: -150pt;
+    left: -200pt;
   }
 }
 @keyframes slideout {
@@ -297,7 +297,7 @@ a:hover {
     left: 0;
   }
   100% {
-    left: -150pt;
+    left: -200pt;
   }
 }
 
@@ -306,7 +306,7 @@ a:hover {
     left: 0;
   }
   100% {
-    margin-left: 150pt;
+    margin-left: 200pt;
   }
 }
 @-webkit-keyframes bodyslidein {
@@ -322,12 +322,12 @@ a:hover {
     margin-left: 0;
   }
   100% {
-    margin-left: 150pt;
+    margin-left: 200pt;
   }
 }
 @-moz-keyframes bodyslideout {
   0% {
-    margin-left: 150pt;
+    margin-left: 200pt;
   }
   100% {
     margin-right: 0;
@@ -335,7 +335,7 @@ a:hover {
 }
 @-webkit-keyframes bodyslideout {
   0% {
-    margin-left: 150pt;
+    margin-left: 200pt;
   }
   100% {
     margin-left: 0;
@@ -343,7 +343,7 @@ a:hover {
 }
 @keyframes bodyslideout {
   0% {
-    margin-left: 150pt;
+    margin-left: 200pt;
   }
   100% {
     margin-left: 0;
