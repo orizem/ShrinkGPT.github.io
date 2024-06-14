@@ -328,6 +328,48 @@ def get_chat_edit() -> Any:
     db.session.commit()
     return ""
 
+@views.route("/chat-delete", endpoint="chat-delete")
+@restricted_route_decorator(check_session=False)
+def get_chat_delete() -> Any:
+    """Get Chat Delete
+
+    Handle GET request for Chat Delete endpoint.
+    Delete the chat by the chat
+    id in the request arguments.
+
+    Returns
+    -------
+    Any
+        An empty string.
+
+    Raises
+    ------
+    Redirect
+        Redirects to the index page if the current
+        user is not authorized to delete the chat or
+        if the chat does not exist.
+
+    Notes
+    -----
+    This endpoint requires the user to be authenticated
+    and have the necessary permissions to delete the
+    chat.
+    """
+    from .models import db
+
+    user = get_current_user()
+
+    id = request.args.get("id")
+
+    # Prevent from other users to access
+    current_chat = Chat.query.filter_by(user_id=user.id, id=id).first()
+    if current_chat is None:
+        return redirect(url_for("views.index"))
+
+    db.session.delete(current_chat)
+    db.session.commit()
+    return ""
+
 
 @views.route("/get_image/<string:username>")
 def get_image(username: str) -> Any:

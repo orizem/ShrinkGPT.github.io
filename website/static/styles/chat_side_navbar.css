@@ -13,7 +13,7 @@ body {
 
 /*main side bar*/
 .msb {
-  width: 150pt;
+  width: 200pt;
   background-color: #f5f7f9;
   position: absolute;
   left: 0;
@@ -227,6 +227,10 @@ a:hover {
 }
 
 .edit-chat-name {
+  display: none;
+}
+
+.delete-chat {
   display: none;
 }
 

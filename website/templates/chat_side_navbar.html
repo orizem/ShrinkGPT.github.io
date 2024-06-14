@@ -19,9 +19,18 @@
                 $(this).find('.edit-chat-name').toggle();
             });
 
+            $('.prev-chat').hover(function() {
+                $(this).find('.delete-chat').toggle();
+            });
+
             // Edit name of chat conversation by sending the new name to the server throw GET call for chat-edit
             $(".edit-chat-name").click(function () {
                 editButtonLogic($(this));
+            });
+
+            // Delete chat
+            $(".delete-chat").click(function () {
+                deleteButtonLogic($(this));
             });
 
             $('.name_input').keypress(function(event) {
@@ -70,6 +79,22 @@
                 }
             }
         }
+
+        function deleteButtonLogic(elem) {
+            var $a = elem.parent().find("a");
+            var $prev = $a.parent();
+            var id = $a.attr("id");
+            var $span = elem;
+
+            $a.attr('href', function(_, currentHref) {
+                return currentHref === '#' ? `/get_chat/${id}` : '#';
+            });
+
+            $prev.remove();
+
+            // Send request to delete this chat
+            $.get("/chat-delete", { id: id }); 
+        }
         
         function barIconAnimate(x) {
             x.classList.toggle("change");
@@ -110,7 +135,8 @@
                             <i class="fas fa-duotone fa-comments"></i> 
                             {{ name_form.name(value=chat.name, style="all:unset; width:55%;", class="name_input", readonly=True) }}
                         </a>
-                        <button id="editButton" style="margin-left: 0pt;" class="fas fa-edit edit-chat-name" style="display: inline; color: white;"></button>
+                        <!-- <button id="editButton" style="margin-left: 0pt;" class="fas fa-edit edit-chat-name" style="display: inline; color: white;"></button> -->
+                        <button id="deleteButton" style="margin-left: 0pt;" class="fas fa-trash delete-chat" style="display: inline; color: white;"></button>
                     </li>
                 {% endfor %}
             </ul>
