@@ -27,6 +27,7 @@ from .utils.utils import (
     get_current_user,
     restricted_route_decorator,
     html_encode,
+    get_avatar_video,
 )
 from .utils.gpt import (
     format_chat_history_for_gpt,
@@ -207,7 +208,6 @@ def get_chat(chat_id: int):
         return redirect(url_for("views.chat"))
 
     chat_name_form = ChatEdit()
-
     return render_template(
         "chat.html",
         user=user,
@@ -269,7 +269,19 @@ def get_bot_response():
     # Update chat history
     db.session.add(current_chat)
     db.session.commit()
-    return html_encode(bot_response)
+
+    encoded_bot_response = html_encode(bot_response)
+
+    # Generate response avatar stream
+    avatar_video_url = get_avatar_video(encoded_bot_response)
+    print(avatar_video_url)
+
+    response = {
+        "encoded_bot_response": encoded_bot_response,
+        "avatar_video_url": avatar_video_url,
+    }
+
+    return response
 
 
 @views.route("/chat-edit", endpoint="chat-edit")

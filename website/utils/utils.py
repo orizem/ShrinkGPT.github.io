@@ -1,6 +1,8 @@
 # utils.py
 
+import os
 import html
+import requests
 import functools
 
 from os import listdir
@@ -9,6 +11,10 @@ from typing import List, Union, Callable
 from flask_login import current_user
 from os.path import realpath, commonpath
 from flask import render_template, redirect, url_for, send_file, session
+from dotenv import load_dotenv
+
+load_dotenv()
+D_ID_API_KEY = os.environ.get("D_ID_API_KEY")
 
 # LOCAL IMPORTS
 from ..models import User
@@ -187,3 +193,67 @@ def html_encode(text):
 
 def html_decode(text):
     return html.unescape(text)
+
+
+def get_avatar_video(text):
+    payload = {
+        "source_url": "https://create-images-results.d-id.com/DefaultPresenters/Emma_f/thumbnail.jpeg",  #! Make this with other frameworks
+        "script": {
+            "type": "text",
+            "input": text,
+            "provider": {
+                "type": "microsoft",  #! Make this with other frameworks
+                "voice_id": "en-US-JennyNeural",  #! Make this with other voices
+                "voice_config": {"style": "Cheerful"},  #! Make this with other configs
+            },
+        },
+    }
+    headers = {
+        "accept": "application/json",
+        "Authorization": f"Basic {D_ID_API_KEY}",
+        "content-type": "application/json",
+    }
+    url = "https://api.d-id.com/talks"
+
+    talks_response_json = dict()
+
+    talks_response = requests.post(url, json=payload, headers=headers)
+    talks_response_json = talks_response.json()
+    print(f"\n{'='*35}\n", talks_response_json, f"\n{'='*35}\n")  #! Remove, Test Tag
+    url = url + "/" + talks_response_json.get("id")
+    print(f"\n{'='*35}\nTalks ID URL = {url}\n{'='*35}\n")  #! Remove, Test Tag
+    sleep(5)
+
+    response = requests.get(url, headers=headers)
+    response_json = response.json()
+
+    # while not talks_response_json.get("id"): #! Fix the not return correct response
+    #     talks_response = requests.post(url, json=payload, headers=headers)
+
+    #     try:
+    #         talks_response_json = talks_response.json()
+    #     except:
+    #         pass
+
+    #     if talks_response_json.get("id"):
+    #         print(f"\n{'='*35}\n", talks_response_json, f"\n{'='*35}\n") #! Remove, Test Tag
+
+    #         url = url + '/' + talks_response_json.get("id")
+    #         print(f"\n{'='*35}\nTalks ID URL = {url}\n{'='*35}\n") #! Remove, Test Tag
+
+    #         response_json = dict()
+    #         i = 0
+    #         while not response_json.get("result_url"): # ! Fix the not return correct response
+    #             response = requests.get(url, headers=headers)
+    #             print(f"try - {i}: |{response_json.get("result_url")}|") #! Remove, Test Tag
+    #             i += 1
+    #             sleep(0.5)
+    #             try:
+    #                 response_json = response.json()
+    #             except:
+    #                 pass
+
+    #             if i > 5:
+    #                 break
+
+    return response_json.get("result_url")

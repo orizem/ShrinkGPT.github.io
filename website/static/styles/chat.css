@@ -232,3 +232,18 @@ textarea {
     max-width: 140pt;
   }
 }
+
+.video-container {
+    width: 1000px;
+    height: 550px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.round-video {
+  position: relative;
+  left: 0;
+  top: 0;
+  opacity: 1;
+} 

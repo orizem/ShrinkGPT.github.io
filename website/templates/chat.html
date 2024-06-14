@@ -12,7 +12,8 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
     href="{{ url_for('static', filename='styles/chat.css') }}"
   />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script>... const socket = new WebSocket('ws://localhost:5000/listen')</script>
+
+  <link rel="icon" type="image/png" sizes="192x192" href="https://studio.d-id.com/favicon/favicon-192x192.png">
 </head>
 
 <!-- Left Side Menu -->
@@ -82,12 +83,31 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
       <button type="submit" class="msger-send-btn">Send</button>
     </form>
   </section>
+  <div class="video-container">
+    <video class="round-video" id="videoFrame" loop autoplay muted>
+          <source id="videoSource" src="../static/video/emma_idle.mp4" type="video/mp4">
+    </video>
+  </div>
   <!-- partial -->
   <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
   <script>
         try{
             stopTextToSpeech(); // Stop any previous audio
         } catch{}
+
+        // ============= [ D-ID Avater Default State ] ===============
+        document.getElementById('videoFrame').addEventListener('ended',myHandler,false);
+        function myHandler(e) {
+          var video = document.getElementById('videoFrame');
+          var source = document.getElementById('videoSource');
+          
+          source.src = "../static/video/emma_idle.mp4";
+          video.muted = false;
+          video.loop = false;
+          video.load();
+          video.play();
+        }
+        // ============= [ End D-ID Avater Default State ] ===============
 
         const msgerForm = get(".msger-inputarea");
         const msgerInput = get(".msger-input");
@@ -224,41 +244,60 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         // ============= [ End Text To Speech ] ===============
 
 
-        function appendMessage(name, img, side, text, time) {
+        function appendMessage(name, img, side, text, time, videoURL="") {
           //   Simple solution for small apps
           const msgHTML = `
-    <div class="msg ${side}-msg">
-      <div class="msg-img" style="background-image: url(${img})"></div>
+            <div class="msg ${side}-msg">
+              <div class="msg-img" style="background-image: url(${img})"></div>
 
-      <div class="msg-bubble">
-        <div class="msg-info">
-          <div class="msg-info-name">${name}</div>
-          <div class="msg-info-time">${time}</div>
-        </div>
+              <div class="msg-bubble">
+                <div class="msg-info">
+                  <div class="msg-info-name">${name}</div>
+                  <div class="msg-info-time">${time}</div>
+                </div>
 
-        <div class="msg-text" style="word-break: break-all;">${text}</div>
-        <div style="text-align: right; font-size:10pt;">
-          <button id="btn-tts" style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="toggleTextToSpeech(event, '${text.replace(/\"/g, "").replace(/\'/g, "")}')">►</button>
-        </div>
-      </div>
-    </div>
-    `;
+                <div class="msg-text" style="word-break: break-all;">${text}</div>
+                <div style="text-align: right; font-size:10pt;">
+                  <button id="btn-tts" style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="toggleTextToSpeech(event, '${text.replace(/\"/g, "").replace(/\'/g, "")}')">►</button>
+                </div>
+              </div>
+            </div>
+          `;
 
-        msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+          msgerChat.insertAdjacentHTML("beforeend", msgHTML);
           msgerChat.scrollTop += 500;
+          
+          // ============= [ Play D-ID Avater Stream ] ===============
+          
+          if (videoURL) {
+
+            // TODO: fix video not changing 
+            var video = document.getElementById('videoFrame');
+            var source = document.getElementById('videoSource');
+            // video.pause();
+
+            source.src = videoURL;
+            video.muted = false;
+            video.loop = false;
+            video.load();
+            video.play();
+          }
+
+          // ============= [ End Play D-ID Avater Stream ] ===============
         }
 
         function botResponse(rawText) {
           dateTime = formatDate(new Date())
           // Bot Response
-          $.get("/get", { msg: rawText, fisrtTime: fisrtTime, dateTime: dateTime, chatId: chatId }).done(function (data) {
+          $.get("/get", { msg: rawText, fisrtTime: fisrtTime, dateTime: dateTime, chatId: chatId }).done(function (response) {
             // Start of the chat conversation indication
             if (fisrtTime == 1) {
               fisrtTime = 0;
             }
 
-            const msgText = data;
-            appendMessage(BOT_NAME, BOT_IMG, "left", msgText, dateTime);
+            const msgText = response.encoded_bot_response;
+            const msgVideo = response.avatar_video_url;
+            appendMessage(BOT_NAME, BOT_IMG, "left", msgText, dateTime, msgVideo);
           });
         }
 
@@ -281,4 +320,5 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         });
   </script>
 </div>
+
 {% endblock %}
