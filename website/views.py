@@ -273,7 +273,7 @@ def get_bot_response():
     encoded_bot_response = html_encode(bot_response)
 
     # Generate response avatar stream
-    avatar_video_url = get_avatar_video(encoded_bot_response)
+    avatar_video_url = get_avatar_video(bot_response)
     print(avatar_video_url)
 
     response = {
