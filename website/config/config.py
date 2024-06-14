@@ -63,7 +63,7 @@ class __Config:
             This exception raises if no `config.yaml` file was found.
         """
         try:
-            with open(rf"{WEBSITE_PATH}\config\config.yaml", "r") as f:
+            with open(f"{WEBSITE_PATH}/config/config.yaml", "r") as f:
                 self.__config = yaml.load(f, Loader=yaml.FullLoader)
         except:
             raise __ConfigFileException
