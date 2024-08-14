@@ -173,6 +173,25 @@ textarea {
   resize: none;
 }
 
+.video-container {
+  border-radius: 50%;
+  overflow: hidden;
+  position:absolute;
+  right: 8%;
+  top: 120px;
+  height: 20vi;
+  width: 20vi;
+}
+
+.round-video {
+position: relative;
+left: 0;
+top: 0;
+opacity: 1;
+width: 100%;
+height: 100%;
+} 
+
 @keyframes shine {
   from {
     background-position: center 0;
@@ -199,6 +218,11 @@ textarea {
   }
   .msg-bubble {
     max-width: 180pt;
+  }
+
+  .video-container {
+    width: 40vi;
+    height: 40vi;
   }
 }
 

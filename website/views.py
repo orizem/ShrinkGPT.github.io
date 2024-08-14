@@ -1,4 +1,5 @@
 # views.py
+
 from io import BytesIO
 from json import dumps
 from typing import Any
@@ -14,22 +15,29 @@ from flask import (
     request,
     flash,
 )
-from zoneinfo import ZoneInfo
+from datetime import datetime
+import pytz
 
 # LOCAL IMPORTS
 from .models import User, Chat
-from .utils.chatbot import ChatBot
-from .utils.text2speech import Text2Speech
+from .utils.text2speech import Text2Speech, speak
 from .utils.utils import (
     generate_slide_show,
     safe_send_default_image,
     get_current_user,
     restricted_route_decorator,
     html_encode,
+    get_avatar_video,
+)
+from .utils.gpt import (
+    format_chat_history_for_gpt,
+    GPT_MESSAGES,
+    client,
+    __gpt_uploaded_files,
 )
 
 views = Blueprint("views", __name__)
-chat_bot = ChatBot()
+tts = Text2Speech()
 
 
 # ROUTES
@@ -46,6 +54,22 @@ def index():
         Renders the 'index.html' template with user information.
     """
     return render_template("index.html", user=current_user)
+
+
+# ROUTES
+@views.route("/presentation")
+def presentation():
+    """Presentation
+
+    Handle GET request for the presentation page.
+    Display the presentation page with user information.
+
+    Returns
+    -------
+    render_template
+        Renders the 'presentation.html' template with user information.
+    """
+    return render_template("presentation.html", user=current_user)
 
 
 @views.errorhandler(404)
@@ -184,7 +208,6 @@ def get_chat(chat_id: int):
         return redirect(url_for("views.chat"))
 
     chat_name_form = ChatEdit()
-
     return render_template(
         "chat.html",
         user=user,
@@ -225,12 +248,19 @@ def get_bot_response():
         current_chat = user.chats[-1]
 
     existing_messages = current_chat.chat
-
     # TODO: Check for the real date time parameter for user (currently using the bot's time)
     new_message = {"identifier": "user", "text": user_msg, "date_time": date_time}
     existing_messages.append(new_message)
 
-    bot_response = chat_bot.chatbot_response(user_msg)
+    chat_history = [format_chat_history_for_gpt(__chat) for __chat in existing_messages]
+
+    # Prepare messages for OpenAI API
+    messages = GPT_MESSAGES + chat_history
+
+    # Interact with OpenAI GPT-4
+    response = client.chat.completions.create(model="gpt-4o", messages=messages)
+    bot_response = response.choices[0].message.content
+
     new_message = {"identifier": "bot", "text": bot_response, "date_time": date_time}
     existing_messages.append(new_message)
 
@@ -239,7 +269,19 @@ def get_bot_response():
     # Update chat history
     db.session.add(current_chat)
     db.session.commit()
-    return html_encode(bot_response)
+
+    encoded_bot_response = html_encode(bot_response)
+
+    # Generate response avatar stream
+    avatar_video_url = get_avatar_video(bot_response)
+    print(avatar_video_url)
+
+    response = {
+        "encoded_bot_response": encoded_bot_response,
+        "avatar_video_url": avatar_video_url,
+    }
+
+    return response
 
 
 @views.route("/chat-edit", endpoint="chat-edit")
@@ -286,6 +328,48 @@ def get_chat_edit() -> Any:
     db.session.commit()
     return ""
 
+@views.route("/chat-delete", endpoint="chat-delete")
+@restricted_route_decorator(check_session=False)
+def get_chat_delete() -> Any:
+    """Get Chat Delete
+
+    Handle GET request for Chat Delete endpoint.
+    Delete the chat by the chat
+    id in the request arguments.
+
+    Returns
+    -------
+    Any
+        An empty string.
+
+    Raises
+    ------
+    Redirect
+        Redirects to the index page if the current
+        user is not authorized to delete the chat or
+        if the chat does not exist.
+
+    Notes
+    -----
+    This endpoint requires the user to be authenticated
+    and have the necessary permissions to delete the
+    chat.
+    """
+    from .models import db
+
+    user = get_current_user()
+
+    id = request.args.get("id")
+
+    # Prevent from other users to access
+    current_chat = Chat.query.filter_by(user_id=user.id, id=id).first()
+    if current_chat is None:
+        return redirect(url_for("views.index"))
+
+    db.session.delete(current_chat)
+    db.session.commit()
+    return ""
+
 
 @views.route("/get_image/<string:username>")
 def get_image(username: str) -> Any:
@@ -312,14 +396,7 @@ def get_image(username: str) -> Any:
     if (user is not None) and (user.image_data is not None):
         image_path = user.image_data
         base_path = BytesIO(image_path)
-
-        safe_path = realpath(image_path)
-        common_base = commonpath([base_path, safe_path])
-        if common_base != base_path:
-            return redirect(url_for("views.index"))
-
-        return send_file(safe_path, mimetype="image/jpeg")
-
+        return send_file(base_path, mimetype="image/jpeg")
     return safe_send_default_image()
 
 
@@ -361,17 +438,16 @@ def slideshow(start_with: str = ""):
 @restricted_route_decorator(check_session=False)
 def text2speech(text: str = ""):
     try:
-        speech = Text2Speech()
-        speech.say(text)
+        speak(text)
     except:
         pass
     return Response()
 
 
-@views.route('/review', methods=['GET', 'POST'])
+@views.route("/review", methods=["GET", "POST"])
 def reviews():
     """Review
-    
+
     Handle GET and POST requests for the review page.
     Display previous user's reviews and allow logged in users to post reviews.
 
@@ -387,26 +463,35 @@ def reviews():
     """
     from .forms import ReviewForm
     from .models import db, Reviews
+
     review_form = ReviewForm()
     if review_form.validate_on_submit() and current_user.is_authenticated:
-        review = Reviews(title=review_form.title.data,
-                        content=review_form.content.data,
-                        stars=review_form.stars.data,
-                        user_id=None if review_form.anonymous.data else current_user.id)
+        review = Reviews(
+            title=review_form.title.data,
+            content=review_form.content.data,
+            stars=review_form.stars.data,
+            user_id=None if review_form.anonymous.data else current_user.id,
+        )
         db.session.add(review)
         db.session.commit()
-        flash('Your review has been posted!', 'success')
-        return redirect(url_for('views.reviews'))
+        flash("Your review has been posted!", "success")
+        return redirect(url_for("views.reviews"))
     reviews = Reviews.query.all()
-    local_timezone = ZoneInfo("Asia/Jerusalem")
-    for review in reviews:
-        review.submitted_at = review.submitted_at.astimezone(local_timezone)
-    return render_template('review.html', title='Reviews', review_form=review_form, reviews=reviews)
 
-@views.route('/user_image/<filename>')
+    jerusalem_tz = pytz.timezone("Asia/Jerusalem")
+    local_timezone = datetime.now(jerusalem_tz)
+
+    for review in reviews:
+        review.submitted_at = review.submitted_at.astimezone(local_timezone.tzinfo)
+    return render_template(
+        "review.html", title="Reviews", review_form=review_form, reviews=reviews
+    )
+
+
+@views.route("/user_image/<filename>")
 def user_image(filename):
     """Get Image
-    
+
     Returns the profile image of the current user.
 
     Parameters
@@ -421,6 +506,8 @@ def user_image(filename):
     """
     user = User.query.filter_by(image_filename=filename).first()
     if user and user.image_data:
-        return Response(user.image_data, mimetype='image/png')  # Adjust mimetype as necessary
+        # Adjust mimetype as necessary
+        return Response(user.image_data, mimetype="image/png")
     else:
-        return url_for('static', filename='image/default.png')  # Fallback to default image
+        # Fallback to default image
+        return url_for("static", filename="image/default.png")

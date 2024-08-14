@@ -1,14 +1,15 @@
-# syntax=docker/dockerfile:1
-FROM --platform=$BUILDPLATFORM python:3.9.7 AS builder
+FROM python:3.12.3
 
-WORKDIR /ShrinkGPT.github.io
-COPY . /ShrinkGPT.github.io
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip3 install --upgrade pip
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip3 install -r requirements.txt
+RUN pip install --upgrade pip
 
-ENV NAME venv
+WORKDIR /app
 
-EXPOSE 8080
-CMD ["python3", "main.py"]
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY . . 
+
+EXPOSE 5000
+
+CMD ["python", "main.py"]

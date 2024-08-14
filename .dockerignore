@@ -1,0 +1,6 @@
+.venv
+.venv_3_12_3
+.offline
+venv/
+venv_3_12_3/
+offline/
