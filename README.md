@@ -23,7 +23,7 @@ Welcome to ShrinkGPT, your personal AI chatbot psychologist! This project combin
 
 - Upgrade pip with `python -m pip install --upgrade pip`.
 - Install project dependencies with `python -m pip install -r requirements.txt`.
-- Create a .env file with OPENAI_API_KEY="OPENAI-API-KEY" and D_ID_API_KEY="D-ID-API-KEY"
+- Create a .env file with `OPENAI_API_KEY="OPENAI-API-KEY"` and `D_ID_API_KEY="D-ID-API-KEY"`
 
 ## <span style="color:#ff9900; text-shadow: 1px 1px 2px #ddd;">Docker Support 🐳</span>
 
