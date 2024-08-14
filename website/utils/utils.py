@@ -257,3 +257,9 @@ def get_avatar_video(text):
     #                 break
 
     return response_json.get("result_url")
+
+ALLOWED_EXTENSIONS = {'mp3', 'wav'}
+
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
