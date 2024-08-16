@@ -19,9 +19,6 @@ D_ID_API_KEY = os.environ.get("D_ID_API_KEY")
 # LOCAL IMPORTS
 from ..models import User
 
-# PROJECT IMPORTS
-from config import WEBSITE_PATH
-
 
 # PRIVATE
 def __get_all_images(start_with: Union[str, List]):
