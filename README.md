@@ -27,12 +27,9 @@ Welcome to ShrinkGPT, your personal AI chatbot psychologist! This project combin
 
 ## <span style="color:#ff9900; text-shadow: 1px 1px 2px #ddd;">Docker Support 🐳</span>
 
-<!-- Uncomment the following lines to enable Docker support for your project. -->
-<!-- ```bash
-1. cd website
-2. docker build -t website .
-3. docker run -dp 127.0.0.1:3000:3000 website
-``` -->
+1. docker build -t flask-app .
+2. docker run -p 5000:5000 flask-app
+
 
 ## <span style="color:#ff9900;">Documentation with Sphinx 📚✨</span>
 

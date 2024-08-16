@@ -24,7 +24,7 @@ from datetime import datetime
 
 # LOCAL IMPORTS
 from .models import User, Chat
-from .utils.text2speech import Text2Speech, speak
+from .utils.text2speech import speak
 from .utils.utils import (
     generate_slide_show,
     safe_send_default_image,
@@ -44,14 +44,7 @@ from .utils.gpt import (
 # Define a thread-local storage for each request/thread
 thread_local = threading.local()
 
-# Define the folder to save recordings
-UPLOAD_FOLDER = (
-    r"D:\New folder\Final Project\ShrinkGPT.github.io\offline\test recordings"
-)
-
 views = Blueprint("views", __name__)
-tts = Text2Speech()
-
 
 # ROUTES
 @views.route("/")
