@@ -224,35 +224,6 @@ def get_avatar_video(text):
     response = requests.get(url, headers=headers)
     response_json = response.json()
 
-    # while not talks_response_json.get("id"): #! Fix the not return correct response
-    #     talks_response = requests.post(url, json=payload, headers=headers)
-
-    #     try:
-    #         talks_response_json = talks_response.json()
-    #     except:
-    #         pass
-
-    #     if talks_response_json.get("id"):
-    #         print(f"\n{'='*35}\n", talks_response_json, f"\n{'='*35}\n") #! Remove, Test Tag
-
-    #         url = url + '/' + talks_response_json.get("id")
-    #         print(f"\n{'='*35}\nTalks ID URL = {url}\n{'='*35}\n") #! Remove, Test Tag
-
-    #         response_json = dict()
-    #         i = 0
-    #         while not response_json.get("result_url"): # ! Fix the not return correct response
-    #             response = requests.get(url, headers=headers)
-    #             print(f"try - {i}: |{response_json.get("result_url")}|") #! Remove, Test Tag
-    #             i += 1
-    #             sleep(0.5)
-    #             try:
-    #                 response_json = response.json()
-    #             except:
-    #                 pass
-
-    #             if i > 5:
-    #                 break
-
     return response_json.get("result_url")
 
 ALLOWED_EXTENSIONS = {'mp3', 'wav'}
