@@ -71,16 +71,21 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
       {% endif %}
     </main>
 
-    <form class="msger-inputarea">
+    <form class="msger-inputarea" enctype="multipart/form-data">
       <textarea
-        id="w3review"
         class="msger-input"
         id="textInput"
         name="w3review"
         rows="2"
         cols="20"
       ></textarea>
+    
       <button type="submit" class="msger-send-btn">Send</button>
+    
+      <!-- Record Button -->
+      <button id="toggleRecording" type="button">
+        <i class="microphone-icon">🎤</i>
+      </button>
     </form>
   </section>
   <div class="video-container">
@@ -271,7 +276,6 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
           
           if (videoURL) {
 
-            // TODO: fix video not changing 
             var video = document.getElementById('videoFrame');
             var source = document.getElementById('videoSource');
             // video.pause();
@@ -285,7 +289,71 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
 
           // ============= [ End Play D-ID Avater Stream ] ===============
         }
+        
+        // ============= [ Record Voice Message With Speech To Text ] ===============
+        
+        navigator
+            .mediaDevices
+            .getUserMedia({audio: true})
+            .then(stream => { handlerFunction(stream) });
 
+        function handlerFunction(stream) {
+            rec = new MediaRecorder(stream);
+            rec.ondataavailable = e => {
+                audioChunks.push(e.data);
+                if (rec.state == "inactive") {
+                    let blob = new Blob(audioChunks, {type: 'audio/mpeg-3'});
+                    sendData(blob);
+                }
+            }
+        }
+
+        function sendData(data) {
+            var form = new FormData();
+            form.append('file', data, 'data.mp3');  // Ensure 'data' is a valid File object
+        
+            $.ajax({
+                type: 'POST',
+                url: '/save_record',
+                data: form,
+                cache: false,
+                processData: false,
+                contentType: false
+            }).done(function(response) {
+                const resultText = response.text;
+                const textInput = document.getElementById('textInput');
+                if (textInput) {
+                    textInput.value = resultText;
+                } else {
+                    console.error("Textarea not found");
+                }
+            }).fail(function(xhr, status, error) {
+                console.error('Error processing the file:', xhr.responseText || error);
+            });
+        }
+
+        const toggleRecording = document.getElementById('toggleRecording');
+        let isRecording = false;
+        let audioChunks = [];
+
+        toggleRecording.onclick = () => {
+            if (isRecording) {
+                // Stop recording
+                console.log("Recording stopped.");
+                toggleRecording.classList.remove('recording');
+                rec.stop();
+            } else {
+                // Start recording
+                console.log("Recording started.");
+                toggleRecording.classList.add('recording');
+                audioChunks = [];
+                rec.start();
+            }
+            isRecording = !isRecording;
+        };
+
+        // ============= [ End Record Voice Message With Speech To Text ] ===============
+        
         function botResponse(rawText) {
           dateTime = formatDate(new Date())
           // Bot Response

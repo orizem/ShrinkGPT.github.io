@@ -1,5 +1,9 @@
 # views.py
 
+import os
+import io
+import pytz
+import threading
 from io import BytesIO
 from json import dumps
 from typing import Any
@@ -14,13 +18,13 @@ from flask import (
     send_file,
     request,
     flash,
+    jsonify,
 )
 from datetime import datetime
-import pytz
 
 # LOCAL IMPORTS
 from .models import User, Chat
-from .utils.text2speech import Text2Speech, speak
+from .utils.text2speech import speak
 from .utils.utils import (
     generate_slide_show,
     safe_send_default_image,
@@ -28,6 +32,7 @@ from .utils.utils import (
     restricted_route_decorator,
     html_encode,
     get_avatar_video,
+    allowed_file,
 )
 from .utils.gpt import (
     format_chat_history_for_gpt,
@@ -36,9 +41,10 @@ from .utils.gpt import (
     __gpt_uploaded_files,
 )
 
-views = Blueprint("views", __name__)
-tts = Text2Speech()
+# Define a thread-local storage for each request/thread
+thread_local = threading.local()
 
+views = Blueprint("views", __name__)
 
 # ROUTES
 @views.route("/")
@@ -328,6 +334,7 @@ def get_chat_edit() -> Any:
     db.session.commit()
     return ""
 
+
 @views.route("/chat-delete", endpoint="chat-delete")
 @restricted_route_decorator(check_session=False)
 def get_chat_delete() -> Any:
@@ -511,3 +518,26 @@ def user_image(filename):
     else:
         # Fallback to default image
         return url_for("static", filename="image/default.png")
+
+@views.route("/save_record", methods=["POST"])
+def save_record():
+    if "file" not in request.files:
+        return "No file part", 400
+
+    file = request.files["file"]
+
+    if file and allowed_file(file.filename):
+        file_bytes_data = file.read()
+        buffer = io.BytesIO(file_bytes_data)  # Read file data into memory
+        buffer.name = "file.mp3"
+        transcription = transcribe_audio(buffer)  # Transcribe the audio in memory
+        return jsonify({"text": transcription}), 200
+    else:
+        return "Invalid file type", 400
+
+def transcribe_audio(file_bytes):
+    file_bytes.seek(0)  # Reset pointer to the start of the file
+    transcription = client.audio.transcriptions.create(
+        model="whisper-1", file=file_bytes, language="en"
+    )
+    return transcription.text

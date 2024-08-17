@@ -19,13 +19,10 @@ D_ID_API_KEY = os.environ.get("D_ID_API_KEY")
 # LOCAL IMPORTS
 from ..models import User
 
-# PROJECT IMPORTS
-from config import WEBSITE_PATH
-
 
 # PRIVATE
 def __get_all_images(start_with: Union[str, List]):
-    IMAGE_PATH = rf"{WEBSITE_PATH}\static\image"
+    IMAGE_PATH = r"website/static/image"
 
     if not isinstance(start_with, list):
         start_with = [start_with]
@@ -76,7 +73,7 @@ def generate_slide_show(start_with: Union[str, List]):
     images = __get_all_images(start_with=start_with)
 
     # Instantly load image without sleep
-    with open(rf"{WEBSITE_PATH}\static\image\{images[-1]}", "rb") as img_file:
+    with open(rf"website/static/image/{images[-1]}", "rb") as img_file:
         yield (
             b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + img_file.read() + b"\r\n"
         )
@@ -85,7 +82,7 @@ def generate_slide_show(start_with: Union[str, List]):
         for image_name in images:
             try:
                 with open(
-                    rf"{WEBSITE_PATH}\static\image\{image_name}", "rb"
+                    rf"website/static/image/{image_name}", "rb"
                 ) as img_file:
                     yield (
                         b"--frame\r\nContent-Type: image/jpeg\r\n\r\n"
@@ -119,11 +116,11 @@ def safe_send_default_image():
         status code 404 is returned.
 
     """
-    base = rf"{WEBSITE_PATH}\static\image"
-    safepath = realpath(rf"{WEBSITE_PATH}\static\image\default.png")
+    base = rf"website/static/image"
+    safepath = realpath(rf"website/static/image/default.png")
     prefix = commonpath((base, safepath))
     if prefix == base:
-        return send_file(rf"{base}\default.png", mimetype="image/jpeg")
+        return send_file(rf"{base}/default.png", mimetype="image/jpeg")
     return "Error", 404
 
 
@@ -257,3 +254,9 @@ def get_avatar_video(text):
     #                 break
 
     return response_json.get("result_url")
+
+ALLOWED_EXTENSIONS = {'mp3', 'wav'}
+
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
