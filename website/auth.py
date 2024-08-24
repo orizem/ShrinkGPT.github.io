@@ -33,6 +33,10 @@ def register():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None:
+            if user.status == -1:
+                flash("Deactivated user.")
+                return redirect(url_for("auth.register"))
+            
             flash("Username already exists.")
             return redirect(url_for("auth.register"))
 
@@ -99,6 +103,7 @@ def qrcode():
 def login():
     """User login route."""
     from .forms import LoginForm
+    import sys
 
     if current_user.is_authenticated:
         # if user is logged in we get out of here
@@ -113,6 +118,10 @@ def login():
             or not user.verify_totp(form.token.data)
         ):
             flash("Invalid username, password or token.")
+            return redirect(url_for("auth.login"))
+
+        if user.status == -1:
+            flash("Deactivated user.")
             return redirect(url_for("auth.login"))
 
         # log user in
