@@ -1,3 +1,11 @@
+h3 {
+  text-align: center;
+}
+
+#reviews-container {
+  padding-top: 15px;
+}
+
 /* Table Styles */
  table {
     width: 100%;

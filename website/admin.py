@@ -17,7 +17,7 @@ from flask_login import login_user, logout_user, current_user
 from sqlalchemy import asc, desc
 
 # LOCAL IMPORTS
-from .models import User, Status, db
+from .models import User, Status, Reviews, Chat, db
 from .utils.utils import restricted_admin_route_decorator
 
 admin = Blueprint("admin", __name__)
@@ -26,9 +26,9 @@ admin = Blueprint("admin", __name__)
 @admin.route("/admin_dashboard")
 @restricted_admin_route_decorator()
 def admin_dashboard():
-    # Get the current page and rows per page from the request
+    # Get the current page, rows per page, order column and order type from the request
     page = request.args.get(key="page", default=1, type=int)
-    rows_per_page = request.args.get(key="rows_per_page", default=10, type=int)
+    rows_per_page = request.args.get(key="rows_per_page", default=5, type=int)
     column = request.args.get(key="column", default=None, type=str)
     order = request.args.get(key="order", default=None, type=str)
 
@@ -40,12 +40,42 @@ def admin_dashboard():
 
     users = query.paginate(page=page, per_page=rows_per_page)
 
+    # Query the reviews data
+    reviews_data = (
+        db.session.query(Reviews.stars, db.func.count(Reviews.stars))
+        .group_by(Reviews.stars)
+        .all()
+    )
+
+    # Process the data into a format suitable for the chart
+    reviews_chart_data = [
+        {"name": f"{stars} Stars", "y": count} for stars, count in reviews_data
+    ]
+
+    # Calculate average chats per user
+    total_chats = db.session.query(db.func.count(Chat.id)).scalar()
+    total_users = db.session.query(db.func.count(User.id)).scalar()
+    avg_chats_per_user = total_chats / total_users if total_users > 0 else 0
+
+    # Calculate users with and without chats
+    users_with_chats = db.session.query(Chat.user_id).distinct().count()
+    users_without_chats = total_users - users_with_chats
+
+    # Prepare pie chart data
+    chats_pie_chart_data = [
+        {"name": "Users with Chats", "y": users_with_chats},
+        {"name": "Users without Chats", "y": users_without_chats},
+    ]
+
     return render_template(
         "admin.html",
         users=users,
         page=page,
         rows_per_page=rows_per_page,
         total_users=users.total,
+        reviews_chart_data=reviews_chart_data,
+        avg_chats_per_user=avg_chats_per_user,
+        chats_pie_chart_data=chats_pie_chart_data,
     )
 
 
@@ -70,7 +100,7 @@ def activate_user(user_id):
 
     user_status.status = 0  # Activate the user
     flash(f"User {user_id} has been activated.", "info")
-    
+
     db.session.add(user_status)
     db.session.commit()
     return redirect(url_for("admin.admin_dashboard"))
@@ -86,7 +116,7 @@ def deactivate_user(user_id):
 
     user_status.status = -1  # Deactivate the user
     flash(f"User {user_id} has been deactivated.", "info")
-    
+
     db.session.add(user_status)
     db.session.commit()
     return redirect(url_for("admin.admin_dashboard"))

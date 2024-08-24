@@ -8,7 +8,7 @@ from flask import render_template, redirect, url_for, flash, session
 from flask_login import login_user, logout_user, current_user
 
 # LOCAL IMPORTS
-from .models import User, db
+from .models import User, Status, db
 from .config.config import config
 from .utils.utils import restricted_route_decorator
 
@@ -62,6 +62,12 @@ def register():
         user = User(**user_data)
         db.session.add(user)
         db.session.commit()
+        
+        user = User.query.filter_by(username=user.username).first()       
+        status = Status(**{"user_id": user.id, "status": 0}) # TODO: Change it to 1 when implementing initial chat
+        db.session.add(status)
+        db.session.commit()
+        
 
         # redirect to the two-factor auth page, passing username in session
         session["username"] = user.username
