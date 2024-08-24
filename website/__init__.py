@@ -39,6 +39,11 @@ def create_app():
 
     app.register_blueprint(auth_blueprint)
 
+    # blueprint for admin routes in our app
+    from .admin import admin as admin_blueprint
+
+    app.register_blueprint(admin_blueprint)
+
     # blueprint for non-auth parts of app
     from .views import views as views_blueprint
 

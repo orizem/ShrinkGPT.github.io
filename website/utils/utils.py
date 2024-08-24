@@ -10,14 +10,14 @@ from time import sleep
 from typing import List, Union, Callable
 from flask_login import current_user
 from os.path import realpath, commonpath
-from flask import render_template, redirect, url_for, send_file, session
+from flask import render_template, redirect, url_for, send_file, session, request
 from dotenv import load_dotenv
 
 load_dotenv()
 D_ID_API_KEY = os.environ.get("D_ID_API_KEY")
 
 # LOCAL IMPORTS
-from ..models import User
+from ..models import User, Admin
 
 
 # PRIVATE
@@ -175,6 +175,44 @@ def restricted_route_decorator(check_session: bool):
 
                 if user is None:
                     return redirect(url_for("views.index"))
+
+            res = func(*args, **kwargs)
+            return res
+
+        return wrapper
+
+    return decorator
+
+# @restricted_route_decorator(check_session=True)
+def restricted_admin_route_decorator():
+    """Restricted Route Decorator
+
+    Using the restricted_route_decorator, this decorator checks 
+    if the user id is in the admins table, otherwise, redirected
+    to index page as well. 
+
+    Must define endpoint for each route using this decorator.
+    The decorator should be right above the function in
+    order to run properly.
+
+    Parameters
+    ----------
+    func : Callable
+        The function to wrap with authentication checking.
+    """
+
+    def decorator(func: Callable):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            try:
+                user = get_current_user()
+            except:
+                return redirect(url_for("views.index"))
+                
+            admin_id = Admin.query.filter_by(user_id=user.id).first()
+              
+            if admin_id is None:
+                return redirect(url_for("views.index"))
 
             res = func(*args, **kwargs)
             return res

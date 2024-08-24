@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+<br>
+<br>
+<br>
+<br>
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Shrink.io - Admin{% endblock %}
+
+{% block page_content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/admin.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(".delete-btn").click(function() {
+                var userId = $(this).data("user-id");
+                $.ajax({
+                    url: "/delete/" + userId,
+                    type: "POST",
+                    success: function() {
+                        // Refresh the page after successful deletion
+                        window.location.href = "/admin_dashboard";
+                    }
+                });
+            });
+
+            $("#rows-per-page").val("{{ rows_per_page }}");
+            $("#rows-per-page").change(function() {
+                var page = "{{ page }}";
+                var rows_per_page = $(this).val();
+                window.location.href = "{{ url_for('admin.admin_dashboard') }}?page=" + 1 + "&rows_per_page=" + rows_per_page;
+            });
+        });
+    </script>
+</head>
+<div class="container">
+</br>
+</div>
+<div class="grid-container">
+    <div class="paging" style="width:40%;">
+        <label for="rows-per-page">Rows per page:</label>
+        <span class="custom-select">
+            <select id="rows-per-page">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+            </select>
+        </span>
+    </div>
+
+    <table id="user-table">
+        <tbody>
+            <tr class="table-header">
+                <td>ID</td>
+                <td>Username</td>
+                <td>Name</td>
+                <td>Lastname</td>
+                <td>Actions</td>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>
+                    <button class="delete-btn" data-user-id="{{ user.id }}">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="paging-btns">
+        {% for i in range(1, (total_users // rows_per_page) + 1) %}
+        <a class="page-btn long-shadow-cast {% if i == page %}current-page{% endif %}" href="{{ url_for('admin.admin_dashboard', page=i, rows_per_page=rows_per_page) }}">{{ i }}</a>
+        {% endfor %}
+        
+        {% if total_users % rows_per_page > 0 %}
+            <a class="page-btn long-shadow-cast {% if total_users // rows_per_page + 1 == page %}current-page{% endif %}" href="{{ url_for('admin.admin_dashboard', page=(total_users // rows_per_page + 1), rows_per_page=rows_per_page) }}">{{ total_users // rows_per_page + 1 }}</a>
+        {% else %}
+            <a class="page-btn long-shadow-cast {% if total_users // rows_per_page == page %}current-page{% endif %}" href="{{ url_for('admin.admin_dashboard', page=(total_users // rows_per_page), rows_per_page=rows_per_page) }}">{{ total_users // rows_per_page }}</a>
+        {% endif %}
+    </div>
+</div>
+<div class="container">
+</br>
+</br>
+</br>
+</div>
+{% endblock %}

@@ -7,7 +7,7 @@ from onetimepass import valid_totp
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import datetime, UTC
 
 db = SQLAlchemy()
 
@@ -30,6 +30,7 @@ class User(UserMixin, db.Model):
         "Chat", backref=db.backref("chats", lazy=True)
     )  # Creating a relationship with the User model
     reviews = db.relationship("Reviews", backref="user", lazy=True)
+    is_admin = db.relationship("Admin", backref="user", lazy=True)
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -44,6 +45,12 @@ class User(UserMixin, db.Model):
     @password.setter
     def password(self, password):
         self.password_hash = generate_password_hash(password)
+    
+    # New property or method
+    @property
+    def is_admin(self):
+        # Implement logic to check if the user is an admin
+        return bool(Admin.query.filter_by(user_id=self.id).first())
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
@@ -53,6 +60,17 @@ class User(UserMixin, db.Model):
 
     def verify_totp(self, token):
         return valid_totp(token, self.otp_secret)
+
+
+class Admin(UserMixin, db.Model):
+    """Admin model."""
+
+    __tablename__ = "admins"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    def __init__(self, **kwargs):
+        super(Admin, self).__init__(**kwargs)
 
 
 class Chat(UserMixin, db.Model):
@@ -89,7 +107,7 @@ class Reviews(db.Model):
 
     __tablename__ = "reviews"
     id = db.Column(db.Integer, primary_key=True)
-    submitted_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    submitted_at = db.Column(db.DateTime, nullable=False, default=UTC)
     user_id = db.Column(
         db.Integer, db.ForeignKey("users.id"), nullable=True
     )  # nullable=True - Assuming anonymity is allowed
