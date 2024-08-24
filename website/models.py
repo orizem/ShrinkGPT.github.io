@@ -7,7 +7,7 @@ from onetimepass import valid_totp
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime, UTC
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -107,7 +107,7 @@ class Reviews(db.Model):
 
     __tablename__ = "reviews"
     id = db.Column(db.Integer, primary_key=True)
-    submitted_at = db.Column(db.DateTime, nullable=False, default=UTC)
+    submitted_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(
         db.Integer, db.ForeignKey("users.id"), nullable=True
     )  # nullable=True - Assuming anonymity is allowed

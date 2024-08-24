@@ -382,7 +382,7 @@ def get_chat_delete() -> Any:
 def get_image(username: str) -> Any:
     """Get Image
 
-    Returns the profile image of the current user.
+    Returns the profile image of the user.
 
     Parameters
     ----------
@@ -394,9 +394,12 @@ def get_image(username: str) -> Any:
     Any
         User image.
     """
-    # Make sure the user sent the request correctly
-    if current_user.username != username:
-        return redirect(url_for("views.index"))
+    # Make sure the user sent the request correctly, or to reviews
+    referrer = request.referrer
+    
+    if referrer is None or referrer.split("/")[3] != "review":
+        if current_user.username != username:
+            return redirect(url_for("views.index"))
 
     # Prevent from other users to access
     user = User.query.filter_by(username=username).first()
