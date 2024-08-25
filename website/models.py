@@ -85,6 +85,8 @@ class Status(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     status = db.Column(db.Integer, nullable=False) # Deactivated:-1 | Active:0 | Registration Steps:n 
+    register_date = db.Column(db.DateTime, nullable=False)
+    last_deactivate_date = db.Column(db.DateTime, nullable=True)
 
     def __init__(self, **kwargs):
         super(Status, self).__init__(**kwargs)

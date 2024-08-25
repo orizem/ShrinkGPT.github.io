@@ -1,20 +1,15 @@
 # admin.py
 
-import sqlite3
-
-from io import BytesIO
+from datetime import datetime
 from flask import (
     Blueprint,
     render_template,
-    Flask,
     request,
     redirect,
     url_for,
     flash,
-    session,
 )
-from flask_login import login_user, logout_user, current_user
-from sqlalchemy import asc, desc
+from sqlalchemy import asc, desc, func
 
 # LOCAL IMPORTS
 from .models import User, Status, Reviews, Chat, db
@@ -66,6 +61,30 @@ def admin_dashboard():
         {"name": "Users with Chats", "y": users_with_chats},
         {"name": "Users without Chats", "y": users_without_chats},
     ]
+    
+    # Query for registered users by month and year
+    register_query = db.session.query(
+        func.strftime('%Y-%m', Status.register_date).label('month_year'),
+        func.count(Status.id).label('registered_count')
+    ).filter(Status.status == 0).group_by('month_year').order_by('month_year').all()
+
+    # Query for deactivated users by month and year
+    deactivate_query = db.session.query(
+        func.strftime('%Y-%m', Status.last_deactivate_date).label('month_year'),
+        func.count(Status.id).label('deactivated_count')
+    ).filter(Status.status == -1).group_by('month_year').order_by('month_year').all()
+
+    # Process data for the chart
+    register_data = {month_year: registered_count for month_year, registered_count in register_query}
+    deactivate_data = {month_year: deactivated_count for month_year, deactivated_count in deactivate_query}
+
+    # Fill in missing months with zero counts
+    all_months = sorted(set(register_data.keys()).union(deactivate_data.keys()))
+    dates_chart_data = {
+        'months': all_months,
+        'registered': [register_data.get(month, 0) for month in all_months],
+        'deactivated': [deactivate_data.get(month, 0) for month in all_months],
+    }
 
     return render_template(
         "admin.html",
@@ -76,6 +95,7 @@ def admin_dashboard():
         reviews_chart_data=reviews_chart_data,
         avg_chats_per_user=avg_chats_per_user,
         chats_pie_chart_data=chats_pie_chart_data,
+        dates_chart_data=dates_chart_data,
     )
 
 
@@ -115,6 +135,7 @@ def deactivate_user(user_id):
         return redirect(url_for("admin.admin_dashboard"))
 
     user_status.status = -1  # Deactivate the user
+    user_status.last_deactivate_date = datetime.today()
     flash(f"User {user_id} has been deactivated.", "info")
 
     db.session.add(user_status)

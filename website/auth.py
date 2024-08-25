@@ -3,6 +3,7 @@
 import pyqrcode
 
 from io import BytesIO
+from datetime import datetime
 from flask import Blueprint, render_template
 from flask import render_template, redirect, url_for, flash, session
 from flask_login import login_user, logout_user, current_user
@@ -36,7 +37,7 @@ def register():
             if user.status == -1:
                 flash("Deactivated user.")
                 return redirect(url_for("auth.register"))
-            
+
             flash("Username already exists.")
             return redirect(url_for("auth.register"))
 
@@ -62,12 +63,18 @@ def register():
         user = User(**user_data)
         db.session.add(user)
         db.session.commit()
-        
-        user = User.query.filter_by(username=user.username).first()       
-        status = Status(**{"user_id": user.id, "status": 0}) # TODO: Change it to 1 when implementing initial chat
+
+        user = User.query.filter_by(username=user.username).first()
+
+        status_data = {
+            "user_id": user.id,
+            "status": 0,
+            "register_date": datetime.today(),
+            "last_deactivate_date": None,
+        }  # TODO: Change it to 1 when implementing initial chat
+        status = Status(**status_data)
         db.session.add(status)
         db.session.commit()
-        
 
         # redirect to the two-factor auth page, passing username in session
         session["username"] = user.username
