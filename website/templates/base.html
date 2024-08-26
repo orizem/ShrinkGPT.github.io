@@ -48,18 +48,23 @@ Demo{% endblock %}
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
+        {% if current_user.is_admin %}
+          <li><a href="{{ url_for('admin.admin_dashboard') }}">Admin</a></li>
+        {% endif %}
+        
         <li><a href="{{ url_for('views.reviews') }}">Reviews</a></li>
+        
         {% if current_user.is_authenticated %}
-        <li>
-          <a href="{{ url_for('views.profile') }}"
-            >{{ current_user.username.title() }}</a
-          >
-        </li>
-        <li><a href="{{ url_for('views.chat') }}">Chat</a></li>
-        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+          <li>
+            <a href="{{ url_for('views.profile') }}"
+              >{{ current_user.username.title() }}</a
+            >
+          </li>
+          <li><a href="{{ url_for('views.chat') }}">Chat</a></li>
+          <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
         {% else %}
-        <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
-        <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+          <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+          <li><a href="{{ url_for('auth.register') }}">Register</a></li>
         {% endif %}
       </ul>
     </div>

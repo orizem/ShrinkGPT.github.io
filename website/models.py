@@ -30,6 +30,8 @@ class User(UserMixin, db.Model):
         "Chat", backref=db.backref("chats", lazy=True)
     )  # Creating a relationship with the User model
     reviews = db.relationship("Reviews", backref="user", lazy=True)
+    is_admin = db.relationship("Admin", backref="user", lazy=True)
+    _status = db.relationship("Status", backref="user", lazy=True)
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -44,6 +46,26 @@ class User(UserMixin, db.Model):
     @password.setter
     def password(self, password):
         self.password_hash = generate_password_hash(password)
+    
+    @property
+    def is_admin(self):
+        # Implement logic to check if the user is an admin
+        return bool(Admin.query.filter_by(user_id=self.id).first())
+    
+    @property
+    def full_name(self):
+        return f"{self.name} {self.lastname}".title()
+    
+    @property
+    def status(self):
+        # Get user status
+        user_status = Status.query.filter_by(user_id=self.id).first()
+        return user_status.status if user_status else None
+
+    @status.setter
+    def status(self, status):
+        user_status = Status.query.filter_by(user_id=self.id).first()
+        user_status.status = status
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
@@ -53,6 +75,30 @@ class User(UserMixin, db.Model):
 
     def verify_totp(self, token):
         return valid_totp(token, self.otp_secret)
+
+
+class Admin(UserMixin, db.Model):
+    """Admin model."""
+
+    __tablename__ = "admins"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    def __init__(self, **kwargs):
+        super(Admin, self).__init__(**kwargs)
+
+class Status(UserMixin, db.Model):
+    """Status model."""
+
+    __tablename__ = "status"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    status = db.Column(db.Integer, nullable=False) # Deactivated:-1 | Active:0 | Registration Steps:n 
+    register_date = db.Column(db.DateTime, nullable=False)
+    last_deactivate_date = db.Column(db.DateTime, nullable=True)
+
+    def __init__(self, **kwargs):
+        super(Status, self).__init__(**kwargs)
 
 
 class Chat(UserMixin, db.Model):

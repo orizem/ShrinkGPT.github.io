@@ -33,6 +33,8 @@ from .utils.utils import (
     html_encode,
     get_avatar_video,
     allowed_file,
+    get_initial_chat_state_response,
+    QUESTIONS,
 )
 from .utils.gpt import (
     format_chat_history_for_gpt,
@@ -45,6 +47,7 @@ from .utils.gpt import (
 thread_local = threading.local()
 
 views = Blueprint("views", __name__)
+
 
 # ROUTES
 @views.route("/")
@@ -227,6 +230,7 @@ def get_chat(chat_id: int):
 @restricted_route_decorator(check_session=False)
 def get_bot_response():
     from .models import db
+    import sys
 
     user = get_current_user()
 
@@ -237,11 +241,31 @@ def get_bot_response():
 
     if chat_id != -1:
         current_chat = Chat.query.filter_by(user_id=current_user.id, id=chat_id).first()
+    elif user.status == 1:
+        welcome_text = ""
+        welcome_response = {
+            "identifier": "bot",
+            "text": welcome_text,
+            "date_time": date_time,
+        }
+        new_chat = Chat(
+            name=f"Chat_{len(user.chats)}",
+            chat_json=dumps([welcome_response]),
+            user_id=current_user.id,
+        )
+        db.session.add(new_chat)
+        db.session.commit()
+        current_chat = user.chats[-1]
     else:
         if fisrt_time == "1":
+            if user.status == 1:
+                welcome_text = QUESTIONS[0].format(user.full_name) + "\n" + QUESTIONS[1]
+            else:
+                welcome_text = f"Hi { user.name.title() }, welcome to Shrink.io! Go ahead and send me a message."
+
             welcome_response = {
                 "identifier": "bot",
-                "text": f"Hi { user.name.title() }, welcome to Shrink.io! Go ahead and send me a message.",
+                "text": welcome_text,
                 "date_time": date_time,
             }
             new_chat = Chat(
@@ -258,14 +282,19 @@ def get_bot_response():
     new_message = {"identifier": "user", "text": user_msg, "date_time": date_time}
     existing_messages.append(new_message)
 
-    chat_history = [format_chat_history_for_gpt(__chat) for __chat in existing_messages]
+    if user.status == 0:
+        chat_history = [
+            format_chat_history_for_gpt(__chat) for __chat in existing_messages
+        ]
 
-    # Prepare messages for OpenAI API
-    messages = GPT_MESSAGES + chat_history
+        # Prepare messages for OpenAI API
+        messages = GPT_MESSAGES + chat_history
 
-    # Interact with OpenAI GPT-4
-    response = client.chat.completions.create(model="gpt-4o", messages=messages)
-    bot_response = response.choices[0].message.content
+        # Interact with OpenAI GPT-4
+        response = client.chat.completions.create(model="gpt-4o", messages=messages)
+        bot_response = response.choices[0].message.content
+    else:
+        bot_response = get_initial_chat_state_response(user)
 
     new_message = {"identifier": "bot", "text": bot_response, "date_time": date_time}
     existing_messages.append(new_message)
@@ -279,7 +308,11 @@ def get_bot_response():
     encoded_bot_response = html_encode(bot_response)
 
     # Generate response avatar stream
-    avatar_video_url = get_avatar_video(bot_response)
+    try:
+        avatar_video_url = get_avatar_video(bot_response)
+    except Exception as e:
+        print(e)
+        avatar_video_url = ""
     print(avatar_video_url)
 
     response = {
@@ -382,7 +415,7 @@ def get_chat_delete() -> Any:
 def get_image(username: str) -> Any:
     """Get Image
 
-    Returns the profile image of the current user.
+    Returns the profile image of the user.
 
     Parameters
     ----------
@@ -394,12 +427,16 @@ def get_image(username: str) -> Any:
     Any
         User image.
     """
-    # Make sure the user sent the request correctly
-    if current_user.username != username:
-        return redirect(url_for("views.index"))
+    # Make sure the user sent the request correctly, or to reviews
+    referrer = request.referrer
+
+    if referrer is None or referrer.split("/")[3] != "review":
+        if current_user.username != username:
+            return redirect(url_for("views.index"))
 
     # Prevent from other users to access
     user = User.query.filter_by(username=username).first()
+
     if (user is not None) and (user.image_data is not None):
         image_path = user.image_data
         base_path = BytesIO(image_path)
@@ -519,6 +556,7 @@ def user_image(filename):
         # Fallback to default image
         return url_for("static", filename="image/default.png")
 
+
 @views.route("/save_record", methods=["POST"])
 def save_record():
     if "file" not in request.files:
@@ -534,6 +572,7 @@ def save_record():
         return jsonify({"text": transcription}), 200
     else:
         return "Invalid file type", 400
+
 
 def transcribe_audio(file_bytes):
     file_bytes.seek(0)  # Reset pointer to the start of the file

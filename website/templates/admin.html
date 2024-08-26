@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+<br>
+<br>
+<br>
+<br>
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Shrink.io - Admin{% endblock %}
+
+{% block page_content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/admin.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(".delete-btn").click(function() {
+                var userId = $(this).data("user-id");
+                $.ajax({
+                    url: "/delete/" + userId,
+                    type: "POST",
+                    success: function() {
+                        // Refresh the page after successful deletion
+                        window.location.href = "/admin_dashboard";
+                    }
+                });
+            });
+
+            $(".active-btn").click(function() {
+                var userId = $(this).data("user-id");
+                var userState = $(this).data("user-state");
+                var action = "activate";
+                if (userState === "on") {
+                    action = "deactivate";
+                }
+                $.ajax({
+                    url: `/${action}/${userId}`,
+                    type: "POST",
+                    success: function() {
+                        // Refresh the page after successful deletion
+                        window.location.href = "/admin_dashboard";
+                    }
+                });
+            });
+
+            $(".column-order-btn").click(function() {
+                var page = "{{ page }}";
+                var rows_per_page = $(this).val();
+                var column = $(this).data("column");
+
+                window.location.href = get_url_for_table_order(page, rows_per_page, column);
+            });
+
+            $("#rows-per-page").val("{{ rows_per_page }}");
+            $("#rows-per-page").change(function() {
+                var rows_per_page = $(this).val();
+                var urlParams = getAllUrlParams(window.location.href);
+                var new_path = `{{ url_for('admin.admin_dashboard') }}?page=${1}&rows_per_page=${rows_per_page}`;
+                
+                if (urlParams.column !== undefined) {
+                    new_path += `&column=${urlParams.column}`;
+                }
+                if (urlParams.order !== undefined) {
+                    new_path += `&order=${urlParams.order}`;
+                }
+                window.location.href = new_path;
+            });
+
+            $(".page-btn").click(function() {
+                var page = $(this).data("page");
+                var urlParams = getAllUrlParams(window.location.href);
+                var new_path = `{{ url_for('admin.admin_dashboard') }}?page=${page}&rows_per_page=${urlParams.rows_per_page}`;
+                
+                if (urlParams.column !== undefined) {
+                    new_path += `&column=${urlParams.column}`;
+                }
+                if (urlParams.order !== undefined) {
+                    new_path += `&order=${urlParams.order}`;
+                }
+                window.location.href = new_path;
+            });
+            
+            function get_url_for_table_order(page, rows_per_page, column) {
+                var new_path = `{{ url_for('admin.admin_dashboard') }}?page=${page}&rows_per_page=${rows_per_page}&column=${column}`;
+                var current_path = window.location.pathname + window.location.search;
+
+                if (new_path === current_path) {
+                    new_path += "&order=DESC";
+                }
+                return new_path;
+            }
+
+
+            function getAllUrlParams(url) {
+                var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+                var obj = {};
+                
+                if (queryString) {
+                  queryString = queryString.split('#')[0];
+                  var arr = queryString.split('&');
+
+                  for (var i = 0; i < arr.length; i++) {
+                    var a = arr[i].split('=');
+                    var paramName = a[0];
+                    var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
+                    paramName = paramName.toLowerCase();
+                 
+                    if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
+                    if (paramName.match(/\[(\d+)?\]$/)) {
+                      var key = paramName.replace(/\[(\d+)?\]/, '');
+                      
+                      if (!obj[key]) obj[key] = [];
+                      if (paramName.match(/\[\d+\]$/)) {
+                        var index = /\[(\d+)\]/.exec(paramName)[1];
+                        obj[key][index] = paramValue;
+                      } else {
+                        obj[key].push(paramValue);
+                      }
+                    } else {
+                      if (!obj[paramName]) {
+                        obj[paramName] = paramValue;
+                      } else if (obj[paramName] && typeof obj[paramName] === 'string'){
+                        obj[paramName] = [obj[paramName]];
+                        obj[paramName].push(paramValue);
+                      } else {
+                        obj[paramName].push(paramValue);
+                      }
+                    }
+                  }
+                }
+                return obj;
+            }
+        });
+    </script>
+</head>
+<div class="container">
+</br>
+</div>
+<div class="grid-container">
+    <div class="paging" style="width:40%;">
+        <label for="rows-per-page">Rows per page:</label>
+        <span class="custom-select">
+            <select id="rows-per-page">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+            </select>
+        </span>
+    </div>
+
+    <table id="user-table">
+        <tbody>
+            <tr class="table-header">
+                <td>
+                    <button data-column="id" class="column-order-btn">ID</button>
+                </td>
+                <td>
+                    <button data-column="username" class="column-order-btn">Username</button>
+                </td>
+                <td>
+                    <button data-column="name" class="column-order-btn">Name</button>
+                </td>
+                <td>
+                    <button data-column="lastname" class="column-order-btn">Lastname</button>
+                </td>
+                <td>
+                    <button>Activation</button>
+                </td>
+                <td>
+                    <button>Delete</button>
+                </td>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>
+                    {% if user.status == 0 %}
+                        <button class="active-btn" data-user-id="{{ user.id }}" data-user-state="on" title="Deactivate user"><i class="fas fa-user-slash" title="Deactivate user"></i></button>
+                    {% else %}
+                        <button class="active-btn" data-user-id="{{ user.id }}" data-user-state="off" title="Activate user"><i class="fas fa-user" title="Activate user"></i></button>
+                    {% endif %}
+                </td>
+                <td>    
+                    <button class="delete-btn" data-user-id="{{ user.id }}" title="Delete user"><i class="fas fa-trash" title="Delete user"></i></button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="paging-btns">
+        {% for i in range(1, (total_users // rows_per_page) + (1 * (rows_per_page != 1 and total_users % rows_per_page > 0))) %}
+        <a class="page-btn long-shadow-cast {% if i == page %}current-page{% endif %}" data-page="{{ i }}">{{ i }}</a>
+        {% endfor %}
+        
+        {% if total_users % rows_per_page > 0 %}
+            <a class="page-btn long-shadow-cast {% if total_users // rows_per_page + 1 == page %}current-page{% endif %}" data-page="{{ total_users // rows_per_page + 1 }}">{{ total_users // rows_per_page + 1 }}</a>
+        {% else %}
+            <a class="page-btn long-shadow-cast {% if total_users // rows_per_page == page %}current-page{% endif %}" data-page="{{ total_users // rows_per_page }}">{{ total_users // rows_per_page }}</a>
+        {% endif %}
+    </div>
+
+    <hr data-content="Registration and Deactivation Over Time">
+    <div id="dates-container" class="chart"></div>
+    <hr data-content="Reviews">
+    <div id="reviews-container" class="chart"></div>
+    <hr data-content="Chats">
+    <div id="chat-pie-container" class="chart"></div>
+    <h3>Average Chats per User: {{ avg_chats_per_user|round(2) }}</h3>
+    
+    <script>
+        $(document).ready(function() {
+            var reviewsChartData = {{ reviews_chart_data|tojson }};
+            Highcharts.chart('reviews-container', {
+                chart: {
+                    type: 'pie',
+                    options3d: {
+                        enabled: true,
+                        alpha: 45,
+                        beta: 0
+                    }
+                },
+                title: {
+                    text: 'Review Ratings'
+                },
+                plotOptions: {
+                    pie: {
+                        innerSize: 100,
+                        depth: 45
+                    }
+                },
+                series: [{
+                    name: 'Reviews',
+                    data: reviewsChartData
+                }]
+            });
+
+            var pieChartData = {{ chats_pie_chart_data|tojson }};
+            Highcharts.chart('chat-pie-container', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Users with and without Chats'
+                },
+                series: [{
+                    name: 'Users',
+                    colorByPoint: true,
+                    data: pieChartData
+                }]
+            });
+
+            var datesChartData = {{ dates_chart_data|tojson }};
+            Highcharts.chart('dates-container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Number of Users Over Time'
+                },
+                xAxis: {
+                    categories: datesChartData.months,
+                    title: {
+                        text: 'Month/Year'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Number of Users'
+                    }
+                },
+                series: [{
+                    name: 'Registered Users',
+                    data: datesChartData.registered
+                }, {
+                    name: 'Deactivated Users',
+                    data: datesChartData.deactivated
+                }]
+            });
+        });
+    </script>
+    <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+</div>
+<div class="container">
+    </br>
+    </br>
+    </br>
+</div>
+{% endblock %}

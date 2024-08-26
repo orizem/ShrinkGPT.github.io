@@ -10,14 +10,36 @@ from time import sleep
 from typing import List, Union, Callable
 from flask_login import current_user
 from os.path import realpath, commonpath
-from flask import render_template, redirect, url_for, send_file, session
+from flask import render_template, redirect, url_for, send_file, session, request
 from dotenv import load_dotenv
 
 load_dotenv()
 D_ID_API_KEY = os.environ.get("D_ID_API_KEY")
+QUESTIONS = [
+    """
+    Hello {}, welcome to Shrink.io!
+    Before we start the therapy sessions, I would like
+    you to tell me a little bit about you self. 
+    I will ask you some questions and after that we will
+    begin working on the what brought you here.
+    Ok, lets begin:""",
+    "How old are you?",
+    "What's your current living situation? Do you live alone, with family, or with roommates?",
+    "What do you do for work or study? How do you feel about your job or school?",
+    "What does a typical day look like for you from morning to night?",
+    "Do you have any daily routines or rituals that are important to you?",
+    "How do you spend your free time or weekends?",
+    "How would you describe your social life? Do you spend a lot of time with friends or family?",
+    "Are you currently in a relationship? If so, how would you describe it?",
+    "Have you experienced any significant physical health issues?",
+    "Do you have any history of mental health diagnoses or treatments?",
+    "Are you currently taking any medications?",
+    "Have you ever seen a psychologist or therapist before?",
+    "What brings you in today?",
+]
 
 # LOCAL IMPORTS
-from ..models import User
+from ..models import User, Admin
 
 
 # PRIVATE
@@ -81,9 +103,7 @@ def generate_slide_show(start_with: Union[str, List]):
     while True:
         for image_name in images:
             try:
-                with open(
-                    rf"website/static/image/{image_name}", "rb"
-                ) as img_file:
+                with open(rf"website/static/image/{image_name}", "rb") as img_file:
                     yield (
                         b"--frame\r\nContent-Type: image/jpeg\r\n\r\n"
                         + img_file.read()
@@ -116,9 +136,10 @@ def safe_send_default_image():
         status code 404 is returned.
 
     """
-    base = rf"website/static/image"
-    safepath = realpath(rf"website/static/image/default.png")
-    prefix = commonpath((base, safepath))
+    base = realpath(r"website/static/image")
+    safe_path = realpath(r"website/static/image/default.png")
+    prefix = commonpath((base, safe_path))
+    
     if prefix == base:
         return send_file(rf"{base}/default.png", mimetype="image/jpeg")
     return "Error", 404
@@ -184,6 +205,45 @@ def restricted_route_decorator(check_session: bool):
     return decorator
 
 
+# @restricted_route_decorator(check_session=True)
+def restricted_admin_route_decorator():
+    """Restricted Route Decorator
+
+    Using the restricted_route_decorator, this decorator checks
+    if the user id is in the admins table, otherwise, redirected
+    to index page as well.
+
+    Must define endpoint for each route using this decorator.
+    The decorator should be right above the function in
+    order to run properly.
+
+    Parameters
+    ----------
+    func : Callable
+        The function to wrap with authentication checking.
+    """
+
+    def decorator(func: Callable):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            try:
+                user = get_current_user()
+            except:
+                return redirect(url_for("views.index"))
+
+            admin_id = Admin.query.filter_by(user_id=user.id).first()
+
+            if admin_id is None:
+                return redirect(url_for("views.index"))
+
+            res = func(*args, **kwargs)
+            return res
+
+        return wrapper
+
+    return decorator
+
+
 def html_encode(text):
     return html.escape(text)
 
@@ -226,8 +286,31 @@ def get_avatar_video(text):
 
     return response_json.get("result_url")
 
-ALLOWED_EXTENSIONS = {'mp3', 'wav'}
 
 def allowed_file(filename):
-    ALLOWED_EXTENSIONS = {'flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm'}
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    ALLOWED_EXTENSIONS = {
+        "flac",
+        "m4a",
+        "mp3",
+        "mp4",
+        "mpeg",
+        "mpga",
+        "oga",
+        "ogg",
+        "wav",
+        "webm",
+    }
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def get_initial_chat_state_response(user):
+    status = user.status
+    response = QUESTIONS[status]
+    if user.status == 1:
+        response = QUESTIONS[0].format(user.full_name) + "\n" + response
+    user.status += 1
+
+    if user.status >= len(QUESTIONS):
+        user.status = 0
+
+    return response

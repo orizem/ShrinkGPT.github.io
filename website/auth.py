@@ -3,12 +3,13 @@
 import pyqrcode
 
 from io import BytesIO
+from datetime import datetime
 from flask import Blueprint, render_template
 from flask import render_template, redirect, url_for, flash, session
 from flask_login import login_user, logout_user, current_user
 
 # LOCAL IMPORTS
-from .models import User, db
+from .models import User, Status, db
 from .config.config import config
 from .utils.utils import restricted_route_decorator
 
@@ -33,6 +34,10 @@ def register():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None:
+            if user.status == -1:
+                flash("Deactivated user.")
+                return redirect(url_for("auth.register"))
+
             flash("Username already exists.")
             return redirect(url_for("auth.register"))
 
@@ -57,6 +62,18 @@ def register():
         }
         user = User(**user_data)
         db.session.add(user)
+        db.session.commit()
+
+        user = User.query.filter_by(username=user.username).first()
+
+        status_data = {
+            "user_id": user.id,
+            "status": 0,
+            "register_date": datetime.today(),
+            "last_deactivate_date": None,
+        }  # TODO: Change it to 1 when implementing initial chat
+        status = Status(**status_data)
+        db.session.add(status)
         db.session.commit()
 
         # redirect to the two-factor auth page, passing username in session
@@ -99,6 +116,7 @@ def qrcode():
 def login():
     """User login route."""
     from .forms import LoginForm
+    import sys
 
     if current_user.is_authenticated:
         # if user is logged in we get out of here
@@ -113,6 +131,10 @@ def login():
             or not user.verify_totp(form.token.data)
         ):
             flash("Invalid username, password or token.")
+            return redirect(url_for("auth.login"))
+
+        if user.status == -1:
+            flash("Deactivated user.")
             return redirect(url_for("auth.login"))
 
         # log user in
