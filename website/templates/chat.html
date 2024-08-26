@@ -100,6 +100,13 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
             stopTextToSpeech(); // Stop any previous audio
         } catch{}
 
+        $("#textareaId").keypress(function (e) {
+          if(e.which === 13 && !e.shiftKey && !e.ctrlKey) {
+            e.preventDefault();
+            $(this).closest("form").submit();
+          }
+        });
+
         // ============= [ D-ID Avater Default State ] ===============
         document.getElementById('videoFrame').addEventListener('ended',myHandler,false);
         function myHandler(e) {

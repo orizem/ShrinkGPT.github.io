@@ -31,7 +31,7 @@ class User(UserMixin, db.Model):
     )  # Creating a relationship with the User model
     reviews = db.relationship("Reviews", backref="user", lazy=True)
     is_admin = db.relationship("Admin", backref="user", lazy=True)
-    status = db.relationship("Status", backref="user", lazy=True)
+    _status = db.relationship("Status", backref="user", lazy=True)
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -53,10 +53,19 @@ class User(UserMixin, db.Model):
         return bool(Admin.query.filter_by(user_id=self.id).first())
     
     @property
+    def full_name(self):
+        return f"{self.name} {self.lastname}".title()
+    
+    @property
     def status(self):
         # Get user status
         user_status = Status.query.filter_by(user_id=self.id).first()
         return user_status.status if user_status else None
+
+    @status.setter
+    def status(self, status):
+        user_status = Status.query.filter_by(user_id=self.id).first()
+        user_status.status = status
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
