@@ -95,7 +95,7 @@ def generate_slide_show(start_with: Union[str, List]):
     images = __get_all_images(start_with=start_with)
 
     # Instantly load image without sleep
-    with open(rf"website/static/image/{images[-1]}", "rb") as img_file:
+    with open(os.path.join(r"website/static/image", images[-1]), "rb") as img_file:
         yield (
             b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + img_file.read() + b"\r\n"
         )
