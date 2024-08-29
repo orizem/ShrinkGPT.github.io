@@ -103,7 +103,9 @@ def generate_slide_show(start_with: Union[str, List]):
     while True:
         for image_name in images:
             try:
-                with open(rf"website/static/image/{image_name}", "rb") as img_file:
+                with open(
+                    os.path.join(r"website/static/image", image_name), "rb"
+                ) as img_file:
                     yield (
                         b"--frame\r\nContent-Type: image/jpeg\r\n\r\n"
                         + img_file.read()
@@ -139,7 +141,7 @@ def safe_send_default_image():
     base = realpath(r"website/static/image")
     safe_path = realpath(r"website/static/image/default.png")
     prefix = commonpath((base, safe_path))
-    
+
     if prefix == base:
         return send_file(rf"{base}/default.png", mimetype="image/jpeg")
     return "Error", 404
@@ -276,9 +278,7 @@ def get_avatar_video(text):
 
     talks_response = requests.post(url, json=payload, headers=headers)
     talks_response_json = talks_response.json()
-    print(f"\n{'='*35}\n", talks_response_json, f"\n{'='*35}\n")  #! Remove, Test Tag
     url = url + "/" + talks_response_json.get("id")
-    print(f"\n{'='*35}\nTalks ID URL = {url}\n{'='*35}\n")  #! Remove, Test Tag
     sleep(5)
 
     response = requests.get(url, headers=headers)
