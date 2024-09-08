@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/review.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<div class="container">
-    <h1>.</h1>
+<br>
+<br>
+<br>
+<div class="review-container">
     <h1>Service Reviews</h1>
     {% if current_user.is_authenticated %}
         <h2>Write a Review</h2>
@@ -40,75 +42,70 @@
         </form>
     {% endif %}
     <h2>Customer Reviews</h2>
-    {% for review in reviews %}
-    <div>
-        <div class="div_for_picture_name_title">
-            {% if review.user_id is none %}
-                <!-- Anonymous User -->
-                <img class="review_user_picture" src="{{ url_for('static', filename='image/anonymous.png') }}" alt="Anonymous User">
-                <h3 class="review_usersName  _title">Anonymous: {{ review.title }}</h3>
-            {% else %}
-                {% if review.user.image_data %}
-                    <!-- User with Custom Picture -->
-                    <img class="review_user_picture" src="{{ url_for('views.get_image', username=review.user.username) }}" alt="{{ review.user.username }}'s Image">
-                {% else %}
-                    <!-- Default Picture -->
-                    <img class="review_user_picture" src="{{ url_for('static', filename='image/default.png') }}" alt="Default User Image">
-                {% endif %}
-                <h3 class="review_usersName_title">{{ review.user.username }}: {{ review.title }}</h3>
-            {% endif %}
-        </div>
-        <p>{{ review.content }}</p>
-        <p>Reviewed on: {{ review.submitted_at.strftime('%d.%m.%Y - %H:%M') }}</p>
-        <div>
-            {% for i in range(1, 6) %}
-                {% if i <= review.stars %}
-                    <span class="star filled-star"></span>
-                {% else %}
-                    <span class="star empty-star"></span>
-                {% endif %}
-            {% endfor %}
-        </div>
+
+    <div style="max-height: 979px; overflow-y: auto;">
+        {% for review in reviews %}
+        {% with review=review %} {% include
+            "review_card.html" %} {% endwith %}
+        {% endfor %}
     </div>
-{% endfor %}
 </div>
 <script>/* script for display the rating as stars in the published reviews, empty and filled based on  the rating */
     document.addEventListener("DOMContentLoaded", function() {
-        const ratingInputs = document.querySelectorAll('.star-rating input');
-        ratingInputs.forEach(input => {
-            input.addEventListener('change', function() {
-                const rating = this.value;
-                this.parentNode.style.backgroundPosition = `0 -${50 * rating}px`;
+        const starLabels = document.querySelectorAll('.star-rating label');
+    
+        // Function to update the stars when clicked or hovered
+        function updateStars(clickedIndex) {
+            const starInputs = document.querySelectorAll('.star-rating input[type="radio"]');
+            starInputs.forEach((input, index) => {
+                const label = input.nextElementSibling;
+                const starSpan = label.querySelector('.star');
+                if (index <= clickedIndex) {
+                    starSpan.classList.remove('empty-star');
+                    starSpan.classList.add('filled-star');
+                } else {
+                    starSpan.classList.remove('filled-star');
+                    starSpan.classList.add('empty-star');
+                }
+            });
+        }
+    
+        // Function to show star tooltip on hover
+        function showTooltip(label, index) {
+            const tooltip = label.querySelector('.star-tooltip');
+            tooltip.textContent = `${index + 1} star${index === 0 ? '' : 's'}`;
+            tooltip.style.display = 'block';
+        }
+    
+        // Function to hide star tooltip when not hovered
+        function hideTooltip(label) {
+            const tooltip = label.querySelector('.star-tooltip');
+            tooltip.style.display = 'none';
+        }
+    
+        starLabels.forEach((label, index) => {
+            // Click event to select stars
+            label.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default action
+                updateStars(index - 1); // Set stars based on clicked index
+                const associatedInput = document.querySelector('#' + this.getAttribute('for'));
+                associatedInput.checked = true; // Manually set the radio button as checked
+            });
+    
+            // Hover event to display tooltip and highlight stars
+            label.addEventListener('mouseenter', function() {
+                updateStars(index - 1);
+                showTooltip(this, index);
+            });
+    
+            // Remove tooltip and reset stars when mouse leaves
+            label.addEventListener('mouseleave', function() {
+                const checkedInput = document.querySelector('.star-rating input[type="radio"]:checked');
+                const checkedIndex = checkedInput ? Array.from(starLabels).indexOf(checkedInput.nextElementSibling) : -1;
+                updateStars(checkedIndex - 1); // Revert to the last selected stars
+                hideTooltip(this);
             });
         });
-    });
-    </script>
-    <script>/* script for display the rating-RadioField as stars, empty and filled based on the rating */
-        document.addEventListener("DOMContentLoaded", function() {
-            const starLabels = document.querySelectorAll('.star-rating label');
-        
-            function updateStars(clickedIndex) {
-                const starInputs = document.querySelectorAll('.star-rating input[type="radio"]');
-                starInputs.forEach((input, index) => {
-                    const label = input.nextElementSibling;
-                    const starSpan = label.querySelector('.star');
-                    if (index <= clickedIndex) {
-                        starSpan.classList.remove('empty-star');
-                        starSpan.classList.add('filled-star');
-                    } else {
-                        starSpan.classList.remove('filled-star');
-                        starSpan.classList.add('empty-star');
-                    }
-                });
-            }
-            starLabels.forEach((label, index) => {
-                label.addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent the default action
-                    updateStars(index - 1); // Adjust index for 0-based
-                    const associatedInput = document.querySelector('#' + this.getAttribute('for'));
-                    associatedInput.checked = true; // Manually set the radio button as checked
-                });
-            });
-        });
-        </script>
+    });    
+</script>
 {% endblock %}

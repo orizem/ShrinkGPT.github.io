@@ -1,7 +1,9 @@
+@import url("color_palette.css");
+
 :root {
-  --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  --msger-bg: #fff;
-  --border: 2px solid #ddd;
+  --body-bg: linear-gradient(135deg, var(--background-color) 0%, #c3cfe2 100%);
+  --msger-bg: var(--background-color);
+  --border: 2px solid var(--border-color);
   --left-msg-bg: #444;
   --right-msg-bg: #579ffb;
 }
@@ -27,14 +29,8 @@ html {
 }
 
 body {
-  background: linear-gradient(
-    60deg,
-    rgba(84, 58, 183, 1) 0%,
-    rgba(0, 172, 193, 1) 100%
-  );
   background-size: auto;
   background-attachment: fixed;
-  color: white;
 }
 
 .msger {
@@ -69,7 +65,7 @@ body {
   width: 6px;
 }
 .msger-chat::-webkit-scrollbar-track {
-  background: #ddd;
+  background: var(--border-color);
 }
 .msger-chat::-webkit-scrollbar-thumb {
   border-radius: 10px;
@@ -85,7 +81,7 @@ body {
   width: 50px;
   height: 50px;
   margin-right: 10px;
-  background: #ddd;
+  background: var(--border-color);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -149,11 +145,11 @@ body {
 }
 .msger-input {
   flex: 1;
-  background: #ddd;
+  background: var(--border-color);
 }
 .msger-send-btn {
   margin-left: 10px;
-  background: rgb(0, 172, 193);
+  background: var(--primary-color);
   color: #fff;
   font-weight: bold;
   cursor: pointer;
@@ -193,8 +189,8 @@ height: 100%;
 } 
 
 #toggleRecording {
-  background-color: rgb(0, 156, 178);  /* Blue when not recording */
-  color: white;
+  background-color: var(--primary-color); /* When not recording */
+  color: var(--background-color);
   border: none;
   padding: 10px;
   margin-left: 5px;
@@ -204,8 +200,12 @@ height: 100%;
   transition: background-color 0.3s ease;
 }
 
+#toggleRecording:hover {
+  background: rgb(0, 156, 178);
+}
+
 #toggleRecording.recording {
-  background-color: red;  /* Red when recording */
+  background-color: var(--recording-color);  /* When recording */
 }
 
 #toggleRecording i {

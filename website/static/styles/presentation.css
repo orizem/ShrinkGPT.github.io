@@ -1,5 +1,6 @@
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);
 @import url("https://fonts.googleapis.com/css?family=Montserrat:900");
+@import url("color_palette.css");
 
 body {
   /* background: radial-gradient(ellipse at bottom, #022227 0%, #ffffff 100%); */
@@ -8,11 +9,6 @@ body {
   width: 100vw;
   margin: 0;
   max-width: 100%;
-  background: linear-gradient(
-    60deg,
-    rgba(84, 58, 183, 1) 0%,
-    rgba(0, 172, 193, 1) 100%
-  );
   background-size: auto;
   background-attachment: fixed;
   /* overflow: hidden; */
@@ -76,7 +72,7 @@ p {
   font-family: "Lato", sans-serif;
   letter-spacing: 1px;
   font-size: 14px;
-  color: #333333;
+  color: var(--text-color);
 }
 
 .title {

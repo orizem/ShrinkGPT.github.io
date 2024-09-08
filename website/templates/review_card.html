@@ -1,0 +1,38 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+
+<div class="review-card">
+    <div class="div_for_picture_name_title">
+        {% if review.user_id is none %}
+            <!-- Anonymous User -->
+            <img class="review_user_picture" src="{{ url_for('static', filename='image/anonymous.png') }}" alt="Anonymous User">
+            <h3 class="review_usersName  _title">Anonymous: {{ review.title }}</h3>
+        {% else %}
+            {% if review.user.image_data %}
+                <!-- User with Custom Picture -->
+                <img class="review_user_picture" src="{{ url_for('views.get_image', username=review.user.username) }}" alt="{{ review.user.username }}'s Image">
+            {% else %}
+                <!-- Default Picture -->
+                <img class="review_user_picture" src="{{ url_for('static', filename='image/default.png') }}" alt="Default User Image">
+            {% endif %}
+            <h3 class="review_usersName  _title">{{ review.user.username }}: {{ review.title }}</h3>
+        {% endif %}
+    </div>
+
+    <p>&ldquo;{{ review.content }}&rdquo;</p>
+    
+    <div>
+        {% for i in range(1, 6) %}
+        {% if i <= review.stars %}
+        <span class="star filled-star"></span>
+        {% else %}
+        <span class="star empty-star"></span>
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+    <div class="date-time d-flex justify-content-center">{{ review.submitted_at.strftime('%d.%m.%Y - %H:%M') }}</div>
+</div>
+
+{% endblock %}
