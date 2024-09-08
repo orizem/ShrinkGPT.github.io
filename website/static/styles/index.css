@@ -1,18 +1,12 @@
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);
 @import url("https://fonts.googleapis.com/css?family=Montserrat:900");
+@import url("color_palette.css");
 
 body {
   /* background: radial-gradient(ellipse at bottom, #022227 0%, #ffffff 100%); */
   position: relative;
-  height: 100vh;
-  width: 100vw;
   margin: 0;
   max-width: 100%;
-  background: linear-gradient(
-    60deg,
-    rgba(84, 58, 183, 1) 0%,
-    rgba(0, 172, 193, 1) 100%
-  );
   background-size: auto;
   background-attachment: fixed;
   /* overflow: hidden; */
@@ -28,7 +22,7 @@ h1 {
   letter-spacing: 2px;
   font-size: 50px;
   margin: 0;
-  color: white;
+  color:var(--background-color);
   /* background:url('../image/wallpapers/22422-3840x2160-desktop-4k-leaf-background-image.jpg'); */
   /* background:url('../image/wallpapers/asters-patterns-backgrounds-surface-wallpaper-preview.jpg'); */
   /* background:url('../image/wallpapers/background-6650672_1280.jpg'); */
@@ -45,7 +39,7 @@ h1 {
   background-size: auto 200%;
   background-clip: text;
   -webkit-text-stroke-width: 0.1vi;
-  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-color: var(--background-color);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shine 100s linear infinite;
@@ -76,7 +70,7 @@ p {
   font-family: "Lato", sans-serif;
   letter-spacing: 1px;
   font-size: 14px;
-  color: #333333;
+  color: var(--text-color);
 }
 
 .title {
@@ -114,13 +108,13 @@ p {
   position: relative;
   text-align: center;
   /* background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%); */
-  color: rgb(233, 233, 233);
-  stroke: rgb(233, 233, 233);
+  color: var(--background-color);
+  stroke: var(--background-color);
   stroke-width: 0.7;
 }
 .logo {
   width: 50px;
-  fill: white;
+  fill: var(--background-color);
   padding-right: 15px;
   display: inline-block;
   vertical-align: middle;
@@ -154,7 +148,7 @@ p {
   position: relative;
   height: 20vh;
   text-align: center;
-  background-color: white;
+  background-color: var(--background-color);
   -webkit-text-stroke-width: 0px;
 }
 

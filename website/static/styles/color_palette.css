@@ -1,0 +1,21 @@
+/* Base styles */
+:root {
+    --primary-color: #23a6d5;
+    --secondary-color: #23d5ab;
+    --recording-color: #fc1b2e;
+    --accent-color: #e73c7e;
+    --star-color: #f39c12;
+    --star-empty-color: #ffd28a;
+    --text-color: #333;
+    --background-color: #f5f7fa;
+    --border-color: #ddd;
+    --border-radius: 5px;
+    --transition-speed: 0.3s;
+  }
+
+body {
+    background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+    color: var(--background-color);
+    height: 100vh;
+    width: 100vw;
+}

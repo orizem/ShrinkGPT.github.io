@@ -520,13 +520,16 @@ def reviews():
         db.session.commit()
         flash("Your review has been posted!", "success")
         return redirect(url_for("views.reviews"))
-    reviews = Reviews.query.all()
+    
+    # Order reviews by submitted_at in descending order
+    reviews = Reviews.query.order_by(Reviews.submitted_at.desc()).all()
 
     jerusalem_tz = pytz.timezone("Asia/Jerusalem")
     local_timezone = datetime.now(jerusalem_tz)
 
     for review in reviews:
         review.submitted_at = review.submitted_at.astimezone(local_timezone.tzinfo)
+        
     return render_template(
         "review.html", title="Reviews", review_form=review_form, reviews=reviews
     )

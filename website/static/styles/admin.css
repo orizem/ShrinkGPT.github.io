@@ -1,13 +1,16 @@
+@import url('color_palette.css');
+
 body {
-  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
-  color: #fcfcfa;
+  height: 100%;
+  width: 100%;
 }
+
 h3 {
   text-align: center;
 }
 
 button {
-  color: #333;
+  color: var(--text-color);
 }
 
 hr {
@@ -34,7 +37,7 @@ hr:after {
   content: attr(data-content);
   position: relative;
   padding: 0 20px;
-  color: #fcfcfa;
+  color: var(--background-color);
   background-color: #0F67B1;
   border: 1px solid #3FA2F6;
   line-height: 1;
@@ -51,7 +54,7 @@ hr:after {
     border-collapse: collapse;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    color: #fcfcfa;
+    color: var(--background-color);
     box-shadow: 1px 1px 5px -2px;
     border-radius: 3%;
     background: linear-gradient(60deg, rgba(36, 186, 255, 0.3) 0%, rgb(20, 86, 184) 100%);
@@ -65,11 +68,11 @@ hr:after {
     width: 100%;
     padding: 12px 15px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color);
   }
   
   th {
-    background-color: #f5f5f5;
+    background-color: var(--background-color);
     font-weight: 500;
   }
   
@@ -83,13 +86,13 @@ hr:after {
   .table-header{
     position: sticky;
     top: 0;
-    background: #fff;
-    box-shadow: #333 0 0 5px 0;
+    background: var(--background-color);
+    box-shadow: var(--text-color) 0 0 5px 0;
   }
   
   tr:hover {
-    background-color: #f5f5f5;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
   }
   
   /* Pagination Styles */
@@ -102,14 +105,14 @@ hr:after {
     display: inline-block;
     padding: 8px 12px;
     margin: 0 4px;
-    background-color: #f5f5f5;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
     text-decoration: none;
     border-radius: 4px;
   }
   
   .pagination a.active {
-    color: #fff;
+    color: var(--background-color);
   }
   
   .pagination a:hover {
@@ -136,7 +139,7 @@ hr:after {
   /* Button Styles */
   .delete-btn {
     background-color: #dc3545;
-    color: #fff;
+    color: var(--background-color);
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
@@ -149,7 +152,7 @@ hr:after {
 
   .page-btn {
     background-color: #0F67B1;
-    color: #fff;
+    color: var(--background-color);
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
@@ -168,7 +171,7 @@ hr:after {
     text-decoration: none; 
     font-size: 20px;
     font-weight: bolder;
-    color: #ffffff;
+    color: var(--background-color);
     text-shadow: 
       1px 1px 0px rgba(0, 0, 0, 1),
       2px 2px 0px rgba(0, 0, 0, 0.9),
@@ -199,7 +202,7 @@ hr:after {
   }
   
   ::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+    background-color: var(--background-color);
   }
   
   ::-webkit-scrollbar-thumb {
@@ -223,7 +226,7 @@ hr:after {
     background-color: #0F67B1;
     border: 1px solid #3FA2F6;
     border-radius: 0.25rem;
-    color: #fff;
+    color: var(--background-color);
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 10px;

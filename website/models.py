@@ -46,16 +46,16 @@ class User(UserMixin, db.Model):
     @password.setter
     def password(self, password):
         self.password_hash = generate_password_hash(password)
-    
+
     @property
     def is_admin(self):
         # Implement logic to check if the user is an admin
         return bool(Admin.query.filter_by(user_id=self.id).first())
-    
+
     @property
     def full_name(self):
         return f"{self.name} {self.lastname}".title()
-    
+
     @property
     def status(self):
         # Get user status
@@ -87,13 +87,16 @@ class Admin(UserMixin, db.Model):
     def __init__(self, **kwargs):
         super(Admin, self).__init__(**kwargs)
 
+
 class Status(UserMixin, db.Model):
     """Status model."""
 
     __tablename__ = "status"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    status = db.Column(db.Integer, nullable=False) # Deactivated:-1 | Active:0 | Registration Steps:n 
+    status = db.Column(
+        db.Integer, nullable=False
+    )  # Deactivated:-1 | Active:0 | Registration Steps:n
     register_date = db.Column(db.DateTime, nullable=False)
     last_deactivate_date = db.Column(db.DateTime, nullable=True)
 
