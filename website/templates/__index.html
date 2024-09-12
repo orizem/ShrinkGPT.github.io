@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Shrink.io - Home{% endblock %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script type="text/javascript"> 
+        $(document).ready(function () {
+            // Function to handle resizing logic
+            function resizeText() {
+                // Calculate the final font size  
+                // to be 8% of the window width 
+                let size = $(window).width(); 
+                
+                // Use the css() method to set the 
+                // font-size to all the elements on 
+                // the page 
+                $(".resizing-1").css("font-size", size * 0.15 + "px"); 
+                let s2 = size * 0.08;
+                if (size > 1000) {
+                    s2 = size * 0.05;
+                }
+                $(".resizing-2").css("font-size", s2 + "px"); 
+            }
+    
+            // Call the resizeText function on document ready
+            resizeText();
+    
+            // Bind the resizeText function to the window resize event
+            $(window).resize(resizeText);
+        });
+    </script> 
+</head>
+
+<body>
+    <div class="container-fluid" style="padding:0; float:bottom; margin:0">
+        <div class="header">
+
+            <!--Content before waves-->
+            <div class="inner-header flex">
+                <div class="w3-row resizing" style="display:block;">
+                    <div class="w3-container">
+                        </br>
+                        <h2 class="resizing-2 pad-top title title-sm">Welcome to</h2>
+                    </div>
+                    <div class="w3-container">
+                        <h1 class="resizing-1 title title-lg">Shrink.io</h1>
+                    </div>
+                    <div class="w3-container" style="padding-bottom:50vh">
+                        <img src='/slideshow/[man;woman;bot]'/>
+                    </div>
+                </div>
+            </div>
+            <!--Content before waves end-->
+
+            {% block footer %}
+            <div class="navbar-footer" style="position: fixed; bottom: 0px; width:100vw;">
+                <!--Waves Container-->
+                <div>
+                    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                        <defs>
+                            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                        </defs>
+                        <g class="parallax">
+                            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                            <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                        </g>
+                    </svg>
+                </div>
+                <!--Waves end-->
+
+                <!--Content starts-->
+                <div class="content flex">
+                    <p>Shrink.io | Free to use </p>
+                </div>
+                <!--Content ends-->
+            </div>
+            {% endblock %}
+        </div>
+        {% block page_content %}{% endblock %}
+    </div>
+</body>
+{% endblock %}
