@@ -12,11 +12,11 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 __base_path = "website/static/gpt"
 __gpt_uploaded_files = [
-    # client.files.create(
-    #     file=open(os.path.join(__base_path, path), "rb"),
-    #     purpose="fine-tune",
-    # )
-    # for path in os.listdir(__base_path)
+    client.files.create(
+        file=open(os.path.join(__base_path, path), "rb"),
+        purpose="fine-tune",
+    )
+    for path in os.listdir(__base_path)
 ]
 
 GPT_MESSAGES = [
