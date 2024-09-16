@@ -230,6 +230,10 @@ body {
     height: calc(100vh - 40px);
   }
 
+  .navbar {
+    max-height: 20px;
+  }
+
   .msg-bubble {
     max-width: 300px;
   }

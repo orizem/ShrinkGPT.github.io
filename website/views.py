@@ -62,7 +62,32 @@ def index():
     render_template
         Renders the 'index.html' template with user information.
     """
-    return render_template("index.html", user=current_user)
+    from .models import Reviews
+
+    # Order reviews by submitted_at in descending order
+    reviews = Reviews.query.order_by(Reviews.submitted_at.desc()).limit(10).all()
+
+    jerusalem_tz = pytz.timezone("Asia/Jerusalem")
+    local_timezone = datetime.now(jerusalem_tz)
+
+    for review in reviews:
+        review.submitted_at = review.submitted_at.astimezone(local_timezone.tzinfo)
+
+    table_data = [
+        {
+            "submitted_at": str(review.submitted_at),
+            "name": review.user.username if review.user_id != None else "Anonymous",
+            "title": review.title,
+            "content": review.content,
+            "stars": review.stars,
+            "user_id": review.user_id,
+        }
+        for review in reviews
+    ]
+    
+    table_data_json = dumps(table_data)
+
+    return render_template("index.html", user=current_user, reviews=table_data_json)
 
 
 # ROUTES
@@ -430,7 +455,7 @@ def get_image(username: str) -> Any:
     # Make sure the user sent the request correctly, or to reviews
     referrer = request.referrer
 
-    if referrer is None or referrer.split("/")[3] != "review":
+    if referrer is None or referrer.split("/")[3] not in ["review", ""]:
         if current_user.username != username:
             return redirect(url_for("views.index"))
 
@@ -520,7 +545,7 @@ def reviews():
         db.session.commit()
         flash("Your review has been posted!", "success")
         return redirect(url_for("views.reviews"))
-    
+
     # Order reviews by submitted_at in descending order
     reviews = Reviews.query.order_by(Reviews.submitted_at.desc()).all()
 
@@ -529,7 +554,7 @@ def reviews():
 
     for review in reviews:
         review.submitted_at = review.submitted_at.astimezone(local_timezone.tzinfo)
-        
+
     return render_template(
         "review.html", title="Reviews", review_form=review_form, reviews=reviews
     )

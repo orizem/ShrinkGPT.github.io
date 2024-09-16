@@ -89,9 +89,8 @@ p {
 }
 
 .title-lg {
-  font-size: 200px;
+  font-size: 22vw;
   text-align: center;
-  padding: 3vw;
 
   -webkit-user-drag: none;
   -khtml-user-drag: none;
@@ -100,28 +99,20 @@ p {
 }
 
 .title-sm {
-  font-size: 80px;
+  font-size: 6vw;
   text-align: center;
 }
 
 .header {
   position: relative;
   text-align: center;
-  /* background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%); */
   color: var(--background-color);
   stroke: var(--background-color);
   stroke-width: 0.7;
 }
-.logo {
-  width: 50px;
-  fill: var(--background-color);
-  padding-right: 15px;
-  display: inline-block;
-  vertical-align: middle;
-}
 
 .inner-header {
-  height: 65vh;
+  height: 30vw;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -208,16 +199,14 @@ p {
 /*****************************/ 
 .scroll-container {
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto; /* Allow vertical scrolling */
   scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* Basic smooth scrolling */
 }
 
 .full-page {
-  height: auto;
   min-height: 100vh;
   scroll-snap-align: start;
-  overflow-y: auto;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -225,18 +214,33 @@ p {
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+}
+
+ /* Scrollbar Styles */
+ ::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0F67B1;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #3FA2F6;
 }
 
 section {
-  padding: 80px 0;
   box-sizing: border-box;
 }
 
 .section-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 60px 15px;
   text-align: center;
 }
 
@@ -248,12 +252,14 @@ h1, h2, h3 {
 h1 {
   font-size: 2.5em;
   color: #2c3e50;
+  filter: drop-shadow(0.7vw 1vw 0.15vw rgba(0, 0, 0, 0.5));
 }
 
 h2 {
   font-size: 2em;
-  color: #34495e;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  color: #c9c9c9;
+  /* color: #34495e; */
+  text-shadow: 0.2vw 0.3vw 0.2vw rgba(0, 0, 0, 0.5);
 }
 
 h3 {
@@ -292,55 +298,14 @@ p {
   z-index: 1000;
 }
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
-}
-
-.logo {
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #3498db;
-}
-
-.nav-links {
-  display: flex;
-}
-
-.nav-links a {
-  margin-left: 30px;
-  color: #333;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: #3498db;
-}
-
-.nav-links a.active {
-  color: #3498db;
-  font-weight: bold;
-}
-
 #hero {
   color: white;
   text-align: center;
-  padding-top: 100px;
-  padding-bottom: 100px;
 }
 
 .tagline {
   font-size: 1.4em;
   margin-bottom: 30px;
-}
-
-.features {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .feature {
@@ -413,6 +378,7 @@ p {
 }
 
 .testimonial {
+  width: 50vh;
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -493,7 +459,7 @@ footer {
   }
   
   .container {
-      padding: 60px 15px;
+      /* padding: 60px 15px; */
   }
   
   h1 {
@@ -531,25 +497,16 @@ footer {
   }
 }
 
-.scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-.scroll-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 #feature-ai-therapy {
-  background-image: url('https://picsum.photos/id/1059/1600/900');
+  background-image: url('../image/index/hero/istockphoto-1469875556-640_adpp_is.gif');
 }
 
 #feature-avatar {
-  background-image: url('https://picsum.photos/id/1071/1600/900');
+  background-image: url('../image/index/hero/istockphoto-1553724801-640_adpp_is.gif');
 }
 
 #feature-availability {
-  background-image: url('https://picsum.photos/id/1043/1600/900');
+  background-image: url('../image/index/hero/istockphoto-92876756-640_adpp_is.gif');
 }
 
 #feature-tracking {
@@ -557,7 +514,7 @@ footer {
 }
 
 #feature-security {
-  background-image: url('https://picsum.photos/id/1055/1600/900');
+  background-image: url('../image/index/hero/istockphoto-1414660524-640_adpp_is.gif');
 }
 
 #feature-library {
@@ -565,7 +522,7 @@ footer {
 }
 
 #about {
-  background-image: url('https://picsum.photos/id/1076/1600/900');
+  background-image: url('../image/index/hero/istockphoto-1411820941-640_adpp_is.gif');
   color: #fff;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
@@ -577,7 +534,7 @@ footer {
 }
 
 #testimonials {
-  background-image: url('https://picsum.photos/id/1080/1600/900');
+  background-image: url('../image/index/hero/istockphoto-1364638772-640_adpp_is.gif');
 }
 
 #contact {
@@ -596,32 +553,60 @@ footer {
   color: #ecf0f1;
 }
 
+.review_user_picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: #333 5px solid;
+  box-shadow: rgba(51, 51, 51, 0.4) 4px 4px 4px;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+/* Star rating display */
+.filled-star, .empty-star {
+  font-size: 30px;
+}
+
+.filled-star::before {
+  content: '★';
+  color: var(--star-color);
+}
+
+.empty-star::before {
+  content: '☆';
+  color: var(--star-empty-color);
+}
 
 /* Test Animations */
+.slideshow img {
+  margin-top: -12vw;
+  right: 20vw;
+  width: 16vw;
+  height: 16vw;
+}
+
 .floating-image {
   position:absolute; /* Keeps the image floating in the background */
-  transform: translate(-50%, -50%);
-  animation: float 3s ease-in-out infinite, rotate 10s linear infinite;
+  animation: float 7s ease-in-out infinite;
   z-index: 1; /* Places the image behind the content */
 }
 
 .floating-image-icons {
   position:absolute; /* Keeps the image floating in the background */
-  transform: translate(-50%, -50%);
-  animation: float 3s ease-in-out infinite, rotate 10s linear infinite;
+  animation: float 7s ease-in-out infinite, rotate 10s linear infinite;
   z-index: 1; /* Places the image behind the content */
 }
 
 .floating-image-jiggle {
   position:absolute; /* Keeps the image floating in the background */
-  transform: translate(-50%, -50%);
-  animation: float 3s ease-in-out infinite, rotate 10s linear infinite;
+  animation: float 7s ease-in-out infinite, rotate 10s linear infinite;
   z-index: 1; /* Places the image behind the content */
 }
   
 .floating-bot {
-  top: 60vh;
-  left: 80%;
+  margin-top: -5vw;
+  left: 85vw;
 }
 
 .floating-bot img {
@@ -630,40 +615,85 @@ footer {
 }
 
 .floating-hand {
-  top: 30%;
-  left: 10%;
+  margin-top: 1vw;
+  left: -1vw;
+}
+
+.floating-hand-thumb {
+  margin-top: 1vw;
+  left: -1vw;
+  z-index: 2;
 }
 
 .floating-hand img {
-  left: 1%;
-  top: 30%;
   width: 25vw; 
   height: 10vw;
 }
 
-.floating-stethoscope {
-  bottom: 65vh;
-  left: 80vw;
+.floating-hand-thumb img {
+  width: 25vw; 
+  height: 10vw;
+  filter: drop-shadow(0.5vw 0.5vw 4px rgba(0, 0, 0, 0.5));
 }
 
-.floating-stethoscope img {
-  width: 10vw; 
-  height: 10vw;
+.floating-stethoscope {
+  margin-top: -10vw;
+  left: 70vw;
+}
+
+.floating-welcome-title {
+  position:absolute;
+}
+
+.floating-welcome-title .resizing{
+  font-size: 20vw;
+}
+
+.floating-project-title {
+  position:absolute;
+  top: 50%;
 }
 
 .floating-image img {
-  top: 55vh;
   position: fixed;
-  width: 150px; 
+  width: 15vw; 
   height: auto;
-  animation: rotate-itself 90s linear infinite; /* New animation for self-rotation */
+  animation: rotate-back-and-forth 30s ease-in-out infinite; /* New animation for self-rotation */
 }
 
+.floating-image-5 img {
+  position: fixed;
+  height: auto;
+  animation: rotate-back-and-forth-5 30s ease-in-out infinite; /* New animation for self-rotation */
+}
+
+.floating-image-10 img {
+  position: fixed;
+  height: auto;
+  animation: rotate-back-and-forth-10 30s ease-in-out infinite; /* New animation for self-rotation */
+}
+
+.floating-image-20 img {
+  position: fixed;
+  height: auto;
+  animation: rotate-back-and-forth-20 30s ease-in-out infinite; /* New animation for self-rotation */
+}
+
+
+.floating-image-jiggle img {
+  position: fixed;
+  width: 15vw; 
+  height: auto;
+  animation: rotate-back-and-forth 30s ease-in-out infinite; /* New animation for self-rotation */
+}
 .floating-image-jiggle img {
   animation: rotate-back-and-forth 30s ease-in-out infinite; /* New animation for self-rotation */
 }
 
 .floating-image-icons img {
+  position: fixed;
+  width: 10vw; 
+  height: auto;
   animation: rotate-back-and-forth 30s ease-in-out infinite; /* New animation for self-rotation */
 }
 
@@ -696,6 +726,45 @@ footer {
 
 /* Keyframes for back-and-forth rotation */
 @keyframes rotate-back-and-forth {
+  0% {
+    transform: rotate(-20deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(-20deg);
+  }
+}
+
+/* Keyframes for back-and-forth rotation */
+@keyframes rotate-back-and-forth-5 {
+  0% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+/* Keyframes for back-and-forth rotation */
+@keyframes rotate-back-and-forth-10 {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+/* Keyframes for back-and-forth rotation */
+@keyframes rotate-back-and-forth-20 {
   0% {
     transform: rotate(-20deg);
   }
