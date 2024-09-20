@@ -50,6 +50,7 @@ Demo{% endblock %}
       <ul class="nav navbar-nav navbar-right">
         {% if current_user.is_admin %}
           <li><a href="{{ url_for('admin.admin_dashboard') }}">Admin</a></li>
+          <li><a href="{{ url_for('admin.api_keys_form') }}">APIs</a></li>
         {% endif %}
         
         <li><a href="{{ url_for('views.reviews') }}">Reviews</a></li>
