@@ -13,8 +13,6 @@ from os.path import realpath, commonpath
 from flask import render_template, redirect, url_for, send_file, session, request
 from dotenv import load_dotenv
 
-load_dotenv()
-D_ID_API_KEY = os.environ.get("D_ID_API_KEY")
 QUESTIONS = [
     """
     Hello {}, welcome to Shrink.io!
@@ -255,6 +253,9 @@ def html_decode(text):
 
 
 def get_avatar_video(text):
+    load_dotenv()
+    D_ID_API_KEY = os.environ.get("D_ID_API_KEY")
+    
     payload = {
         "source_url": "https://create-images-results.d-id.com/DefaultPresenters/Emma_f/thumbnail.jpeg",  #! Make this with other frameworks
         "script": {

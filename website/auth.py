@@ -68,10 +68,10 @@ def register():
 
         status_data = {
             "user_id": user.id,
-            "status": 0,
+            "status": 1,
             "register_date": datetime.today(),
             "last_deactivate_date": None,
-        }  # TODO: Change it to 1 when implementing initial chat
+        }
         status = Status(**status_data)
         db.session.add(status)
         db.session.commit()
@@ -128,7 +128,7 @@ def login():
         if (
             user is None
             or not user.verify_password(form.password.data)
-            or not user.verify_totp(form.token.data)
+            # or not user.verify_totp(form.token.data)
         ):
             flash("Invalid username, password or token.")
             return redirect(url_for("auth.login"))

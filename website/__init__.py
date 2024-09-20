@@ -4,9 +4,11 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
+from flask import session
+from datetime import datetime
 
 # LOCAL IMPORTS
-from .models import db
+from .models import Admin, User, Status, db
 from .views import page_not_found
 
 
@@ -25,6 +27,7 @@ def create_app():
     from .models import User
 
     create_database(app)
+    create_admin(app)
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -54,3 +57,44 @@ def create_app():
 def create_database(app):
     with app.app_context():
         db.create_all()
+
+def create_admin(app):
+    with app.app_context():
+        # Check if needs to add a default admin
+        is_there_any_admins = Admin.query.all()
+        if len(is_there_any_admins) > 0:
+            return
+    
+        # add new user to the database
+        user_data = {
+            "username": "admin",
+            "password": "eK9HIEXwVNin8d2AYeIlS8f",
+            "name": "admin",
+            "lastname": "admin",
+            "image_data": None,
+            "image_filename": "default.png",
+        }
+        user = User(**user_data)
+        db.session.add(user)
+        db.session.commit()
+
+        user = User.query.filter_by(username=user.username).first()
+
+        status_data = {
+            "user_id": user.id,
+            "status": 0,
+            "register_date": datetime.today(),
+            "last_deactivate_date": None,
+        }  
+        status = Status(**status_data)
+        db.session.add(status)
+        db.session.commit()
+
+        new_admin = Admin(user_id=1)
+
+        # Add the new admin entry to the session
+        db.session.add(new_admin)
+
+        # Commit the session to save the changes to the database
+        db.session.commit()
+

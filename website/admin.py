@@ -1,5 +1,6 @@
 # admin.py
 
+import os
 from datetime import datetime
 from flask import (
     Blueprint,
@@ -8,14 +9,32 @@ from flask import (
     redirect,
     url_for,
     flash,
+    jsonify,
 )
 from sqlalchemy import asc, desc, func
+from dotenv import load_dotenv
 
 # LOCAL IMPORTS
 from .models import User, Status, Reviews, Chat, db
 from .utils.utils import restricted_admin_route_decorator
+from .utils.gpt import client
+
+load_dotenv()
 
 admin = Blueprint("admin", __name__)
+
+# Dictionary to store API keys and their purposes
+api_keys = {}
+
+
+def load_api_keys():
+    for key, value in os.environ.items():
+        if key.endswith("_API_KEY"):
+            purpose = key[:-8].title().replace("_", "-")
+            api_keys[purpose] = value
+
+
+load_api_keys()
 
 
 @admin.route("/admin_dashboard")
@@ -61,29 +80,46 @@ def admin_dashboard():
         {"name": "Users with Chats", "y": users_with_chats},
         {"name": "Users without Chats", "y": users_without_chats},
     ]
-    
+
     # Query for registered users by month and year
-    register_query = db.session.query(
-        func.strftime('%Y-%m', Status.register_date).label('month_year'),
-        func.count(Status.id).label('registered_count')
-    ).filter(Status.status == 0).group_by('month_year').order_by('month_year').all()
+    register_query = (
+        db.session.query(
+            func.strftime("%Y-%m", Status.register_date).label("month_year"),
+            func.count(Status.id).label("registered_count"),
+        )
+        .filter(Status.status == 0)
+        .group_by("month_year")
+        .order_by("month_year")
+        .all()
+    )
 
     # Query for deactivated users by month and year
-    deactivate_query = db.session.query(
-        func.strftime('%Y-%m', Status.last_deactivate_date).label('month_year'),
-        func.count(Status.id).label('deactivated_count')
-    ).filter(Status.status == -1).group_by('month_year').order_by('month_year').all()
+    deactivate_query = (
+        db.session.query(
+            func.strftime("%Y-%m", Status.last_deactivate_date).label("month_year"),
+            func.count(Status.id).label("deactivated_count"),
+        )
+        .filter(Status.status == -1)
+        .group_by("month_year")
+        .order_by("month_year")
+        .all()
+    )
 
     # Process data for the chart
-    register_data = {month_year: registered_count for month_year, registered_count in register_query}
-    deactivate_data = {month_year: deactivated_count for month_year, deactivated_count in deactivate_query}
+    register_data = {
+        month_year: registered_count for month_year, registered_count in register_query
+    }
+    deactivate_data = {
+        month_year: deactivated_count
+        for month_year, deactivated_count in deactivate_query
+    }
 
     # Fill in missing months with zero counts
     all_months = sorted(set(register_data.keys()).union(deactivate_data.keys()))
     dates_chart_data = {
-        'months': all_months,
-        'registered': [register_data.get(month, 0) for month in all_months],
-        'deactivated': [deactivate_data.get(month, 0) for month in all_months],
+        "months": all_months,
+        "registered": [register_data.get(month, 0) for month in all_months],
+        "deactivated": [deactivate_data.get(month, 0) for month in all_months],
     }
 
     return render_template(
@@ -141,3 +177,37 @@ def deactivate_user(user_id):
     db.session.add(user_status)
     db.session.commit()
     return redirect(url_for("admin.admin_dashboard"))
+
+
+@admin.route("/api")
+@restricted_admin_route_decorator()
+def api_keys_form():
+    return render_template("api_keys.html", api_keys=api_keys)
+
+
+@admin.route("/update_keys", methods=["POST"])
+@restricted_admin_route_decorator()
+def update_keys():
+    for purpose, new_key in request.form.items():
+        api_keys[purpose] = new_key
+        env_var_name = f'{purpose.upper().replace("-", "_")}_API_KEY'
+        os.environ[env_var_name] = new_key
+
+        # Update .env file
+        with open(os.path.join("website", ".env"), "r") as file:
+            lines = file.readlines()
+
+        with open(os.path.join("website", ".env"), "w") as file:
+            updated = False
+            for line in lines:
+                if line.startswith(f"{env_var_name}="):
+                    file.write(f'{env_var_name}="{new_key}"\n')
+                    updated = True
+                else:
+                    file.write(line)
+
+            if not updated:
+                file.write(f'{env_var_name}="{new_key}"\n')
+
+    client.api_key = os.environ.get("OPENAI_API_KEY")
+    return redirect(url_for("admin.api_keys_form"))
