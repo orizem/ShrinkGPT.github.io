@@ -32,9 +32,9 @@ def create_app():
     from .models import User
 
     create_database(app)
-    # create_admin(app)
-    # create_test_users(app)
-    # create_test_reviews(app)
+    create_admin(app)
+    create_test_users(app)
+    create_test_reviews(app)
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -122,6 +122,11 @@ def random_date() -> datetime:
 
 def create_test_users(app):
     with app.app_context():
+        # Check if needs to add default users
+        is_there_any_users = User.query.all()
+        if len(is_there_any_users) > 2:
+            return
+        
         for i in range(383):
             Faker.seed(randint(0, 100000))
             fake = Faker("en")
@@ -327,6 +332,11 @@ def generate_random_review():
 
 def create_test_reviews(app):
     with app.app_context():
+        # Check if needs to add default reviews
+        is_there_any_reviews = Reviews.query.all()
+        if len(is_there_any_reviews) > 0:
+            return
+        
         # Fetch all user IDs from the User model
         user_ids = db.session.query(User.id).all()
         
