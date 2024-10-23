@@ -202,16 +202,63 @@
     </table>
 
     <div class="paging-btns">
-        {% for i in range(1, (total_users // rows_per_page) + (1 * (rows_per_page != 1 and total_users % rows_per_page > 0))) %}
-        <a class="page-btn long-shadow-cast {% if i == page %}current-page{% endif %}" data-page="{{ i }}">{{ i }}</a>
-        {% endfor %}
+        {% set total_pages = (total_users // rows_per_page) + (1 if total_users % rows_per_page > 0 else 0) %}
         
-        {% if total_users % rows_per_page > 0 %}
-            <a class="page-btn long-shadow-cast {% if total_users // rows_per_page + 1 == page %}current-page{% endif %}" data-page="{{ total_users // rows_per_page + 1 }}">{{ total_users // rows_per_page + 1 }}</a>
-        {% else %}
-            <a class="page-btn long-shadow-cast {% if total_users // rows_per_page == page %}current-page{% endif %}" data-page="{{ total_users // rows_per_page }}">{{ total_users // rows_per_page }}</a>
+        <!-- Previous Button -->
+        {% if page > 1 %}
+            <a class="page-btn long-shadow-cast" data-page="{{ page - 1 }}">Previous</a>
+        {% endif %}
+        
+        <!-- First Page -->
+        {% if page != 1 %}
+            <a class="page-btn long-shadow-cast {% if page == 1 %}current-page{% endif %}" data-page="1">1</a>
+        {% endif %}
+        
+        <!-- Second Page (only if current page is not 2) -->
+        {% if page > 2 and total_pages > 1 %}
+            <a class="page-btn long-shadow-cast {% if page == 2 %}current-page{% endif %}" data-page="2">2</a>
+        {% endif %}
+        
+        <!-- Ellipsis Before Current (only show if current page is greater than 4) -->
+        {% if page > 4 %}
+            <span>...</span>
+        {% endif %}
+        
+        <!-- Previous Page (if it’s not overlapping with 1 or 2) -->
+        {% if page > 3 %}
+            <a class="page-btn long-shadow-cast" data-page="{{ page - 1 }}">{{ page - 1 }}</a>
+        {% endif %}
+        
+        <!-- Current Page -->
+        <a class="page-btn long-shadow-cast current-page" data-page="{{ page }}">{{ page }}</a>
+        
+        <!-- Next Page (if it’s not overlapping with the second-to-last or last page) -->
+        {% if page < total_pages - 2 %}
+            <a class="page-btn long-shadow-cast" data-page="{{ page + 1 }}">{{ page + 1 }}</a>
+        {% endif %}
+        
+        <!-- Ellipsis After Current (only show if current page is less than total_pages - 3) -->
+        {% if page < total_pages - 3 %}
+            <span>...</span>
+        {% endif %}
+        
+        <!-- Second-to-last Page (only if current page is not equal to it) -->
+        {% if page < total_pages - 1 and total_pages > 2 %}
+            <a class="page-btn long-shadow-cast {% if page == total_pages - 1 %}current-page{% endif %}" data-page="{{ total_pages - 1 }}">{{ total_pages - 1 }}</a>
+        {% endif %}
+        
+        <!-- Last Page (always display unless it's the current page) -->
+        {% if page != total_pages %}
+            <a class="page-btn long-shadow-cast {% if page == total_pages %}current-page{% endif %}" data-page="{{ total_pages }}">{{ total_pages }}</a>
+        {% endif %}
+        
+        <!-- Next Button -->
+        {% if page < total_pages %}
+            <a class="page-btn long-shadow-cast" data-page="{{ page + 1 }}">Next</a>
         {% endif %}
     </div>
+    
+    
 
     <hr data-content="Registration and Deactivation Over Time">
     <div id="dates-container" class="chart"></div>
