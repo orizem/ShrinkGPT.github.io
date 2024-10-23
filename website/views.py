@@ -619,11 +619,13 @@ def transcribe_audio(file_bytes):
 
 
 # Route to serve the Sphinx documentation
+@views.route("/docs/")
+def docs_empty():
+    return redirect(url_for("views.docs_main"))
+
+# Route to serve the Sphinx documentation
 @views.route("/docs/<path:filename>")
 def docs(filename):
-    if filename == "":
-        return redirect(url_for("views.docs_main"))
-
     file_path = os.path.join(DOCS_PATH, filename)
     if os.path.exists(file_path):
         return send_file(file_path)
