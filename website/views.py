@@ -19,6 +19,8 @@ from flask import (
     request,
     flash,
     jsonify,
+    send_from_directory,
+    abort,
 )
 from datetime import datetime
 
@@ -47,6 +49,12 @@ from .utils.gpt import (
 thread_local = threading.local()
 
 views = Blueprint("views", __name__)
+
+# Define the absolute path to your Sphinx HTML docs
+DOCS_PATH = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "docs/_build/html")
+)
+STATIC_PATH = os.path.join(DOCS_PATH, "_static")
 
 
 # ROUTES
@@ -84,7 +92,7 @@ def index():
         }
         for review in reviews
     ]
-    
+
     table_data_json = dumps(table_data)
 
     return render_template("index.html", user=current_user, reviews=table_data_json)
@@ -608,3 +616,44 @@ def transcribe_audio(file_bytes):
         model="whisper-1", file=file_bytes, language="en"
     )
     return transcription.text
+
+
+# Route to serve the Sphinx documentation
+@views.route("/docs/<path:filename>")
+def docs(filename):
+    file_path = os.path.join(DOCS_PATH, filename)
+    if os.path.exists(file_path):
+        return send_file(file_path)
+    else:
+        abort(404)
+
+
+# Route for the index page of the documentation
+@views.route("/docs")
+def docs_index():
+    return redirect(url_for('views.docs_main'))
+
+# Route for the index page of the documentation
+@views.route("/docs/main.html")
+def docs_main():
+    index_path = os.path.join(DOCS_PATH, "main.html")
+    if os.path.exists(index_path):
+        return send_file(index_path)
+    else:
+        abort(404)
+
+
+# Redirect root static path requests to the correct /docs/_static path
+@views.route("/_static/<path:filename>")
+def root_static(filename):
+    return redirect(f"/docs/_static/{filename}", code=301)
+
+
+# Serve static files (CSS, JS, images)
+@views.route("/docs/_static/<path:filename>")
+def docs_static(filename):
+    static_file_path = os.path.join(STATIC_PATH, filename)
+    if os.path.exists(static_file_path):
+        return send_file(static_file_path)
+    else:
+        abort(404)

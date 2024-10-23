@@ -32,9 +32,9 @@ def create_app():
     from .models import User
 
     create_database(app)
-    create_admin(app)
-    create_test_users(app)
-    create_test_reviews(app)
+    # create_admin(app)
+    # create_test_users(app)
+    # create_test_reviews(app)
 
     @login_manager.user_loader
     def load_user(user_id):

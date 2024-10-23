@@ -54,6 +54,7 @@ Demo{% endblock %}
         {% endif %}
         
         <li><a href="{{ url_for('views.reviews') }}">Reviews</a></li>
+        <li><a href="{{ url_for('views.docs_index') }}" target="_blank">Docs</a></li>
         
         {% if current_user.is_authenticated %}
           <li>
