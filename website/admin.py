@@ -16,7 +16,12 @@ from dotenv import load_dotenv
 
 # LOCAL IMPORTS
 from .models import User, Status, Reviews, Chat, db
-from .utils.utils import restricted_admin_route_decorator
+from .utils.utils import (
+    restricted_admin_route_decorator,
+    create_test_users,
+    create_test_reviews,
+    create_test_chats,
+)
 from .utils.gpt import client
 
 load_dotenv()
@@ -136,6 +141,15 @@ def admin_dashboard():
 
 
 # ROUTES
+@admin.route("/generate_test_data", methods=["POST"])
+@restricted_admin_route_decorator()
+def generate_test_data():
+    create_test_users()
+    create_test_chats()
+    create_test_reviews()
+    return {'redirect(url_for("admin.admin_dashboard"))'}
+
+
 @admin.route("/delete/<int:user_id>", methods=["POST"])
 @restricted_admin_route_decorator()
 def delete_user(user_id):

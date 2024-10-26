@@ -263,7 +263,6 @@ def get_chat(chat_id: int):
 @restricted_route_decorator(check_session=False)
 def get_bot_response():
     from .models import db
-    import sys
 
     user = get_current_user()
 
@@ -544,8 +543,8 @@ def reviews():
     review_form = ReviewForm()
     if review_form.validate_on_submit() and current_user.is_authenticated:
         review = Reviews(
-            title=review_form.title.data,
-            content=review_form.content.data,
+            title=review_form.title.data.replace("`", "'"),
+            content=review_form.content.data.replace("`", "'"),
             stars=review_form.stars.data,
             user_id=None if review_form.anonymous.data else current_user.id,
         )
@@ -569,7 +568,7 @@ def reviews():
 
 
 @views.route("/user_image/<filename>")
-def user_image(filename):
+def user_image(filename: str):
     """Get Image
 
     Returns the profile image of the current user.

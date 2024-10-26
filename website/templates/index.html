@@ -217,7 +217,7 @@
     {% endblock %}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const tableData = JSON.parse('{{ reviews | safe }}');
+            const tableData = JSON.parse(`{{ reviews | safe }}`);
             let currentIndex = 0;
 
             function updateContent() {

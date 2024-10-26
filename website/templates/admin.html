@@ -23,6 +23,17 @@
 
     <script>
         $(document).ready(function() {
+            $(".test-data-btn").click(function() {
+                $.ajax({
+                    url: "/generate_test_data",
+                    type: "POST",
+                    success: function() {
+                        // Refresh the page after successful deletion
+                        window.location.href = "/admin_dashboard";
+                    }
+                });
+            });
+
             $(".delete-btn").click(function() {
                 var userId = $(this).data("user-id");
                 $.ajax({
@@ -156,6 +167,10 @@
                 <option value="50">50</option>
             </select>
         </span>
+        
+        <span style="width:5%; display:inline-block;"></span>
+        <label for="rows-per-page">Generate Test Data:</label>
+        <button class="test-data-btn">Run</button>
     </div>
 
     <table id="user-table">
