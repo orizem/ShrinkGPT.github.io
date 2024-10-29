@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
@@ -5,18 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>website.utils.text2speech &mdash; Shrink.io 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -61,6 +59,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../website.html">website</a></li>
       <li class="breadcrumb-item active">website.utils.text2speech</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -84,6 +83,15 @@
 <div class="viewcode-block" id="Text2Speech">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.text2speech.Text2Speech">[docs]</a>
 <span class="k">class</span> <span class="nc">Text2Speech</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Text Two Speech</span>
+<span class="sd">    </span>
+<span class="sd">    Class for speech the provided text.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gender: Literal[&quot;male&quot;, &quot;female&quot;], default &quot;female&quot;</span>
+<span class="sd">        The gender of the person speaks.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gender</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;male&quot;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;female&quot;</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span> <span class="o">=</span> <span class="n">pyttsx3</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
 
@@ -108,6 +116,13 @@
     <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
 </div>
+
+        
+<div class="viewcode-block" id="speak">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.text2speech.speak">[docs]</a>
+<span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">speech</span> <span class="o">=</span> <span class="n">Text2Speech</span><span class="p">()</span>
+    <span class="n">speech</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
 
 
     <span class="c1"># TODO: Add functionality for pause also, with the button icon changed</span>

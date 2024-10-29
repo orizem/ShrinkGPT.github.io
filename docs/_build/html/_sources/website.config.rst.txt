@@ -1,9 +1,6 @@
 website.config package
 ======================
 
-Submodules
-----------
-
 website.config.config module
 ----------------------------
 

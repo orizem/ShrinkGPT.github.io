@@ -7,10 +7,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from config import WEBSITE_PATH
+
 # Load OpenAI API key from environment variable
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-__base_path = "website/static/gpt"
+__base_path = f"{WEBSITE_PATH}/static/gpt"
 __gpt_uploaded_files = [
     client.files.create(
         file=open(os.path.join(__base_path, file), "rb"),

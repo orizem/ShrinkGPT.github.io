@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -5,18 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>website.auth &mdash; Shrink.io 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -77,12 +75,14 @@
 <span class="kn">import</span> <span class="nn">pyqrcode</span>
 
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">render_template</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">Response</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">flash</span><span class="p">,</span> <span class="n">session</span>
 <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">login_user</span><span class="p">,</span> <span class="n">logout_user</span><span class="p">,</span> <span class="n">current_user</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 
 <span class="c1"># LOCAL IMPORTS</span>
-<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Status</span><span class="p">,</span> <span class="n">db</span>
 <span class="kn">from</span> <span class="nn">.config.config</span> <span class="kn">import</span> <span class="n">config</span>
 <span class="kn">from</span> <span class="nn">.utils.utils</span> <span class="kn">import</span> <span class="n">restricted_route_decorator</span>
 
@@ -97,8 +97,57 @@
 <div class="viewcode-block" id="register">
 <a class="viewcode-back" href="../../website.html#website.auth.register">[docs]</a>
 <span class="nd">@auth</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/register&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;User registration route.&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">register</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Response</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;User Registration Route Handler</span>
+
+<span class="sd">    This route manages both GET and POST requests for user registration.</span>
+<span class="sd">    On GET requests, it displays the registration form.</span>
+<span class="sd">    On POST requests, it processes the form submission and creates a new user account.</span>
+
+<span class="sd">    The route performs the following operations:</span>
+<span class="sd">    1. Checks if user is already logged in</span>
+<span class="sd">    2. Validates the registration form</span>
+<span class="sd">    3. Checks for username conflicts</span>
+<span class="sd">    4. Handles user profile image upload</span>
+<span class="sd">    5. Creates new user record in database</span>
+<span class="sd">    6. Creates user status record</span>
+<span class="sd">    7. Initiates two-factor authentication setup</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Union[str, Response]</span>
+<span class="sd">        - On GET: Rendered registration form template</span>
+<span class="sd">        - On POST (success): Redirect to two-factor setup</span>
+<span class="sd">        - On POST (failure): Redirect back to registration with error message</span>
+<span class="sd">        - On authenticated access: Redirect to index page</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Form Fields:</span>
+<span class="sd">        - username: Unique user identifier</span>
+<span class="sd">        - password: User&#39;s password</span>
+<span class="sd">        - name: User&#39;s first name</span>
+<span class="sd">        - lastname: User&#39;s last name</span>
+<span class="sd">        - image: Optional profile image (defaults to &#39;default.png&#39;)</span>
+
+<span class="sd">    Database Operations:</span>
+<span class="sd">        - Creates new User record</span>
+<span class="sd">        - Creates associated Status record</span>
+<span class="sd">        - Initial status is set to 1 (active)</span>
+
+<span class="sd">    Flash Messages:</span>
+<span class="sd">        - &quot;Deactivated user.&quot; - When username exists but is deactivated</span>
+<span class="sd">        - &quot;Username already exists.&quot; - When username is taken</span>
+
+<span class="sd">    Session Data:</span>
+<span class="sd">        - Sets &#39;username&#39; in session for two-factor setup</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    .forms.RegisterForm : The form class handling registration data</span>
+<span class="sd">    User : User model class</span>
+<span class="sd">    Status : Status model class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">RegisterForm</span>
 
     <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
@@ -109,6 +158,10 @@
     <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
         <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Deactivated user.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;auth.register&quot;</span><span class="p">))</span>
+
             <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Username already exists.&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;auth.register&quot;</span><span class="p">))</span>
 
@@ -135,6 +188,18 @@
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+        <span class="n">status_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;register_date&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">(),</span>
+            <span class="s2">&quot;last_deactivate_date&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="p">(</span><span class="o">**</span><span class="n">status_data</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
         <span class="c1"># redirect to the two-factor auth page, passing username in session</span>
         <span class="n">session</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span>
         <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;auth.two_factor_setup&quot;</span><span class="p">))</span>
@@ -147,6 +212,38 @@
 <span class="nd">@auth</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/two_factor_setup&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;two_factor_setup&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">two_factor_setup</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Two Factor Authentication Setup Route Handler</span>
+
+<span class="sd">    Renders the two-factor authentication setup page with specific cache control headers.</span>
+<span class="sd">    This route is protected by the restricted_route_decorator, which verifies</span>
+<span class="sd">    the user has an active session before allowing access.</span>
+
+<span class="sd">    The route enforces a strict no-cache policy to ensure the security of the 2FA setup process</span>
+<span class="sd">    by preventing browser caching of sensitive setup information.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        A tuple containing three elements:</span>
+<span class="sd">        </span>
+<span class="sd">        - Rendered two-factor setup template</span>
+<span class="sd">        - HTTP status code (200)</span>
+<span class="sd">        - Dictionary of cache control headers with values:</span>
+<span class="sd">            - Cache-Control: &quot;no-cache, no-store, must-revalidate&quot;</span>
+<span class="sd">            - Pragma: &quot;no-cache&quot;</span>
+<span class="sd">            - Expires: &quot;0&quot;</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Route is decorated with restricted_route_decorator to verify session</span>
+<span class="sd">    - Prints AUTH variable for debugging/logging purposes</span>
+<span class="sd">    - Implements strict no-cache policy through multiple headers</span>
+<span class="sd">    - Template: &quot;two-factor-setup.html&quot;</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    restricted_route_decorator : Decorator that validates session</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">AUTH</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;two-factor-setup.html&quot;</span><span class="p">),</span>
@@ -164,7 +261,47 @@
 <a class="viewcode-back" href="../../website.html#website.auth.qrcode">[docs]</a>
 <span class="nd">@auth</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/qrcode&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;qrcode&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">qrcode</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">qrcode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate QR Code for Two-Factor Authentication Setup</span>
+
+<span class="sd">    Generates and returns a QR code image for setting up TOTP-based two-factor</span>
+<span class="sd">    authentication. The QR code encodes the user&#39;s TOTP URI which can be scanned</span>
+<span class="sd">    by authenticator apps like Google Authenticator or FreeOTP.</span>
+
+<span class="sd">    The route performs the following operations:</span>
+<span class="sd">    1. Retrieves user from database using session username</span>
+<span class="sd">    2. Removes username from session for security</span>
+<span class="sd">    3. Generates QR code from user&#39;s TOTP URI</span>
+<span class="sd">    4. Returns QR code as SVG image stream</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        A tuple containing three elements:</span>
+<span class="sd">        - BytesIO stream containing SVG QR code image</span>
+<span class="sd">        - HTTP status code (200)</span>
+<span class="sd">        - STREAM_AUTH headers for secure content delivery</span>
+
+<span class="sd">    Security Notes</span>
+<span class="sd">    --------------</span>
+<span class="sd">    - Protected by restricted_route_decorator</span>
+<span class="sd">    - Removes username from session after use</span>
+<span class="sd">    - QR code is generated dynamically per request</span>
+<span class="sd">    - Uses secure TOTP protocol for 2FA</span>
+
+<span class="sd">    Technical Details</span>
+<span class="sd">    -----------------</span>
+<span class="sd">    - QR code is generated using pyqrcode library</span>
+<span class="sd">    - Output format is SVG with scale factor of 3</span>
+<span class="sd">    - TOTP URI follows standard RFC 6238 format</span>
+<span class="sd">    - Stream is delivered with authentication headers</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    restricted_route_decorator : Session validation decorator</span>
+<span class="sd">    User.get_totp_uri : Method generating TOTP URI</span>
+<span class="sd">    STREAM_AUTH : Security headers for stream delivery</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 
     <span class="c1"># for added security, remove username from session</span>
@@ -181,9 +318,57 @@
 <div class="viewcode-block" id="login">
 <a class="viewcode-back" href="../../website.html#website.auth.login">[docs]</a>
 <span class="nd">@auth</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;User login route.&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Response</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;User Login Route Handler</span>
+
+<span class="sd">    Manages both GET and POST requests for user authentication. Validates user credentials</span>
+<span class="sd">    and handles the user login process. Currently supports username/password authentication</span>
+<span class="sd">    with commented infrastructure for TOTP-based two-factor authentication.</span>
+
+<span class="sd">    The route performs the following operations:</span>
+<span class="sd">    1. Checks if user is already logged in</span>
+<span class="sd">    2. Validates the login form submission</span>
+<span class="sd">    3. Verifies user credentials</span>
+<span class="sd">    4. Checks user account status</span>
+<span class="sd">    5. Creates user session on successful login</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Union[str, Response]</span>
+<span class="sd">        - On GET: Rendered login form template</span>
+<span class="sd">        - On POST (success): Redirect to index page with success message</span>
+<span class="sd">        - On POST (failure): Redirect back to login with error message</span>
+<span class="sd">        - On authenticated access: Redirect to index page</span>
+
+<span class="sd">    Authentication Process</span>
+<span class="sd">    ----------------------</span>
+<span class="sd">    1. Username lookup in database</span>
+<span class="sd">    2. Password verification using secure hash comparison</span>
+<span class="sd">    3. (Commented) TOTP token verification</span>
+<span class="sd">    4. User status verification (active/deactivated)</span>
+
+<span class="sd">    Flash Messages</span>
+<span class="sd">    --------------</span>
+<span class="sd">    - &quot;Invalid username, password or token.&quot; - When credentials are incorrect</span>
+<span class="sd">    - &quot;Deactivated user.&quot; - When account is deactivated</span>
+<span class="sd">    - &quot;You are now logged in!&quot; - On successful authentication</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Uses Flask-Login for session management</span>
+<span class="sd">    - Form validation through WTForms</span>
+<span class="sd">    - Password verification uses secure comparison</span>
+<span class="sd">    - TOTP verification is currently commented out</span>
+<span class="sd">    - Redirects authenticated users to index</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    .forms.LoginForm : The form class handling login data</span>
+<span class="sd">    User : User model with verification methods</span>
+<span class="sd">    login_user : Flask-Login function for session creation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">LoginForm</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
 
     <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
         <span class="c1"># if user is logged in we get out of here</span>
@@ -195,9 +380,13 @@
         <span class="k">if</span> <span class="p">(</span>
             <span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span>
             <span class="ow">or</span> <span class="ow">not</span> <span class="n">user</span><span class="o">.</span><span class="n">verify_password</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-            <span class="ow">or</span> <span class="ow">not</span> <span class="n">user</span><span class="o">.</span><span class="n">verify_totp</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">token</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="c1"># or not user.verify_totp(form.token.data)</span>
         <span class="p">):</span>
             <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Invalid username, password or token.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;auth.login&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Deactivated user.&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;auth.login&quot;</span><span class="p">))</span>
 
         <span class="c1"># log user in</span>

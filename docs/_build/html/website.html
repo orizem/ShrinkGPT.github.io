@@ -1,212 +1,377 @@
+
+
 <!DOCTYPE html>
-<html  lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <title>website package</title>
-    
-          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
-      
-      <!-- sphinx script_files -->
-        <script src="_static/documentation_options.js?v=8d563738"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>website package &mdash; Shrink.io 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
-      
-      <!-- bundled in js (rollup iife) -->
-      <!-- <script src="_static/theme-vendors.js"></script> -->
-      <script src="_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="genindex.html" />
-  <link rel="search" title="Search" href="search.html" />
-  <link rel="next" title="website.utils package" href="website.utils.html" />
-  <link rel="prev" title="ShrinkGPT.github.io" href="modules.html" /> 
-  </head>
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="website.utils package" href="website.utils.html" />
+    <link rel="prev" title="ShrinkGPT.github.io" href="modules.html" /> 
+</head>
 
-  <body>
-    <div id="app">
-    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="index.html" class="home-link">
-    
-      <span class="site-name">Shrink.io</span>
-    
-  </router-link>
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  <div class="links">
-    <navlinks class="can-hide">
-
-
-
-    </navlinks>
-  </div>
-</navbar>
-
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
-      </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
           
-          <navlinks>
-            
-
-
-
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Quick search</span>
-    <div class="searchformwrapper">
-      <form class="search" action="search.html" method="get">
-        <input type="text" name="q" />
-        <input type="submit" value="Search" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
-    </div>
-  </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="modules.html#shrinkgpt-github-io">shrinkgpt.github.io</a></span>
-      </p>
-      <ul class="current">
-        
-          <li class="toctree-l1 current">
-            
-              <a href="#" class="reference internal current">website package</a>
-            
-
-            
-              <ul>
-                
-                  <li class="toctree-l2"><a href="#submodules" class="reference internal">Submodules</a></li>
-                
-                  <li class="toctree-l2"><a href="#module-website.auth" class="reference internal">website.auth module</a></li>
-                
-                  <li class="toctree-l2"><a href="#module-website.views" class="reference internal">website.views module</a></li>
-                
-                  <li class="toctree-l2"><a href="#module-website.forms" class="reference internal">website.forms module</a></li>
-                
-                  <li class="toctree-l2"><a href="#module-website.models" class="reference internal">website.models module</a></li>
-                
-                  <li class="toctree-l2"><a href="#module-website.training" class="reference internal">website.training module</a></li>
-                
-                  <li class="toctree-l2"><a href="#module-website" class="reference internal">Module contents</a></li>
-                
-              </ul>
-            
-          </li>
-
-        
-          <li class="toctree-l1 ">
-            
-              <a href="website.utils.html" class="reference internal ">website.utils package</a>
-            
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 ">
-            
-              <a href="main.html" class="reference internal ">main module</a>
-            
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 ">
-            
-              <a href="config.html" class="reference internal ">config module</a>
-            
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
+          
+          <a href="index.html" class="icon icon-home">
+            Shrink.io
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
-        </sidebar>
-
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-    
-      <li><a href="modules.html">ShrinkGPT.github.io</a> &raquo;</li>
-    
-    <li>website package</li>
-  </ul>
-  
-
-  <ul class="page-nav">
-  <li class="prev">
-    <a href="modules.html"
-       title="previous chapter">← ShrinkGPT.github.io</a>
-  </li>
-  <li class="next">
-    <a href="website.utils.html"
-       title="next chapter">website.utils package →</a>
-  </li>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ShrinkGPT.github.io</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">website package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-website.auth">website.auth module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#website.auth.login"><code class="docutils literal notranslate"><span class="pre">login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.auth.logout"><code class="docutils literal notranslate"><span class="pre">logout()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.auth.qrcode"><code class="docutils literal notranslate"><span class="pre">qrcode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.auth.register"><code class="docutils literal notranslate"><span class="pre">register()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.auth.two_factor_setup"><code class="docutils literal notranslate"><span class="pre">two_factor_setup()</span></code></a></li>
 </ul>
-  
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-website.views">website.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.chat"><code class="docutils literal notranslate"><span class="pre">chat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.docs"><code class="docutils literal notranslate"><span class="pre">docs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.docs_empty"><code class="docutils literal notranslate"><span class="pre">docs_empty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.docs_index"><code class="docutils literal notranslate"><span class="pre">docs_index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.docs_main"><code class="docutils literal notranslate"><span class="pre">docs_main()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.docs_static"><code class="docutils literal notranslate"><span class="pre">docs_static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.get_bot_response"><code class="docutils literal notranslate"><span class="pre">get_bot_response()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.get_chat"><code class="docutils literal notranslate"><span class="pre">get_chat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.get_chat_delete"><code class="docutils literal notranslate"><span class="pre">get_chat_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.get_chat_edit"><code class="docutils literal notranslate"><span class="pre">get_chat_edit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.get_image"><code class="docutils literal notranslate"><span class="pre">get_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.page_not_found"><code class="docutils literal notranslate"><span class="pre">page_not_found()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.presentation"><code class="docutils literal notranslate"><span class="pre">presentation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.profile"><code class="docutils literal notranslate"><span class="pre">profile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.reviews"><code class="docutils literal notranslate"><span class="pre">reviews()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.root_static"><code class="docutils literal notranslate"><span class="pre">root_static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.save_record"><code class="docutils literal notranslate"><span class="pre">save_record()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.slideshow"><code class="docutils literal notranslate"><span class="pre">slideshow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.text2speech"><code class="docutils literal notranslate"><span class="pre">text2speech()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.transcribe_audio"><code class="docutils literal notranslate"><span class="pre">transcribe_audio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.views.user_image"><code class="docutils literal notranslate"><span class="pre">user_image()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-website.forms">website.forms module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#website.forms.ChatEdit"><code class="docutils literal notranslate"><span class="pre">ChatEdit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.forms.LoginForm"><code class="docutils literal notranslate"><span class="pre">LoginForm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.forms.ProfileForm"><code class="docutils literal notranslate"><span class="pre">ProfileForm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.forms.RegisterForm"><code class="docutils literal notranslate"><span class="pre">RegisterForm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.forms.ReviewForm"><code class="docutils literal notranslate"><span class="pre">ReviewForm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-website.models">website.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#website.models.Admin"><code class="docutils literal notranslate"><span class="pre">Admin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.models.Chat"><code class="docutils literal notranslate"><span class="pre">Chat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.models.Reviews"><code class="docutils literal notranslate"><span class="pre">Reviews</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.models.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-website">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#website.create_admin"><code class="docutils literal notranslate"><span class="pre">create_admin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.create_database"><code class="docutils literal notranslate"><span class="pre">create_database()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="website.utils.html">website.utils package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">config module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Shrink.io</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">ShrinkGPT.github.io</a></li>
+      <li class="breadcrumb-item active">website package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/website.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
 </div>
-<hr>
-          <div class="content" role="main" v-pre>
-            
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="website-package">
-<h1>website package<a class="headerlink" href="#website-package" title="Link to this heading">¶</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
-</section>
+<h1>website package<a class="headerlink" href="#website-package" title="Link to this heading"></a></h1>
 <section id="module-website.auth">
-<span id="website-auth-module"></span><h2>website.auth module<a class="headerlink" href="#module-website.auth" title="Link to this heading">¶</a></h2>
+<span id="website-auth-module"></span><h2>website.auth module<a class="headerlink" href="#module-website.auth" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="website.auth.login">
-<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.login" title="Link to this definition">¶</a></dt>
-<dd><p>User login route.</p>
+<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/auth.html#login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.login" title="Link to this definition"></a></dt>
+<dd><p>User Login Route Handler</p>
+<p>Manages both GET and POST requests for user authentication. Validates user credentials
+and handles the user login process. Currently supports username/password authentication
+with commented infrastructure for TOTP-based two-factor authentication.</p>
+<p>The route performs the following operations:
+1. Checks if user is already logged in
+2. Validates the login form submission
+3. Verifies user credentials
+4. Checks user account status
+5. Creates user session on successful login</p>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Union[str, Response]</dt><dd><ul class="simple">
+<li><p>On GET: Rendered login form template</p></li>
+<li><p>On POST (success): Redirect to index page with success message</p></li>
+<li><p>On POST (failure): Redirect back to login with error message</p></li>
+<li><p>On authenticated access: Redirect to index page</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="authentication-process">
+<h3>Authentication Process<a class="headerlink" href="#authentication-process" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Username lookup in database</p></li>
+<li><p>Password verification using secure hash comparison</p></li>
+<li><p>(Commented) TOTP token verification</p></li>
+<li><p>User status verification (active/deactivated)</p></li>
+</ol>
+</section>
+<section id="flash-messages">
+<h3>Flash Messages<a class="headerlink" href="#flash-messages" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>“Invalid username, password or token.” - When credentials are incorrect</p></li>
+<li><p>“Deactivated user.” - When account is deactivated</p></li>
+<li><p>“You are now logged in!” - On successful authentication</p></li>
+</ul>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Uses Flask-Login for session management</p></li>
+<li><p>Form validation through WTForms</p></li>
+<li><p>Password verification uses secure comparison</p></li>
+<li><p>TOTP verification is currently commented out</p></li>
+<li><p>Redirects authenticated users to index</p></li>
+</ul>
+</section>
+<section id="see-also">
+<h3>See Also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h3>
+<p>.forms.LoginForm : The form class handling login data
+User : User model with verification methods
+login_user : Flask-Login function for session creation</p>
+</section>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.auth.logout">
-<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#logout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.logout" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#logout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.logout" title="Link to this definition"></a></dt>
 <dd><p>User logout route.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.auth.qrcode">
-<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">qrcode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#qrcode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.qrcode" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">qrcode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/website/auth.html#qrcode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.qrcode" title="Link to this definition"></a></dt>
+<dd><p>Generate QR Code for Two-Factor Authentication Setup</p>
+<p>Generates and returns a QR code image for setting up TOTP-based two-factor
+authentication. The QR code encodes the user’s TOTP URI which can be scanned
+by authenticator apps like Google Authenticator or FreeOTP.</p>
+<p>The route performs the following operations:
+1. Retrieves user from database using session username
+2. Removes username from session for security
+3. Generates QR code from user’s TOTP URI
+4. Returns QR code as SVG image stream</p>
+<section id="id1">
+<h3>Returns<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>tuple</dt><dd><p>A tuple containing three elements:
+- BytesIO stream containing SVG QR code image
+- HTTP status code (200)
+- STREAM_AUTH headers for secure content delivery</p>
+</dd>
+</dl>
+</section>
+<section id="security-notes">
+<h3>Security Notes<a class="headerlink" href="#security-notes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Protected by restricted_route_decorator</p></li>
+<li><p>Removes username from session after use</p></li>
+<li><p>QR code is generated dynamically per request</p></li>
+<li><p>Uses secure TOTP protocol for 2FA</p></li>
+</ul>
+</section>
+<section id="technical-details">
+<h3>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>QR code is generated using pyqrcode library</p></li>
+<li><p>Output format is SVG with scale factor of 3</p></li>
+<li><p>TOTP URI follows standard RFC 6238 format</p></li>
+<li><p>Stream is delivered with authentication headers</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>See Also<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>restricted_route_decorator : Session validation decorator
+User.get_totp_uri : Method generating TOTP URI
+STREAM_AUTH : Security headers for stream delivery</p>
+</section>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.auth.register">
-<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.register" title="Link to this definition">¶</a></dt>
-<dd><p>User registration route.</p>
+<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/auth.html#register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.register" title="Link to this definition"></a></dt>
+<dd><p>User Registration Route Handler</p>
+<p>This route manages both GET and POST requests for user registration.
+On GET requests, it displays the registration form.
+On POST requests, it processes the form submission and creates a new user account.</p>
+<p>The route performs the following operations:
+1. Checks if user is already logged in
+2. Validates the registration form
+3. Checks for username conflicts
+4. Handles user profile image upload
+5. Creates new user record in database
+6. Creates user status record
+7. Initiates two-factor authentication setup</p>
+<section id="id3">
+<h3>Returns<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Union[str, Response]</dt><dd><ul class="simple">
+<li><p>On GET: Rendered registration form template</p></li>
+<li><p>On POST (success): Redirect to two-factor setup</p></li>
+<li><p>On POST (failure): Redirect back to registration with error message</p></li>
+<li><p>On authenticated access: Redirect to index page</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h3>Notes<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Form Fields:</dt><dd><ul class="simple">
+<li><p>username: Unique user identifier</p></li>
+<li><p>password: User’s password</p></li>
+<li><p>name: User’s first name</p></li>
+<li><p>lastname: User’s last name</p></li>
+<li><p>image: Optional profile image (defaults to ‘default.png’)</p></li>
+</ul>
+</dd>
+<dt>Database Operations:</dt><dd><ul class="simple">
+<li><p>Creates new User record</p></li>
+<li><p>Creates associated Status record</p></li>
+<li><p>Initial status is set to 1 (active)</p></li>
+</ul>
+</dd>
+<dt>Flash Messages:</dt><dd><ul class="simple">
+<li><p>“Deactivated user.” - When username exists but is deactivated</p></li>
+<li><p>“Username already exists.” - When username is taken</p></li>
+</ul>
+</dd>
+<dt>Session Data:</dt><dd><ul class="simple">
+<li><p>Sets ‘username’ in session for two-factor setup</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h3>See Also<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>.forms.RegisterForm : The form class handling registration data
+User : User model class
+Status : Status model class</p>
+</section>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.auth.two_factor_setup">
-<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">two_factor_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#two_factor_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.two_factor_setup" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">two_factor_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#two_factor_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.two_factor_setup" title="Link to this definition"></a></dt>
+<dd><p>Two Factor Authentication Setup Route Handler</p>
+<p>Renders the two-factor authentication setup page with specific cache control headers.
+This route is protected by the restricted_route_decorator, which verifies
+the user has an active session before allowing access.</p>
+<p>The route enforces a strict no-cache policy to ensure the security of the 2FA setup process
+by preventing browser caching of sensitive setup information.</p>
+<section id="id6">
+<h3>Returns<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>tuple</dt><dd><p>A tuple containing three elements:</p>
+<ul class="simple">
+<li><p>Rendered two-factor setup template</p></li>
+<li><p>HTTP status code (200)</p></li>
+<li><dl class="simple">
+<dt>Dictionary of cache control headers with values:</dt><dd><ul>
+<li><p>Cache-Control: “no-cache, no-store, must-revalidate”</p></li>
+<li><p>Pragma: “no-cache”</p></li>
+<li><p>Expires: “0”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="id7">
+<h3>Notes<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Route is decorated with restricted_route_decorator to verify session</p></li>
+<li><p>Prints AUTH variable for debugging/logging purposes</p></li>
+<li><p>Implements strict no-cache policy through multiple headers</p></li>
+<li><p>Template: “two-factor-setup.html”</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>See Also<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>restricted_route_decorator : Decorator that validates session</p>
+</section>
+</dd></dl>
 
 </section>
 <section id="module-website.views">
-<span id="website-views-module"></span><h2>website.views module<a class="headerlink" href="#module-website.views" title="Link to this heading">¶</a></h2>
+<span id="website-views-module"></span><h2>website.views module<a class="headerlink" href="#module-website.views" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="website.views.chat">
-<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">chat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#chat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.chat" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">chat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#chat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.chat" title="Link to this definition"></a></dt>
 <dd><p>Chat
 Handle GET request for the Chat page.
 Display the Chat page with user
 information and an empty chat form.</p>
-<section id="returns">
-<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading">¶</a></h3>
+<section id="id9">
+<h3>Returns<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘chat.html’ template with
 user information, no specific chat data,
@@ -214,32 +379,204 @@ no chat ID, and an empty chat name form.</p>
 </dd>
 </dl>
 </section>
-<section id="notes">
-<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h3>
+<section id="id10">
+<h3>Notes<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <p>This endpoint requires the user to be authenticated.</p>
 </section>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="website.views.docs">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">docs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/views.html#docs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.docs" title="Link to this definition"></a></dt>
+<dd><p>Docs</p>
+<p>Serve static files from the documentation directory.
+This route handles requests for documentation files stored in the DOCS_PATH directory.
+It allows serving individual files or directories within the documentation structure.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>filename<span class="classifier">str</span></dt><dd><p>Path to the file or directory within the DOCS_PATH.</p>
+</dd>
+</dl>
+</section>
+<section id="id11">
+<h3>Returns<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Response</dt><dd><p>File contents if found, otherwise raises a 404 error.</p>
+</dd>
+</dl>
+</section>
+<section id="id12">
+<h3>Notes<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<p>This endpoint serves static files directly without processing them through the Flask application.
+It’s designed to handle documentation-related file requests efficiently.</p>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">docs</span><span class="p">(</span><span class="s1">&#39;readme.md&#39;</span><span class="p">)</span>
+<span class="go">Serves the readme.md file from the DOCS_PATH.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">docs</span><span class="p">(</span><span class="s1">&#39;images/logo.png&#39;</span><span class="p">)</span>
+<span class="go">Serves the logo.png image from the images subdirectory in DOCS_PATH.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">docs</span><span class="p">(</span><span class="s1">&#39;api/docs.pdf&#39;</span><span class="p">)</span>
+<span class="go">Serves the api/docs.pdf file from the DOCS_PATH.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.views.docs_empty">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">docs_empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/views.html#docs_empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.docs_empty" title="Link to this definition"></a></dt>
+<dd><p>Redirect Empty Docs Route</p>
+<p>This route handler manages the empty ‘/docs/’ endpoint by redirecting
+to the main documentation page. When users access the /docs/ URL
+without additional path parameters, they will be automatically
+redirected to the main documentation view.</p>
+<section id="id13">
+<h3>Returns<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Response</dt><dd><p>A Flask redirect response that sends the user
+to the main documentation page (views.docs_main).</p>
+</dd>
+</dl>
+</section>
+<section id="id14">
+<h3>Notes<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The trailing slash in ‘/docs/’ is important for route matching</p></li>
+<li><p>Uses Flask’s url_for() for generating the redirect URL</p></li>
+<li><p>This is a convenience route to handle empty docs requests</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.views.docs_index">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">docs_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#docs_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.docs_index" title="Link to this definition"></a></dt>
+<dd><p>Docs Index</p>
+<p>Redirect to the main documentation page.
+This route serves as the entry point for accessing the documentation.
+It redirects users to the main documentation page, which likely contains an overview or index of available documentation resources.</p>
+<section id="id15">
+<h3>Returns<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>redirect</dt><dd><p>Redirects to the main documentation page.</p>
+</dd>
+</dl>
+</section>
+<section id="id16">
+<h3>Notes<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<p>This endpoint is typically used to provide a centralized access point for documentation within the application.
+It’s part of a larger documentation system, possibly involving multiple pages or sections.</p>
+</section>
+<section id="id17">
+<h3>Examples<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">docs_index</span><span class="p">()</span>
+<span class="go">Redirects to the main documentation page.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.views.docs_main">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">docs_main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#docs_main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.docs_main" title="Link to this definition"></a></dt>
+<dd><p>Docs Main</p>
+<p>Serve the main documentation page.
+This route handles requests for the main HTML file in the documentation directory.
+It serves the main.html file, which likely contains an overview or index of available documentation resources.</p>
+<section id="id18">
+<h3>Returns<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Response</dt><dd><p>File contents of the main.html file if found, otherwise raises a 404 error.</p>
+</dd>
+</dl>
+</section>
+<section id="id19">
+<h3>Notes<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<p>This endpoint serves the main documentation page directly without additional processing.
+It’s part of a larger documentation system, possibly involving multiple pages or sections.</p>
+</section>
+<section id="id20">
+<h3>Examples<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">docs_main</span><span class="p">()</span>
+<span class="go">Serves the main.html file from the DOCS_PATH.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.views.docs_static">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">docs_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#docs_static"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.docs_static" title="Link to this definition"></a></dt>
+<dd><p>Docs Static</p>
+<p>Redirect static files to the documentation directory.
+This route handles requests for static files located outside the documentation directory.
+It redirects these requests to the corresponding files within the documentation structure.</p>
+<section id="id21">
+<h3>Parameters<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>filename<span class="classifier">str</span></dt><dd><p>Path to the static file relative to the root of the application.</p>
+</dd>
+</dl>
+</section>
+<section id="id22">
+<h3>Returns<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>redirect</dt><dd><p>Redirects to the equivalent file path within the docs/_static directory.</p>
+</dd>
+</dl>
+</section>
+<section id="id23">
+<h3>Notes<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<p>This endpoint serves as a fallback mechanism for serving static files.
+It ensures consistency in serving static resources regardless of their location within the application structure.</p>
+</section>
+<section id="id24">
+<h3>Examples<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">root_static</span><span class="p">(</span><span class="s1">&#39;image.jpg&#39;</span><span class="p">)</span>
+<span class="go">Redirects to &#39;/docs/_static/image.jpg&#39;.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root_static</span><span class="p">(</span><span class="s1">&#39;styles.css&#39;</span><span class="p">)</span>
+<span class="go">Redirects to &#39;/docs/_static/styles.css&#39;.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="website.views.get_bot_response">
-<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_bot_response</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#get_bot_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_bot_response" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_bot_response</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#get_bot_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_bot_response" title="Link to this definition"></a></dt>
+<dd><p>Handle GET request for bot response.</p>
+<p>Process user input and generate a response from the AI model.</p>
+<section id="id25">
+<h3>Returns<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>dict: A dictionary containing the encoded bot response and avatar video URL.</p>
+</div></blockquote>
+</section>
+<section id="note">
+<h3>Note<a class="headerlink" href="#note" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>This endpoint requires authentication and appropriate permissions.</p>
+</div></blockquote>
+</section>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.views.get_chat">
-<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_chat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chat_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#get_chat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_chat" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_chat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chat_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#get_chat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_chat" title="Link to this definition"></a></dt>
 <dd><p>Get Chat</p>
 <p>Handle GET request to retrieve chat information.
 Retrieve and display information about a specific chat.</p>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h3>
+<section id="id26">
+<h3>Parameters<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>chat_id<span class="classifier">int</span></dt><dd><p>The identifier of the chat to be retrieved.</p>
 </dd>
 </dl>
 </section>
-<section id="id1">
-<h3>Returns<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<section id="id27">
+<h3>Returns<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘chat.html’ template with user
 information, chat data, chat ID, and a
@@ -248,7 +585,7 @@ chat name form.</p>
 </dl>
 </section>
 <section id="raises">
-<h3>Raises<a class="headerlink" href="#raises" title="Link to this heading">¶</a></h3>
+<h3>Raises<a class="headerlink" href="#raises" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Redirect</dt><dd><p>Redirects to the chat page if the current user
 is not authorized to access the specified chat
@@ -256,8 +593,8 @@ or if the chat does not exist.</p>
 </dd>
 </dl>
 </section>
-<section id="id2">
-<h3>Notes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<section id="id28">
+<h3>Notes<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
 <p>This endpoint requires the user to be authenticated
 and have the necessary permissions to access
 the specified chat.</p>
@@ -265,21 +602,52 @@ the specified chat.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="website.views.get_chat_edit">
-<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_chat_edit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/website/views.html#get_chat_edit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_chat_edit" title="Link to this definition">¶</a></dt>
-<dd><p>Get Chat Edit</p>
-<p>Handle GET request for Chat Edit endpoint.
-Edit the name of a chat by the name and chat
+<dt class="sig sig-object py" id="website.views.get_chat_delete">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_chat_delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/website/views.html#get_chat_delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_chat_delete" title="Link to this definition"></a></dt>
+<dd><p>Get Chat Delete</p>
+<p>Handle GET request for Chat Delete endpoint.
+Delete the chat by the chat
 id in the request arguments.</p>
-<section id="id3">
-<h3>Returns<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<section id="id29">
+<h3>Returns<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Any</dt><dd><p>An empty string.</p>
 </dd>
 </dl>
 </section>
-<section id="id4">
-<h3>Raises<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<section id="id30">
+<h3>Raises<a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Redirect</dt><dd><p>Redirects to the index page if the current
+user is not authorized to delete the chat or
+if the chat does not exist.</p>
+</dd>
+</dl>
+</section>
+<section id="id31">
+<h3>Notes<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<p>This endpoint requires the user to be authenticated
+and have the necessary permissions to delete the
+chat.</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.views.get_chat_edit">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_chat_edit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/website/views.html#get_chat_edit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_chat_edit" title="Link to this definition"></a></dt>
+<dd><p>Get Chat Edit</p>
+<p>Handle GET request for Chat Edit endpoint.
+Edit the name of a chat by the name and chat
+id in the request arguments.</p>
+<section id="id32">
+<h3>Returns<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Any</dt><dd><p>An empty string.</p>
+</dd>
+</dl>
+</section>
+<section id="id33">
+<h3>Raises<a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Redirect</dt><dd><p>Redirects to the index page if the current
 user is not authorized to edit the chat or
@@ -287,8 +655,8 @@ if the chat does not exist.</p>
 </dd>
 </dl>
 </section>
-<section id="id5">
-<h3>Notes<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<section id="id34">
+<h3>Notes<a class="headerlink" href="#id34" title="Link to this heading"></a></h3>
 <p>This endpoint requires the user to be authenticated
 and have the necessary permissions to edit the
 chat name.</p>
@@ -297,18 +665,18 @@ chat name.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.views.get_image">
-<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/website/views.html#get_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_image" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/website/views.html#get_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_image" title="Link to this definition"></a></dt>
 <dd><p>Get Image</p>
-<p>Returns the profile image of the current user.</p>
-<section id="id6">
-<h3>Parameters<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p>Returns the profile image of the user.</p>
+<section id="id35">
+<h3>Parameters<a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>username<span class="classifier">str</span></dt><dd><p>The user name to search.</p>
 </dd>
 </dl>
 </section>
-<section id="id7">
-<h3>Returns<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<section id="id36">
+<h3>Returns<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Any</dt><dd><p>User image.</p>
 </dd>
@@ -318,12 +686,12 @@ chat name.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.views.index">
-<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.index" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.index" title="Link to this definition"></a></dt>
 <dd><p>Index</p>
 <p>Handle GET request for the index page.
 Display the index page with user information.</p>
-<section id="id8">
-<h3>Returns<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<section id="id37">
+<h3>Returns<a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘index.html’ template with user information.</p>
 </dd>
@@ -333,19 +701,19 @@ Display the index page with user information.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.views.page_not_found">
-<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">page_not_found</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#page_not_found"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.page_not_found" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">page_not_found</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#page_not_found"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.page_not_found" title="Link to this definition"></a></dt>
 <dd><p>Page Not Found</p>
 <p>Handle 404 errors.
 Render a custom 404 page with an error message.</p>
-<section id="id9">
-<h3>Parameters<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<section id="id38">
+<h3>Parameters<a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>e<span class="classifier">Exception</span></dt><dd><p>The exception object representing the 404 error.</p>
 </dd>
 </dl>
 </section>
-<section id="id10">
-<h3>Returns<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<section id="id39">
+<h3>Returns<a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘404.html’ template with the provided error message.</p>
 </dd>
@@ -354,33 +722,96 @@ Render a custom 404 page with an error message.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="website.views.presentation">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">presentation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#presentation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.presentation" title="Link to this definition"></a></dt>
+<dd><p>Presentation</p>
+<p>Handle GET request for the presentation page.
+Display the presentation page with user information.</p>
+<section id="id40">
+<h3>Returns<a class="headerlink" href="#id40" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>render_template</dt><dd><p>Renders the ‘presentation.html’ template with user information.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="website.views.profile">
-<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">profile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.profile" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">profile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.profile" title="Link to this definition"></a></dt>
 <dd><p>Profile</p>
 <p>Handle GET and POST requests for the profile page.
 Display user profile information and allow users to update their profiles.</p>
-<section id="id11">
-<h3>Returns<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<section id="id41">
+<h3>Returns<a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘profile.html’ template with user information and a profile form.</p>
 </dd>
 </dl>
 </section>
-<section id="id12">
-<h3>Notes<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<section id="id42">
+<h3>Notes<a class="headerlink" href="#id42" title="Link to this heading"></a></h3>
 <p>This endpoint requires the user to be authenticated.</p>
 </section>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="website.views.reviews">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">reviews</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#reviews"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.reviews" title="Link to this definition"></a></dt>
+<dd><p>Review</p>
+<p>Handle GET and POST requests for the review page.
+Display previous user’s reviews and allow logged in users to post reviews.</p>
+<section id="id43">
+<h3>Returns<a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>render_template</dt><dd><p>Renders the ‘review.html’ template with review form.</p>
+</dd>
+</dl>
+</section>
+<section id="id44">
+<h3>Notes<a class="headerlink" href="#id44" title="Link to this heading"></a></h3>
+<p>the post method requires the user to be authenticated.</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.views.root_static">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">root_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#root_static"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.root_static" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.views.save_record">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">save_record</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/website/views.html#save_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.save_record" title="Link to this definition"></a></dt>
+<dd><p>Audio File Transcription Endpoint</p>
+<p>This endpoint accepts audio file uploads and transcribes them to text.
+The audio file should be sent as a multipart form data with key ‘file’.
+Only allowed audio file formats (as determined by allowed_file()) will be processed.
+The audio data is processed in memory without saving to disk.</p>
+<section id="id45">
+<h3>Returns<a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>tuple</dt><dd><p>A tuple containing two elements:
+- First element: Either a JSON response with transcribed text or an error message string
+- Second element: HTTP status code (200 for success, 400 for errors)</p>
+</dd>
+</dl>
+</section>
+<section id="example-response">
+<h3>Example Response<a class="headerlink" href="#example-response" title="Link to this heading"></a></h3>
+<p>Success: ({“text”: “transcribed text content”}, 200)
+Error: (“No file part”, 400) or (“Invalid file type”, 400)</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="website.views.slideshow">
-<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">slideshow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_with</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#slideshow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.slideshow" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">slideshow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_with</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/views.html#slideshow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.slideshow" title="Link to this definition"></a></dt>
 <dd><p>Slideshow</p>
 <p>Using this route (<cite>/slideshow</cite>) will return a slideshow of images located in the <cite>static/image</cite> folder.
 If you want to choose what all file names should start with, use <cite>/slideshow/&lt;START_WITH&gt;</cite>.
 The start with parameter can also be passed as a list separated by semicolon (<cite>;</cite>).</p>
-<section id="id13">
-<h3>Parameters<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<section id="id46">
+<h3>Parameters<a class="headerlink" href="#id46" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>start_with<span class="classifier">str, optional</span></dt><dd><p>A string or list of strings that the desired
 images file name should start with.
@@ -389,8 +820,8 @@ located in the <cite>static/image</cite> folder, by default “”.</p>
 </dd>
 </dl>
 </section>
-<section id="id14">
-<h3>Returns<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<section id="id47">
+<h3>Returns<a class="headerlink" href="#id47" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Response</dt><dd><p>Response of the desired images.</p>
 </dd>
@@ -400,151 +831,263 @@ located in the <cite>static/image</cite> folder, by default “”.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.views.text2speech">
-<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">text2speech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#text2speech"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.text2speech" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">text2speech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/views.html#text2speech"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.text2speech" title="Link to this definition"></a></dt>
+<dd><p>Text to Speech Converter</p>
+<p>Convert text to speech and play it.
+This route handles text-to-speech conversion and playback.
+It uses the speak function to convert the provided text into speech.</p>
+<section id="id48">
+<h3>Parameters<a class="headerlink" href="#id48" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>text<span class="classifier">str, optional</span></dt><dd><p>The text to be converted to speech. If omitted, an empty string is used.</p>
+</dd>
+</dl>
+</section>
+<section id="id49">
+<h3>Returns<a class="headerlink" href="#id49" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Response</dt><dd><p>An empty Flask Response object.</p>
+</dd>
+</dl>
+</section>
+<section id="id50">
+<h3>Notes<a class="headerlink" href="#id50" title="Link to this heading"></a></h3>
+<p>This endpoint does not require user authentication (check_session=False).
+It silently fails and returns an empty response if any error occurs during the speech synthesis process.</p>
+</section>
+<section id="id51">
+<h3>Examples<a class="headerlink" href="#id51" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text2speech</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+<span class="go">Plays the spoken version of &quot;Hello, world!&quot;.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text2speech</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="go">Does nothing, as no text is provided.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.views.transcribe_audio">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">transcribe_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BytesIO</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/website/views.html#transcribe_audio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.transcribe_audio" title="Link to this definition"></a></dt>
+<dd><p>Transcribe Audio to Text using OpenAI’s Whisper Model</p>
+<p>This function takes an audio file in bytes format and transcribes it to text
+using OpenAI’s Whisper ASR (Automatic Speech Recognition) model.
+The file pointer is reset to the start before processing to ensure
+complete file reading.</p>
+<section id="id52">
+<h3>Parameters<a class="headerlink" href="#id52" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>file_bytes<span class="classifier">io.BytesIO</span></dt><dd><p>A BytesIO object containing the audio data to be transcribed.
+The audio should be in a format supported by the Whisper model
+(e.g., mp3, wav, m4a, etc.).</p>
+</dd>
+</dl>
+</section>
+<section id="id53">
+<h3>Returns<a class="headerlink" href="#id53" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>str</dt><dd><p>The transcribed text from the audio file.
+Returns an empty string if transcription fails.</p>
+</dd>
+</dl>
+</section>
+<section id="id54">
+<h3>Notes<a class="headerlink" href="#id54" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Uses OpenAI’s ‘whisper-1’ model for transcription</p></li>
+<li><p>Currently set to transcribe English language content only</p></li>
+<li><p>Requires valid OpenAI API credentials in the client object</p></li>
+</ul>
+</section>
+<section id="id55">
+<h3>Raises<a class="headerlink" href="#id55" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Exception</dt><dd><p>May raise exceptions related to API calls, invalid audio format,
+or authentication issues with the OpenAI client.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.views.user_image">
+<span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">user_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#user_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.user_image" title="Link to this definition"></a></dt>
+<dd><p>Get Image</p>
+<p>Returns the profile image of the current user.</p>
+<section id="id56">
+<h3>Parameters<a class="headerlink" href="#id56" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>filename<span class="classifier">str</span></dt><dd><p>The file name to search.</p>
+</dd>
+</dl>
+</section>
+<section id="id57">
+<h3>Returns<a class="headerlink" href="#id57" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Any</dt><dd><p>filename image.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
 
 </section>
 <section id="module-website.forms">
-<span id="website-forms-module"></span><h2>website.forms module<a class="headerlink" href="#module-website.forms" title="Link to this heading">¶</a></h2>
+<span id="website-forms-module"></span><h2>website.forms module<a class="headerlink" href="#module-website.forms" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="website.forms.ChatEdit">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.forms.</span></span><span class="sig-name descname"><span class="pre">ChatEdit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/forms.html#ChatEdit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.forms.ChatEdit" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.forms.</span></span><span class="sig-name descname"><span class="pre">ChatEdit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/forms.html#ChatEdit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.forms.ChatEdit" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FlaskForm</span></code></p>
 <p>Profile form.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.ChatEdit.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Name',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.ChatEdit.name" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Name',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.ChatEdit.name" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="website.forms.LoginForm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.forms.</span></span><span class="sig-name descname"><span class="pre">LoginForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/forms.html#LoginForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.forms.LoginForm" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.forms.</span></span><span class="sig-name descname"><span class="pre">LoginForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/forms.html#LoginForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.forms.LoginForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FlaskForm</span></code></p>
 <p>Login form.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.LoginForm.password">
-<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(PasswordField,</span> <span class="pre">('Password',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.LoginForm.password" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(PasswordField,</span> <span class="pre">('Password',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.LoginForm.password" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.LoginForm.submit">
-<span class="sig-name descname"><span class="pre">submit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SubmitField,</span> <span class="pre">('Login',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#website.forms.LoginForm.submit" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">submit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SubmitField,</span> <span class="pre">('Login',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#website.forms.LoginForm.submit" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.LoginForm.token">
-<span class="sig-name descname"><span class="pre">token</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Token',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;],</span> <span class="pre">'render_kw':</span> <span class="pre">{'autocomplete':</span> <span class="pre">'off'}})&gt;</span></em><a class="headerlink" href="#website.forms.LoginForm.token" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">token</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Token',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;],</span> <span class="pre">'render_kw':</span> <span class="pre">{'autocomplete':</span> <span class="pre">'off'}})&gt;</span></em><a class="headerlink" href="#website.forms.LoginForm.token" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.LoginForm.username">
-<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Username',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.LoginForm.username" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Username',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.LoginForm.username" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="website.forms.ProfileForm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.forms.</span></span><span class="sig-name descname"><span class="pre">ProfileForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/forms.html#ProfileForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.forms.ProfileForm" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.forms.</span></span><span class="sig-name descname"><span class="pre">ProfileForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/forms.html#ProfileForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.forms.ProfileForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FlaskForm</span></code></p>
 <p>Profile form.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.ProfileForm.image">
-<span class="sig-name descname"><span class="pre">image</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(FileField,</span> <span class="pre">('Photo',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;flask_wtf.file.FileAllowed</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.ProfileForm.image" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">image</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(FileField,</span> <span class="pre">('Photo',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;flask_wtf.file.FileAllowed</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.ProfileForm.image" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.ProfileForm.lastname">
-<span class="sig-name descname"><span class="pre">lastname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Lastname',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.ProfileForm.lastname" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">lastname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Lastname',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.ProfileForm.lastname" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.ProfileForm.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Name',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.ProfileForm.name" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Name',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.ProfileForm.name" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.ProfileForm.submit">
-<span class="sig-name descname"><span class="pre">submit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SubmitField,</span> <span class="pre">('Save',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#website.forms.ProfileForm.submit" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">submit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SubmitField,</span> <span class="pre">('Save',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#website.forms.ProfileForm.submit" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="website.forms.RegisterForm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.forms.</span></span><span class="sig-name descname"><span class="pre">RegisterForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/forms.html#RegisterForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.forms.RegisterForm" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.forms.</span></span><span class="sig-name descname"><span class="pre">RegisterForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/forms.html#RegisterForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.forms.RegisterForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FlaskForm</span></code></p>
 <p>Registration form.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.RegisterForm.image">
-<span class="sig-name descname"><span class="pre">image</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(FileField,</span> <span class="pre">('Photo',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;flask_wtf.file.FileAllowed</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.image" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">image</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(FileField,</span> <span class="pre">('Photo',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;flask_wtf.file.FileAllowed</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.image" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.RegisterForm.lastname">
-<span class="sig-name descname"><span class="pre">lastname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Lastname',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.lastname" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">lastname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Lastname',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.lastname" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.RegisterForm.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Name',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.name" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Name',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.name" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.RegisterForm.password">
-<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(PasswordField,</span> <span class="pre">('Password',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.password" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(PasswordField,</span> <span class="pre">('Password',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.password" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.RegisterForm.password_again">
-<span class="sig-name descname"><span class="pre">password_again</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(PasswordField,</span> <span class="pre">('Password</span> <span class="pre">again',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.EqualTo</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.password_again" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">password_again</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(PasswordField,</span> <span class="pre">('Password</span> <span class="pre">again',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.EqualTo</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.password_again" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.RegisterForm.submit">
-<span class="sig-name descname"><span class="pre">submit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SubmitField,</span> <span class="pre">('Register',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.submit" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">submit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SubmitField,</span> <span class="pre">('Register',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.submit" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.forms.RegisterForm.username">
-<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Username',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.username" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Username',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.InputRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.RegisterForm.username" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="website.forms.ReviewForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.forms.</span></span><span class="sig-name descname"><span class="pre">ReviewForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/forms.html#ReviewForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.forms.ReviewForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FlaskForm</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.forms.ReviewForm.anonymous">
+<span class="sig-name descname"><span class="pre">anonymous</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(BooleanField,</span> <span class="pre">('Publish</span> <span class="pre">Anonymously',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#website.forms.ReviewForm.anonymous" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.forms.ReviewForm.content">
+<span class="sig-name descname"><span class="pre">content</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(TextAreaField,</span> <span class="pre">('Review',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.DataRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.ReviewForm.content" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.forms.ReviewForm.stars">
+<span class="sig-name descname"><span class="pre">stars</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(RadioField,</span> <span class="pre">('Rating',),</span> <span class="pre">{'choices':</span> <span class="pre">[(1,</span> <span class="pre">'1</span> <span class="pre">Star'),</span> <span class="pre">(2,</span> <span class="pre">'2</span> <span class="pre">Stars'),</span> <span class="pre">(3,</span> <span class="pre">'3</span> <span class="pre">Stars'),</span> <span class="pre">(4,</span> <span class="pre">'4</span> <span class="pre">Stars'),</span> <span class="pre">(5,</span> <span class="pre">'5</span> <span class="pre">Stars')],</span> <span class="pre">'coerce':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;})&gt;</span></em><a class="headerlink" href="#website.forms.ReviewForm.stars" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.forms.ReviewForm.submit">
+<span class="sig-name descname"><span class="pre">submit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SubmitField,</span> <span class="pre">('Submit</span> <span class="pre">Review',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#website.forms.ReviewForm.submit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.forms.ReviewForm.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(StringField,</span> <span class="pre">('Title',),</span> <span class="pre">{'validators':</span> <span class="pre">[&lt;wtforms.validators.DataRequired</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;wtforms.validators.Length</span> <span class="pre">object&gt;]})&gt;</span></em><a class="headerlink" href="#website.forms.ReviewForm.title" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </section>
 <section id="module-website.models">
-<span id="website-models-module"></span><h2>website.models module<a class="headerlink" href="#module-website.models" title="Link to this heading">¶</a></h2>
+<span id="website-models-module"></span><h2>website.models module<a class="headerlink" href="#module-website.models" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="website.models.Chat">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.models.</span></span><span class="sig-name descname"><span class="pre">Chat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#Chat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.Chat" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="website.models.Admin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.models.</span></span><span class="sig-name descname"><span class="pre">Admin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#Admin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.Admin" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>Chat model.</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="website.models.Chat.chat">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chat</span></span><a class="headerlink" href="#website.models.Chat.chat" title="Link to this definition">¶</a></dt>
+<p>Admin model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Admin.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#website.models.Admin.id" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="website.models.Chat.chat_json">
-<span class="sig-name descname"><span class="pre">chat_json</span></span><a class="headerlink" href="#website.models.Chat.chat_json" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="website.models.Chat.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#website.models.Chat.id" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="website.models.Chat.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#website.models.Chat.name" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="website.models.Chat.query">
-<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#website.models.Chat.query" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="website.models.Admin.query">
+<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#website.models.Admin.query" title="Link to this definition"></a></dt>
 <dd><p>A SQLAlchemy query for a model. Equivalent to <code class="docutils literal notranslate"><span class="pre">db.session.query(Model)</span></code>. Can be
 customized per-model by overriding <code class="xref py py-attr docutils literal notranslate"><span class="pre">query_class</span></code>.</p>
 <div class="admonition warning">
@@ -555,137 +1098,267 @@ customized per-model by overriding <code class="xref py py-attr docutils literal
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Admin.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#website.models.Admin.user_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="website.models.Chat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.models.</span></span><span class="sig-name descname"><span class="pre">Chat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#Chat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.Chat" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Chat model.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="website.models.Chat.chat">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chat</span></span><a class="headerlink" href="#website.models.Chat.chat" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Chat.chat_json">
+<span class="sig-name descname"><span class="pre">chat_json</span></span><a class="headerlink" href="#website.models.Chat.chat_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Chat.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#website.models.Chat.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="website.models.Chat.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#website.models.Chat.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="website.models.Chat.user_id">
-<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#website.models.Chat.user_id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#website.models.Chat.user_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="website.models.Reviews">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.models.</span></span><span class="sig-name descname"><span class="pre">Reviews</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#Reviews"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.Reviews" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Reviews model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Reviews.content">
+<span class="sig-name descname"><span class="pre">content</span></span><a class="headerlink" href="#website.models.Reviews.content" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Reviews.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#website.models.Reviews.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Reviews.query">
+<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#website.models.Reviews.query" title="Link to this definition"></a></dt>
+<dd><p>A SQLAlchemy query for a model. Equivalent to <code class="docutils literal notranslate"><span class="pre">db.session.query(Model)</span></code>. Can be
+customized per-model by overriding <code class="xref py py-attr docutils literal notranslate"><span class="pre">query_class</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The query interface is considered legacy in SQLAlchemy. Prefer using
+<code class="docutils literal notranslate"><span class="pre">session.execute(select())</span></code> instead.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Reviews.stars">
+<span class="sig-name descname"><span class="pre">stars</span></span><a class="headerlink" href="#website.models.Reviews.stars" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Reviews.submitted_at">
+<span class="sig-name descname"><span class="pre">submitted_at</span></span><a class="headerlink" href="#website.models.Reviews.submitted_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Reviews.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#website.models.Reviews.title" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Reviews.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#website.models.Reviews.user_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="website.models.Status">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.models.</span></span><span class="sig-name descname"><span class="pre">Status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#Status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.Status" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Status model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Status.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#website.models.Status.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Status.last_deactivate_date">
+<span class="sig-name descname"><span class="pre">last_deactivate_date</span></span><a class="headerlink" href="#website.models.Status.last_deactivate_date" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Status.register_date">
+<span class="sig-name descname"><span class="pre">register_date</span></span><a class="headerlink" href="#website.models.Status.register_date" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Status.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#website.models.Status.status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="website.models.Status.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#website.models.Status.user_id" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="website.models.User">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#User"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.User" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#User"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.User" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
 <p>User model.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.models.User.chats">
-<span class="sig-name descname"><span class="pre">chats</span></span><a class="headerlink" href="#website.models.User.chats" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">chats</span></span><a class="headerlink" href="#website.models.User.chats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="website.models.User.full_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_name</span></span><a class="headerlink" href="#website.models.User.full_name" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="website.models.User.get_totp_uri">
-<span class="sig-name descname"><span class="pre">get_totp_uri</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#User.get_totp_uri"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.User.get_totp_uri" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_totp_uri</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#User.get_totp_uri"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.User.get_totp_uri" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.models.User.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#website.models.User.id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#website.models.User.id" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.models.User.image_data">
-<span class="sig-name descname"><span class="pre">image_data</span></span><a class="headerlink" href="#website.models.User.image_data" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">image_data</span></span><a class="headerlink" href="#website.models.User.image_data" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.models.User.image_filename">
-<span class="sig-name descname"><span class="pre">image_filename</span></span><a class="headerlink" href="#website.models.User.image_filename" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">image_filename</span></span><a class="headerlink" href="#website.models.User.image_filename" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="website.models.User.is_admin">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_admin</span></span><a class="headerlink" href="#website.models.User.is_admin" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.models.User.lastname">
-<span class="sig-name descname"><span class="pre">lastname</span></span><a class="headerlink" href="#website.models.User.lastname" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">lastname</span></span><a class="headerlink" href="#website.models.User.lastname" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.models.User.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#website.models.User.name" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#website.models.User.name" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.models.User.otp_secret">
-<span class="sig-name descname"><span class="pre">otp_secret</span></span><a class="headerlink" href="#website.models.User.otp_secret" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">otp_secret</span></span><a class="headerlink" href="#website.models.User.otp_secret" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="website.models.User.password">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">password</span></span><a class="headerlink" href="#website.models.User.password" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">password</span></span><a class="headerlink" href="#website.models.User.password" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.models.User.password_hash">
-<span class="sig-name descname"><span class="pre">password_hash</span></span><a class="headerlink" href="#website.models.User.password_hash" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">password_hash</span></span><a class="headerlink" href="#website.models.User.password_hash" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="website.models.User.query">
-<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">t.ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Query</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#website.models.User.query" title="Link to this definition">¶</a></dt>
-<dd><p>A SQLAlchemy query for a model. Equivalent to <code class="docutils literal notranslate"><span class="pre">db.session.query(Model)</span></code>. Can be
-customized per-model by overriding <code class="xref py py-attr docutils literal notranslate"><span class="pre">query_class</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The query interface is considered legacy in SQLAlchemy. Prefer using
-<code class="docutils literal notranslate"><span class="pre">session.execute(select())</span></code> instead.</p>
-</div>
-</dd></dl>
+<dt class="sig sig-object py" id="website.models.User.reviews">
+<span class="sig-name descname"><span class="pre">reviews</span></span><a class="headerlink" href="#website.models.User.reviews" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="website.models.User.status">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#website.models.User.status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="website.models.User.username">
-<span class="sig-name descname"><span class="pre">username</span></span><a class="headerlink" href="#website.models.User.username" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">username</span></span><a class="headerlink" href="#website.models.User.username" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="website.models.User.verify_password">
-<span class="sig-name descname"><span class="pre">verify_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#User.verify_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.User.verify_password" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">verify_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#User.verify_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.User.verify_password" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="website.models.User.verify_totp">
-<span class="sig-name descname"><span class="pre">verify_totp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#User.verify_totp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.User.verify_totp" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">verify_totp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/models.html#User.verify_totp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.models.User.verify_totp" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </section>
-<section id="module-website.training">
-<span id="website-training-module"></span><h2>website.training module<a class="headerlink" href="#module-website.training" title="Link to this heading">¶</a></h2>
-</section>
 <section id="module-website">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-website" title="Link to this heading">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-website" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="website.create_admin">
+<span class="sig-prename descclassname"><span class="pre">website.</span></span><span class="sig-name descname"><span class="pre">create_admin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website.html#create_admin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.create_admin" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="website.create_app">
-<span class="sig-prename descclassname"><span class="pre">website.</span></span><span class="sig-name descname"><span class="pre">create_app</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website.html#create_app"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.create_app" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.</span></span><span class="sig-name descname"><span class="pre">create_app</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website.html#create_app"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.create_app" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.create_database">
-<span class="sig-prename descclassname"><span class="pre">website.</span></span><span class="sig-name descname"><span class="pre">create_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website.html#create_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.create_database" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.</span></span><span class="sig-name descname"><span class="pre">create_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website.html#create_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.create_database" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </section>
 </section>
 
 
+           </div>
           </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-  <li class="prev">
-    <a href="modules.html"
-       title="previous chapter">← ShrinkGPT.github.io</a>
-  </li>
-  <li class="next">
-    <a href="website.utils.html"
-       title="next chapter">website.utils package →</a>
-  </li>
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2024, Ori Tsemach, Eldar Garrett, Sahar Amar.
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 7.2.6 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
-</div>
-            </div>
-          </div>
-      </page>
-    </div></div>
-    
-    
-  </body>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="ShrinkGPT.github.io" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="website.utils.html" class="btn btn-neutral float-right" title="website.utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Ori Tsemach, Eldar Garrett, Sahar Amar.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

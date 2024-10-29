@@ -13,7 +13,7 @@ class Text2Speech:
     
     Class for speech the provided text.
     
-    Parameters:
+    Parameters
     ----------
     gender: Literal["male", "female"], default "female"
         The gender of the person speaks.

@@ -1,9 +1,6 @@
 website package
 ===============
 
-Submodules
-----------
-
 website.auth module
 -------------------
 
@@ -32,14 +29,6 @@ website.models module
 ---------------------
 
 .. automodule:: website.models
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-website.training module
------------------------
-
-.. automodule:: website.training
    :members:
    :undoc-members:
    :show-inheritance:

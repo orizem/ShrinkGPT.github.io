@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -5,18 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>website.views &mdash; Shrink.io 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -74,10 +72,15 @@
   <h1>Source code for website.views</h1><div class="highlight"><pre>
 <span></span><span class="c1"># views.py</span>
 
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">pytz</span>
+<span class="kn">import</span> <span class="nn">threading</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">current_user</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">realpath</span><span class="p">,</span> <span class="n">commonpath</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Blueprint</span><span class="p">,</span>
     <span class="n">Response</span><span class="p">,</span>
@@ -86,22 +89,43 @@
     <span class="n">url_for</span><span class="p">,</span>
     <span class="n">send_file</span><span class="p">,</span>
     <span class="n">request</span><span class="p">,</span>
+    <span class="n">flash</span><span class="p">,</span>
+    <span class="n">jsonify</span><span class="p">,</span>
+    <span class="n">send_from_directory</span><span class="p">,</span>
+    <span class="n">abort</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="c1"># LOCAL IMPORTS</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Chat</span>
-<span class="kn">from</span> <span class="nn">.utils.chatbot</span> <span class="kn">import</span> <span class="n">ChatBot</span>
-<span class="kn">from</span> <span class="nn">.utils.text2speech</span> <span class="kn">import</span> <span class="n">Text2Speech</span>
+<span class="kn">from</span> <span class="nn">.utils.text2speech</span> <span class="kn">import</span> <span class="n">speak</span>
 <span class="kn">from</span> <span class="nn">.utils.utils</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">generate_slide_show</span><span class="p">,</span>
     <span class="n">safe_send_default_image</span><span class="p">,</span>
     <span class="n">get_current_user</span><span class="p">,</span>
     <span class="n">restricted_route_decorator</span><span class="p">,</span>
     <span class="n">html_encode</span><span class="p">,</span>
+    <span class="n">get_avatar_video</span><span class="p">,</span>
+    <span class="n">allowed_file</span><span class="p">,</span>
+    <span class="n">get_initial_chat_state_response</span><span class="p">,</span>
+    <span class="n">QUESTIONS</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.utils.gpt</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">format_chat_history_for_gpt</span><span class="p">,</span>
+    <span class="n">GPT_MESSAGES</span><span class="p">,</span>
+    <span class="n">client</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="c1"># Define a thread-local storage for each request/thread</span>
+<span class="n">thread_local</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">local</span><span class="p">()</span>
+
 <span class="n">views</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s2">&quot;views&quot;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
-<span class="n">chat_bot</span> <span class="o">=</span> <span class="n">ChatBot</span><span class="p">()</span>
+
+<span class="c1"># Define the absolute path to your Sphinx HTML docs</span>
+<span class="n">DOCS_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;docs/_build/html&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">STATIC_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DOCS_PATH</span><span class="p">,</span> <span class="s2">&quot;_static&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># ROUTES</span>
@@ -119,7 +143,51 @@
 <span class="sd">    render_template</span>
 <span class="sd">        Renders the &#39;index.html&#39; template with user information.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;index.html&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">current_user</span><span class="p">)</span></div>
+    <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Reviews</span>
+
+    <span class="c1"># Order reviews by submitted_at in descending order</span>
+    <span class="n">reviews</span> <span class="o">=</span> <span class="n">Reviews</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Reviews</span><span class="o">.</span><span class="n">submitted_at</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="n">jerusalem_tz</span> <span class="o">=</span> <span class="n">pytz</span><span class="o">.</span><span class="n">timezone</span><span class="p">(</span><span class="s2">&quot;Asia/Jerusalem&quot;</span><span class="p">)</span>
+    <span class="n">local_timezone</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">jerusalem_tz</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">reviews</span><span class="p">:</span>
+        <span class="n">review</span><span class="o">.</span><span class="n">submitted_at</span> <span class="o">=</span> <span class="n">review</span><span class="o">.</span><span class="n">submitted_at</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">local_timezone</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">)</span>
+
+    <span class="n">table_data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;submitted_at&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">review</span><span class="o">.</span><span class="n">submitted_at</span><span class="p">),</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="k">if</span> <span class="n">review</span><span class="o">.</span><span class="n">user_id</span> <span class="o">!=</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;Anonymous&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+            <span class="s2">&quot;stars&quot;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">stars</span><span class="p">,</span>
+            <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">reviews</span>
+    <span class="p">]</span>
+
+    <span class="n">table_data_json</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">table_data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;index.html&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">current_user</span><span class="p">,</span> <span class="n">reviews</span><span class="o">=</span><span class="n">table_data_json</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ROUTES</span>
+<div class="viewcode-block" id="presentation">
+<a class="viewcode-back" href="../../website.html#website.views.presentation">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/presentation&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">presentation</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Presentation</span>
+
+<span class="sd">    Handle GET request for the presentation page.</span>
+<span class="sd">    Display the presentation page with user information.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    render_template</span>
+<span class="sd">        Renders the &#39;presentation.html&#39; template with user information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;presentation.html&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">current_user</span><span class="p">)</span></div>
 
 
 
@@ -270,7 +338,6 @@
         <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.chat&quot;</span><span class="p">))</span>
 
     <span class="n">chat_name_form</span> <span class="o">=</span> <span class="n">ChatEdit</span><span class="p">()</span>
-
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
         <span class="s2">&quot;chat.html&quot;</span><span class="p">,</span>
         <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
@@ -286,6 +353,18 @@
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/get&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;get&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_bot_response</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle GET request for bot response.</span>
+
+<span class="sd">    Process user input and generate a response from the AI model.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        dict: A dictionary containing the encoded bot response and avatar video URL.</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">        This endpoint requires authentication and appropriate permissions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">db</span>
 
     <span class="n">user</span> <span class="o">=</span> <span class="n">get_current_user</span><span class="p">()</span>
@@ -297,11 +376,31 @@
 
     <span class="k">if</span> <span class="n">chat_id</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="n">current_chat</span> <span class="o">=</span> <span class="n">Chat</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">chat_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">welcome_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">welcome_response</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;bot&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">welcome_text</span><span class="p">,</span>
+            <span class="s2">&quot;date_time&quot;</span><span class="p">:</span> <span class="n">date_time</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">new_chat</span> <span class="o">=</span> <span class="n">Chat</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Chat_</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">chats</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">chat_json</span><span class="o">=</span><span class="n">dumps</span><span class="p">([</span><span class="n">welcome_response</span><span class="p">]),</span>
+            <span class="n">user_id</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_chat</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">current_chat</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">chats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">fisrt_time</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">welcome_text</span> <span class="o">=</span> <span class="n">QUESTIONS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">full_name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">QUESTIONS</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">welcome_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Hi </span><span class="si">{</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="w"> </span><span class="si">}</span><span class="s2">, welcome to Shrink.io! Go ahead and send me a message.&quot;</span>
+
             <span class="n">welcome_response</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;bot&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Hi </span><span class="si">{</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="w"> </span><span class="si">}</span><span class="s2">, welcome to Shrink.io! Go ahead and send me a message.&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">welcome_text</span><span class="p">,</span>
                 <span class="s2">&quot;date_time&quot;</span><span class="p">:</span> <span class="n">date_time</span><span class="p">,</span>
             <span class="p">}</span>
             <span class="n">new_chat</span> <span class="o">=</span> <span class="n">Chat</span><span class="p">(</span>
@@ -314,12 +413,24 @@
         <span class="n">current_chat</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">chats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="n">existing_messages</span> <span class="o">=</span> <span class="n">current_chat</span><span class="o">.</span><span class="n">chat</span>
-
     <span class="c1"># TODO: Check for the real date time parameter for user (currently using the bot&#39;s time)</span>
     <span class="n">new_message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">user_msg</span><span class="p">,</span> <span class="s2">&quot;date_time&quot;</span><span class="p">:</span> <span class="n">date_time</span><span class="p">}</span>
     <span class="n">existing_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_message</span><span class="p">)</span>
 
-    <span class="n">bot_response</span> <span class="o">=</span> <span class="n">chat_bot</span><span class="o">.</span><span class="n">chatbot_response</span><span class="p">(</span><span class="n">user_msg</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">chat_history</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">format_chat_history_for_gpt</span><span class="p">(</span><span class="n">__chat</span><span class="p">)</span> <span class="k">for</span> <span class="n">__chat</span> <span class="ow">in</span> <span class="n">existing_messages</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Prepare messages for OpenAI API</span>
+        <span class="n">messages</span> <span class="o">=</span> <span class="n">GPT_MESSAGES</span> <span class="o">+</span> <span class="n">chat_history</span>
+
+        <span class="c1"># Interact with OpenAI GPT-4</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span> <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">)</span>
+        <span class="n">bot_response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bot_response</span> <span class="o">=</span> <span class="n">get_initial_chat_state_response</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+
     <span class="n">new_message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;bot&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">bot_response</span><span class="p">,</span> <span class="s2">&quot;date_time&quot;</span><span class="p">:</span> <span class="n">date_time</span><span class="p">}</span>
     <span class="n">existing_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_message</span><span class="p">)</span>
 
@@ -328,7 +439,23 @@
     <span class="c1"># Update chat history</span>
     <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current_chat</span><span class="p">)</span>
     <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">html_encode</span><span class="p">(</span><span class="n">bot_response</span><span class="p">)</span></div>
+
+    <span class="n">encoded_bot_response</span> <span class="o">=</span> <span class="n">html_encode</span><span class="p">(</span><span class="n">bot_response</span><span class="p">)</span>
+
+    <span class="c1"># Generate response avatar stream</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">avatar_video_url</span> <span class="o">=</span> <span class="n">get_avatar_video</span><span class="p">(</span><span class="n">bot_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">avatar_video_url</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">avatar_video_url</span><span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;encoded_bot_response&quot;</span><span class="p">:</span> <span class="n">encoded_bot_response</span><span class="p">,</span>
+        <span class="s2">&quot;avatar_video_url&quot;</span><span class="p">:</span> <span class="n">avatar_video_url</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">response</span></div>
 
 
 
@@ -380,13 +507,59 @@
 
 
 
+<div class="viewcode-block" id="get_chat_delete">
+<a class="viewcode-back" href="../../website.html#website.views.get_chat_delete">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/chat-delete&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;chat-delete&quot;</span><span class="p">)</span>
+<span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_chat_delete</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get Chat Delete</span>
+
+<span class="sd">    Handle GET request for Chat Delete endpoint.</span>
+<span class="sd">    Delete the chat by the chat</span>
+<span class="sd">    id in the request arguments.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Any</span>
+<span class="sd">        An empty string.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    Redirect</span>
+<span class="sd">        Redirects to the index page if the current</span>
+<span class="sd">        user is not authorized to delete the chat or</span>
+<span class="sd">        if the chat does not exist.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint requires the user to be authenticated</span>
+<span class="sd">    and have the necessary permissions to delete the</span>
+<span class="sd">    chat.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">db</span>
+
+    <span class="n">user</span> <span class="o">=</span> <span class="n">get_current_user</span><span class="p">()</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Prevent from other users to access</span>
+    <span class="n">current_chat</span> <span class="o">=</span> <span class="n">Chat</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">current_chat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.index&quot;</span><span class="p">))</span>
+
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">current_chat</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+
 <div class="viewcode-block" id="get_image">
 <a class="viewcode-back" href="../../website.html#website.views.get_image">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/get_image/&lt;string:username&gt;&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get Image</span>
 
-<span class="sd">    Returns the profile image of the current user.</span>
+<span class="sd">    Returns the profile image of the user.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -398,15 +571,20 @@
 <span class="sd">    Any</span>
 <span class="sd">        User image.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Make sure the user sent the request correctly</span>
-    <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">username</span> <span class="o">!=</span> <span class="n">username</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.index&quot;</span><span class="p">))</span>
+    <span class="c1"># Make sure the user sent the request correctly, or to reviews</span>
+    <span class="n">referrer</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">referrer</span>
+
+    <span class="k">if</span> <span class="n">referrer</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">referrer</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;review&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">username</span> <span class="o">!=</span> <span class="n">username</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.index&quot;</span><span class="p">))</span>
 
     <span class="c1"># Prevent from other users to access</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">image_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">send_file</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">image_data</span><span class="p">),</span> <span class="n">mimetype</span><span class="o">=</span><span class="s2">&quot;image/jpeg&quot;</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="p">(</span><span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">image_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">image_path</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">image_data</span>
+        <span class="n">base_path</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">send_file</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">mimetype</span><span class="o">=</span><span class="s2">&quot;image/jpeg&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">safe_send_default_image</span><span class="p">()</span></div>
 
 
@@ -415,7 +593,7 @@
 <a class="viewcode-back" href="../../website.html#website.views.slideshow">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/slideshow/&quot;</span><span class="p">)</span>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/slideshow/&lt;string:start_with&gt;&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">slideshow</span><span class="p">(</span><span class="n">start_with</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">slideshow</span><span class="p">(</span><span class="n">start_with</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Slideshow</span>
 
 <span class="sd">    Using this route (`/slideshow`) will return a slideshow of images located in the `static/image` folder.</span>
@@ -429,7 +607,7 @@
 <span class="sd">        images file name should start with.</span>
 <span class="sd">        Using only /slideshow will return all images</span>
 <span class="sd">        located in the `static/image` folder, by default &quot;&quot;.</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Response</span>
@@ -452,13 +630,385 @@
 <a class="viewcode-back" href="../../website.html#website.views.text2speech">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/text2speech/&lt;string:text&gt;&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;text2speech&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">text2speech</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">text2speech</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Text to Speech Converter</span>
+
+<span class="sd">    Convert text to speech and play it.</span>
+<span class="sd">    This route handles text-to-speech conversion and playback.</span>
+<span class="sd">    It uses the speak function to convert the provided text into speech.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str, optional</span>
+<span class="sd">        The text to be converted to speech. If omitted, an empty string is used.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Response</span>
+<span class="sd">        An empty Flask Response object.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint does not require user authentication (check_session=False).</span>
+<span class="sd">    It silently fails and returns an empty response if any error occurs during the speech synthesis process.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; text2speech(&quot;Hello, world!&quot;)</span>
+<span class="sd">    Plays the spoken version of &quot;Hello, world!&quot;.</span>
+<span class="sd">    &gt;&gt;&gt; text2speech(&quot;&quot;)</span>
+<span class="sd">    Does nothing, as no text is provided.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">speech</span> <span class="o">=</span> <span class="n">Text2Speech</span><span class="p">()</span>
-        <span class="n">speech</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">speak</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">Response</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="reviews">
+<a class="viewcode-back" href="../../website.html#website.views.reviews">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/review&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">reviews</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Review</span>
+
+<span class="sd">    Handle GET and POST requests for the review page.</span>
+<span class="sd">    Display previous user&#39;s reviews and allow logged in users to post reviews.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    render_template</span>
+<span class="sd">        Renders the &#39;review.html&#39; template with review form.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    the post method requires the user to be authenticated.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">ReviewForm</span>
+    <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">Reviews</span>
+
+    <span class="n">review_form</span> <span class="o">=</span> <span class="n">ReviewForm</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">review_form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">()</span> <span class="ow">and</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+        <span class="n">review</span> <span class="o">=</span> <span class="n">Reviews</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">review_form</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;`&quot;</span><span class="p">,</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">),</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">review_form</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;`&quot;</span><span class="p">,</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">),</span>
+            <span class="n">stars</span><span class="o">=</span><span class="n">review_form</span><span class="o">.</span><span class="n">stars</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+            <span class="n">user_id</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">review_form</span><span class="o">.</span><span class="n">anonymous</span><span class="o">.</span><span class="n">data</span> <span class="k">else</span> <span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">review</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Your review has been posted!&quot;</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.reviews&quot;</span><span class="p">))</span>
+
+    <span class="c1"># Order reviews by submitted_at in descending order</span>
+    <span class="n">reviews</span> <span class="o">=</span> <span class="n">Reviews</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Reviews</span><span class="o">.</span><span class="n">submitted_at</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="n">jerusalem_tz</span> <span class="o">=</span> <span class="n">pytz</span><span class="o">.</span><span class="n">timezone</span><span class="p">(</span><span class="s2">&quot;Asia/Jerusalem&quot;</span><span class="p">)</span>
+    <span class="n">local_timezone</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">jerusalem_tz</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">reviews</span><span class="p">:</span>
+        <span class="n">review</span><span class="o">.</span><span class="n">submitted_at</span> <span class="o">=</span> <span class="n">review</span><span class="o">.</span><span class="n">submitted_at</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">local_timezone</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
+        <span class="s2">&quot;review.html&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Reviews&quot;</span><span class="p">,</span> <span class="n">review_form</span><span class="o">=</span><span class="n">review_form</span><span class="p">,</span> <span class="n">reviews</span><span class="o">=</span><span class="n">reviews</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="user_image">
+<a class="viewcode-back" href="../../website.html#website.views.user_image">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/user_image/&lt;filename&gt;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">user_image</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get Image</span>
+
+<span class="sd">    Returns the profile image of the current user.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        The file name to search.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Any</span>
+<span class="sd">        filename image.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">image_filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="o">.</span><span class="n">image_data</span><span class="p">:</span>
+        <span class="c1"># Adjust mimetype as necessary</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">image_data</span><span class="p">,</span> <span class="n">mimetype</span><span class="o">=</span><span class="s2">&quot;image/png&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Fallback to default image</span>
+        <span class="k">return</span> <span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;image/default.png&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="save_record">
+<a class="viewcode-back" href="../../website.html#website.views.save_record">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/save_record&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">save_record</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Audio File Transcription Endpoint</span>
+
+<span class="sd">    This endpoint accepts audio file uploads and transcribes them to text.</span>
+<span class="sd">    The audio file should be sent as a multipart form data with key &#39;file&#39;.</span>
+<span class="sd">    Only allowed audio file formats (as determined by allowed_file()) will be processed.</span>
+<span class="sd">    The audio data is processed in memory without saving to disk.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        A tuple containing two elements:</span>
+<span class="sd">        - First element: Either a JSON response with transcribed text or an error message string</span>
+<span class="sd">        - Second element: HTTP status code (200 for success, 400 for errors)</span>
+
+<span class="sd">    Example Response</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    Success: ({&quot;text&quot;: &quot;transcribed text content&quot;}, 200)</span>
+<span class="sd">    Error: (&quot;No file part&quot;, 400) or (&quot;Invalid file type&quot;, 400)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;file&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;No file part&quot;</span><span class="p">,</span> <span class="mi">400</span>
+
+    <span class="n">file</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">file</span> <span class="ow">and</span> <span class="n">allowed_file</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">file_bytes_data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">file_bytes_data</span><span class="p">)</span>  <span class="c1"># Read file data into memory</span>
+        <span class="n">buffer</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;file.mp3&quot;</span>
+        <span class="n">transcription</span> <span class="o">=</span> <span class="n">transcribe_audio</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>  <span class="c1"># Transcribe the audio in memory</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">transcription</span><span class="p">}),</span> <span class="mi">200</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid file type&quot;</span><span class="p">,</span> <span class="mi">400</span></div>
+
+
+
+<div class="viewcode-block" id="transcribe_audio">
+<a class="viewcode-back" href="../../website.html#website.views.transcribe_audio">[docs]</a>
+<span class="k">def</span> <span class="nf">transcribe_audio</span><span class="p">(</span><span class="n">file_bytes</span><span class="p">:</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transcribe Audio to Text using OpenAI&#39;s Whisper Model</span>
+
+<span class="sd">    This function takes an audio file in bytes format and transcribes it to text</span>
+<span class="sd">    using OpenAI&#39;s Whisper ASR (Automatic Speech Recognition) model.</span>
+<span class="sd">    The file pointer is reset to the start before processing to ensure</span>
+<span class="sd">    complete file reading.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file_bytes : io.BytesIO</span>
+<span class="sd">        A BytesIO object containing the audio data to be transcribed.</span>
+<span class="sd">        The audio should be in a format supported by the Whisper model</span>
+<span class="sd">        (e.g., mp3, wav, m4a, etc.).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The transcribed text from the audio file.</span>
+<span class="sd">        Returns an empty string if transcription fails.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Uses OpenAI&#39;s &#39;whisper-1&#39; model for transcription</span>
+<span class="sd">    - Currently set to transcribe English language content only</span>
+<span class="sd">    - Requires valid OpenAI API credentials in the client object</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    Exception</span>
+<span class="sd">        May raise exceptions related to API calls, invalid audio format,</span>
+<span class="sd">        or authentication issues with the OpenAI client.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_bytes</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Reset pointer to the start of the file</span>
+    <span class="n">transcription</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">audio</span><span class="o">.</span><span class="n">transcriptions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;whisper-1&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file_bytes</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">transcription</span><span class="o">.</span><span class="n">text</span></div>
+
+
+
+<span class="c1"># Route to serve the Sphinx documentation</span>
+<div class="viewcode-block" id="docs_empty">
+<a class="viewcode-back" href="../../website.html#website.views.docs_empty">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">docs_empty</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Redirect Empty Docs Route</span>
+
+<span class="sd">    This route handler manages the empty &#39;/docs/&#39; endpoint by redirecting</span>
+<span class="sd">    to the main documentation page. When users access the /docs/ URL</span>
+<span class="sd">    without additional path parameters, they will be automatically</span>
+<span class="sd">    redirected to the main documentation view.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Response</span>
+<span class="sd">        A Flask redirect response that sends the user</span>
+<span class="sd">        to the main documentation page (views.docs_main).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - The trailing slash in &#39;/docs/&#39; is important for route matching</span>
+<span class="sd">    - Uses Flask&#39;s url_for() for generating the redirect URL</span>
+<span class="sd">    - This is a convenience route to handle empty docs requests</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.docs_main&quot;</span><span class="p">))</span></div>
+
+
+
+<span class="c1"># Route to serve the Sphinx documentation</span>
+<div class="viewcode-block" id="docs">
+<a class="viewcode-back" href="../../website.html#website.views.docs">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs/&lt;path:filename&gt;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">docs</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Docs</span>
+
+<span class="sd">    Serve static files from the documentation directory.</span>
+<span class="sd">    This route handles requests for documentation files stored in the DOCS_PATH directory.</span>
+<span class="sd">    It allows serving individual files or directories within the documentation structure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        Path to the file or directory within the DOCS_PATH.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Response</span>
+<span class="sd">        File contents if found, otherwise raises a 404 error.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint serves static files directly without processing them through the Flask application.</span>
+<span class="sd">    It&#39;s designed to handle documentation-related file requests efficiently.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; docs(&#39;readme.md&#39;)</span>
+<span class="sd">    Serves the readme.md file from the DOCS_PATH.</span>
+<span class="sd">    &gt;&gt;&gt; docs(&#39;images/logo.png&#39;)</span>
+<span class="sd">    Serves the logo.png image from the images subdirectory in DOCS_PATH.</span>
+<span class="sd">    &gt;&gt;&gt; docs(&#39;api/docs.pdf&#39;)</span>
+<span class="sd">    Serves the api/docs.pdf file from the DOCS_PATH.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DOCS_PATH</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">send_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Route for the index page of the documentation</span>
+<div class="viewcode-block" id="docs_index">
+<a class="viewcode-back" href="../../website.html#website.views.docs_index">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">docs_index</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Docs Index</span>
+
+<span class="sd">    Redirect to the main documentation page.</span>
+<span class="sd">    This route serves as the entry point for accessing the documentation.</span>
+<span class="sd">    It redirects users to the main documentation page, which likely contains an overview or index of available documentation resources.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    redirect</span>
+<span class="sd">        Redirects to the main documentation page.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint is typically used to provide a centralized access point for documentation within the application.</span>
+<span class="sd">    It&#39;s part of a larger documentation system, possibly involving multiple pages or sections.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; docs_index()</span>
+<span class="sd">    Redirects to the main documentation page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.docs_main&quot;</span><span class="p">))</span></div>
+
+
+
+<span class="c1"># Route for the index page of the documentation</span>
+<div class="viewcode-block" id="docs_main">
+<a class="viewcode-back" href="../../website.html#website.views.docs_main">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs/main.html&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">docs_main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Docs Main</span>
+
+<span class="sd">    Serve the main documentation page.</span>
+<span class="sd">    This route handles requests for the main HTML file in the documentation directory.</span>
+<span class="sd">    It serves the main.html file, which likely contains an overview or index of available documentation resources.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Response</span>
+<span class="sd">        File contents of the main.html file if found, otherwise raises a 404 error.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint serves the main documentation page directly without additional processing.</span>
+<span class="sd">    It&#39;s part of a larger documentation system, possibly involving multiple pages or sections.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; docs_main()</span>
+<span class="sd">    Serves the main.html file from the DOCS_PATH.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">index_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DOCS_PATH</span><span class="p">,</span> <span class="s2">&quot;main.html&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">index_path</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">send_file</span><span class="p">(</span><span class="n">index_path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Redirect root static path requests to the correct /docs/_static path</span>
+<div class="viewcode-block" id="root_static">
+<a class="viewcode-back" href="../../website.html#website.views.root_static">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/_static/&lt;path:filename&gt;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">root_static</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/docs/_static/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="mi">301</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Serve static files (CSS, JS, images)</span>
+<div class="viewcode-block" id="docs_static">
+<a class="viewcode-back" href="../../website.html#website.views.docs_static">[docs]</a>
+<span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs/_static/&lt;path:filename&gt;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">docs_static</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Docs Static</span>
+
+<span class="sd">    Redirect static files to the documentation directory.</span>
+<span class="sd">    This route handles requests for static files located outside the documentation directory.</span>
+<span class="sd">    It redirects these requests to the corresponding files within the documentation structure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        Path to the static file relative to the root of the application.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    redirect</span>
+<span class="sd">        Redirects to the equivalent file path within the docs/_static directory.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint serves as a fallback mechanism for serving static files.</span>
+<span class="sd">    It ensures consistency in serving static resources regardless of their location within the application structure.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; root_static(&#39;image.jpg&#39;)</span>
+<span class="sd">    Redirects to &#39;/docs/_static/image.jpg&#39;.</span>
+<span class="sd">    &gt;&gt;&gt; root_static(&#39;styles.css&#39;)</span>
+<span class="sd">    Redirects to &#39;/docs/_static/styles.css&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">static_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">STATIC_PATH</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">static_file_path</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">send_file</span><span class="p">(</span><span class="n">static_file_path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span></div>
 
 </pre></div>
 

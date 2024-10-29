@@ -1,9 +1,6 @@
 website.utils.text2speech package
 =================================
 
-Submodules
-----------
-
 website.utils.text2speech.text2speech module
 --------------------------------------------
 

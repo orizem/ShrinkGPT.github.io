@@ -42,7 +42,6 @@ from .utils.gpt import (
     format_chat_history_for_gpt,
     GPT_MESSAGES,
     client,
-    __gpt_uploaded_files,
 )
 
 # Define a thread-local storage for each request/thread
@@ -262,6 +261,18 @@ def get_chat(chat_id: int):
 @views.route("/get", endpoint="get")
 @restricted_route_decorator(check_session=False)
 def get_bot_response():
+    """Handle GET request for bot response.
+
+    Process user input and generate a response from the AI model.
+
+    Returns
+    -------
+        dict: A dictionary containing the encoded bot response and avatar video URL.
+
+    Note
+    ----
+        This endpoint requires authentication and appropriate permissions.
+    """
     from .models import db
 
     user = get_current_user()
@@ -478,7 +489,7 @@ def get_image(username: str) -> Any:
 
 @views.route("/slideshow/")
 @views.route("/slideshow/<string:start_with>")
-def slideshow(start_with: str = ""):
+def slideshow(start_with: str = "") -> Response:
     """Slideshow
 
     Using this route (`/slideshow`) will return a slideshow of images located in the `static/image` folder.
@@ -512,7 +523,35 @@ def slideshow(start_with: str = ""):
 
 @views.route("/text2speech/<string:text>", endpoint="text2speech")
 @restricted_route_decorator(check_session=False)
-def text2speech(text: str = ""):
+def text2speech(text: str = "") -> Response:
+    """Text to Speech Converter
+
+    Convert text to speech and play it.
+    This route handles text-to-speech conversion and playback.
+    It uses the speak function to convert the provided text into speech.
+
+    Parameters
+    ----------
+    text : str, optional
+        The text to be converted to speech. If omitted, an empty string is used.
+
+    Returns
+    -------
+    Response
+        An empty Flask Response object.
+
+    Notes
+    -----
+    This endpoint does not require user authentication (check_session=False).
+    It silently fails and returns an empty response if any error occurs during the speech synthesis process.
+
+    Examples
+    --------
+    >>> text2speech("Hello, world!")
+    Plays the spoken version of "Hello, world!".
+    >>> text2speech("")
+    Does nothing, as no text is provided.
+    """
     try:
         speak(text)
     except:
@@ -593,7 +632,26 @@ def user_image(filename: str):
 
 
 @views.route("/save_record", methods=["POST"])
-def save_record():
+def save_record() -> tuple:
+    """Audio File Transcription Endpoint
+
+    This endpoint accepts audio file uploads and transcribes them to text.
+    The audio file should be sent as a multipart form data with key 'file'.
+    Only allowed audio file formats (as determined by allowed_file()) will be processed.
+    The audio data is processed in memory without saving to disk.
+
+    Returns
+    -------
+    tuple
+        A tuple containing two elements:
+        - First element: Either a JSON response with transcribed text or an error message string
+        - Second element: HTTP status code (200 for success, 400 for errors)
+
+    Example Response
+    ----------------
+    Success: ({"text": "transcribed text content"}, 200)
+    Error: ("No file part", 400) or ("Invalid file type", 400)
+    """
     if "file" not in request.files:
         return "No file part", 400
 
@@ -609,7 +667,39 @@ def save_record():
         return "Invalid file type", 400
 
 
-def transcribe_audio(file_bytes):
+def transcribe_audio(file_bytes: io.BytesIO) -> str:
+    """Transcribe Audio to Text using OpenAI's Whisper Model
+
+    This function takes an audio file in bytes format and transcribes it to text
+    using OpenAI's Whisper ASR (Automatic Speech Recognition) model.
+    The file pointer is reset to the start before processing to ensure
+    complete file reading.
+
+    Parameters
+    ----------
+    file_bytes : io.BytesIO
+        A BytesIO object containing the audio data to be transcribed.
+        The audio should be in a format supported by the Whisper model
+        (e.g., mp3, wav, m4a, etc.).
+
+    Returns
+    -------
+    str
+        The transcribed text from the audio file.
+        Returns an empty string if transcription fails.
+
+    Notes
+    -----
+    - Uses OpenAI's 'whisper-1' model for transcription
+    - Currently set to transcribe English language content only
+    - Requires valid OpenAI API credentials in the client object
+
+    Raises
+    ------
+    Exception
+        May raise exceptions related to API calls, invalid audio format,
+        or authentication issues with the OpenAI client.
+    """
     file_bytes.seek(0)  # Reset pointer to the start of the file
     transcription = client.audio.transcriptions.create(
         model="whisper-1", file=file_bytes, language="en"
@@ -619,12 +709,62 @@ def transcribe_audio(file_bytes):
 
 # Route to serve the Sphinx documentation
 @views.route("/docs/")
-def docs_empty():
+def docs_empty() -> Response:
+    """Redirect Empty Docs Route
+
+    This route handler manages the empty '/docs/' endpoint by redirecting
+    to the main documentation page. When users access the /docs/ URL
+    without additional path parameters, they will be automatically
+    redirected to the main documentation view.
+
+    Returns
+    -------
+    Response
+        A Flask redirect response that sends the user
+        to the main documentation page (views.docs_main).
+
+    Notes
+    -----
+    - The trailing slash in '/docs/' is important for route matching
+    - Uses Flask's url_for() for generating the redirect URL
+    - This is a convenience route to handle empty docs requests
+    """
     return redirect(url_for("views.docs_main"))
+
 
 # Route to serve the Sphinx documentation
 @views.route("/docs/<path:filename>")
-def docs(filename):
+def docs(filename) -> Response:
+    """Docs
+
+    Serve static files from the documentation directory.
+    This route handles requests for documentation files stored in the DOCS_PATH directory.
+    It allows serving individual files or directories within the documentation structure.
+
+    Parameters
+    ----------
+    filename : str
+        Path to the file or directory within the DOCS_PATH.
+
+    Returns
+    -------
+    Response
+        File contents if found, otherwise raises a 404 error.
+
+    Notes
+    -----
+    This endpoint serves static files directly without processing them through the Flask application.
+    It's designed to handle documentation-related file requests efficiently.
+
+    Examples
+    --------
+    >>> docs('readme.md')
+    Serves the readme.md file from the DOCS_PATH.
+    >>> docs('images/logo.png')
+    Serves the logo.png image from the images subdirectory in DOCS_PATH.
+    >>> docs('api/docs.pdf')
+    Serves the api/docs.pdf file from the DOCS_PATH.
+    """
     file_path = os.path.join(DOCS_PATH, filename)
     if os.path.exists(file_path):
         return send_file(file_path)
@@ -635,12 +775,54 @@ def docs(filename):
 # Route for the index page of the documentation
 @views.route("/docs")
 def docs_index():
+    """Docs Index
+
+    Redirect to the main documentation page.
+    This route serves as the entry point for accessing the documentation.
+    It redirects users to the main documentation page, which likely contains an overview or index of available documentation resources.
+
+    Returns
+    -------
+    redirect
+        Redirects to the main documentation page.
+
+    Notes
+    -----
+    This endpoint is typically used to provide a centralized access point for documentation within the application.
+    It's part of a larger documentation system, possibly involving multiple pages or sections.
+
+    Examples
+    --------
+    >>> docs_index()
+    Redirects to the main documentation page.
+    """
     return redirect(url_for("views.docs_main"))
 
 
 # Route for the index page of the documentation
 @views.route("/docs/main.html")
 def docs_main():
+    """Docs Main
+
+    Serve the main documentation page.
+    This route handles requests for the main HTML file in the documentation directory.
+    It serves the main.html file, which likely contains an overview or index of available documentation resources.
+
+    Returns
+    -------
+    Response
+        File contents of the main.html file if found, otherwise raises a 404 error.
+
+    Notes
+    -----
+    This endpoint serves the main documentation page directly without additional processing.
+    It's part of a larger documentation system, possibly involving multiple pages or sections.
+
+    Examples
+    --------
+    >>> docs_main()
+    Serves the main.html file from the DOCS_PATH.
+    """
     index_path = os.path.join(DOCS_PATH, "main.html")
     if os.path.exists(index_path):
         return send_file(index_path)
@@ -657,6 +839,34 @@ def root_static(filename):
 # Serve static files (CSS, JS, images)
 @views.route("/docs/_static/<path:filename>")
 def docs_static(filename):
+    """Docs Static
+
+    Redirect static files to the documentation directory.
+    This route handles requests for static files located outside the documentation directory.
+    It redirects these requests to the corresponding files within the documentation structure.
+
+    Parameters
+    ----------
+    filename : str
+        Path to the static file relative to the root of the application.
+
+    Returns
+    -------
+    redirect
+        Redirects to the equivalent file path within the docs/_static directory.
+
+    Notes
+    -----
+    This endpoint serves as a fallback mechanism for serving static files.
+    It ensures consistency in serving static resources regardless of their location within the application structure.
+
+    Examples
+    --------
+    >>> root_static('image.jpg')
+    Redirects to '/docs/_static/image.jpg'.
+    >>> root_static('styles.css')
+    Redirects to '/docs/_static/styles.css'.
+    """
     static_file_path = os.path.join(STATIC_PATH, filename)
     if os.path.exists(static_file_path):
         return send_file(static_file_path)

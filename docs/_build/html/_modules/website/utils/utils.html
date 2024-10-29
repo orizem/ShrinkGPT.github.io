@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
@@ -5,18 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>website.utils.utils &mdash; Shrink.io 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -73,7 +71,9 @@
   <h1>Source code for website.utils.utils</h1><div class="highlight"><pre>
 <span></span><span class="c1"># utils.py</span>
 
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">html</span>
+<span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">functools</span>
 
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
@@ -81,18 +81,39 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Callable</span>
 <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">current_user</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">realpath</span><span class="p">,</span> <span class="n">commonpath</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">send_file</span><span class="p">,</span> <span class="n">session</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">send_file</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="n">QUESTIONS</span> <span class="o">=</span> <span class="p">[</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Hello {}, welcome to Shrink.io!</span>
+<span class="sd">    Before we start the therapy sessions, I would like</span>
+<span class="sd">    you to tell me a little bit about you self. </span>
+<span class="sd">    I will ask you some questions and after that we will</span>
+<span class="sd">    begin working on the what brought you here.</span>
+<span class="sd">    Ok, lets begin:&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;How old are you?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;What&#39;s your current living situation? Do you live alone, with family, or with roommates?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;What do you do for work or study? How do you feel about your job or school?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;What does a typical day look like for you from morning to night?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Do you have any daily routines or rituals that are important to you?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;How do you spend your free time or weekends?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;How would you describe your social life? Do you spend a lot of time with friends or family?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Are you currently in a relationship? If so, how would you describe it?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Have you experienced any significant physical health issues?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Do you have any history of mental health diagnoses or treatments?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Are you currently taking any medications?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Have you ever seen a psychologist or therapist before?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;What brings you in today?&quot;</span><span class="p">,</span>
+<span class="p">]</span>
 
 <span class="c1"># LOCAL IMPORTS</span>
-<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">User</span>
-
-<span class="c1"># PROJECT IMPORTS</span>
-<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">WEBSITE_PATH</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Admin</span>
 
 
 <span class="c1"># PRIVATE</span>
 <span class="k">def</span> <span class="nf">__get_all_images</span><span class="p">(</span><span class="n">start_with</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">]):</span>
-    <span class="n">IMAGE_PATH</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">WEBSITE_PATH</span><span class="si">}</span><span class="s2">\static\image&quot;</span>
+    <span class="n">IMAGE_PATH</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;website/static/image&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start_with</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="n">start_with</span> <span class="o">=</span> <span class="p">[</span><span class="n">start_with</span><span class="p">]</span>
@@ -145,7 +166,7 @@
     <span class="n">images</span> <span class="o">=</span> <span class="n">__get_all_images</span><span class="p">(</span><span class="n">start_with</span><span class="o">=</span><span class="n">start_with</span><span class="p">)</span>
 
     <span class="c1"># Instantly load image without sleep</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">WEBSITE_PATH</span><span class="si">}</span><span class="s2">\static\image\</span><span class="si">{</span><span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">img_file</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;website/static/image&quot;</span><span class="p">,</span> <span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">img_file</span><span class="p">:</span>
         <span class="k">yield</span> <span class="p">(</span>
             <span class="sa">b</span><span class="s2">&quot;--frame</span><span class="se">\r\n</span><span class="s2">Content-Type: image/jpeg</span><span class="se">\r\n\r\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">img_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="o">+</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span>
         <span class="p">)</span>
@@ -154,7 +175,7 @@
         <span class="k">for</span> <span class="n">image_name</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
-                    <span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">WEBSITE_PATH</span><span class="si">}</span><span class="s2">\static\image\</span><span class="si">{</span><span class="n">image_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;website/static/image&quot;</span><span class="p">,</span> <span class="n">image_name</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span>
                 <span class="p">)</span> <span class="k">as</span> <span class="n">img_file</span><span class="p">:</span>
                     <span class="k">yield</span> <span class="p">(</span>
                         <span class="sa">b</span><span class="s2">&quot;--frame</span><span class="se">\r\n</span><span class="s2">Content-Type: image/jpeg</span><span class="se">\r\n\r\n</span><span class="s2">&quot;</span>
@@ -191,11 +212,12 @@
 <span class="sd">        status code 404 is returned.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">base</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">WEBSITE_PATH</span><span class="si">}</span><span class="s2">\static\image&quot;</span>
-    <span class="n">safepath</span> <span class="o">=</span> <span class="n">realpath</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">WEBSITE_PATH</span><span class="si">}</span><span class="s2">\static\image\default.png&quot;</span><span class="p">)</span>
-    <span class="n">prefix</span> <span class="o">=</span> <span class="n">commonpath</span><span class="p">((</span><span class="n">base</span><span class="p">,</span> <span class="n">safepath</span><span class="p">))</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">realpath</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;website/static/image&quot;</span><span class="p">)</span>
+    <span class="n">safe_path</span> <span class="o">=</span> <span class="n">realpath</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;website/static/image/default.png&quot;</span><span class="p">)</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">commonpath</span><span class="p">((</span><span class="n">base</span><span class="p">,</span> <span class="n">safe_path</span><span class="p">))</span>
+
     <span class="k">if</span> <span class="n">prefix</span> <span class="o">==</span> <span class="n">base</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">send_file</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">\default.png&quot;</span><span class="p">,</span> <span class="n">mimetype</span><span class="o">=</span><span class="s2">&quot;image/jpeg&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">send_file</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">/default.png&quot;</span><span class="p">,</span> <span class="n">mimetype</span><span class="o">=</span><span class="s2">&quot;image/jpeg&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span> <span class="mi">404</span></div>
 
 
@@ -266,6 +288,48 @@
 
 
 
+<span class="c1"># @restricted_route_decorator(check_session=True)</span>
+<div class="viewcode-block" id="restricted_admin_route_decorator">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.restricted_admin_route_decorator">[docs]</a>
+<span class="k">def</span> <span class="nf">restricted_admin_route_decorator</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restricted Route Decorator</span>
+
+<span class="sd">    Using the restricted_route_decorator, this decorator checks</span>
+<span class="sd">    if the user id is in the admins table, otherwise, redirected</span>
+<span class="sd">    to index page as well.</span>
+
+<span class="sd">    Must define endpoint for each route using this decorator.</span>
+<span class="sd">    The decorator should be right above the function in</span>
+<span class="sd">    order to run properly.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : Callable</span>
+<span class="sd">        The function to wrap with authentication checking.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+        <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">get_current_user</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.index&quot;</span><span class="p">))</span>
+
+            <span class="n">admin_id</span> <span class="o">=</span> <span class="n">Admin</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">admin_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.index&quot;</span><span class="p">))</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
 <div class="viewcode-block" id="html_encode">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.html_encode">[docs]</a>
 <span class="k">def</span> <span class="nf">html_encode</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
@@ -277,6 +341,412 @@
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.html_decode">[docs]</a>
 <span class="k">def</span> <span class="nf">html_decode</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">unescape</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_avatar_video">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.get_avatar_video">[docs]</a>
+<span class="k">def</span> <span class="nf">get_avatar_video</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">load_dotenv</span><span class="p">()</span>
+    <span class="n">D_ID_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;D_ID_API_KEY&quot;</span><span class="p">)</span>
+
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;source_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://create-images-results.d-id.com/DefaultPresenters/Emma_f/thumbnail.jpeg&quot;</span><span class="p">,</span>  <span class="c1">#! Make this with other frameworks</span>
+        <span class="s2">&quot;script&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+            <span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;microsoft&quot;</span><span class="p">,</span>  <span class="c1">#! Make this with other frameworks</span>
+                <span class="s2">&quot;voice_id&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US-JennyNeural&quot;</span><span class="p">,</span>  <span class="c1">#! Make this with other voices</span>
+                <span class="s2">&quot;voice_config&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;style&quot;</span><span class="p">:</span> <span class="s2">&quot;Cheerful&quot;</span><span class="p">},</span>  <span class="c1">#! Make this with other configs</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;accept&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Basic </span><span class="si">{</span><span class="n">D_ID_API_KEY</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://api.d-id.com/talks&quot;</span>
+
+    <span class="n">talks_response_json</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="n">talks_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">talks_response_json</span> <span class="o">=</span> <span class="n">talks_response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">talks_response_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">response_json</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">response_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result_url&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="allowed_file">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.allowed_file">[docs]</a>
+<span class="k">def</span> <span class="nf">allowed_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">ALLOWED_EXTENSIONS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;flac&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;m4a&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mp3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mp4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mpeg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mpga&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;oga&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ogg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;wav&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;webm&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">filename</span> <span class="ow">and</span> <span class="n">filename</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">ALLOWED_EXTENSIONS</span></div>
+
+
+
+<div class="viewcode-block" id="get_initial_chat_state_response">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.get_initial_chat_state_response">[docs]</a>
+<span class="k">def</span> <span class="nf">get_initial_chat_state_response</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">QUESTIONS</span><span class="p">[</span><span class="n">status</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">QUESTIONS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">full_name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">response</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">QUESTIONS</span><span class="p">):</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">response</span></div>
+
+
+
+<span class="c1"># Admin Utils</span>
+<span class="c1"># import os</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">session</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span><span class="p">,</span> <span class="n">choice</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="n">sample</span>
+<span class="kn">from</span> <span class="nn">faker</span> <span class="kn">import</span> <span class="n">Faker</span>
+<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<span class="kn">from</span> <span class="nn">bson</span> <span class="kn">import</span> <span class="n">json_util</span>
+
+<span class="c1"># LOCAL IMPORTS</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Admin</span><span class="p">,</span> <span class="n">User</span><span class="p">,</span> <span class="n">Status</span><span class="p">,</span> <span class="n">Reviews</span><span class="p">,</span> <span class="n">Chat</span><span class="p">,</span> <span class="n">db</span>
+
+<span class="c1"># Initialize the Faker object</span>
+<span class="n">fake</span> <span class="o">=</span> <span class="n">Faker</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="random_date">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.random_date">[docs]</a>
+<span class="k">def</span> <span class="nf">random_date</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a random date between two given dates.</span>
+
+<span class="sd">    :return: A random date between start and end.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="n">random_days</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">start</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">random_days</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_test_users">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.create_test_users">[docs]</a>
+<span class="k">def</span> <span class="nf">create_test_users</span><span class="p">():</span>
+    <span class="c1"># Check if needs to add default users</span>
+    <span class="c1"># is_there_any_users = User.query.all()</span>
+    <span class="c1"># if len(is_there_any_users) &gt; 2:</span>
+    <span class="c1">#     return</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">383</span><span class="p">):</span>
+        <span class="n">Faker</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100000</span><span class="p">))</span>
+        <span class="n">fake</span> <span class="o">=</span> <span class="n">Faker</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">fake</span><span class="o">.</span><span class="n">first_name</span><span class="p">()</span>
+        <span class="n">lastname</span> <span class="o">=</span> <span class="n">fake</span><span class="o">.</span><span class="n">last_name</span><span class="p">()</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">lastname</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">999</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;123456&quot;</span>
+
+        <span class="c1"># add new user to the database</span>
+        <span class="n">user_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+            <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+            <span class="s2">&quot;lastname&quot;</span><span class="p">:</span> <span class="n">lastname</span><span class="p">,</span>
+            <span class="s2">&quot;image_data&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;image_filename&quot;</span><span class="p">:</span> <span class="s2">&quot;default.png&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="o">**</span><span class="n">user_data</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+        <span class="n">status_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="s2">&quot;register_date&quot;</span><span class="p">:</span> <span class="n">random_date</span><span class="p">(),</span>
+            <span class="s2">&quot;last_deactivate_date&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="p">(</span><span class="o">**</span><span class="n">status_data</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="generate_random_review">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.generate_random_review">[docs]</a>
+<span class="k">def</span> <span class="nf">generate_random_review</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a random review with title, content, and stars based on the star rating group.</span>
+
+<span class="sd">    :return: A dictionary with title, content, and star rating.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Titles categorized by star rating groups</span>
+    <span class="n">titles</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;bad&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Not worth the money&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Very disappointing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Regret buying&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Waste of money&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Poor quality&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Terrible experience&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Product broke quickly&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;False advertising&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Not as described&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Horrible service&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Disappointing results&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Wouldn&#39;t recommend&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Very low quality&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Frustrating purchase&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Not worth the hype&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Overpriced garbage&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Worst purchase ever&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Complete letdown&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Not durable at all&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Avoid this product&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;good&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Quite satisfied&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Better than expected&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Good, but could improve&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Decent product&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Worth the price&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Happy with the purchase&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Meets expectations&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Solid quality&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Good value for money&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Pleasant surprise&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Performs well&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Would buy again&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Useful and practical&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Does the job&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Satisfactory performance&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Reasonable quality&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Good, but some issues&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Works as expected&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Happy overall&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Pretty good purchase&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;excellent&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Fantastic product!&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Exceeded expectations&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Best purchase ever!&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Perfect in every way&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Incredible quality&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Highly recommend&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Top-notch product&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Absolutely love it&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Impressive results&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Amazing experience&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Worth every penny&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Best decision ever&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Can&#39;t live without it&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Superior quality&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Outstanding performance&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Perfect choice&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Thrilled with this product&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Couldn&#39;t be happier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Five stars all the way&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Must-have item&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Contents categorized by star rating groups</span>
+    <span class="n">contents</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;bad&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;This product really let me down. Wouldn&#39;t recommend.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;The quality was poor and didn&#39;t meet expectations.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;A complete waste of money. I regret buying this.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;It broke after just a week. Very disappointed.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Terrible experience overall. Not what I expected.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;False advertising, the product doesn&#39;t work as described.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;I had high hopes but was sorely disappointed.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;The material is cheap and flimsy.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Not worth even half the price.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Bad customer service and bad product.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;It stopped working after a few uses.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Definitely wouldn&#39;t buy this again.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Overhyped and under-delivered.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Extremely dissatisfied with this purchase.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;The product arrived damaged and wasn&#39;t usable.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Poor quality control. It&#39;s full of defects.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Feels cheaply made and didn&#39;t last.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;It&#39;s unusable. Complete failure.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Very frustrating to use. A total waste.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Avoid this product at all costs!&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;good&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;The product is decent for its price. Satisfied with the performance.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Pretty good overall. Some minor issues.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Better than expected. I&#39;m quite happy with it.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Does what it promises, though there&#39;s room for improvement.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Worth the money for what it offers.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Solid performance and generally happy with it.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;I had a good experience, though it could be improved in some areas.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Performs well for the price.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Happy with the purchase, though not perfect.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;The product does its job without any major problems.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Good value for money, does what it&#39;s supposed to.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;I am content with the results.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Works well for most tasks, but could be better.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;It’s solid overall with a few minor issues.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Good product but I’ve seen better.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Overall, a decent buy. Would consider buying again.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;For the price, this is pretty good.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Performs adequately for its cost.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Quite happy with how it turned out.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Good quality, though there are some improvements that could be made.&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;excellent&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Absolutely fantastic! Best purchase I&#39;ve made.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Exceeded all expectations. Very pleased with this.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;This is the best product I&#39;ve used in a long time.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;It performs incredibly well. Highly recommend it.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Perfect! Couldn&#39;t ask for more.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Amazing quality and great value.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;I&#39;m extremely happy with this product. It works flawlessly.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Superb build and functionality.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Impressed by the attention to detail and performance.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Five stars for sure. Worth every penny.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;One of the best purchases I&#39;ve ever made.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Can&#39;t imagine living without this now.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Superb experience from start to finish.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Couldn&#39;t be happier with how this turned out.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Highly recommend to everyone! It&#39;s perfect.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Outstanding quality and great design.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Completely satisfied with this purchase.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Top-tier performance and quality.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;This product is a game changer.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Best decision I&#39;ve ever made. Highly recommend!&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Generate a random star rating (1 to 5)</span>
+    <span class="n">stars</span> <span class="o">=</span> <span class="n">choices</span><span class="p">(</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>  <span class="c1"># Star ratings</span>
+        <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>  <span class="c1"># Corresponding odds (more weight = more likely)</span>
+        <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># Number of items to choose</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Decide which type of review to generate based on the stars</span>
+    <span class="k">if</span> <span class="n">stars</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+        <span class="n">review_type</span> <span class="o">=</span> <span class="s2">&quot;bad&quot;</span>
+    <span class="k">elif</span> <span class="n">stars</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+        <span class="n">review_type</span> <span class="o">=</span> <span class="s2">&quot;good&quot;</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># stars == 5</span>
+        <span class="n">review_type</span> <span class="o">=</span> <span class="s2">&quot;excellent&quot;</span>
+
+    <span class="c1"># Pick a random title and content from the appropriate group</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">review_type</span><span class="p">])</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">contents</span><span class="p">[</span><span class="n">review_type</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">stars</span></div>
+
+
+
+<div class="viewcode-block" id="create_test_reviews">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.create_test_reviews">[docs]</a>
+<span class="k">def</span> <span class="nf">create_test_reviews</span><span class="p">():</span>
+    <span class="c1"># # Check if needs to add default reviews</span>
+    <span class="c1"># is_there_any_reviews = Reviews.query.all()</span>
+    <span class="c1"># if len(is_there_any_reviews) &gt; 0:</span>
+    <span class="c1">#     return</span>
+
+    <span class="c1"># Fetch all user IDs from the User model</span>
+    <span class="n">user_ids</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="c1"># Flatten the list of tuples into a list of IDs</span>
+    <span class="n">user_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">user_id</span> <span class="ow">in</span> <span class="n">user_ids</span><span class="p">]</span>
+
+    <span class="c1"># Return the specified number of random user IDs</span>
+    <span class="n">amount</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">user_ids</span><span class="p">)</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">//</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_ids</span><span class="p">)</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">//</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">user_ids_sample</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">user_ids</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+        <span class="n">current_user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">user_ids_sample</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+        <span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">user_ids_sample</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">status</span><span class="o">.</span><span class="n">register_date</span>
+        <span class="n">random_days</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span><span class="p">)</span>
+
+        <span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">stars</span> <span class="o">=</span> <span class="n">generate_random_review</span><span class="p">()</span>
+
+        <span class="n">review</span> <span class="o">=</span> <span class="n">Reviews</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span>
+            <span class="n">stars</span><span class="o">=</span><span class="n">stars</span><span class="p">,</span>
+            <span class="n">user_id</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">submitted_at</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">register_date</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">random_days</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">review</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="create_test_chats">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.create_test_chats">[docs]</a>
+<span class="k">def</span> <span class="nf">create_test_chats</span><span class="p">():</span>
+    <span class="c1"># # Check if needs to add default chats</span>
+    <span class="c1"># is_there_any_chats = Chat.query.all()</span>
+    <span class="c1"># if len(is_there_any_chats) &gt; 0:</span>
+    <span class="c1">#     return</span>
+    
+    <span class="c1"># Fetch all user IDs from the User model</span>
+    <span class="n">user_ids</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="c1"># Flatten the list of tuples into a list of IDs</span>
+    <span class="n">user_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">user_id</span> <span class="ow">in</span> <span class="n">user_ids</span><span class="p">]</span>
+
+    <span class="c1"># Return the specified number of random user IDs</span>
+    <span class="n">amount</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">user_ids</span><span class="p">)</span> <span class="o">*</span> <span class="mi">30</span> <span class="o">//</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_ids</span><span class="p">)</span> <span class="o">*</span> <span class="mi">80</span> <span class="o">//</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">user_ids_sample</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">user_ids</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+        <span class="n">current_user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">user_ids_sample</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+        <span class="n">welcome_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Hi </span><span class="si">{</span><span class="w"> </span><span class="n">current_user</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="w"> </span><span class="si">}</span><span class="s2">, welcome to Shrink.io! Go ahead and send me a message.&quot;</span>
+
+        <span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">user_ids_sample</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">status</span><span class="o">.</span><span class="n">register_date</span>
+        <span class="n">random_days</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span><span class="p">)</span>
+
+        <span class="n">new_chat</span> <span class="o">=</span> <span class="n">Chat</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Chat_</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">current_user</span><span class="o">.</span><span class="n">chats</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">chat_json</span><span class="o">=</span><span class="n">dumps</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;bot&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">welcome_text</span><span class="p">,</span>
+                        <span class="s2">&quot;date_time&quot;</span><span class="p">:</span> <span class="n">status</span><span class="o">.</span><span class="n">register_date</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">random_days</span><span class="p">),</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">json_util</span><span class="o">.</span><span class="n">default</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">user_id</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_chat</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
 
 </pre></div>
 
