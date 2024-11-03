@@ -4,13 +4,14 @@ import os
 from datetime import datetime
 from flask import (
     Blueprint,
+    Response,
     render_template,
     request,
     redirect,
     url_for,
     flash,
-    jsonify,
 )
+from typing import Dict
 from sqlalchemy import asc, desc, func
 from dotenv import load_dotenv
 
@@ -44,7 +45,37 @@ load_api_keys()
 
 @admin.route("/admin_dashboard")
 @restricted_admin_route_decorator()
-def admin_dashboard():
+def admin_dashboard() -> str:
+    """Admin Dashboard
+
+    This route handles GET requests for the admin dashboard page.
+    It fetches various data points and renders the admin.html template.
+
+    Parameters
+    ----------
+    None
+        This route does not accept any parameters.
+
+    Returns
+    -------
+    render_template
+        Renders the 'admin.html' template with dashboard data.
+
+    Notes
+    -----
+    This endpoint requires authentication and admin privileges.
+    It performs the following operations:
+    1. Fetches users from the database based on pagination parameters
+    2. Queries reviews data for chart generation
+    3. Calculates average chats per user
+    4. Prepares pie chart data for users with and without chats
+    5. Queries registered and deactivated users by month and year
+
+    Examples
+    --------
+    >>> admin_dashboard()
+    Renders the admin dashboard with all necessary data.
+    """
     # Get the current page, rows per page, order column and order type from the request
     page = request.args.get(key="page", default=1, type=int)
     rows_per_page = request.args.get(key="rows_per_page", default=5, type=int)
@@ -143,7 +174,36 @@ def admin_dashboard():
 # ROUTES
 @admin.route("/generate_test_data", methods=["POST"])
 @restricted_admin_route_decorator()
-def generate_test_data():
+def generate_test_data() -> Dict[str, str]:
+    """Generate Test Data
+
+    This route handles POST requests to generate test data for the application.
+    It creates sample users, chats, and reviews to populate the database for testing purposes.
+
+    Parameters
+    ----------
+    None
+        This route does not accept any parameters.
+
+    Returns
+    -------
+    dict
+        A dictionary containing a redirect URL.
+
+    Notes
+    -----
+    This endpoint is intended for development and testing purposes only.
+    It should not be exposed in production environments.
+    The function performs the following operations:
+    1. Creates sample users
+    2. Generates test chats
+    3. Creates test reviews
+
+    Examples
+    --------
+    >>> generate_test_data()
+    Generates test data and redirects to the admin dashboard.
+    """
     create_test_users()
     create_test_chats()
     create_test_reviews()
@@ -152,7 +212,32 @@ def generate_test_data():
 
 @admin.route("/delete/<int:user_id>", methods=["POST"])
 @restricted_admin_route_decorator()
-def delete_user(user_id):
+def delete_user(user_id: int) -> Response:
+    """Delete User
+
+    This route handles POST requests to delete a user from the database.
+
+    Parameters
+    ----------
+    user_id : int
+        The ID of the user to be deleted.
+
+    Returns
+    -------
+    redirect
+        Redirects to the admin dashboard after deletion.
+
+    Notes
+    -----
+    This endpoint requires authentication and admin privileges.
+    It removes the specified user and associated data from the system.
+    The operation is irreversible and should be used cautiously.
+
+    Examples
+    --------
+    >>> delete_user(123)
+    Deletes the user with ID 123 and redirects to the admin dashboard.
+    """
     # Delete the user from the database
     user = User.query.get(user_id)
     db.session.delete(user)
@@ -162,7 +247,32 @@ def delete_user(user_id):
 
 @admin.route("/activate/<int:user_id>", methods=["POST"])
 @restricted_admin_route_decorator()
-def activate_user(user_id):
+def activate_user(user_id: int) -> Response:
+    """Activate User
+
+    This route handles POST requests to activate a deactivated user account.
+
+    Parameters
+    ----------
+    user_id : int
+        The ID of the user to be activated.
+
+    Returns
+    -------
+    redirect
+        Redirects to the admin dashboard after activation.
+
+    Notes
+    -----
+    This endpoint requires authentication and admin privileges.
+    Only users with status -1 (deactivated) can be activated.
+    The function updates the user's status to 0 (active).
+
+    Examples
+    --------
+    >>> activate_user(456)
+    Activates the user with ID 456 and redirects to the admin dashboard.
+    """
     # Activate user
     user_status = Status.query.filter_by(user_id=user_id).first()
     if user_status.status not in [0, -1]:
@@ -178,7 +288,33 @@ def activate_user(user_id):
 
 @admin.route("/deactivate/<int:user_id>", methods=["POST"])
 @restricted_admin_route_decorator()
-def deactivate_user(user_id):
+def deactivate_user(user_id: int) -> Response:
+    """
+    Deactivate User
+
+    This route handles POST requests to deactivate an active user account.
+
+    Parameters
+    ----------
+    user_id : int
+        The ID of the user to be deactivated.
+
+    Returns
+    -------
+    redirect
+        Redirects to the admin dashboard after deactivation.
+
+    Notes
+    -----
+    This endpoint requires authentication and admin privileges.
+    Only active users (status 0) can be deactivated.
+    The function updates the user's status to -1 (deactivated).
+
+    Examples
+    --------
+    >>> deactivate_user(789)
+    Deactivates the user with ID 789 and redirects to the admin dashboard.
+    """
     # Deactivate user
     user_status = Status.query.filter_by(user_id=user_id).first()
     if user_status.status not in [0, -1]:
@@ -195,13 +331,65 @@ def deactivate_user(user_id):
 
 @admin.route("/api")
 @restricted_admin_route_decorator()
-def api_keys_form():
+def api_keys_form() -> str:
+    """
+    API Keys Form
+
+    This route renders the API keys form page.
+
+    Parameters
+    ----------
+    None
+        This route does not accept any parameters.
+
+    Returns
+    -------
+    render_template
+        Renders the 'api_keys.html' template with api_keys dictionary.
+
+    Notes
+    -----
+    This endpoint requires authentication and admin privileges.
+    It displays the current API keys stored in the system.
+
+    Examples
+    --------
+    >>> api_keys_form()
+    Renders the API keys form page with all available API keys.
+    """
     return render_template("api_keys.html", api_keys=api_keys)
 
 
 @admin.route("/update_keys", methods=["POST"])
 @restricted_admin_route_decorator()
-def update_keys():
+def update_keys() -> Response:
+    """
+    Update API Keys
+
+    This route handles POST requests to update API keys stored in the system.
+
+    Parameters
+    ----------
+    None
+        This route does not accept any parameters directly.
+        It processes form data submitted via POST request.
+
+    Returns
+    -------
+    redirect
+        Redirects to the API keys form page after updating.
+
+    Notes
+    -----
+    This endpoint requires authentication and admin privileges.
+    It updates both the in-memory dictionary and the .env file.
+    The function iterates through form data to update each API key.
+
+    Examples
+    --------
+    >>> update_keys()
+    Updates API keys based on form submission and redirects to the API keys form page.
+    """
     for purpose, new_key in request.form.items():
         api_keys[purpose] = new_key
         env_var_name = f'{purpose.upper().replace("-", "_")}_API_KEY'

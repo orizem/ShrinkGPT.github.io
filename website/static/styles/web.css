@@ -171,22 +171,7 @@ body {
   background-color: var(--accent-color);
 }
 
-/* Video Container */
-.video-container {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: all var(--transition-speed) ease;
-}
 
-.video-container:hover {
-  transform: scale(1.05);
-}
 
 .round-video {
   width: 100%;
@@ -238,12 +223,6 @@ body {
     max-width: 300px;
   }
 
-  .video-container {
-    width: 100px;
-    height: 100px;
-    right: 10px;
-    bottom: 10px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -254,11 +233,6 @@ body {
 
   .msg-bubble {
     max-width: 250px;
-  }
-
-  .video-container {
-    width: 80px;
-    height: 80px;
   }
 
   #toggleRecording {

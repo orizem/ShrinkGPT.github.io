@@ -1,6 +1,16 @@
 website package
 ===============
 
+website.admin module
+--------------------
+
+.. automodule:: website.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+website.views module
+
 website.auth module
 -------------------
 

@@ -14,6 +14,16 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <link rel="icon" type="image/png" sizes="192x192" href="https://studio.d-id.com/favicon/favicon-192x192.png">
+
+
+  <style>
+
+    .video-box {
+      cursor: grab;
+      position: absolute;
+      pointer-events: auto;
+    }
+  </style>
 </head>
 
 <!-- Left Side Menu -->
@@ -89,9 +99,11 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
     </form>
   </section>
   <div class="video-container">
-    <video class="round-video" id="videoFrame" loop autoplay muted>
-          <source id="videoSource" src="../static/video/emma_idle.mp4" type="video/mp4">
-    </video>
+    <div class="video-box" id="videoBox">
+      <video class="round-video" id="videoFrame" loop autoplay muted>
+        <source id="videoSource" src="../static/video/emma_idle.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
   <!-- partial -->
   <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
@@ -100,12 +112,82 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
             stopTextToSpeech(); // Stop any previous audio
         } catch{}
 
-        $("#textareaId").keypress(function (e) {
-          if(e.which === 13 && !e.shiftKey && !e.ctrlKey) {
-            e.preventDefault();
-            $(this).closest("form").submit();
+        //  $("#textareaId").keypress(function (e) {
+        //    if(e.which === 13 && !e.shiftKey && !e.ctrlKey) {
+        //      e.preventDefault();
+        //      $(this).closest("form").submit();
+        //    }
+        //  });
+
+        // ============= [ Drag & Drop Video ] ===============
+        const videoBox = document.getElementById("videoBox");
+        videoBox.style.left = `72vw`;
+        videoBox.style.top = `120px`;
+
+        let offsetX = 0, offsetY = 0;
+        let isDragging = false;
+
+        // Start dragging (for both mouse and touch)
+        function startDrag(e) {
+          e.preventDefault();
+          isDragging = true;
+
+          if (e.type === "mousedown") {
+            offsetX = e.clientX - videoBox.getBoundingClientRect().left;
+            offsetY = e.clientY - videoBox.getBoundingClientRect().top;
+            document.addEventListener("mousemove", handleDrag);
+            document.addEventListener("mouseup", stopDrag);
+          } else if (e.type === "touchstart") {
+            const touch = e.touches[0];
+            offsetX = touch.clientX - videoBox.getBoundingClientRect().left;
+            offsetY = touch.clientY - videoBox.getBoundingClientRect().top;
+            document.addEventListener("touchmove", handleDrag);
+            document.addEventListener("touchend", stopDrag);
           }
-        });
+          
+          videoBox.style.transition = "none"; // Disable transition while dragging
+        }
+
+        // Dragging (for both mouse and touch)
+        function handleDrag(e) {
+          if (!isDragging) return;
+
+          let clientX, clientY;
+          if (e.type === "mousemove") {
+            clientX = e.clientX;
+            clientY = e.clientY;
+          } else if (e.type === "touchmove") {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+          }
+
+          const containerRect = videoBox.parentElement.getBoundingClientRect();
+          let newLeft = clientX - offsetX - containerRect.left;
+          let newTop = clientY - offsetY - containerRect.top;
+
+          // Constrain within the container
+          newLeft = Math.max(0, Math.min(containerRect.width - videoBox.offsetWidth, newLeft));
+          newTop = Math.max(0, Math.min(containerRect.height - videoBox.offsetHeight, newTop));
+
+          videoBox.style.left = `${newLeft}px`;
+          videoBox.style.top = `${newTop}px`;
+        }
+
+        // Stop dragging (for both mouse and touch)
+        function stopDrag() {
+          isDragging = false;
+          videoBox.style.transition = "box-shadow 0.3s ease"; // Re-enable transition
+          document.removeEventListener("mousemove", handleDrag);
+          document.removeEventListener("mouseup", stopDrag);
+          document.removeEventListener("touchmove", handleDrag);
+          document.removeEventListener("touchend", stopDrag);
+        }
+
+        // Event listeners for mouse and touch events
+        videoBox.addEventListener("mousedown", startDrag);
+        videoBox.addEventListener("touchstart", startDrag);
+
+
 
         // ============= [ D-ID Avater Default State ] ===============
         document.getElementById('videoFrame').addEventListener('ended',myHandler,false);
@@ -135,7 +217,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         chatId = -1;
 
         // Load previous chats
-        messages = {{ chat_data|tojson|safe }}
+        messages = {{ chat_data|tojson|safe }};
         if (messages != -1) {
           chatId = {{ chat_id }};
 
@@ -164,22 +246,6 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
           msgerInput.value = "";
           botResponse(msgText);
         });
-
-        // function requestTextToSpeech(text) {
-        //   // fetch(`/text2speech/${text}`)
-        //   //   .then(response => response.json())
-        //   //   .then(data => console.log(data))
-        //   //   .catch(error => console.error(error));
-        //   var msg = new SpeechSynthesisUtterance();
-        //   var voices = window.speechSynthesis.getVoices();
-        //   msg.voice = voices[10]; 
-        //   msg.volume = 1; // From 0 to 1
-        //   msg.rate = 1.8; // From 0.1 to 10
-        //   msg.pitch = 2; // From 0 to 2
-        //   msg.text = text;
-        //   msg.lang = 'en';
-        //   speechSynthesis.speak(msg);
-        // }
 
         // =============== [ Text To Speech ] ===============
 
@@ -256,7 +322,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         // ============= [ End Text To Speech ] ===============
 
 
-        function appendMessage(name, img, side, text, time, videoURL="") {
+        function appendMessage(name, img, side, text="", time, videoURL="") {
           //   Simple solution for small apps
           const msgHTML = `
             <div class="msg ${side}-msg">
@@ -278,9 +344,9 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
 
           msgerChat.insertAdjacentHTML("beforeend", msgHTML);
           msgerChat.scrollTop += 500;
-          
-          // ============= [ Play D-ID Avater Stream ] ===============
-          
+         
+         
+        // ============= [ Play D-ID Avater Stream ] ===============
           if (videoURL) {
 
             var video = document.getElementById('videoFrame');
@@ -293,9 +359,9 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
             video.load();
             video.play();
           }
-
-          // ============= [ End Play D-ID Avater Stream ] ===============
         }
+
+        // ============= [ End Play D-ID Avater Stream ] ===============
         
         // ============= [ Record Voice Message With Speech To Text ] ===============
         

@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>website.admin &mdash; Shrink.io 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Shrink.io
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">ShrinkGPT.github.io</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Shrink.io</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../website.html">website</a></li>
+      <li class="breadcrumb-item active">website.admin</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for website.admin</h1><div class="highlight"><pre>
+<span></span><span class="c1"># admin.py</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Blueprint</span><span class="p">,</span>
+    <span class="n">Response</span><span class="p">,</span>
+    <span class="n">render_template</span><span class="p">,</span>
+    <span class="n">request</span><span class="p">,</span>
+    <span class="n">redirect</span><span class="p">,</span>
+    <span class="n">url_for</span><span class="p">,</span>
+    <span class="n">flash</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">asc</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">func</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="c1"># LOCAL IMPORTS</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Status</span><span class="p">,</span> <span class="n">Reviews</span><span class="p">,</span> <span class="n">Chat</span><span class="p">,</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">.utils.utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">restricted_admin_route_decorator</span><span class="p">,</span>
+    <span class="n">create_test_users</span><span class="p">,</span>
+    <span class="n">create_test_reviews</span><span class="p">,</span>
+    <span class="n">create_test_chats</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.utils.gpt</span> <span class="kn">import</span> <span class="n">client</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">admin</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Dictionary to store API keys and their purposes</span>
+<span class="n">api_keys</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<div class="viewcode-block" id="load_api_keys">
+<a class="viewcode-back" href="../../website.html#website.admin.load_api_keys">[docs]</a>
+<span class="k">def</span> <span class="nf">load_api_keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;_API_KEY&quot;</span><span class="p">):</span>
+            <span class="n">purpose</span> <span class="o">=</span> <span class="n">key</span><span class="p">[:</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+            <span class="n">api_keys</span><span class="p">[</span><span class="n">purpose</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+
+<span class="n">load_api_keys</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="admin_dashboard">
+<a class="viewcode-back" href="../../website.html#website.admin.admin_dashboard">[docs]</a>
+<span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/admin_dashboard&quot;</span><span class="p">)</span>
+<span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">admin_dashboard</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Admin Dashboard</span>
+
+<span class="sd">    This route handles GET requests for the admin dashboard page.</span>
+<span class="sd">    It fetches various data points and renders the admin.html template.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">        This route does not accept any parameters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    render_template</span>
+<span class="sd">        Renders the &#39;admin.html&#39; template with dashboard data.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint requires authentication and admin privileges.</span>
+<span class="sd">    It performs the following operations:</span>
+<span class="sd">    1. Fetches users from the database based on pagination parameters</span>
+<span class="sd">    2. Queries reviews data for chart generation</span>
+<span class="sd">    3. Calculates average chats per user</span>
+<span class="sd">    4. Prepares pie chart data for users with and without chats</span>
+<span class="sd">    5. Queries registered and deactivated users by month and year</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; admin_dashboard()</span>
+<span class="sd">    Renders the admin dashboard with all necessary data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the current page, rows per page, order column and order type from the request</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;page&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">rows_per_page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;rows_per_page&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">column</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;column&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;order&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+
+    <span class="c1"># Fetch the users from the database based on the pagination parameters</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span>
+    <span class="k">if</span> <span class="n">column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">attr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">asc</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span> <span class="k">if</span> <span class="n">order</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">desc</span><span class="p">(</span><span class="n">attr</span><span class="p">))</span>
+
+    <span class="n">users</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">rows_per_page</span><span class="p">)</span>
+
+    <span class="c1"># Query the reviews data</span>
+    <span class="n">reviews_data</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Reviews</span><span class="o">.</span><span class="n">stars</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Reviews</span><span class="o">.</span><span class="n">stars</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">Reviews</span><span class="o">.</span><span class="n">stars</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Process the data into a format suitable for the chart</span>
+    <span class="n">reviews_chart_data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">stars</span><span class="si">}</span><span class="s2"> Stars&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">count</span><span class="p">}</span> <span class="k">for</span> <span class="n">stars</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">reviews_data</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Calculate average chats per user</span>
+    <span class="n">total_chats</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Chat</span><span class="o">.</span><span class="n">id</span><span class="p">))</span><span class="o">.</span><span class="n">scalar</span><span class="p">()</span>
+    <span class="n">total_users</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">))</span><span class="o">.</span><span class="n">scalar</span><span class="p">()</span>
+    <span class="n">avg_chats_per_user</span> <span class="o">=</span> <span class="n">total_chats</span> <span class="o">/</span> <span class="n">total_users</span> <span class="k">if</span> <span class="n">total_users</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="c1"># Calculate users with and without chats</span>
+    <span class="n">users_with_chats</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Chat</span><span class="o">.</span><span class="n">user_id</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">users_without_chats</span> <span class="o">=</span> <span class="n">total_users</span> <span class="o">-</span> <span class="n">users_with_chats</span>
+
+    <span class="c1"># Prepare pie chart data</span>
+    <span class="n">chats_pie_chart_data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Users with Chats&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">users_with_chats</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Users without Chats&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">users_without_chats</span><span class="p">},</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Query for registered users by month and year</span>
+    <span class="n">register_query</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m&quot;</span><span class="p">,</span> <span class="n">Status</span><span class="o">.</span><span class="n">register_date</span><span class="p">)</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s2">&quot;month_year&quot;</span><span class="p">),</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Status</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s2">&quot;registered_count&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;month_year&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;month_year&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Query for deactivated users by month and year</span>
+    <span class="n">deactivate_query</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m&quot;</span><span class="p">,</span> <span class="n">Status</span><span class="o">.</span><span class="n">last_deactivate_date</span><span class="p">)</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s2">&quot;month_year&quot;</span><span class="p">),</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Status</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s2">&quot;deactivated_count&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;month_year&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;month_year&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Process data for the chart</span>
+    <span class="n">register_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">month_year</span><span class="p">:</span> <span class="n">registered_count</span> <span class="k">for</span> <span class="n">month_year</span><span class="p">,</span> <span class="n">registered_count</span> <span class="ow">in</span> <span class="n">register_query</span>
+    <span class="p">}</span>
+    <span class="n">deactivate_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">month_year</span><span class="p">:</span> <span class="n">deactivated_count</span>
+        <span class="k">for</span> <span class="n">month_year</span><span class="p">,</span> <span class="n">deactivated_count</span> <span class="ow">in</span> <span class="n">deactivate_query</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Fill in missing months with zero counts</span>
+    <span class="n">all_months</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">register_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">deactivate_data</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="n">dates_chart_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;months&quot;</span><span class="p">:</span> <span class="n">all_months</span><span class="p">,</span>
+        <span class="s2">&quot;registered&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">register_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">all_months</span><span class="p">],</span>
+        <span class="s2">&quot;deactivated&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">deactivate_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">all_months</span><span class="p">],</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
+        <span class="s2">&quot;admin.html&quot;</span><span class="p">,</span>
+        <span class="n">users</span><span class="o">=</span><span class="n">users</span><span class="p">,</span>
+        <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span>
+        <span class="n">rows_per_page</span><span class="o">=</span><span class="n">rows_per_page</span><span class="p">,</span>
+        <span class="n">total_users</span><span class="o">=</span><span class="n">users</span><span class="o">.</span><span class="n">total</span><span class="p">,</span>
+        <span class="n">reviews_chart_data</span><span class="o">=</span><span class="n">reviews_chart_data</span><span class="p">,</span>
+        <span class="n">avg_chats_per_user</span><span class="o">=</span><span class="n">avg_chats_per_user</span><span class="p">,</span>
+        <span class="n">chats_pie_chart_data</span><span class="o">=</span><span class="n">chats_pie_chart_data</span><span class="p">,</span>
+        <span class="n">dates_chart_data</span><span class="o">=</span><span class="n">dates_chart_data</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># ROUTES</span>
+<div class="viewcode-block" id="generate_test_data">
+<a class="viewcode-back" href="../../website.html#website.admin.generate_test_data">[docs]</a>
+<span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/generate_test_data&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">generate_test_data</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate Test Data</span>
+
+<span class="sd">    This route handles POST requests to generate test data for the application.</span>
+<span class="sd">    It creates sample users, chats, and reviews to populate the database for testing purposes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">        This route does not accept any parameters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        A dictionary containing a redirect URL.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint is intended for development and testing purposes only.</span>
+<span class="sd">    It should not be exposed in production environments.</span>
+<span class="sd">    The function performs the following operations:</span>
+<span class="sd">    1. Creates sample users</span>
+<span class="sd">    2. Generates test chats</span>
+<span class="sd">    3. Creates test reviews</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; generate_test_data()</span>
+<span class="sd">    Generates test data and redirects to the admin dashboard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">create_test_users</span><span class="p">()</span>
+    <span class="n">create_test_chats</span><span class="p">()</span>
+    <span class="n">create_test_reviews</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;redirect(url_for(&quot;admin.admin_dashboard&quot;))&#39;</span><span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="delete_user">
+<a class="viewcode-back" href="../../website.html#website.admin.delete_user">[docs]</a>
+<span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/delete/&lt;int:user_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">delete_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete User</span>
+
+<span class="sd">    This route handles POST requests to delete a user from the database.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    user_id : int</span>
+<span class="sd">        The ID of the user to be deleted.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    redirect</span>
+<span class="sd">        Redirects to the admin dashboard after deletion.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint requires authentication and admin privileges.</span>
+<span class="sd">    It removes the specified user and associated data from the system.</span>
+<span class="sd">    The operation is irreversible and should be used cautiously.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; delete_user(123)</span>
+<span class="sd">    Deletes the user with ID 123 and redirects to the admin dashboard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Delete the user from the database</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;admin.admin_dashboard&quot;</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="activate_user">
+<a class="viewcode-back" href="../../website.html#website.admin.activate_user">[docs]</a>
+<span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/activate/&lt;int:user_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">activate_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Activate User</span>
+
+<span class="sd">    This route handles POST requests to activate a deactivated user account.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    user_id : int</span>
+<span class="sd">        The ID of the user to be activated.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    redirect</span>
+<span class="sd">        Redirects to the admin dashboard after activation.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint requires authentication and admin privileges.</span>
+<span class="sd">    Only users with status -1 (deactivated) can be activated.</span>
+<span class="sd">    The function updates the user&#39;s status to 0 (active).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; activate_user(456)</span>
+<span class="sd">    Activates the user with ID 456 and redirects to the admin dashboard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Activate user</span>
+    <span class="n">user_status</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">user_status</span><span class="o">.</span><span class="n">status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;admin.admin_dashboard&quot;</span><span class="p">))</span>
+
+    <span class="n">user_status</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Activate the user</span>
+    <span class="n">flash</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2"> has been activated.&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span>
+
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user_status</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;admin.admin_dashboard&quot;</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="deactivate_user">
+<a class="viewcode-back" href="../../website.html#website.admin.deactivate_user">[docs]</a>
+<span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/deactivate/&lt;int:user_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">deactivate_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deactivate User</span>
+
+<span class="sd">    This route handles POST requests to deactivate an active user account.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    user_id : int</span>
+<span class="sd">        The ID of the user to be deactivated.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    redirect</span>
+<span class="sd">        Redirects to the admin dashboard after deactivation.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint requires authentication and admin privileges.</span>
+<span class="sd">    Only active users (status 0) can be deactivated.</span>
+<span class="sd">    The function updates the user&#39;s status to -1 (deactivated).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; deactivate_user(789)</span>
+<span class="sd">    Deactivates the user with ID 789 and redirects to the admin dashboard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Deactivate user</span>
+    <span class="n">user_status</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">user_status</span><span class="o">.</span><span class="n">status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;admin.admin_dashboard&quot;</span><span class="p">))</span>
+
+    <span class="n">user_status</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># Deactivate the user</span>
+    <span class="n">user_status</span><span class="o">.</span><span class="n">last_deactivate_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="n">flash</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2"> has been deactivated.&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span>
+
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user_status</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;admin.admin_dashboard&quot;</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="api_keys_form">
+<a class="viewcode-back" href="../../website.html#website.admin.api_keys_form">[docs]</a>
+<span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">api_keys_form</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API Keys Form</span>
+
+<span class="sd">    This route renders the API keys form page.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">        This route does not accept any parameters.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    render_template</span>
+<span class="sd">        Renders the &#39;api_keys.html&#39; template with api_keys dictionary.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint requires authentication and admin privileges.</span>
+<span class="sd">    It displays the current API keys stored in the system.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; api_keys_form()</span>
+<span class="sd">    Renders the API keys form page with all available API keys.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;api_keys.html&quot;</span><span class="p">,</span> <span class="n">api_keys</span><span class="o">=</span><span class="n">api_keys</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="update_keys">
+<a class="viewcode-back" href="../../website.html#website.admin.update_keys">[docs]</a>
+<span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/update_keys&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">update_keys</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update API Keys</span>
+
+<span class="sd">    This route handles POST requests to update API keys stored in the system.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">        This route does not accept any parameters directly.</span>
+<span class="sd">        It processes form data submitted via POST request.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    redirect</span>
+<span class="sd">        Redirects to the API keys form page after updating.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint requires authentication and admin privileges.</span>
+<span class="sd">    It updates both the in-memory dictionary and the .env file.</span>
+<span class="sd">    The function iterates through form data to update each API key.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; update_keys()</span>
+<span class="sd">    Updates API keys based on form submission and redirects to the API keys form page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">purpose</span><span class="p">,</span> <span class="n">new_key</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">api_keys</span><span class="p">[</span><span class="n">purpose</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_key</span>
+        <span class="n">env_var_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">purpose</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">_API_KEY&#39;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">env_var_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_key</span>
+
+        <span class="c1"># Update .env file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;website&quot;</span><span class="p">,</span> <span class="s2">&quot;.env&quot;</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;website&quot;</span><span class="p">,</span> <span class="s2">&quot;.env&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">updated</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">env_var_name</span><span class="si">}</span><span class="s2">=&quot;</span><span class="p">):</span>
+                    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">env_var_name</span><span class="si">}</span><span class="s1">=&quot;</span><span class="si">{</span><span class="n">new_key</span><span class="si">}</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">updated</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">updated</span><span class="p">:</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">env_var_name</span><span class="si">}</span><span class="s1">=&quot;</span><span class="si">{</span><span class="n">new_key</span><span class="si">}</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">client</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;admin.api_keys_form&quot;</span><span class="p">))</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Ori Tsemach, Eldar Garrett, Sahar Amar.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

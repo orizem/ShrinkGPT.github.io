@@ -2,6 +2,7 @@
 
 import os
 
+from typing import Dict
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -37,6 +38,41 @@ GPT_MESSAGES = [
 ]
 
 
-def format_chat_history_for_gpt(chat):
+def format_chat_history_for_gpt(chat: Dict[str, str]) -> Dict[str, str]:
+    """
+    Format chat history for GPT input.
+
+    This function takes a chat message and formats it into a structure suitable for GPT input.
+    It determines the role of the speaker (user or assistant) based on the identifier and
+    extracts the content of the message.
+
+    Parameters
+    ----------
+    chat : Dict[str, str]
+        A dictionary containing chat message information.
+        It should have at least two keys: "identifier" and "text".
+
+    Returns
+    -------
+    Dict[str, str]
+        A dictionary with two keys: "role" and "content".
+        The "role" key will be either "user" or "assistant" based on the chat["identifier"].
+        The "content" key contains the text of the chat message.
+
+    Notes
+    -----
+    This function assumes that the input dictionary has the following structure:
+    {
+        "identifier": "user" or "assistant",
+        "text": "The content of the chat message"
+    }
+
+    Examples
+    --------
+    >>> format_chat_history_for_gpt({"identifier": "user", "text": "Hello, how are you?"})
+    {"role": "user", "content": "Hello, how are you?"}
+    >>> format_chat_history_for_gpt({"identifier": "assistant", "text": "I'm good, thanks. How can I help you?"})
+    {"role": "assistant", "content": "I'm good, thanks. How can I help you?"}
+    """
     role = "user" if chat["identifier"] == "user" else "assistant"
     return {"role": role, "content": chat["text"]}

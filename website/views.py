@@ -800,7 +800,7 @@ def docs_index():
 
 
 # Route for the index page of the documentation
-@views.route("/docs/main.html")
+@views.route("/docs/modules.html")
 def docs_main():
     """Docs Main
 
@@ -823,7 +823,7 @@ def docs_main():
     >>> docs_main()
     Serves the main.html file from the DOCS_PATH.
     """
-    index_path = os.path.join(DOCS_PATH, "main.html")
+    index_path = os.path.join(DOCS_PATH, "modules.html")
     if os.path.exists(index_path):
         return send_file(index_path)
     else:

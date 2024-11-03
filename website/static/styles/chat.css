@@ -170,22 +170,22 @@ textarea {
 }
 
 .video-container {
-  border-radius: 50%;
   overflow: hidden;
   position:absolute;
-  right: 8%;
-  top: 120px;
-  height: 20vi;
-  width: 20vi;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  pointer-events: none;
 }
 
 .round-video {
-position: relative;
-left: 0;
-top: 0;
-opacity: 1;
-width: 100%;
-height: 100%;
+  border-radius: 50%;
+  position: relative;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  width: 20vi;
+  height: 100%;
 } 
 
 #toggleRecording {
@@ -240,10 +240,10 @@ height: 100%;
     max-width: 180pt;
   }
 
-  .video-container {
+  .round-video {
     width: 40vi;
-    height: 40vi;
-  }
+  } 
+
 }
 
 @media (max-width: 568px) {

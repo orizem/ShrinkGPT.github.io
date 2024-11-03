@@ -46,6 +46,17 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">ShrinkGPT.github.io</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">website package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#website-admin-module">website.admin module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#website.admin.activate_user"><code class="docutils literal notranslate"><span class="pre">activate_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.admin.admin_dashboard"><code class="docutils literal notranslate"><span class="pre">admin_dashboard()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.admin.api_keys_form"><code class="docutils literal notranslate"><span class="pre">api_keys_form()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.admin.deactivate_user"><code class="docutils literal notranslate"><span class="pre">deactivate_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.admin.delete_user"><code class="docutils literal notranslate"><span class="pre">delete_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.admin.generate_test_data"><code class="docutils literal notranslate"><span class="pre">generate_test_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.admin.load_api_keys"><code class="docutils literal notranslate"><span class="pre">load_api_keys()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#website.admin.update_keys"><code class="docutils literal notranslate"><span class="pre">update_keys()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-website.auth">website.auth module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#website.auth.login"><code class="docutils literal notranslate"><span class="pre">login()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#website.auth.logout"><code class="docutils literal notranslate"><span class="pre">logout()</span></code></a></li>
@@ -137,6 +148,262 @@
              
   <section id="website-package">
 <h1>website package<a class="headerlink" href="#website-package" title="Link to this heading"></a></h1>
+<section id="website-admin-module">
+<h2>website.admin module<a class="headerlink" href="#website-admin-module" title="Link to this heading"></a></h2>
+<dl class="py function" id="module-website.admin">
+<dt class="sig sig-object py" id="website.admin.activate_user">
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">activate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/admin.html#activate_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.activate_user" title="Link to this definition"></a></dt>
+<dd><p>Activate User</p>
+<p>This route handles POST requests to activate a deactivated user account.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>user_id<span class="classifier">int</span></dt><dd><p>The ID of the user to be activated.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>redirect</dt><dd><p>Redirects to the admin dashboard after activation.</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<p>This endpoint requires authentication and admin privileges.
+Only users with status -1 (deactivated) can be activated.
+The function updates the user’s status to 0 (active).</p>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activate_user</span><span class="p">(</span><span class="mi">456</span><span class="p">)</span>
+<span class="go">Activates the user with ID 456 and redirects to the admin dashboard.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.admin.admin_dashboard">
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">admin_dashboard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/website/admin.html#admin_dashboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.admin_dashboard" title="Link to this definition"></a></dt>
+<dd><p>Admin Dashboard</p>
+<p>This route handles GET requests for the admin dashboard page.
+It fetches various data points and renders the admin.html template.</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>None</dt><dd><p>This route does not accept any parameters.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>render_template</dt><dd><p>Renders the ‘admin.html’ template with dashboard data.</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h3>Notes<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>This endpoint requires authentication and admin privileges.
+It performs the following operations:
+1. Fetches users from the database based on pagination parameters
+2. Queries reviews data for chart generation
+3. Calculates average chats per user
+4. Prepares pie chart data for users with and without chats
+5. Queries registered and deactivated users by month and year</p>
+</section>
+<section id="id4">
+<h3>Examples<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">admin_dashboard</span><span class="p">()</span>
+<span class="go">Renders the admin dashboard with all necessary data.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.admin.api_keys_form">
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">api_keys_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/website/admin.html#api_keys_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.api_keys_form" title="Link to this definition"></a></dt>
+<dd><p>API Keys Form</p>
+<p>This route renders the API keys form page.</p>
+<section id="id5">
+<h3>Parameters<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>None</dt><dd><p>This route does not accept any parameters.</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3>Returns<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>render_template</dt><dd><p>Renders the ‘api_keys.html’ template with api_keys dictionary.</p>
+</dd>
+</dl>
+</section>
+<section id="id7">
+<h3>Notes<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>This endpoint requires authentication and admin privileges.
+It displays the current API keys stored in the system.</p>
+</section>
+<section id="id8">
+<h3>Examples<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api_keys_form</span><span class="p">()</span>
+<span class="go">Renders the API keys form page with all available API keys.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.admin.deactivate_user">
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">deactivate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/admin.html#deactivate_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.deactivate_user" title="Link to this definition"></a></dt>
+<dd><p>Deactivate User</p>
+<p>This route handles POST requests to deactivate an active user account.</p>
+<section id="id9">
+<h3>Parameters<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>user_id<span class="classifier">int</span></dt><dd><p>The ID of the user to be deactivated.</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h3>Returns<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>redirect</dt><dd><p>Redirects to the admin dashboard after deactivation.</p>
+</dd>
+</dl>
+</section>
+<section id="id11">
+<h3>Notes<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<p>This endpoint requires authentication and admin privileges.
+Only active users (status 0) can be deactivated.
+The function updates the user’s status to -1 (deactivated).</p>
+</section>
+<section id="id12">
+<h3>Examples<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">deactivate_user</span><span class="p">(</span><span class="mi">789</span><span class="p">)</span>
+<span class="go">Deactivates the user with ID 789 and redirects to the admin dashboard.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.admin.delete_user">
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">delete_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/admin.html#delete_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.delete_user" title="Link to this definition"></a></dt>
+<dd><p>Delete User</p>
+<p>This route handles POST requests to delete a user from the database.</p>
+<section id="id13">
+<h3>Parameters<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>user_id<span class="classifier">int</span></dt><dd><p>The ID of the user to be deleted.</p>
+</dd>
+</dl>
+</section>
+<section id="id14">
+<h3>Returns<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>redirect</dt><dd><p>Redirects to the admin dashboard after deletion.</p>
+</dd>
+</dl>
+</section>
+<section id="id15">
+<h3>Notes<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<p>This endpoint requires authentication and admin privileges.
+It removes the specified user and associated data from the system.
+The operation is irreversible and should be used cautiously.</p>
+</section>
+<section id="id16">
+<h3>Examples<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">delete_user</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="go">Deletes the user with ID 123 and redirects to the admin dashboard.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.admin.generate_test_data">
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">generate_test_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/website/admin.html#generate_test_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.generate_test_data" title="Link to this definition"></a></dt>
+<dd><p>Generate Test Data</p>
+<p>This route handles POST requests to generate test data for the application.
+It creates sample users, chats, and reviews to populate the database for testing purposes.</p>
+<section id="id17">
+<h3>Parameters<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>None</dt><dd><p>This route does not accept any parameters.</p>
+</dd>
+</dl>
+</section>
+<section id="id18">
+<h3>Returns<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>dict</dt><dd><p>A dictionary containing a redirect URL.</p>
+</dd>
+</dl>
+</section>
+<section id="id19">
+<h3>Notes<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<p>This endpoint is intended for development and testing purposes only.
+It should not be exposed in production environments.
+The function performs the following operations:
+1. Creates sample users
+2. Generates test chats
+3. Creates test reviews</p>
+</section>
+<section id="id20">
+<h3>Examples<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generate_test_data</span><span class="p">()</span>
+<span class="go">Generates test data and redirects to the admin dashboard.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.admin.load_api_keys">
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">load_api_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/admin.html#load_api_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.load_api_keys" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.admin.update_keys">
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">update_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/admin.html#update_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.update_keys" title="Link to this definition"></a></dt>
+<dd><p>Update API Keys</p>
+<p>This route handles POST requests to update API keys stored in the system.</p>
+<section id="id21">
+<h3>Parameters<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>None</dt><dd><p>This route does not accept any parameters directly.
+It processes form data submitted via POST request.</p>
+</dd>
+</dl>
+</section>
+<section id="id22">
+<h3>Returns<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>redirect</dt><dd><p>Redirects to the API keys form page after updating.</p>
+</dd>
+</dl>
+</section>
+<section id="id23">
+<h3>Notes<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<p>This endpoint requires authentication and admin privileges.
+It updates both the in-memory dictionary and the .env file.
+The function iterates through form data to update each API key.</p>
+</section>
+<section id="id24">
+<h3>Examples<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">update_keys</span><span class="p">()</span>
+<span class="go">Updates API keys based on form submission and redirects to the API keys form page.</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<p>website.views module</p>
+</section>
 <section id="module-website.auth">
 <span id="website-auth-module"></span><h2>website.auth module<a class="headerlink" href="#module-website.auth" title="Link to this heading"></a></h2>
 <dl class="py function">
@@ -152,8 +419,8 @@ with commented infrastructure for TOTP-based two-factor authentication.</p>
 3. Verifies user credentials
 4. Checks user account status
 5. Creates user session on successful login</p>
-<section id="returns">
-<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<section id="id25">
+<h3>Returns<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Union[str, Response]</dt><dd><ul class="simple">
 <li><p>On GET: Rendered login form template</p></li>
@@ -181,8 +448,8 @@ with commented infrastructure for TOTP-based two-factor authentication.</p>
 <li><p>“You are now logged in!” - On successful authentication</p></li>
 </ul>
 </section>
-<section id="notes">
-<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<section id="id26">
+<h3>Notes<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Uses Flask-Login for session management</p></li>
 <li><p>Form validation through WTForms</p></li>
@@ -217,8 +484,8 @@ by authenticator apps like Google Authenticator or FreeOTP.</p>
 2. Removes username from session for security
 3. Generates QR code from user’s TOTP URI
 4. Returns QR code as SVG image stream</p>
-<section id="id1">
-<h3>Returns<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<section id="id27">
+<h3>Returns<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>tuple</dt><dd><p>A tuple containing three elements:
 - BytesIO stream containing SVG QR code image
@@ -245,8 +512,8 @@ by authenticator apps like Google Authenticator or FreeOTP.</p>
 <li><p>Stream is delivered with authentication headers</p></li>
 </ul>
 </section>
-<section id="id2">
-<h3>See Also<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<section id="id28">
+<h3>See Also<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
 <p>restricted_route_decorator : Session validation decorator
 User.get_totp_uri : Method generating TOTP URI
 STREAM_AUTH : Security headers for stream delivery</p>
@@ -268,8 +535,8 @@ On POST requests, it processes the form submission and creates a new user accoun
 5. Creates new user record in database
 6. Creates user status record
 7. Initiates two-factor authentication setup</p>
-<section id="id3">
-<h3>Returns<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="id29">
+<h3>Returns<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Union[str, Response]</dt><dd><ul class="simple">
 <li><p>On GET: Rendered registration form template</p></li>
@@ -280,8 +547,8 @@ On POST requests, it processes the form submission and creates a new user accoun
 </dd>
 </dl>
 </section>
-<section id="id4">
-<h3>Notes<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id30">
+<h3>Notes<a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Form Fields:</dt><dd><ul class="simple">
 <li><p>username: Unique user identifier</p></li>
@@ -308,8 +575,8 @@ On POST requests, it processes the form submission and creates a new user accoun
 </dd>
 </dl>
 </section>
-<section id="id5">
-<h3>See Also<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id31">
+<h3>See Also<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
 <p>.forms.RegisterForm : The form class handling registration data
 User : User model class
 Status : Status model class</p>
@@ -325,8 +592,8 @@ This route is protected by the restricted_route_decorator, which verifies
 the user has an active session before allowing access.</p>
 <p>The route enforces a strict no-cache policy to ensure the security of the 2FA setup process
 by preventing browser caching of sensitive setup information.</p>
-<section id="id6">
-<h3>Returns<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id32">
+<h3>Returns<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>tuple</dt><dd><p>A tuple containing three elements:</p>
 <ul class="simple">
@@ -345,8 +612,8 @@ by preventing browser caching of sensitive setup information.</p>
 </dd>
 </dl>
 </section>
-<section id="id7">
-<h3>Notes<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id33">
+<h3>Notes<a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Route is decorated with restricted_route_decorator to verify session</p></li>
 <li><p>Prints AUTH variable for debugging/logging purposes</p></li>
@@ -354,8 +621,8 @@ by preventing browser caching of sensitive setup information.</p>
 <li><p>Template: “two-factor-setup.html”</p></li>
 </ul>
 </section>
-<section id="id8">
-<h3>See Also<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="id34">
+<h3>See Also<a class="headerlink" href="#id34" title="Link to this heading"></a></h3>
 <p>restricted_route_decorator : Decorator that validates session</p>
 </section>
 </dd></dl>
@@ -370,8 +637,8 @@ by preventing browser caching of sensitive setup information.</p>
 Handle GET request for the Chat page.
 Display the Chat page with user
 information and an empty chat form.</p>
-<section id="id9">
-<h3>Returns<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="id35">
+<h3>Returns<a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘chat.html’ template with
 user information, no specific chat data,
@@ -379,8 +646,8 @@ no chat ID, and an empty chat name form.</p>
 </dd>
 </dl>
 </section>
-<section id="id10">
-<h3>Notes<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<section id="id36">
+<h3>Notes<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
 <p>This endpoint requires the user to be authenticated.</p>
 </section>
 </dd></dl>
@@ -392,27 +659,27 @@ no chat ID, and an empty chat name form.</p>
 <p>Serve static files from the documentation directory.
 This route handles requests for documentation files stored in the DOCS_PATH directory.
 It allows serving individual files or directories within the documentation structure.</p>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<section id="id37">
+<h3>Parameters<a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>filename<span class="classifier">str</span></dt><dd><p>Path to the file or directory within the DOCS_PATH.</p>
 </dd>
 </dl>
 </section>
-<section id="id11">
-<h3>Returns<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<section id="id38">
+<h3>Returns<a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Response</dt><dd><p>File contents if found, otherwise raises a 404 error.</p>
 </dd>
 </dl>
 </section>
-<section id="id12">
-<h3>Notes<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<section id="id39">
+<h3>Notes<a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
 <p>This endpoint serves static files directly without processing them through the Flask application.
 It’s designed to handle documentation-related file requests efficiently.</p>
 </section>
-<section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
+<section id="id40">
+<h3>Examples<a class="headerlink" href="#id40" title="Link to this heading"></a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">docs</span><span class="p">(</span><span class="s1">&#39;readme.md&#39;</span><span class="p">)</span>
 <span class="go">Serves the readme.md file from the DOCS_PATH.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">docs</span><span class="p">(</span><span class="s1">&#39;images/logo.png&#39;</span><span class="p">)</span>
@@ -432,16 +699,16 @@ It’s designed to handle documentation-related file requests efficiently.</p>
 to the main documentation page. When users access the /docs/ URL
 without additional path parameters, they will be automatically
 redirected to the main documentation view.</p>
-<section id="id13">
-<h3>Returns<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<section id="id41">
+<h3>Returns<a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Response</dt><dd><p>A Flask redirect response that sends the user
 to the main documentation page (views.docs_main).</p>
 </dd>
 </dl>
 </section>
-<section id="id14">
-<h3>Notes<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<section id="id42">
+<h3>Notes<a class="headerlink" href="#id42" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>The trailing slash in ‘/docs/’ is important for route matching</p></li>
 <li><p>Uses Flask’s url_for() for generating the redirect URL</p></li>
@@ -457,20 +724,20 @@ to the main documentation page (views.docs_main).</p>
 <p>Redirect to the main documentation page.
 This route serves as the entry point for accessing the documentation.
 It redirects users to the main documentation page, which likely contains an overview or index of available documentation resources.</p>
-<section id="id15">
-<h3>Returns<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<section id="id43">
+<h3>Returns<a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>redirect</dt><dd><p>Redirects to the main documentation page.</p>
 </dd>
 </dl>
 </section>
-<section id="id16">
-<h3>Notes<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<section id="id44">
+<h3>Notes<a class="headerlink" href="#id44" title="Link to this heading"></a></h3>
 <p>This endpoint is typically used to provide a centralized access point for documentation within the application.
 It’s part of a larger documentation system, possibly involving multiple pages or sections.</p>
 </section>
-<section id="id17">
-<h3>Examples<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<section id="id45">
+<h3>Examples<a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">docs_index</span><span class="p">()</span>
 <span class="go">Redirects to the main documentation page.</span>
 </pre></div>
@@ -485,20 +752,20 @@ It’s part of a larger documentation system, possibly involving multiple pages 
 <p>Serve the main documentation page.
 This route handles requests for the main HTML file in the documentation directory.
 It serves the main.html file, which likely contains an overview or index of available documentation resources.</p>
-<section id="id18">
-<h3>Returns<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<section id="id46">
+<h3>Returns<a class="headerlink" href="#id46" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Response</dt><dd><p>File contents of the main.html file if found, otherwise raises a 404 error.</p>
 </dd>
 </dl>
 </section>
-<section id="id19">
-<h3>Notes<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<section id="id47">
+<h3>Notes<a class="headerlink" href="#id47" title="Link to this heading"></a></h3>
 <p>This endpoint serves the main documentation page directly without additional processing.
 It’s part of a larger documentation system, possibly involving multiple pages or sections.</p>
 </section>
-<section id="id20">
-<h3>Examples<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<section id="id48">
+<h3>Examples<a class="headerlink" href="#id48" title="Link to this heading"></a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">docs_main</span><span class="p">()</span>
 <span class="go">Serves the main.html file from the DOCS_PATH.</span>
 </pre></div>
@@ -513,27 +780,27 @@ It’s part of a larger documentation system, possibly involving multiple pages 
 <p>Redirect static files to the documentation directory.
 This route handles requests for static files located outside the documentation directory.
 It redirects these requests to the corresponding files within the documentation structure.</p>
-<section id="id21">
-<h3>Parameters<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<section id="id49">
+<h3>Parameters<a class="headerlink" href="#id49" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>filename<span class="classifier">str</span></dt><dd><p>Path to the static file relative to the root of the application.</p>
 </dd>
 </dl>
 </section>
-<section id="id22">
-<h3>Returns<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<section id="id50">
+<h3>Returns<a class="headerlink" href="#id50" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>redirect</dt><dd><p>Redirects to the equivalent file path within the docs/_static directory.</p>
 </dd>
 </dl>
 </section>
-<section id="id23">
-<h3>Notes<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<section id="id51">
+<h3>Notes<a class="headerlink" href="#id51" title="Link to this heading"></a></h3>
 <p>This endpoint serves as a fallback mechanism for serving static files.
 It ensures consistency in serving static resources regardless of their location within the application structure.</p>
 </section>
-<section id="id24">
-<h3>Examples<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<section id="id52">
+<h3>Examples<a class="headerlink" href="#id52" title="Link to this heading"></a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">root_static</span><span class="p">(</span><span class="s1">&#39;image.jpg&#39;</span><span class="p">)</span>
 <span class="go">Redirects to &#39;/docs/_static/image.jpg&#39;.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">root_static</span><span class="p">(</span><span class="s1">&#39;styles.css&#39;</span><span class="p">)</span>
@@ -548,8 +815,8 @@ It ensures consistency in serving static resources regardless of their location 
 <span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_bot_response</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#get_bot_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_bot_response" title="Link to this definition"></a></dt>
 <dd><p>Handle GET request for bot response.</p>
 <p>Process user input and generate a response from the AI model.</p>
-<section id="id25">
-<h3>Returns<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<section id="id53">
+<h3>Returns<a class="headerlink" href="#id53" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>dict: A dictionary containing the encoded bot response and avatar video URL.</p>
 </div></blockquote>
@@ -568,15 +835,15 @@ It ensures consistency in serving static resources regardless of their location 
 <dd><p>Get Chat</p>
 <p>Handle GET request to retrieve chat information.
 Retrieve and display information about a specific chat.</p>
-<section id="id26">
-<h3>Parameters<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<section id="id54">
+<h3>Parameters<a class="headerlink" href="#id54" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>chat_id<span class="classifier">int</span></dt><dd><p>The identifier of the chat to be retrieved.</p>
 </dd>
 </dl>
 </section>
-<section id="id27">
-<h3>Returns<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<section id="id55">
+<h3>Returns<a class="headerlink" href="#id55" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘chat.html’ template with user
 information, chat data, chat ID, and a
@@ -593,8 +860,8 @@ or if the chat does not exist.</p>
 </dd>
 </dl>
 </section>
-<section id="id28">
-<h3>Notes<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<section id="id56">
+<h3>Notes<a class="headerlink" href="#id56" title="Link to this heading"></a></h3>
 <p>This endpoint requires the user to be authenticated
 and have the necessary permissions to access
 the specified chat.</p>
@@ -608,15 +875,15 @@ the specified chat.</p>
 <p>Handle GET request for Chat Delete endpoint.
 Delete the chat by the chat
 id in the request arguments.</p>
-<section id="id29">
-<h3>Returns<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<section id="id57">
+<h3>Returns<a class="headerlink" href="#id57" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Any</dt><dd><p>An empty string.</p>
 </dd>
 </dl>
 </section>
-<section id="id30">
-<h3>Raises<a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
+<section id="id58">
+<h3>Raises<a class="headerlink" href="#id58" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Redirect</dt><dd><p>Redirects to the index page if the current
 user is not authorized to delete the chat or
@@ -624,8 +891,8 @@ if the chat does not exist.</p>
 </dd>
 </dl>
 </section>
-<section id="id31">
-<h3>Notes<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<section id="id59">
+<h3>Notes<a class="headerlink" href="#id59" title="Link to this heading"></a></h3>
 <p>This endpoint requires the user to be authenticated
 and have the necessary permissions to delete the
 chat.</p>
@@ -639,15 +906,15 @@ chat.</p>
 <p>Handle GET request for Chat Edit endpoint.
 Edit the name of a chat by the name and chat
 id in the request arguments.</p>
-<section id="id32">
-<h3>Returns<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<section id="id60">
+<h3>Returns<a class="headerlink" href="#id60" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Any</dt><dd><p>An empty string.</p>
 </dd>
 </dl>
 </section>
-<section id="id33">
-<h3>Raises<a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
+<section id="id61">
+<h3>Raises<a class="headerlink" href="#id61" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Redirect</dt><dd><p>Redirects to the index page if the current
 user is not authorized to edit the chat or
@@ -655,8 +922,8 @@ if the chat does not exist.</p>
 </dd>
 </dl>
 </section>
-<section id="id34">
-<h3>Notes<a class="headerlink" href="#id34" title="Link to this heading"></a></h3>
+<section id="id62">
+<h3>Notes<a class="headerlink" href="#id62" title="Link to this heading"></a></h3>
 <p>This endpoint requires the user to be authenticated
 and have the necessary permissions to edit the
 chat name.</p>
@@ -668,15 +935,15 @@ chat name.</p>
 <span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">get_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/website/views.html#get_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.get_image" title="Link to this definition"></a></dt>
 <dd><p>Get Image</p>
 <p>Returns the profile image of the user.</p>
-<section id="id35">
-<h3>Parameters<a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
+<section id="id63">
+<h3>Parameters<a class="headerlink" href="#id63" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>username<span class="classifier">str</span></dt><dd><p>The user name to search.</p>
 </dd>
 </dl>
 </section>
-<section id="id36">
-<h3>Returns<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<section id="id64">
+<h3>Returns<a class="headerlink" href="#id64" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Any</dt><dd><p>User image.</p>
 </dd>
@@ -690,8 +957,8 @@ chat name.</p>
 <dd><p>Index</p>
 <p>Handle GET request for the index page.
 Display the index page with user information.</p>
-<section id="id37">
-<h3>Returns<a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
+<section id="id65">
+<h3>Returns<a class="headerlink" href="#id65" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘index.html’ template with user information.</p>
 </dd>
@@ -705,15 +972,15 @@ Display the index page with user information.</p>
 <dd><p>Page Not Found</p>
 <p>Handle 404 errors.
 Render a custom 404 page with an error message.</p>
-<section id="id38">
-<h3>Parameters<a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
+<section id="id66">
+<h3>Parameters<a class="headerlink" href="#id66" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>e<span class="classifier">Exception</span></dt><dd><p>The exception object representing the 404 error.</p>
 </dd>
 </dl>
 </section>
-<section id="id39">
-<h3>Returns<a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
+<section id="id67">
+<h3>Returns<a class="headerlink" href="#id67" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘404.html’ template with the provided error message.</p>
 </dd>
@@ -727,8 +994,8 @@ Render a custom 404 page with an error message.</p>
 <dd><p>Presentation</p>
 <p>Handle GET request for the presentation page.
 Display the presentation page with user information.</p>
-<section id="id40">
-<h3>Returns<a class="headerlink" href="#id40" title="Link to this heading"></a></h3>
+<section id="id68">
+<h3>Returns<a class="headerlink" href="#id68" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘presentation.html’ template with user information.</p>
 </dd>
@@ -742,15 +1009,15 @@ Display the presentation page with user information.</p>
 <dd><p>Profile</p>
 <p>Handle GET and POST requests for the profile page.
 Display user profile information and allow users to update their profiles.</p>
-<section id="id41">
-<h3>Returns<a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
+<section id="id69">
+<h3>Returns<a class="headerlink" href="#id69" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘profile.html’ template with user information and a profile form.</p>
 </dd>
 </dl>
 </section>
-<section id="id42">
-<h3>Notes<a class="headerlink" href="#id42" title="Link to this heading"></a></h3>
+<section id="id70">
+<h3>Notes<a class="headerlink" href="#id70" title="Link to this heading"></a></h3>
 <p>This endpoint requires the user to be authenticated.</p>
 </section>
 </dd></dl>
@@ -761,15 +1028,15 @@ Display user profile information and allow users to update their profiles.</p>
 <dd><p>Review</p>
 <p>Handle GET and POST requests for the review page.
 Display previous user’s reviews and allow logged in users to post reviews.</p>
-<section id="id43">
-<h3>Returns<a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
+<section id="id71">
+<h3>Returns<a class="headerlink" href="#id71" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>render_template</dt><dd><p>Renders the ‘review.html’ template with review form.</p>
 </dd>
 </dl>
 </section>
-<section id="id44">
-<h3>Notes<a class="headerlink" href="#id44" title="Link to this heading"></a></h3>
+<section id="id72">
+<h3>Notes<a class="headerlink" href="#id72" title="Link to this heading"></a></h3>
 <p>the post method requires the user to be authenticated.</p>
 </section>
 </dd></dl>
@@ -787,8 +1054,8 @@ Display previous user’s reviews and allow logged in users to post reviews.</p>
 The audio file should be sent as a multipart form data with key ‘file’.
 Only allowed audio file formats (as determined by allowed_file()) will be processed.
 The audio data is processed in memory without saving to disk.</p>
-<section id="id45">
-<h3>Returns<a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
+<section id="id73">
+<h3>Returns<a class="headerlink" href="#id73" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>tuple</dt><dd><p>A tuple containing two elements:
 - First element: Either a JSON response with transcribed text or an error message string
@@ -810,8 +1077,8 @@ Error: (“No file part”, 400) or (“Invalid file type”, 400)</p>
 <p>Using this route (<cite>/slideshow</cite>) will return a slideshow of images located in the <cite>static/image</cite> folder.
 If you want to choose what all file names should start with, use <cite>/slideshow/&lt;START_WITH&gt;</cite>.
 The start with parameter can also be passed as a list separated by semicolon (<cite>;</cite>).</p>
-<section id="id46">
-<h3>Parameters<a class="headerlink" href="#id46" title="Link to this heading"></a></h3>
+<section id="id74">
+<h3>Parameters<a class="headerlink" href="#id74" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>start_with<span class="classifier">str, optional</span></dt><dd><p>A string or list of strings that the desired
 images file name should start with.
@@ -820,8 +1087,8 @@ located in the <cite>static/image</cite> folder, by default “”.</p>
 </dd>
 </dl>
 </section>
-<section id="id47">
-<h3>Returns<a class="headerlink" href="#id47" title="Link to this heading"></a></h3>
+<section id="id75">
+<h3>Returns<a class="headerlink" href="#id75" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Response</dt><dd><p>Response of the desired images.</p>
 </dd>
@@ -836,27 +1103,27 @@ located in the <cite>static/image</cite> folder, by default “”.</p>
 <p>Convert text to speech and play it.
 This route handles text-to-speech conversion and playback.
 It uses the speak function to convert the provided text into speech.</p>
-<section id="id48">
-<h3>Parameters<a class="headerlink" href="#id48" title="Link to this heading"></a></h3>
+<section id="id76">
+<h3>Parameters<a class="headerlink" href="#id76" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>text<span class="classifier">str, optional</span></dt><dd><p>The text to be converted to speech. If omitted, an empty string is used.</p>
 </dd>
 </dl>
 </section>
-<section id="id49">
-<h3>Returns<a class="headerlink" href="#id49" title="Link to this heading"></a></h3>
+<section id="id77">
+<h3>Returns<a class="headerlink" href="#id77" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Response</dt><dd><p>An empty Flask Response object.</p>
 </dd>
 </dl>
 </section>
-<section id="id50">
-<h3>Notes<a class="headerlink" href="#id50" title="Link to this heading"></a></h3>
+<section id="id78">
+<h3>Notes<a class="headerlink" href="#id78" title="Link to this heading"></a></h3>
 <p>This endpoint does not require user authentication (check_session=False).
 It silently fails and returns an empty response if any error occurs during the speech synthesis process.</p>
 </section>
-<section id="id51">
-<h3>Examples<a class="headerlink" href="#id51" title="Link to this heading"></a></h3>
+<section id="id79">
+<h3>Examples<a class="headerlink" href="#id79" title="Link to this heading"></a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text2speech</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
 <span class="go">Plays the spoken version of &quot;Hello, world!&quot;.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">text2speech</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -874,8 +1141,8 @@ It silently fails and returns an empty response if any error occurs during the s
 using OpenAI’s Whisper ASR (Automatic Speech Recognition) model.
 The file pointer is reset to the start before processing to ensure
 complete file reading.</p>
-<section id="id52">
-<h3>Parameters<a class="headerlink" href="#id52" title="Link to this heading"></a></h3>
+<section id="id80">
+<h3>Parameters<a class="headerlink" href="#id80" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>file_bytes<span class="classifier">io.BytesIO</span></dt><dd><p>A BytesIO object containing the audio data to be transcribed.
 The audio should be in a format supported by the Whisper model
@@ -883,24 +1150,24 @@ The audio should be in a format supported by the Whisper model
 </dd>
 </dl>
 </section>
-<section id="id53">
-<h3>Returns<a class="headerlink" href="#id53" title="Link to this heading"></a></h3>
+<section id="id81">
+<h3>Returns<a class="headerlink" href="#id81" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>str</dt><dd><p>The transcribed text from the audio file.
 Returns an empty string if transcription fails.</p>
 </dd>
 </dl>
 </section>
-<section id="id54">
-<h3>Notes<a class="headerlink" href="#id54" title="Link to this heading"></a></h3>
+<section id="id82">
+<h3>Notes<a class="headerlink" href="#id82" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Uses OpenAI’s ‘whisper-1’ model for transcription</p></li>
 <li><p>Currently set to transcribe English language content only</p></li>
 <li><p>Requires valid OpenAI API credentials in the client object</p></li>
 </ul>
 </section>
-<section id="id55">
-<h3>Raises<a class="headerlink" href="#id55" title="Link to this heading"></a></h3>
+<section id="id83">
+<h3>Raises<a class="headerlink" href="#id83" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Exception</dt><dd><p>May raise exceptions related to API calls, invalid audio format,
 or authentication issues with the OpenAI client.</p>
@@ -914,15 +1181,15 @@ or authentication issues with the OpenAI client.</p>
 <span class="sig-prename descclassname"><span class="pre">website.views.</span></span><span class="sig-name descname"><span class="pre">user_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/views.html#user_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.views.user_image" title="Link to this definition"></a></dt>
 <dd><p>Get Image</p>
 <p>Returns the profile image of the current user.</p>
-<section id="id56">
-<h3>Parameters<a class="headerlink" href="#id56" title="Link to this heading"></a></h3>
+<section id="id84">
+<h3>Parameters<a class="headerlink" href="#id84" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>filename<span class="classifier">str</span></dt><dd><p>The file name to search.</p>
 </dd>
 </dl>
 </section>
-<section id="id57">
-<h3>Returns<a class="headerlink" href="#id57" title="Link to this heading"></a></h3>
+<section id="id85">
+<h3>Returns<a class="headerlink" href="#id85" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Any</dt><dd><p>filename image.</p>
 </dd>
