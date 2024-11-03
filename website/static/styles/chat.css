@@ -176,6 +176,72 @@ textarea {
   height: 100vh;
   width: 100vw;
   pointer-events: none;
+  object-fit: cover;
+}
+
+.circular-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.custom-controls {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; /* Full width of the video container */
+  height: 60px; /* Height of the control strip */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align buttons at the top of the control strip */
+  pointer-events: none; /* Prevent interaction with the container */
+  transition: opacity 0.5s ease-out;
+  opacity: 0;
+}
+
+.video-container:hover .custom-controls {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-in;
+}
+
+.control-button {
+  width: 30px; /* Control button size */
+  height: 30px; /* Control button size */
+  background: rgba(0, 0, 0, 0.7); /* Background color */
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 12px; /* Adjust size for icons */
+  border-radius: 50%; /* Round buttons */
+  pointer-events: auto; /* Enable interaction */
+  margin: 0 5px; /* Space between buttons */
+  position: absolute; /* Position absolute for custom placement */
+}
+
+/* Position the buttons along the arch */
+#playPauseBtn {
+  top: 2px; /* Adjust position */
+  left: calc(50% - 100px); /* Position left */
+}
+
+#muteBtn {
+  top: 2px; /* Adjust position */
+  left: calc(50% + 60px); /* Position center right */
+}
+
+#seekBar {
+  position: absolute;
+  bottom: 20px;
+  left: calc(50% - 60px);
+  width: 120px; /* Width of the seek bar */
+  pointer-events: auto; /* Enable interaction */
+}
+
+#fullscreenBtn {
+  bottom: 43px; /* Adjust position */
+  left: calc(50% + 95px); /* Position center left */
 }
 
 .round-video {

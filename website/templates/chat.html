@@ -100,9 +100,16 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
   </section>
   <div class="video-container">
     <div class="video-box" id="videoBox">
-      <video class="round-video" id="videoFrame" loop autoplay muted>
+      <video class="round-video circular-video" id="videoFrame" preload="metadata" loop autoplay muted>
         <source id="videoSource" src="../static/video/emma_idle.mp4" type="video/mp4">
       </video>
+
+      <div class="custom-controls">
+        <button id="playPauseBtn" class="control-button"><i class="fas fa-pause"></i></button>
+        <button id="muteBtn" class="control-button"><i class="fas fa-volume-up"></i></button>
+        <input type="range" id="seekBar" value="0" min="0" max="100" step="1">
+        <button id="fullscreenBtn" class="control-button"><i class="fas fa-expand"></i></button>
+      </div>
     </div>
   </div>
   <!-- partial -->
@@ -118,6 +125,53 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         //      $(this).closest("form").submit();
         //    }
         //  });
+
+        // ============= [ Custom Video Controls ] ===============
+        const video = document.getElementById('videoFrame');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        const seekBar = document.getElementById('seekBar');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+        // Play/Pause functionality
+        playPauseBtn.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                video.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+
+        // Mute/Unmute functionality
+        muteBtn.addEventListener('click', () => {
+            video.muted = !video.muted;
+            muteBtn.innerHTML = video.muted ? '<i class="fas fa-volume-down"></i>' : '<i class="fas fa-volume-up"></i>';
+        });
+
+        // Update the seek bar as the video plays
+        video.addEventListener('timeupdate', () => {
+            seekBar.value = (video.currentTime / video.duration) * 100 || 0;
+        });
+
+        // Seek functionality
+        seekBar.addEventListener('input', () => {
+            video.currentTime = (seekBar.value / 100) * video.duration;
+        });
+
+        // Fullscreen functionality
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                video.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>'; // Change to compress icon
+            } else {
+                document.exitFullscreen();
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>'; // Change to expand icon
+            }
+        });
 
         // ============= [ Drag & Drop Video ] ===============
         const videoBox = document.getElementById("videoBox");
