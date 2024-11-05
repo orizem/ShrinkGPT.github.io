@@ -57,8 +57,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
             <div class="msg-info-name">Shrink.io</div>
           </div>
 
-          {% set welcome_msg = "Hi " + user.name.title() + ", welcome to
-          Shrink.io! Go ahead and send me a message." %}
+          {% set welcome_msg = "Hi " + user.name.title() + ", welcome to Shrink.io! Go ahead and send me a message." %}
 
           <div class="msg-text">{{ welcome_msg }}</div>
           <div style="text-align: right; font-size: 10pt">
@@ -71,7 +70,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
                 width: 20pt;
                 height: 20pt;
               "
-              onclick="requestTextToSpeech('{{ welcome_msg }}')"
+              onclick="toggleTextToSpeech(event, `${text.replace(/\u0022/g, '').replace(/\'/g, '')}`)"
             >
               ►
             </button>
@@ -267,7 +266,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         const PERSON_IMG = "{{ url_for('views.get_image', username=user.username) }}";
         const BOT_NAME = "Shrink.io";
         const PERSON_NAME = "You";
-        fisrtTime = 1;
+        firstTime = 1;
         chatId = -1;
 
         // Load previous chats
@@ -325,7 +324,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
             stopTextToSpeech(); // Stop any previous audio
           }
           catch{}
-          
+
           var msg = new SpeechSynthesisUtterance();
           var voices = window.speechSynthesis.getVoices();
           
@@ -484,10 +483,10 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         function botResponse(rawText) {
           dateTime = formatDate(new Date())
           // Bot Response
-          $.get("/get", { msg: rawText, fisrtTime: fisrtTime, dateTime: dateTime, chatId: chatId }).done(function (response) {
+          $.get("/get", { msg: rawText, firstTime: firstTime, dateTime: dateTime, chatId: chatId }).done(function (response) {
             // Start of the chat conversation indication
-            if (fisrtTime == 1) {
-              fisrtTime = 0;
+            if (firstTime == 1) {
+              firstTime = 0;
             }
 
             const msgText = response.encoded_bot_response;
