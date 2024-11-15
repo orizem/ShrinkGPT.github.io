@@ -8,7 +8,6 @@ from io import BytesIO
 from json import dumps
 from typing import Any
 from flask_login import current_user
-from os.path import realpath, commonpath
 from flask import (
     Blueprint,
     Response,
@@ -19,10 +18,13 @@ from flask import (
     request,
     flash,
     jsonify,
-    send_from_directory,
     abort,
 )
 from datetime import datetime
+
+# from transformers import AutoTokenizer, AutoModelForSequenceClassification
+# from torch.nn.functional import softmax
+# from torch import argmax
 
 # LOCAL IMPORTS
 from .models import User, Chat
@@ -55,6 +57,11 @@ DOCS_PATH = os.path.abspath(
 )
 STATIC_PATH = os.path.join(DOCS_PATH, "_static")
 
+# tokenizer = AutoTokenizer.from_pretrained("nateraw/bert-base-uncased-emotion")
+# model = AutoModelForSequenceClassification.from_pretrained(
+#     "nateraw/bert-base-uncased-emotion"
+# )
+
 
 # ROUTES
 @views.route("/")
@@ -83,7 +90,7 @@ def index():
     table_data = [
         {
             "submitted_at": str(review.submitted_at),
-            "name": review.user.username if review.user_id != None else "Anonymous",
+            "name": review.user.username if review.user_id is not None else "Anonymous",
             "title": review.title,
             "content": review.content,
             "stars": review.stars,
@@ -276,9 +283,8 @@ def get_bot_response():
     from .models import db
 
     user = get_current_user()
-
     chat_id = int(request.args.get("chatId"))
-    fisrt_time = request.args.get("fisrtTime")
+    first_time = request.args.get("firstTime")
     user_msg = request.args.get("msg")
     date_time = request.args.get("dateTime")
 
@@ -300,7 +306,7 @@ def get_bot_response():
         db.session.commit()
         current_chat = user.chats[-1]
     else:
-        if fisrt_time == "1":
+        if first_time == "1":
             if user.status == 1:
                 welcome_text = QUESTIONS[0].format(user.full_name) + "\n" + QUESTIONS[1]
             else:
@@ -321,7 +327,6 @@ def get_bot_response():
         current_chat = user.chats[-1]
 
     existing_messages = current_chat.chat
-    # TODO: Check for the real date time parameter for user (currently using the bot's time)
     new_message = {"identifier": "user", "text": user_msg, "date_time": date_time}
     existing_messages.append(new_message)
 
@@ -352,15 +357,27 @@ def get_bot_response():
 
     # Generate response avatar stream
     try:
-        avatar_video_url = get_avatar_video(bot_response)
+        # Get emotion classification
+        # inputs = tokenizer(user_msg, return_tensors="pt")
+        # outputs = model(**inputs)
+        # probs = softmax(outputs.logits, dim=-1)
+
+        # # Map to emotion labels
+        # emotions = ["surprise", "happy", "serious", "neutral"]
+        # max_index = argmax(probs, dim=1).item()
+        # emotion = emotions[max_index]
+        emotion = "neutral"
+
+        avatar_video_url = get_avatar_video(bot_response, emotion)
     except Exception as e:
-        print(e)
+        print("[D-ID Video Error]:", e)
         avatar_video_url = ""
-    print(avatar_video_url)
+    print("[avatar_video_url]:", avatar_video_url)
 
     response = {
         "encoded_bot_response": encoded_bot_response,
         "avatar_video_url": avatar_video_url,
+        "emotion": emotion,
     }
 
     return response
@@ -800,7 +817,7 @@ def docs_index():
 
 
 # Route for the index page of the documentation
-@views.route("/docs/modules.html")
+@views.route("/docs/index.html")
 def docs_main():
     """Docs Main
 
@@ -823,7 +840,7 @@ def docs_main():
     >>> docs_main()
     Serves the main.html file from the DOCS_PATH.
     """
-    index_path = os.path.join(DOCS_PATH, "modules.html")
+    index_path = os.path.join(DOCS_PATH, "index.html")
     if os.path.exists(index_path):
         return send_file(index_path)
     else:

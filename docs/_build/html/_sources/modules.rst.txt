@@ -6,5 +6,3 @@ ShrinkGPT.github.io
 
    website
    website.utils
-   main
-   config

@@ -2,7 +2,7 @@ website package
 ===============
 
 website.admin module
--------------------
+--------------------
 
 .. automodule:: website.admin
    :members:

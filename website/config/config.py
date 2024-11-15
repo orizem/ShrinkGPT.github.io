@@ -65,7 +65,7 @@ class __Config:
         try:
             with open(f"{WEBSITE_PATH}/config/config.yaml", "r") as f:
                 self.__config = yaml.load(f, Loader=yaml.FullLoader)
-        except:
+        except Exception:
             raise __ConfigFileException
 
     def read(self, *args):
@@ -100,8 +100,3 @@ class __Config:
 
 
 config = __Config()
-# # DEBUGGING
-# if __name__ == "__main__":
-#     c = Config()
-#     print(c.read("text2speech", "male"))
-#     print(c.read("auth"))

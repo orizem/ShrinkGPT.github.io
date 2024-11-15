@@ -10,7 +10,7 @@ from time import sleep
 from typing import List, Union, Callable
 from flask_login import current_user
 from os.path import realpath, commonpath
-from flask import render_template, redirect, url_for, send_file, session, request
+from flask import render_template, redirect, url_for, send_file, session
 from dotenv import load_dotenv
 
 QUESTIONS = [
@@ -181,7 +181,7 @@ def restricted_route_decorator(check_session: bool):
     def decorator(func: Callable):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            if check_session == True:
+            if check_session:
                 if "username" not in session:
                     return redirect(url_for("views.index"))
                 user = User.query.filter_by(username=session["username"]).first()
@@ -189,7 +189,7 @@ def restricted_route_decorator(check_session: bool):
                 if user is None:
                     return redirect(url_for("views.index"))
             else:
-                if (current_user == None) or (current_user.is_authenticated == False):
+                if (current_user is None) or (not current_user.is_authenticated):
                     msg = "The page you where looking for could not be found."
                     return render_template("404.html", err_msg=msg), 404
                 user = get_current_user()
@@ -228,7 +228,7 @@ def restricted_admin_route_decorator():
         def wrapper(*args, **kwargs):
             try:
                 user = get_current_user()
-            except:
+            except Exception:
                 return redirect(url_for("views.index"))
 
             admin_id = Admin.query.filter_by(user_id=user.id).first()
@@ -252,9 +252,11 @@ def html_decode(text):
     return html.unescape(text)
 
 
-def get_avatar_video(text):
+def get_avatar_video(text, emotion):
     load_dotenv()
     D_ID_API_KEY = os.environ.get("D_ID_API_KEY")
+    
+    print("~"*30, emotion)
 
     payload = {
         "source_url": "https://create-images-results.d-id.com/DefaultPresenters/Emma_f/thumbnail.jpeg",  #! Make this with other frameworks
@@ -262,10 +264,16 @@ def get_avatar_video(text):
             "type": "text",
             "input": text,
             "provider": {
-                "type": "microsoft",  #! Make this with other frameworks
-                "voice_id": "en-US-JennyNeural",  #! Make this with other voices
-                "voice_config": {"style": "Cheerful"},  #! Make this with other configs
+                "type": "microsoft", 
+                "voice_id": "en-US-JennyNeural",  
             },
+        },
+        "config": {
+            "driver_expressions": {
+                "expressions": [
+                    {"start_frame": 0, "expression": f"{emotion}", "intensity": 1}
+                ]
+            }
         },
     }
     headers = {
@@ -279,11 +287,14 @@ def get_avatar_video(text):
 
     talks_response = requests.post(url, json=payload, headers=headers)
     talks_response_json = talks_response.json()
+
     url = url + "/" + talks_response_json.get("id")
-    sleep(5)
+    sleep(7)
 
     response = requests.get(url, headers=headers)
     response_json = response.json()
+    
+    print("\n\n~~~~~~~~~~~~~~~~", response_json, "/n/n~~~~~~~~~~~~/n/n")
 
     return response_json.get("result_url")
 
@@ -347,11 +358,6 @@ def random_date() -> datetime:
 
 
 def create_test_users():
-    # Check if needs to add default users
-    # is_there_any_users = User.query.all()
-    # if len(is_there_any_users) > 2:
-    #     return
-
     for i in range(383):
         Faker.seed(randint(0, 100000))
         fake = Faker("en")
@@ -556,11 +562,6 @@ def generate_random_review():
 
 
 def create_test_reviews():
-    # # Check if needs to add default reviews
-    # is_there_any_reviews = Reviews.query.all()
-    # if len(is_there_any_reviews) > 0:
-    #     return
-
     # Fetch all user IDs from the User model
     user_ids = db.session.query(User.id).all()
 
@@ -592,11 +593,6 @@ def create_test_reviews():
 
 
 def create_test_chats():
-    # # Check if needs to add default chats
-    # is_there_any_chats = Chat.query.all()
-    # if len(is_there_any_chats) > 0:
-    #     return
-    
     # Fetch all user IDs from the User model
     user_ids = db.session.query(User.id).all()
 

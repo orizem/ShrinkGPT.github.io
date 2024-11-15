@@ -1,133 +1,370 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>website.utils package &mdash; Shrink.io 1.0.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>website.utils package &#8212; Shrink.io 1.0.0 documentation</title>
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'website.utils';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="main module" href="main.html" />
-    <link rel="prev" title="website package" href="website.html" /> 
-</head>
+    <link rel="prev" title="website package" href="website.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-          
-          
-          <a href="index.html" class="icon icon-home">
-            Shrink.io
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ShrinkGPT.github.io</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="website.html">website package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">website.utils package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-website.utils.text2speech">website.utils.text2speech module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.text2speech.Text2Speech"><code class="docutils literal notranslate"><span class="pre">Text2Speech</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.text2speech.speak"><code class="docutils literal notranslate"><span class="pre">speak()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-website.utils.utils">website.utils.utils module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.allowed_file"><code class="docutils literal notranslate"><span class="pre">allowed_file()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.create_test_chats"><code class="docutils literal notranslate"><span class="pre">create_test_chats()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.create_test_reviews"><code class="docutils literal notranslate"><span class="pre">create_test_reviews()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.create_test_users"><code class="docutils literal notranslate"><span class="pre">create_test_users()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.generate_random_review"><code class="docutils literal notranslate"><span class="pre">generate_random_review()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.generate_slide_show"><code class="docutils literal notranslate"><span class="pre">generate_slide_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.get_avatar_video"><code class="docutils literal notranslate"><span class="pre">get_avatar_video()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.get_current_user"><code class="docutils literal notranslate"><span class="pre">get_current_user()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.get_initial_chat_state_response"><code class="docutils literal notranslate"><span class="pre">get_initial_chat_state_response()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.html_decode"><code class="docutils literal notranslate"><span class="pre">html_decode()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.html_encode"><code class="docutils literal notranslate"><span class="pre">html_encode()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.random_date"><code class="docutils literal notranslate"><span class="pre">random_date()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.restricted_admin_route_decorator"><code class="docutils literal notranslate"><span class="pre">restricted_admin_route_decorator()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.restricted_route_decorator"><code class="docutils literal notranslate"><span class="pre">restricted_route_decorator()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#website.utils.utils.safe_send_default_image"><code class="docutils literal notranslate"><span class="pre">safe_send_default_image()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-website.utils">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config.html">config module</a></li>
-</ul>
-</li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Shrink.io</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">ShrinkGPT.github.io</a></li>
-      <li class="breadcrumb-item active">website.utils package</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/website.utils.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Shrink.io 1.0.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    ShrinkGPT.github.io
+  </a>
+</li>
+
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    ShrinkGPT.github.io
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="website.html">website package</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">website.utils package</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">ShrinkGPT.github.io</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">website.utils package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="website-utils-package">
-<h1>website.utils package<a class="headerlink" href="#website-utils-package" title="Link to this heading"></a></h1>
+<h1>website.utils package<a class="headerlink" href="#website-utils-package" title="Link to this heading">#</a></h1>
+<section id="module-website.utils.gpt">
+<span id="website-utils-gpt-module"></span><h2>website.utils.gpt module<a class="headerlink" href="#module-website.utils.gpt" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="website.utils.gpt.format_chat_history_for_gpt">
+<span class="sig-prename descclassname"><span class="pre">website.utils.gpt.</span></span><span class="sig-name descname"><span class="pre">format_chat_history_for_gpt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/website/utils/gpt.html#format_chat_history_for_gpt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.gpt.format_chat_history_for_gpt" title="Link to this definition">#</a></dt>
+<dd><p>Format chat history for GPT input.</p>
+<p>This function takes a chat message and formats it into a structure suitable for GPT input.
+It determines the role of the speaker (user or assistant) based on the identifier and
+extracts the content of the message.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>chat<span class="classifier">Dict[str, str]</span></dt><dd><p>A dictionary containing chat message information.
+It should have at least two keys: “identifier” and “text”.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>Dict[str, str]</dt><dd><p>A dictionary with two keys: “role” and “content”.
+The “role” key will be either “user” or “assistant” based on the chat[“identifier”].
+The “content” key contains the text of the chat message.</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h3>
+<p>This function assumes that the input dictionary has the following structure:
+{</p>
+<blockquote>
+<div><p>“identifier”: “user” or “assistant”,
+“text”: “The content of the chat message”</p>
+</div></blockquote>
+<p>}</p>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">format_chat_history_for_gpt</span><span class="p">({</span><span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello, how are you?&quot;</span><span class="p">})</span>
+<span class="go">{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello, how are you?&quot;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">format_chat_history_for_gpt</span><span class="p">({</span><span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;I&#39;m good, thanks. How can I help you?&quot;</span><span class="p">})</span>
+<span class="go">{&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;I&#39;m good, thanks. How can I help you?&quot;}</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+</section>
 <section id="module-website.utils.text2speech">
-<span id="website-utils-text2speech-module"></span><h2>website.utils.text2speech module<a class="headerlink" href="#module-website.utils.text2speech" title="Link to this heading"></a></h2>
+<span id="website-utils-text2speech-module"></span><h2>website.utils.text2speech module<a class="headerlink" href="#module-website.utils.text2speech" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="website.utils.text2speech.Text2Speech">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.utils.text2speech.</span></span><span class="sig-name descname"><span class="pre">Text2Speech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'male'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'female'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'female'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.utils.text2speech.</span></span><span class="sig-name descname"><span class="pre">Text2Speech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'male'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'female'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'female'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Text Two Speech</p>
 <p>Class for speech the provided text.</p>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>gender: Literal[“male”, “female”], default “female”</dt><dd><p>The gender of the person speaks.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="website.utils.text2speech.Text2Speech.say">
-<span class="sig-name descname"><span class="pre">say</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech.say"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech.say" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">say</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech.say"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech.say" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="website.utils.text2speech.Text2Speech.stop">
-<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech.stop" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech.stop" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -135,35 +372,35 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.text2speech.speak">
-<span class="sig-prename descclassname"><span class="pre">website.utils.text2speech.</span></span><span class="sig-name descname"><span class="pre">speak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#speak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.speak" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.text2speech.</span></span><span class="sig-name descname"><span class="pre">speak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#speak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.speak" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="module-website.utils.utils">
-<span id="website-utils-utils-module"></span><h2>website.utils.utils module<a class="headerlink" href="#module-website.utils.utils" title="Link to this heading"></a></h2>
+<span id="website-utils-utils-module"></span><h2>website.utils.utils module<a class="headerlink" href="#module-website.utils.utils" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.allowed_file">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">allowed_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#allowed_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.allowed_file" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">allowed_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#allowed_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.allowed_file" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.create_test_chats">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">create_test_chats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#create_test_chats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.create_test_chats" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">create_test_chats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#create_test_chats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.create_test_chats" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.create_test_reviews">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">create_test_reviews</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#create_test_reviews"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.create_test_reviews" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">create_test_reviews</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#create_test_reviews"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.create_test_reviews" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.create_test_users">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">create_test_users</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#create_test_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.create_test_users" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">create_test_users</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#create_test_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.create_test_users" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.generate_random_review">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">generate_random_review</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#generate_random_review"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.generate_random_review" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">generate_random_review</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#generate_random_review"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.generate_random_review" title="Link to this definition">#</a></dt>
 <dd><p>Generates a random review with title, content, and stars based on the star rating group.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -174,7 +411,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.generate_slide_show">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">generate_slide_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_with</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#generate_slide_show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.generate_slide_show" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">generate_slide_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_with</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#generate_slide_show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.generate_slide_show" title="Link to this definition">#</a></dt>
 <dd><p>Generate Slide Show</p>
 <p>Generate a slideshow of images.</p>
 <p>This generator function yields frames
@@ -183,8 +420,8 @@ It starts with the specified image or
 list of images and continues in a loop,
 adding a delay of 5 seconds
 between each image.</p>
-<section id="id1">
-<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<section id="id2">
+<h3>Parameters<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>start_with<span class="classifier">str | List</span></dt><dd><p>The starting image or list of images
 for the slideshow.</p>
@@ -192,15 +429,15 @@ for the slideshow.</p>
 </dl>
 </section>
 <section id="yields">
-<h3>Yields<a class="headerlink" href="#yields" title="Link to this heading"></a></h3>
+<h3>Yields<a class="headerlink" href="#yields" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>bytes</dt><dd><p>Frames of images in the form of bytes
 with appropriate HTTP headers for streaming.</p>
 </dd>
 </dl>
 </section>
-<section id="notes">
-<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<section id="id3">
+<h3>Notes<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The images are read from the ‘static/image’ directory in the project path.</p></li>
 <li><p>The slideshow continues indefinitely, looping through the specified images.</p></li>
@@ -211,16 +448,16 @@ with appropriate HTTP headers for streaming.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.get_avatar_video">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_avatar_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_avatar_video"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_avatar_video" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_avatar_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emotion</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_avatar_video"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_avatar_video" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.get_current_user">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_current_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_current_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_current_user" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_current_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_current_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_current_user" title="Link to this definition">#</a></dt>
 <dd><p>Get Current User</p>
 <p>Search the flask login current user.</p>
-<section id="returns">
-<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<section id="id4">
+<h3>Returns<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>User | None</dt><dd><p>The model of flask login current user.
 Returns None if was not found.</p>
@@ -231,22 +468,22 @@ Returns None if was not found.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.get_initial_chat_state_response">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_initial_chat_state_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_initial_chat_state_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_initial_chat_state_response" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_initial_chat_state_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_initial_chat_state_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_initial_chat_state_response" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.html_decode">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">html_decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#html_decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.html_decode" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">html_decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#html_decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.html_decode" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.html_encode">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">html_encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#html_encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.html_encode" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">html_encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#html_encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.html_encode" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.random_date">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">random_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="reference internal" href="_modules/website/utils/utils.html#random_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.random_date" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">random_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="reference internal" href="_modules/website/utils/utils.html#random_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.random_date" title="Link to this definition">#</a></dt>
 <dd><p>Generates a random date between two given dates.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -257,7 +494,7 @@ Returns None if was not found.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.restricted_admin_route_decorator">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">restricted_admin_route_decorator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#restricted_admin_route_decorator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.restricted_admin_route_decorator" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">restricted_admin_route_decorator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#restricted_admin_route_decorator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.restricted_admin_route_decorator" title="Link to this definition">#</a></dt>
 <dd><p>Restricted Route Decorator</p>
 <p>Using the restricted_route_decorator, this decorator checks
 if the user id is in the admins table, otherwise, redirected
@@ -265,8 +502,8 @@ to index page as well.</p>
 <p>Must define endpoint for each route using this decorator.
 The decorator should be right above the function in
 order to run properly.</p>
-<section id="id2">
-<h3>Parameters<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<section id="id5">
+<h3>Parameters<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>func<span class="classifier">Callable</span></dt><dd><p>The function to wrap with authentication checking.</p>
 </dd>
@@ -276,7 +513,7 @@ order to run properly.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.restricted_route_decorator">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">restricted_route_decorator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">check_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#restricted_route_decorator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.restricted_route_decorator" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">restricted_route_decorator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">check_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#restricted_route_decorator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.restricted_route_decorator" title="Link to this definition">#</a></dt>
 <dd><p>Restricted Route Decorator</p>
 <p>Check if the user session is valid, if not,
 it redirected to 404.
@@ -285,8 +522,8 @@ if not, will be redirected to index page.</p>
 <p>Must define endpoint for each route using this decorator.
 The decorator should be right above the function in
 order to run properly.</p>
-<section id="id3">
-<h3>Parameters<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3>Parameters<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>func<span class="classifier">Callable</span></dt><dd><p>The function to wrap with authentication checking.</p>
 </dd>
@@ -296,7 +533,7 @@ order to run properly.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.safe_send_default_image">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">safe_send_default_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#safe_send_default_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.safe_send_default_image" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">safe_send_default_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#safe_send_default_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.safe_send_default_image" title="Link to this definition">#</a></dt>
 <dd><p>Safe Send Default Image</p>
 <p>Safely send the default image file.
 This function ensures that the
@@ -304,8 +541,8 @@ default image file is served securely.
 It checks if the provided path is
 within the expected base path to
 prevent directory traversal.</p>
-<section id="id4">
-<h3>Returns<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id7">
+<h3>Returns<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>send_file or tuple</dt><dd><p>If the path is safe, the default
 image file is sent using Flask’s
@@ -320,39 +557,146 @@ status code 404 is returned.</p>
 
 </section>
 <section id="module-website.utils">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-website.utils" title="Link to this heading"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-website.utils" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="website.html" class="btn btn-neutral float-left" title="website package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="main.html" class="btn btn-neutral float-right" title="main module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2024, Ori Tsemach, Eldar Garrett, Sahar Amar.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="website.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">website package</p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-</body>
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-website.utils.gpt">website.utils.gpt module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.gpt.format_chat_history_for_gpt"><code class="docutils literal notranslate"><span class="pre">format_chat_history_for_gpt()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-website.utils.text2speech">website.utils.text2speech module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.text2speech.Text2Speech"><code class="docutils literal notranslate"><span class="pre">Text2Speech</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.text2speech.Text2Speech.say"><code class="docutils literal notranslate"><span class="pre">Text2Speech.say()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.text2speech.Text2Speech.stop"><code class="docutils literal notranslate"><span class="pre">Text2Speech.stop()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.text2speech.speak"><code class="docutils literal notranslate"><span class="pre">speak()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-website.utils.utils">website.utils.utils module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.allowed_file"><code class="docutils literal notranslate"><span class="pre">allowed_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.create_test_chats"><code class="docutils literal notranslate"><span class="pre">create_test_chats()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.create_test_reviews"><code class="docutils literal notranslate"><span class="pre">create_test_reviews()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.create_test_users"><code class="docutils literal notranslate"><span class="pre">create_test_users()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.generate_random_review"><code class="docutils literal notranslate"><span class="pre">generate_random_review()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.generate_slide_show"><code class="docutils literal notranslate"><span class="pre">generate_slide_show()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.get_avatar_video"><code class="docutils literal notranslate"><span class="pre">get_avatar_video()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.get_current_user"><code class="docutils literal notranslate"><span class="pre">get_current_user()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.get_initial_chat_state_response"><code class="docutils literal notranslate"><span class="pre">get_initial_chat_state_response()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.html_decode"><code class="docutils literal notranslate"><span class="pre">html_decode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.html_encode"><code class="docutils literal notranslate"><span class="pre">html_encode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.random_date"><code class="docutils literal notranslate"><span class="pre">random_date()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.restricted_admin_route_decorator"><code class="docutils literal notranslate"><span class="pre">restricted_admin_route_decorator()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.restricted_route_decorator"><code class="docutils literal notranslate"><span class="pre">restricted_route_decorator()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.safe_send_default_image"><code class="docutils literal notranslate"><span class="pre">safe_send_default_image()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-website.utils">Module contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/website.utils.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Ori Tsemach, Eldar Garrett, Sahar Amar.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

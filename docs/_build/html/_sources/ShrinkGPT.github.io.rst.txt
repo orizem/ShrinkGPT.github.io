@@ -9,14 +9,8 @@ Subpackages
 
    ShrinkGPT.github.io.website
 
-ShrinkGPT.github.io.config module
----------------------------------
-
-.. automodule:: ShrinkGPT.github.io.config
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :private-members:
+Submodules
+----------
 
 ShrinkGPT.github.io.main module
 -------------------------------

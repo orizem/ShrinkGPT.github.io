@@ -1,6 +1,14 @@
 website.utils package
 =====================
 
+website.utils.gpt module
+--------------------------------
+
+.. automodule:: website.utils.gpt
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 website.utils.text2speech module
 --------------------------------
 
