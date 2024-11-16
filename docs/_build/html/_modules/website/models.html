@@ -41,6 +41,7 @@
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/website/models';</script>
+    <link rel="icon" href="../../_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -97,17 +98,25 @@
       <div class="navbar-item">
 
   
-    
+     
   
 
-<a class="navbar-brand logo" href="../../index.html">
+<a class="navbar-brand logo" href="https://shrink-io-app-565593111121.me-west1.run.app">
   
   
   
   
   
+    
+    
+      
+    
+    
+    <img src="../../_static/ShrinkGPT_logo.jpg" class="logo__image only-light" alt="Shrink.io - Home"/>
+    <img src="../../_static/ShrinkGPT_logo.jpg" class="logo__image only-dark pst-js-only" alt="Shrink.io - Home"/>
   
-    <p class="title logo__title">Shrink.io 1.0.0 documentation</p>
+  
+    <p class="title logo__title">Shrink.io</p>
   
 </a></div>
     
@@ -153,6 +162,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
       
     </div>
     
@@ -221,6 +246,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
         
       </div>
     
@@ -295,9 +336,41 @@
 
 
 <div class="viewcode-block" id="User">
-<a class="viewcode-back" href="../../website.html#website.models.User">[docs]</a>
+<a class="viewcode-back" href="../../website.models.html#website.models.User">[docs]</a>
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">UserMixin</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;User model.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;User model</span>
+
+<span class="sd">    Represents a user in the application. This model stores personal information</span>
+<span class="sd">    such as username, name, password hash, and OTP secret. It also manages user status</span>
+<span class="sd">    and provides methods for handling authentication and two-factor authentication (TFA).</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    id : int</span>
+<span class="sd">        Primary key for the user.</span>
+<span class="sd">    username : str</span>
+<span class="sd">        Username for the user (unique).</span>
+<span class="sd">    name : str</span>
+<span class="sd">        First name of the user.</span>
+<span class="sd">    lastname : str</span>
+<span class="sd">        Last name of the user.</span>
+<span class="sd">    image_data : bytes, optional</span>
+<span class="sd">        Profile image data for the user.</span>
+<span class="sd">    image_filename : str, optional</span>
+<span class="sd">        Filename for the user&#39;s profile image.</span>
+<span class="sd">    password_hash : str</span>
+<span class="sd">        Hashed password for authentication.</span>
+<span class="sd">    otp_secret : str</span>
+<span class="sd">        Secret key for generating time-based one-time passwords (TOTP).</span>
+<span class="sd">    chats : list of Chat</span>
+<span class="sd">        Relationship for storing the user&#39;s chats.</span>
+<span class="sd">    reviews : list of Reviews</span>
+<span class="sd">        Relationship for storing the user&#39;s reviews.</span>
+<span class="sd">    is_admin : Admin</span>
+<span class="sd">        Relationship for determining if the user is an admin.</span>
+<span class="sd">    status : Status</span>
+<span class="sd">        Relationship for storing the user&#39;s status.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;users&quot;</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -325,56 +398,139 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">password</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Password property setter, prevents direct access to the password.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        AttributeError</span>
+<span class="sd">            When trying to access the password attribute directly.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;password is not a readable attribute&quot;</span><span class="p">)</span>
 
     <span class="nd">@password</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set password hash for the user.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        password : str</span>
+<span class="sd">            The password to be hashed and set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_admin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Implement logic to check if the user is an admin</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the user is an admin.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            `True` if the user is an admin, `False` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Admin</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">())</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">full_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the full name of the user.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The full name of the user, combining `name` and `lastname`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lastname</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the status of the user.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int or None</span>
+<span class="sd">            The status code of the user if found, `None` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Get user status</span>
         <span class="n">user_status</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">user_status</span><span class="o">.</span><span class="n">status</span> <span class="k">if</span> <span class="n">user_status</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="nd">@status</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the status of the user.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        status : int</span>
+<span class="sd">            The status code to be set for the user.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">user_status</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
         <span class="n">user_status</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
 
 <div class="viewcode-block" id="User.verify_password">
-<a class="viewcode-back" href="../../website.html#website.models.User.verify_password">[docs]</a>
+<a class="viewcode-back" href="../../website.models.html#website.models.User.verify_password">[docs]</a>
     <span class="k">def</span> <span class="nf">verify_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify the user&#39;s password.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        password : str</span>
+<span class="sd">            The password to be verified.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            `True` if the password matches the stored hash, `False` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">check_password_hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="User.get_totp_uri">
-<a class="viewcode-back" href="../../website.html#website.models.User.get_totp_uri">[docs]</a>
+<a class="viewcode-back" href="../../website.models.html#website.models.User.get_totp_uri">[docs]</a>
     <span class="k">def</span> <span class="nf">get_totp_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the URI for the user&#39;s OTP secret.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The URI used for setting up the OTP app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;otpauth://totp/Shrink.io:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2">?secret=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">otp_secret</span><span class="si">}</span><span class="s2">&amp;issuer=Shrink.io&quot;</span></div>
 
 
 <div class="viewcode-block" id="User.verify_totp">
-<a class="viewcode-back" href="../../website.html#website.models.User.verify_totp">[docs]</a>
+<a class="viewcode-back" href="../../website.models.html#website.models.User.verify_totp">[docs]</a>
     <span class="k">def</span> <span class="nf">verify_totp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify the OTP token provided by the user.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        token : str</span>
+<span class="sd">            The OTP token to be verified.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            `True` if the token is valid, `False` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">valid_totp</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">otp_secret</span><span class="p">)</span></div>
 </div>
 
 
 
 <div class="viewcode-block" id="Admin">
-<a class="viewcode-back" href="../../website.html#website.models.Admin">[docs]</a>
+<a class="viewcode-back" href="../../website.models.html#website.models.Admin">[docs]</a>
 <span class="k">class</span> <span class="nc">Admin</span><span class="p">(</span><span class="n">UserMixin</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Admin model.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Admin model</span>
+
+<span class="sd">    Represents an admin in the system. An admin is essentially a user with special</span>
+<span class="sd">    privileges, and this model links a user to their admin status.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    id : int</span>
+<span class="sd">        Primary key for the admin.</span>
+<span class="sd">    user_id : int</span>
+<span class="sd">        Foreign key referencing the `users` table to link the admin to a user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;admins&quot;</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -386,9 +542,27 @@
 
 
 <div class="viewcode-block" id="Status">
-<a class="viewcode-back" href="../../website.html#website.models.Status">[docs]</a>
+<a class="viewcode-back" href="../../website.models.html#website.models.Status">[docs]</a>
 <span class="k">class</span> <span class="nc">Status</span><span class="p">(</span><span class="n">UserMixin</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Status model.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Status model</span>
+
+<span class="sd">    Represents the status of a user. This model is used to track whether a user is active,</span>
+<span class="sd">    deactivated, or in registration steps. It also stores the registration and deactivation dates.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    id : int</span>
+<span class="sd">        Primary key for the status.</span>
+<span class="sd">    user_id : int</span>
+<span class="sd">        Foreign key referencing the `users` table.</span>
+<span class="sd">    status : int</span>
+<span class="sd">        Status code for the user: `-1` for deactivated, `0` for active, and other values</span>
+<span class="sd">        represent different registration steps.</span>
+<span class="sd">    register_date : datetime</span>
+<span class="sd">        The date and time when the user registered.</span>
+<span class="sd">    last_deactivate_date : datetime, optional</span>
+<span class="sd">        The date and time when the user was last deactivated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;status&quot;</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -405,9 +579,24 @@
 
 
 <div class="viewcode-block" id="Chat">
-<a class="viewcode-back" href="../../website.html#website.models.Chat">[docs]</a>
+<a class="viewcode-back" href="../../website.models.html#website.models.Chat">[docs]</a>
 <span class="k">class</span> <span class="nc">Chat</span><span class="p">(</span><span class="n">UserMixin</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Chat model.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Chat model</span>
+
+<span class="sd">    Represents a chat conversation in the application. This model stores the chat data</span>
+<span class="sd">    in JSON format and associates each chat with a user.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    id : int</span>
+<span class="sd">        Primary key for the chat.</span>
+<span class="sd">    __name : str</span>
+<span class="sd">        The name of the chat.</span>
+<span class="sd">    chat_json : str</span>
+<span class="sd">        The chat data stored as a JSON string.</span>
+<span class="sd">    user_id : int</span>
+<span class="sd">        Foreign key referencing the `users` table to associate the chat with a user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;chats&quot;</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -420,26 +609,74 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">chat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the chat data as a Python object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            The chat data, parsed from the stored JSON.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chat_json</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chat_json</span> <span class="k">else</span> <span class="p">[]</span>
 
     <span class="nd">@chat</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">chat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the chat data from a Python object.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : list</span>
+<span class="sd">            The chat data to be stored, will be serialized to JSON.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chat_json</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the name of the chat.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The name of the chat.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
 
     <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the name of the chat.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            The name of the chat.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span></div>
 
 
 
 <div class="viewcode-block" id="Reviews">
-<a class="viewcode-back" href="../../website.html#website.models.Reviews">[docs]</a>
+<a class="viewcode-back" href="../../website.models.html#website.models.Reviews">[docs]</a>
 <span class="k">class</span> <span class="nc">Reviews</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reviews model.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reviews model</span>
+
+<span class="sd">    Represents a review submitted by a user. This model stores review details such as</span>
+<span class="sd">    the title, content, stars, and submission date. It also associates each review with</span>
+<span class="sd">    a specific user.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    id : int</span>
+<span class="sd">        Primary key for the review.</span>
+<span class="sd">    title : str</span>
+<span class="sd">        The title of the review.</span>
+<span class="sd">    content : str</span>
+<span class="sd">        The content of the review.</span>
+<span class="sd">    stars : int</span>
+<span class="sd">        The star rating for the review (1 to 5).</span>
+<span class="sd">    submitted_at : datetime</span>
+<span class="sd">        The date and time when the review was submitted.</span>
+<span class="sd">    user_id : int</span>
+<span class="sd">        Foreign key referencing the `users` table to associate the review with a user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;reviews&quot;</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

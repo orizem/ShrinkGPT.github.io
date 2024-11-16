@@ -41,6 +41,7 @@
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/website/admin';</script>
+    <link rel="icon" href="../../_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -97,17 +98,25 @@
       <div class="navbar-item">
 
   
-    
+     
   
 
-<a class="navbar-brand logo" href="../../index.html">
+<a class="navbar-brand logo" href="https://shrink-io-app-565593111121.me-west1.run.app">
   
   
   
   
   
+    
+    
+      
+    
+    
+    <img src="../../_static/ShrinkGPT_logo.jpg" class="logo__image only-light" alt="Shrink.io - Home"/>
+    <img src="../../_static/ShrinkGPT_logo.jpg" class="logo__image only-dark pst-js-only" alt="Shrink.io - Home"/>
   
-    <p class="title logo__title">Shrink.io 1.0.0 documentation</p>
+  
+    <p class="title logo__title">Shrink.io</p>
   
 </a></div>
     
@@ -153,6 +162,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
       
     </div>
     
@@ -221,6 +246,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
         
       </div>
     
@@ -316,8 +357,36 @@
 
 
 <div class="viewcode-block" id="load_api_keys">
-<a class="viewcode-back" href="../../website.html#website.admin.load_api_keys">[docs]</a>
+<a class="viewcode-back" href="../../website.admin.html#website.admin.load_api_keys">[docs]</a>
 <span class="k">def</span> <span class="nf">load_api_keys</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load API Keys from environment variables</span>
+
+<span class="sd">    This function iterates through the environment variables and loads </span>
+<span class="sd">    API keys whose names end with &quot;_API_KEY&quot; into a dictionary. The keys </span>
+<span class="sd">    in the dictionary are derived from the environment variable names by </span>
+<span class="sd">    removing the &quot;_API_KEY&quot; suffix and formatting the remaining part to </span>
+<span class="sd">    match a more readable format.</span>
+
+<span class="sd">    The dictionary `api_keys` is populated with the purpose as the key </span>
+<span class="sd">    (e.g., &quot;Service-Name&quot;) and the corresponding API key as the value.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">        The function does not return anything. It modifies the `api_keys` </span>
+<span class="sd">        dictionary directly.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function assumes the `api_keys` dictionary is already defined </span>
+<span class="sd">    in the scope where the function is called.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; load_api_keys()</span>
+<span class="sd">    The environment variable &#39;TWITTER_API_KEY&#39; will populate the </span>
+<span class="sd">    api_keys dictionary with {&#39;Twitter&#39;: &#39;your-api-key-value&#39;}.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;_API_KEY&quot;</span><span class="p">):</span>
             <span class="n">purpose</span> <span class="o">=</span> <span class="n">key</span><span class="p">[:</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
@@ -329,7 +398,7 @@
 
 
 <div class="viewcode-block" id="admin_dashboard">
-<a class="viewcode-back" href="../../website.html#website.admin.admin_dashboard">[docs]</a>
+<a class="viewcode-back" href="../../website.admin.html#website.admin.admin_dashboard">[docs]</a>
 <span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/admin_dashboard&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">admin_dashboard</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -461,7 +530,7 @@
 
 <span class="c1"># ROUTES</span>
 <div class="viewcode-block" id="generate_test_data">
-<a class="viewcode-back" href="../../website.html#website.admin.generate_test_data">[docs]</a>
+<a class="viewcode-back" href="../../website.admin.html#website.admin.generate_test_data">[docs]</a>
 <span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/generate_test_data&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">generate_test_data</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
@@ -502,7 +571,7 @@
 
 
 <div class="viewcode-block" id="delete_user">
-<a class="viewcode-back" href="../../website.html#website.admin.delete_user">[docs]</a>
+<a class="viewcode-back" href="../../website.admin.html#website.admin.delete_user">[docs]</a>
 <span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/delete/&lt;int:user_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">delete_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
@@ -540,7 +609,7 @@
 
 
 <div class="viewcode-block" id="activate_user">
-<a class="viewcode-back" href="../../website.html#website.admin.activate_user">[docs]</a>
+<a class="viewcode-back" href="../../website.admin.html#website.admin.activate_user">[docs]</a>
 <span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/activate/&lt;int:user_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">activate_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
@@ -584,7 +653,7 @@
 
 
 <div class="viewcode-block" id="deactivate_user">
-<a class="viewcode-back" href="../../website.html#website.admin.deactivate_user">[docs]</a>
+<a class="viewcode-back" href="../../website.admin.html#website.admin.deactivate_user">[docs]</a>
 <span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/deactivate/&lt;int:user_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">deactivate_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
@@ -630,7 +699,7 @@
 
 
 <div class="viewcode-block" id="api_keys_form">
-<a class="viewcode-back" href="../../website.html#website.admin.api_keys_form">[docs]</a>
+<a class="viewcode-back" href="../../website.admin.html#website.admin.api_keys_form">[docs]</a>
 <span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">api_keys_form</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -664,7 +733,7 @@
 
 
 <div class="viewcode-block" id="update_keys">
-<a class="viewcode-back" href="../../website.html#website.admin.update_keys">[docs]</a>
+<a class="viewcode-back" href="../../website.admin.html#website.admin.update_keys">[docs]</a>
 <span class="nd">@admin</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/update_keys&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="nd">@restricted_admin_route_decorator</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">update_keys</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>

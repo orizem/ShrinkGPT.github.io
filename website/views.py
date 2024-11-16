@@ -571,7 +571,7 @@ def text2speech(text: str = "") -> Response:
     """
     try:
         speak(text)
-    except:
+    except Exception:
         pass
     return Response()
 
@@ -850,6 +850,27 @@ def docs_main():
 # Redirect root static path requests to the correct /docs/_static path
 @views.route("/_static/<path:filename>")
 def root_static(filename):
+    """Root Static
+
+    Redirect static files to the documentation directory.
+    This route handles requests for static files outside the documentation directory.
+    It redirects these requests to the corresponding files within the documentation structure.
+
+    Parameters
+    ----------
+    filename : str
+        Path to the static file relative to the root of the application.
+
+    Returns
+    -------
+    redirect
+        Redirects to the equivalent file path within the docs/_static directory.
+
+    Notes
+    -----
+    This endpoint serves as a fallback mechanism for serving static files.
+    It ensures that static resources are correctly served from the docs/_static directory.
+    """
     return redirect(f"/docs/_static/{filename}", code=301)
 
 

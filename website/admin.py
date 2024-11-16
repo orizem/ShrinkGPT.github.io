@@ -34,6 +34,34 @@ api_keys = {}
 
 
 def load_api_keys():
+    """Load API Keys from environment variables
+
+    This function iterates through the environment variables and loads 
+    API keys whose names end with "_API_KEY" into a dictionary. The keys 
+    in the dictionary are derived from the environment variable names by 
+    removing the "_API_KEY" suffix and formatting the remaining part to 
+    match a more readable format.
+
+    The dictionary `api_keys` is populated with the purpose as the key 
+    (e.g., "Service-Name") and the corresponding API key as the value.
+
+    Returns
+    -------
+    None
+        The function does not return anything. It modifies the `api_keys` 
+        dictionary directly.
+
+    Notes
+    -----
+    This function assumes the `api_keys` dictionary is already defined 
+    in the scope where the function is called.
+
+    Examples
+    --------
+    >>> load_api_keys()
+    The environment variable 'TWITTER_API_KEY' will populate the 
+    api_keys dictionary with {'Twitter': 'your-api-key-value'}.
+    """
     for key, value in os.environ.items():
         if key.endswith("_API_KEY"):
             purpose = key[:-8].title().replace("_", "-")

@@ -13,6 +13,31 @@ from .views import page_not_found
 
 
 def create_app():
+    """Create and configure the Flask application
+
+    This function sets up and initializes the Flask application with 
+    the necessary configurations, extensions, and blueprints. It also 
+    registers the user loader for the login manager and error handlers.
+
+    The following components are initialized:
+    - Flask application instance
+    - Bootstrap for front-end styling
+    - Database (SQLAlchemy)
+    - Login Manager for user authentication
+    - Error handler for 404 (page not found)
+    - Blueprints for authentication, admin, and general views
+
+    Returns
+    -------
+    Flask
+        The configured Flask application instance.
+
+    Examples
+    --------
+    >>> app = create_app()
+    The application is configured, and blueprints for auth, admin, and views 
+    are registered, making it ready to run.
+    """
     app = Flask(__name__)
     app.static_folder = "static"
     app.config.from_object("config")
@@ -55,11 +80,63 @@ def create_app():
 
 
 def create_database(app):
+    """Create the database tables
+
+    This function creates the necessary database tables by calling 
+    `db.create_all()` within the app's context.
+
+    It is intended to be run when the application is first set up or 
+    when new database models are added.
+
+    Parameters
+    ----------
+    app : Flask
+        The Flask application instance that provides the app context 
+        for creating the tables.
+
+    Returns
+    -------
+    None
+        This function does not return anything, it only modifies the 
+        database.
+
+    Examples
+    --------
+    >>> create_database(app)
+    Creates the tables defined by the app's models in the database.
+    """
     with app.app_context():
         db.create_all()
 
 
 def create_admin(app):
+    """Create default admin user and admin entry
+
+    This function checks if there are any existing admins in the database. 
+    If no admins are found, it creates a default admin user and adds it 
+    to the database, followed by creating an associated admin entry.
+
+    It is useful for setting up a default administrative account on 
+    the first run of the application.
+
+    Parameters
+    ----------
+    app : Flask
+        The Flask application instance that provides the app context 
+        for creating the admin user.
+
+    Returns
+    -------
+    None
+        This function does not return anything, it only modifies the 
+        database by adding a default admin user and entry.
+
+    Examples
+    --------
+    >>> create_admin(app)
+    If no admins exist, a default admin user is created and added to 
+    the database.
+    """
     with app.app_context():
         # Check if needs to add a default admin
         is_there_any_admins = Admin.query.all()

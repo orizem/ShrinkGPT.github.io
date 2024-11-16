@@ -1,24 +1,27 @@
-website.utils package
-=====================
+Utils
+=====
 
-website.utils.gpt module
---------------------------------
+Utils
+=====
+
+GPT
+---
 
 .. automodule:: website.utils.gpt
    :members:
    :undoc-members:
    :show-inheritance:
 
-website.utils.text2speech module
---------------------------------
+Text To Speech
+--------------
 
 .. automodule:: website.utils.text2speech
    :members:
    :undoc-members:
    :show-inheritance:
 
-website.utils.utils module
---------------------------
+Utils
+-----
 
 .. automodule:: website.utils.utils
    :members:

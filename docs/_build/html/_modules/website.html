@@ -41,6 +41,7 @@
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/website';</script>
+    <link rel="icon" href="../_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -97,17 +98,25 @@
       <div class="navbar-item">
 
   
-    
+     
   
 
-<a class="navbar-brand logo" href="../index.html">
+<a class="navbar-brand logo" href="https://shrink-io-app-565593111121.me-west1.run.app">
   
   
   
   
   
+    
+    
+      
+    
+    
+    <img src="../_static/ShrinkGPT_logo.jpg" class="logo__image only-light" alt="Shrink.io - Home"/>
+    <img src="../_static/ShrinkGPT_logo.jpg" class="logo__image only-dark pst-js-only" alt="Shrink.io - Home"/>
   
-    <p class="title logo__title">Shrink.io 1.0.0 documentation</p>
+  
+    <p class="title logo__title">Shrink.io</p>
   
 </a></div>
     
@@ -153,6 +162,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
       
     </div>
     
@@ -221,6 +246,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
         
       </div>
     
@@ -294,6 +335,31 @@
 <div class="viewcode-block" id="create_app">
 <a class="viewcode-back" href="../website.html#website.create_app">[docs]</a>
 <span class="k">def</span> <span class="nf">create_app</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and configure the Flask application</span>
+
+<span class="sd">    This function sets up and initializes the Flask application with </span>
+<span class="sd">    the necessary configurations, extensions, and blueprints. It also </span>
+<span class="sd">    registers the user loader for the login manager and error handlers.</span>
+
+<span class="sd">    The following components are initialized:</span>
+<span class="sd">    - Flask application instance</span>
+<span class="sd">    - Bootstrap for front-end styling</span>
+<span class="sd">    - Database (SQLAlchemy)</span>
+<span class="sd">    - Login Manager for user authentication</span>
+<span class="sd">    - Error handler for 404 (page not found)</span>
+<span class="sd">    - Blueprints for authentication, admin, and general views</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Flask</span>
+<span class="sd">        The configured Flask application instance.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; app = create_app()</span>
+<span class="sd">    The application is configured, and blueprints for auth, admin, and views </span>
+<span class="sd">    are registered, making it ready to run.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">app</span><span class="o">.</span><span class="n">static_folder</span> <span class="o">=</span> <span class="s2">&quot;static&quot;</span>
     <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
@@ -339,6 +405,31 @@
 <div class="viewcode-block" id="create_database">
 <a class="viewcode-back" href="../website.html#website.create_database">[docs]</a>
 <span class="k">def</span> <span class="nf">create_database</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the database tables</span>
+
+<span class="sd">    This function creates the necessary database tables by calling </span>
+<span class="sd">    `db.create_all()` within the app&#39;s context.</span>
+
+<span class="sd">    It is intended to be run when the application is first set up or </span>
+<span class="sd">    when new database models are added.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    app : Flask</span>
+<span class="sd">        The Flask application instance that provides the app context </span>
+<span class="sd">        for creating the tables.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">        This function does not return anything, it only modifies the </span>
+<span class="sd">        database.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; create_database(app)</span>
+<span class="sd">    Creates the tables defined by the app&#39;s models in the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
         <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span></div>
 
@@ -347,6 +438,33 @@
 <div class="viewcode-block" id="create_admin">
 <a class="viewcode-back" href="../website.html#website.create_admin">[docs]</a>
 <span class="k">def</span> <span class="nf">create_admin</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create default admin user and admin entry</span>
+
+<span class="sd">    This function checks if there are any existing admins in the database. </span>
+<span class="sd">    If no admins are found, it creates a default admin user and adds it </span>
+<span class="sd">    to the database, followed by creating an associated admin entry.</span>
+
+<span class="sd">    It is useful for setting up a default administrative account on </span>
+<span class="sd">    the first run of the application.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    app : Flask</span>
+<span class="sd">        The Flask application instance that provides the app context </span>
+<span class="sd">        for creating the admin user.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">        This function does not return anything, it only modifies the </span>
+<span class="sd">        database by adding a default admin user and entry.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; create_admin(app)</span>
+<span class="sd">    If no admins exist, a default admin user is created and added to </span>
+<span class="sd">    the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
         <span class="c1"># Check if needs to add a default admin</span>
         <span class="n">is_there_any_admins</span> <span class="o">=</span> <span class="n">Admin</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>

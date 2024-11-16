@@ -1,50 +1,20 @@
-website package
-===============
+=======
+Website
+=======
 
-website.admin module
---------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: website.admin
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-website.views module
-
-website.auth module
--------------------
-
-.. automodule:: website.auth
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-website.views module
---------------------
-
-.. automodule:: website.views
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-website.forms module
---------------------
-
-.. automodule:: website.forms
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-website.models module
----------------------
-
-.. automodule:: website.models
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   website.admin
+   website.auth
+   website.views
+   website.models
+   website.forms
+   website.utils
+   website.config
 
 Module contents
----------------
+===============
 
 .. automodule:: website
    :members:

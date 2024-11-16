@@ -42,6 +42,36 @@ from ..models import User, Admin
 
 # PRIVATE
 def __get_all_images(start_with: Union[str, List]):
+    """Get all images from a directory that match a prefix
+
+    This function searches the `website/static/image` directory for image 
+    files that start with a specified prefix or a list of prefixes. It only 
+    considers files with `.jpg`, `.jpeg`, or `.png` extensions and returns 
+    the matching image filenames.
+
+    The function can accept a single prefix as a string or multiple prefixes 
+    as a list of strings. If a list is not provided, the function treats the 
+    prefix as a list with one element.
+
+    Parameters
+    ----------
+    start_with : Union[str, List]
+        A single prefix (str) or a list of prefixes (List[str]) to search for in the filenames.
+
+    Returns
+    -------
+    List[str]
+        A list of image filenames (with `.jpg`, `.jpeg`, or `.png` extensions) 
+        that start with the provided prefix or prefixes.
+
+    Examples
+    --------
+    >>> __get_all_images("logo")
+    ['logo1.jpg', 'logo2.png', 'logo3.jpeg']
+
+    >>> __get_all_images(["thumb", "banner"])
+    ['thumb1.jpg', 'thumb2.png', 'banner1.jpeg']
+    """
     IMAGE_PATH = r"website/static/image"
 
     if not isinstance(start_with, list):
@@ -245,14 +275,80 @@ def restricted_admin_route_decorator():
 
 
 def html_encode(text):
+    """Encode HTML special characters
+
+    This function takes a string and converts all special HTML characters 
+    (e.g., `<`, `>`, `&`, etc.) into their corresponding HTML escape codes. 
+    It uses Python's `html.escape` to ensure that the input text is safely 
+    represented in HTML format.
+
+    Parameters
+    ----------
+    text : str
+        The input string that contains special HTML characters to be encoded.
+
+    Returns
+    -------
+    str
+        The encoded string with HTML special characters replaced by their escape codes.
+
+    Examples
+    --------
+    >>> html_encode("<div>Hello & Welcome</div>")
+    '&lt;div&gt;Hello &amp; Welcome&lt;/div&gt;'
+    """
     return html.escape(text)
 
 
 def html_decode(text):
+    """Decode HTML escape codes into characters
+
+    This function takes a string containing HTML escape codes and converts 
+    them back into their corresponding characters. It uses Python's `html.unescape` 
+    to decode the HTML entities into their original form.
+
+    Parameters
+    ----------
+    text : str
+        The input string containing HTML escape codes to be decoded.
+
+    Returns
+    -------
+    str
+        The decoded string with HTML escape codes replaced by their corresponding characters.
+
+    Examples
+    --------
+    >>> html_decode('&lt;div&gt;Hello &amp; Welcome&lt;/div&gt;')
+    '<div>Hello & Welcome</div>'
+    """
     return html.unescape(text)
 
 
 def get_avatar_video(text, emotion):
+    """Generate an avatar video with a given emotion and text
+
+    This function interacts with the D-ID API to generate a video where 
+    a given avatar speaks the provided text with the specified emotion. 
+    It returns the URL of the generated video.
+
+    Parameters
+    ----------
+    text : str
+        The text that the avatar will speak.
+    emotion : str
+        The emotion (e.g., "happy", "sad") to apply to the avatar's expression.
+
+    Returns
+    -------
+    str
+        The URL of the generated avatar video.
+
+    Examples
+    --------
+    >>> get_avatar_video("Hello, how are you?", "happy")
+    'https://api.d-id.com/talks/xyz/result.mp4'
+    """
     load_dotenv()
     D_ID_API_KEY = os.environ.get("D_ID_API_KEY")
     
@@ -300,6 +396,29 @@ def get_avatar_video(text, emotion):
 
 
 def allowed_file(filename):
+    """Check if the file has an allowed extension
+
+    This function checks whether the given filename has an extension that 
+    is allowed for uploading (e.g., audio or video files).
+
+    Parameters
+    ----------
+    filename : str
+        The filename to check.
+
+    Returns
+    -------
+    bool
+        True if the file has an allowed extension, False otherwise.
+
+    Examples
+    --------
+    >>> allowed_file("song.mp3")
+    True
+
+    >>> allowed_file("image.jpg")
+    False
+    """
     ALLOWED_EXTENSIONS = {
         "flac",
         "m4a",
@@ -316,6 +435,27 @@ def allowed_file(filename):
 
 
 def get_initial_chat_state_response(user):
+    """Get the initial chat state response based on user status
+
+    This function generates the next response for the user based on their 
+    current status. It returns a question or statement according to the user's 
+    progress in the chat.
+
+    Parameters
+    ----------
+    user : User
+        The user object that contains the user's current status.
+
+    Returns
+    -------
+    str
+        The response that corresponds to the user's current chat status.
+
+    Examples
+    --------
+    >>> get_initial_chat_state_response(user)
+    "Hello John, how can I assist you today?"
+    """
     status = user.status
     response = QUESTIONS[status]
     if user.status == 1:
@@ -345,10 +485,14 @@ fake = Faker()
 
 
 def random_date() -> datetime:
-    """
-    Generates a random date between two given dates.
+    """Generates a random date between May 1, 2024, and the current date.
+    
+    Returns a random date calculated by generating a random number of days between the start and today.
 
-    :return: A random date between start and end.
+    Returns
+    -------
+    datetime
+        A random date between May 1, 2024, and the current date.
     """
     start = datetime(2024, 5, 1)
     end = datetime.today()
@@ -358,6 +502,16 @@ def random_date() -> datetime:
 
 
 def create_test_users():
+    """Generates and adds 383 test users to the database with random usernames, names, and statuses.
+
+    This function uses the Faker library to generate random names and usernames, then adds them to the
+    database. A random status is also assigned to each user along with a registration date.
+
+    Returns
+    -------
+    None
+        The function does not return anything. It commits each user and their associated status to the database.
+    """
     for i in range(383):
         Faker.seed(randint(0, 100000))
         fake = Faker("en")
@@ -394,10 +548,16 @@ def create_test_users():
 
 
 def generate_random_review():
-    """
-    Generates a random review with title, content, and stars based on the star rating group.
+    """Generates a random review with a title, content, and star rating.
 
-    :return: A dictionary with title, content, and star rating.
+    Based on the randomly chosen star rating, the function generates a review title and content from
+    pre-defined categories: 'bad', 'good', or 'excellent'. A random star rating is chosen, and 
+    corresponding text for the review is generated.
+
+    Returns
+    -------
+    tuple
+        A tuple containing the title (str), content (str), and star rating (int) of the review.
     """
     # Titles categorized by star rating groups
     titles = {
@@ -562,6 +722,16 @@ def generate_random_review():
 
 
 def create_test_reviews():
+    """Generates random reviews for users and adds them to the database.
+
+    This function fetches all user IDs from the database, then selects a random subset of users.
+    For each selected user, a review is generated using `generate_random_review()` and added to the database.
+
+    Returns
+    -------
+    None
+        The function does not return anything. It commits each generated review to the database.
+    """
     # Fetch all user IDs from the User model
     user_ids = db.session.query(User.id).all()
 
@@ -593,6 +763,16 @@ def create_test_reviews():
 
 
 def create_test_chats():
+    """Generates random chat entries for users and adds them to the database.
+
+    This function selects a random subset of users and generates a welcome message for each user
+    in a chat. The message and user data are then stored in the database as a new chat entry.
+
+    Returns
+    -------
+    None
+        The function does not return anything. It commits each generated chat to the database.
+    """
     # Fetch all user IDs from the User model
     user_ids = db.session.query(User.id).all()
 

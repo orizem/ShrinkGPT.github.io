@@ -315,6 +315,19 @@ def login() -> Union[str, Response]:
 
 @auth.route("/logout")
 def logout():
-    """User logout route."""
+    """User Logout
+
+    Logs the user out of the application by clearing the session and 
+    redirecting to the homepage.
+
+    This route handles user logouts by calling the `logout_user` function
+    which removes the user from the session, ensuring that the user is logged 
+    out and cannot access protected resources until they log in again.
+
+    Returns
+    -------
+    redirect
+        Redirects to the homepage (views.index) after logging the user out.
+    """
     logout_user()
     return redirect(url_for("views.index"))

@@ -24,7 +24,7 @@ class Text2Speech:
         try:
             # Set the voice
             self.__voice_id = config.read("text2speech", gender)
-        except:
+        except Exception:
             # Default voice in case there was a config exception
             self.__voice_id = self.__engine.getProperty("voices")[0]
 

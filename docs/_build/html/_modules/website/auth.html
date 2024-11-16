@@ -41,6 +41,7 @@
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/website/auth';</script>
+    <link rel="icon" href="../../_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -97,17 +98,25 @@
       <div class="navbar-item">
 
   
-    
+     
   
 
-<a class="navbar-brand logo" href="../../index.html">
+<a class="navbar-brand logo" href="https://shrink-io-app-565593111121.me-west1.run.app">
   
   
   
   
   
+    
+    
+      
+    
+    
+    <img src="../../_static/ShrinkGPT_logo.jpg" class="logo__image only-light" alt="Shrink.io - Home"/>
+    <img src="../../_static/ShrinkGPT_logo.jpg" class="logo__image only-dark pst-js-only" alt="Shrink.io - Home"/>
   
-    <p class="title logo__title">Shrink.io 1.0.0 documentation</p>
+  
+    <p class="title logo__title">Shrink.io</p>
   
 </a></div>
     
@@ -153,6 +162,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
       
     </div>
     
@@ -221,6 +246,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
         
       </div>
     
@@ -305,7 +346,7 @@
 
 <span class="c1"># ROUTES</span>
 <div class="viewcode-block" id="register">
-<a class="viewcode-back" href="../../website.html#website.auth.register">[docs]</a>
+<a class="viewcode-back" href="../../website.auth.html#website.auth.register">[docs]</a>
 <span class="nd">@auth</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/register&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">register</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Response</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;User Registration Route Handler</span>
@@ -418,7 +459,7 @@
 
 
 <div class="viewcode-block" id="two_factor_setup">
-<a class="viewcode-back" href="../../website.html#website.auth.two_factor_setup">[docs]</a>
+<a class="viewcode-back" href="../../website.auth.html#website.auth.two_factor_setup">[docs]</a>
 <span class="nd">@auth</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/two_factor_setup&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;two_factor_setup&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">two_factor_setup</span><span class="p">():</span>
@@ -468,7 +509,7 @@
 
 
 <div class="viewcode-block" id="qrcode">
-<a class="viewcode-back" href="../../website.html#website.auth.qrcode">[docs]</a>
+<a class="viewcode-back" href="../../website.auth.html#website.auth.qrcode">[docs]</a>
 <span class="nd">@auth</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/qrcode&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;qrcode&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">qrcode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
@@ -526,7 +567,7 @@
 
 
 <div class="viewcode-block" id="login">
-<a class="viewcode-back" href="../../website.html#website.auth.login">[docs]</a>
+<a class="viewcode-back" href="../../website.auth.html#website.auth.login">[docs]</a>
 <span class="nd">@auth</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">login</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Response</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;User Login Route Handler</span>
@@ -608,10 +649,23 @@
 
 
 <div class="viewcode-block" id="logout">
-<a class="viewcode-back" href="../../website.html#website.auth.logout">[docs]</a>
+<a class="viewcode-back" href="../../website.auth.html#website.auth.logout">[docs]</a>
 <span class="nd">@auth</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/logout&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;User logout route.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;User Logout</span>
+
+<span class="sd">    Logs the user out of the application by clearing the session and </span>
+<span class="sd">    redirecting to the homepage.</span>
+
+<span class="sd">    This route handles user logouts by calling the `logout_user` function</span>
+<span class="sd">    which removes the user from the session, ensuring that the user is logged </span>
+<span class="sd">    out and cannot access protected resources until they log in again.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    redirect</span>
+<span class="sd">        Redirects to the homepage (views.index) after logging the user out.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logout_user</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.index&quot;</span><span class="p">))</span></div>
 

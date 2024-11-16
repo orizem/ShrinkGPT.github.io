@@ -62,10 +62,7 @@ def format_chat_history_for_gpt(chat: Dict[str, str]) -> Dict[str, str]:
     Notes
     -----
     This function assumes that the input dictionary has the following structure:
-    {
-        "identifier": "user" or "assistant",
-        "text": "The content of the chat message"
-    }
+        {"identifier": "user" or "assistant", "text": "The content of the chat message"}
 
     Examples
     --------

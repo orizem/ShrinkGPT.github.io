@@ -5,4 +5,6 @@ ShrinkGPT.github.io
    :maxdepth: 4
 
    website
-   website.utils
+   js
+   guide
+   README

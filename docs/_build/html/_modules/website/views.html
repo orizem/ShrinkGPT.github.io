@@ -41,6 +41,7 @@
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/website/views';</script>
+    <link rel="icon" href="../../_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -97,17 +98,25 @@
       <div class="navbar-item">
 
   
-    
+     
   
 
-<a class="navbar-brand logo" href="../../index.html">
+<a class="navbar-brand logo" href="https://shrink-io-app-565593111121.me-west1.run.app">
   
   
   
   
   
+    
+    
+      
+    
+    
+    <img src="../../_static/ShrinkGPT_logo.jpg" class="logo__image only-light" alt="Shrink.io - Home"/>
+    <img src="../../_static/ShrinkGPT_logo.jpg" class="logo__image only-dark pst-js-only" alt="Shrink.io - Home"/>
   
-    <p class="title logo__title">Shrink.io 1.0.0 documentation</p>
+  
+    <p class="title logo__title">Shrink.io</p>
   
 </a></div>
     
@@ -153,6 +162,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
       
     </div>
     
@@ -221,6 +246,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
         
       </div>
     
@@ -347,7 +388,7 @@
 
 <span class="c1"># ROUTES</span>
 <div class="viewcode-block" id="index">
-<a class="viewcode-back" href="../../website.html#website.views.index">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.index">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Index</span>
@@ -391,7 +432,7 @@
 
 <span class="c1"># ROUTES</span>
 <div class="viewcode-block" id="presentation">
-<a class="viewcode-back" href="../../website.html#website.views.presentation">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.presentation">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/presentation&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">presentation</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Presentation</span>
@@ -409,7 +450,7 @@
 
 
 <div class="viewcode-block" id="page_not_found">
-<a class="viewcode-back" href="../../website.html#website.views.page_not_found">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.page_not_found">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">errorhandler</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">page_not_found</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Page Not Found</span>
@@ -433,7 +474,7 @@
 
 
 <div class="viewcode-block" id="profile">
-<a class="viewcode-back" href="../../website.html#website.views.profile">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.profile">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/profile&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">],</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;profile&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">profile</span><span class="p">():</span>
@@ -478,7 +519,7 @@
 
 
 <div class="viewcode-block" id="chat">
-<a class="viewcode-back" href="../../website.html#website.views.chat">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.chat">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/chat&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;chat&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">chat</span><span class="p">():</span>
@@ -512,7 +553,7 @@
 
 
 <div class="viewcode-block" id="get_chat">
-<a class="viewcode-back" href="../../website.html#website.views.get_chat">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.get_chat">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/get_chat/&lt;int:chat_id&gt;&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;get_chat&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_chat</span><span class="p">(</span><span class="n">chat_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
@@ -566,7 +607,7 @@
 
 
 <div class="viewcode-block" id="get_bot_response">
-<a class="viewcode-back" href="../../website.html#website.views.get_bot_response">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.get_bot_response">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/get&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;get&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_bot_response</span><span class="p">():</span>
@@ -687,7 +728,7 @@
 
 
 <div class="viewcode-block" id="get_chat_edit">
-<a class="viewcode-back" href="../../website.html#website.views.get_chat_edit">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.get_chat_edit">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/chat-edit&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;chat-edit&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_chat_edit</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
@@ -735,7 +776,7 @@
 
 
 <div class="viewcode-block" id="get_chat_delete">
-<a class="viewcode-back" href="../../website.html#website.views.get_chat_delete">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.get_chat_delete">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/chat-delete&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;chat-delete&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_chat_delete</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
@@ -781,7 +822,7 @@
 
 
 <div class="viewcode-block" id="get_image">
-<a class="viewcode-back" href="../../website.html#website.views.get_image">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.get_image">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/get_image/&lt;string:username&gt;&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get Image</span>
@@ -817,7 +858,7 @@
 
 
 <div class="viewcode-block" id="slideshow">
-<a class="viewcode-back" href="../../website.html#website.views.slideshow">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.slideshow">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/slideshow/&quot;</span><span class="p">)</span>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/slideshow/&lt;string:start_with&gt;&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">slideshow</span><span class="p">(</span><span class="n">start_with</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
@@ -854,7 +895,7 @@
 
 
 <div class="viewcode-block" id="text2speech">
-<a class="viewcode-back" href="../../website.html#website.views.text2speech">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.text2speech">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/text2speech/&lt;string:text&gt;&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;text2speech&quot;</span><span class="p">)</span>
 <span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">text2speech</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
@@ -888,14 +929,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">speak</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">Response</span><span class="p">()</span></div>
 
 
 
 <div class="viewcode-block" id="reviews">
-<a class="viewcode-back" href="../../website.html#website.views.reviews">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.reviews">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/review&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">reviews</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Review</span>
@@ -945,7 +986,7 @@
 
 
 <div class="viewcode-block" id="user_image">
-<a class="viewcode-back" href="../../website.html#website.views.user_image">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.user_image">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/user_image/&lt;filename&gt;&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">user_image</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get Image</span>
@@ -973,7 +1014,7 @@
 
 
 <div class="viewcode-block" id="save_record">
-<a class="viewcode-back" href="../../website.html#website.views.save_record">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.save_record">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/save_record&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">save_record</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Audio File Transcription Endpoint</span>
@@ -1012,7 +1053,7 @@
 
 
 <div class="viewcode-block" id="transcribe_audio">
-<a class="viewcode-back" href="../../website.html#website.views.transcribe_audio">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.transcribe_audio">[docs]</a>
 <span class="k">def</span> <span class="nf">transcribe_audio</span><span class="p">(</span><span class="n">file_bytes</span><span class="p">:</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Transcribe Audio to Text using OpenAI&#39;s Whisper Model</span>
 
@@ -1056,7 +1097,7 @@
 
 <span class="c1"># Route to serve the Sphinx documentation</span>
 <div class="viewcode-block" id="docs_empty">
-<a class="viewcode-back" href="../../website.html#website.views.docs_empty">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.docs_empty">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs/&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">docs_empty</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Redirect Empty Docs Route</span>
@@ -1084,7 +1125,7 @@
 
 <span class="c1"># Route to serve the Sphinx documentation</span>
 <div class="viewcode-block" id="docs">
-<a class="viewcode-back" href="../../website.html#website.views.docs">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.docs">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs/&lt;path:filename&gt;&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">docs</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Docs</span>
@@ -1127,7 +1168,7 @@
 
 <span class="c1"># Route for the index page of the documentation</span>
 <div class="viewcode-block" id="docs_index">
-<a class="viewcode-back" href="../../website.html#website.views.docs_index">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.docs_index">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">docs_index</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Docs Index</span>
@@ -1157,7 +1198,7 @@
 
 <span class="c1"># Route for the index page of the documentation</span>
 <div class="viewcode-block" id="docs_main">
-<a class="viewcode-back" href="../../website.html#website.views.docs_main">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.docs_main">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs/index.html&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">docs_main</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Docs Main</span>
@@ -1191,16 +1232,37 @@
 
 <span class="c1"># Redirect root static path requests to the correct /docs/_static path</span>
 <div class="viewcode-block" id="root_static">
-<a class="viewcode-back" href="../../website.html#website.views.root_static">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.root_static">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/_static/&lt;path:filename&gt;&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">root_static</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Root Static</span>
+
+<span class="sd">    Redirect static files to the documentation directory.</span>
+<span class="sd">    This route handles requests for static files outside the documentation directory.</span>
+<span class="sd">    It redirects these requests to the corresponding files within the documentation structure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        Path to the static file relative to the root of the application.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    redirect</span>
+<span class="sd">        Redirects to the equivalent file path within the docs/_static directory.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This endpoint serves as a fallback mechanism for serving static files.</span>
+<span class="sd">    It ensures that static resources are correctly served from the docs/_static directory.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/docs/_static/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="mi">301</span><span class="p">)</span></div>
 
 
 
 <span class="c1"># Serve static files (CSS, JS, images)</span>
 <div class="viewcode-block" id="docs_static">
-<a class="viewcode-back" href="../../website.html#website.views.docs_static">[docs]</a>
+<a class="viewcode-back" href="../../website.views.html#website.views.docs_static">[docs]</a>
 <span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs/_static/&lt;path:filename&gt;&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">docs_static</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Docs Static</span>

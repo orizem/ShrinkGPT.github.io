@@ -1,0 +1,1042 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chat &#8212; Shrink.io 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'js.chat';</script>
+    <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chat Side Navbar" href="js.chat_side_navbar.html" />
+    <link rel="prev" title="JSDoc" href="js.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="https://shrink-io-app-565593111121.me-west1.run.app">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/ShrinkGPT_logo.jpg" class="logo__image only-light" alt="Shrink.io - Home"/>
+    <img src="_static/ShrinkGPT_logo.jpg" class="logo__image only-dark pst-js-only" alt="Shrink.io - Home"/>
+  
+  
+    <p class="title logo__title">Shrink.io</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    ShrinkGPT.github.io
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    ShrinkGPT.github.io
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="website.html">Website</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="website.admin.html">Admin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.auth.html">Auth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="js.html">JSDoc</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Chat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.chat_side_navbar.html">Chat Side Navbar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.admin.html">Admin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.review.html">Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.index.html">Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
+
+
+
+
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">ShrinkGPT.github.io</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="js.html" class="nav-link">JSDoc</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Chat</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chat">
+<h1>Chat<a class="headerlink" href="#chat" title="Link to this heading">#</a></h1>
+<section id="custom-video-controls">
+<h2>Custom Video Controls<a class="headerlink" href="#custom-video-controls" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>muteBtn.click: `EventListener`</strong>::
+Toggles the mute/unmute state of the video when the muteBtn is clicked.
+Updates the muteBtn icon accordingly.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Toggles the mute/unmute state of the video when the muteBtn is clicked.</span>
+<span class="cm"> * Updates the muteBtn icon accordingly.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Event} event - The click event triggered on the muteBtn.</span>
+<span class="cm"> */</span>
+<span class="nx">muteBtn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">muted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="nx">video</span><span class="p">.</span><span class="nx">muted</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">muteBtn</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">video</span><span class="p">.</span><span class="nx">muted</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;&lt;i class=&quot;fas fa-volume-down&quot;&gt;&lt;/i&gt;&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&lt;i class=&quot;fas fa-volume-up&quot;&gt;&lt;/i&gt;&#39;</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>video.timeupdate: `EventListener`</strong>::
+Updates the value of the seek bar as the video plays.
+The seek bar value is updated based on the current time of the video relative to its duration.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Updates the value of the seek bar as the video plays.</span>
+<span class="cm"> * The seek bar value is updated based on the current time of the video relative to its duration.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Event} event - The timeupdate event triggered by the video element.</span>
+<span class="cm"> */</span>
+<span class="nx">video</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;timeupdate&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">seekBar</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">video</span><span class="p">.</span><span class="nx">currentTime</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">video</span><span class="p">.</span><span class="nx">duration</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>seekBar.input: `EventListener`</strong>::
+Allows the user to seek through the video by interacting with the seek bar.
+Updates the video’s currentTime based on the seek bar value.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Allows the user to seek through the video by interacting with the seek bar.</span>
+<span class="cm"> * Updates the video&#39;s currentTime based on the seek bar value.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Event} event - The input event triggered on the seekBar.</span>
+<span class="cm"> */</span>
+<span class="nx">seekBar</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">seekBar</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">video</span><span class="p">.</span><span class="nx">duration</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>fullscreenBtn.click: `EventListener`</strong>::
+Toggles the fullscreen state of the video when the fullscreenBtn is clicked.
+Changes the fullscreenBtn icon depending on whether the video is in fullscreen mode.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Toggles the fullscreen state of the video when the fullscreenBtn is clicked.</span>
+<span class="cm"> * Changes the fullscreenBtn icon depending on whether the video is in fullscreen mode.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Event} event - The click event triggered on the fullscreenBtn.</span>
+<span class="cm"> */</span>
+<span class="nx">fullscreenBtn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nb">document</span><span class="p">.</span><span class="nx">fullscreenElement</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">video</span><span class="p">.</span><span class="nx">requestFullscreen</span><span class="p">().</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`Error attempting to enable full-screen mode: </span><span class="si">${</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="nx">err</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">)`</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">        </span><span class="nx">fullscreenBtn</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&lt;i class=&quot;fas fa-compress&quot;&gt;&lt;/i&gt;&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Change to compress icon</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">document</span><span class="p">.</span><span class="nx">exitFullscreen</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">fullscreenBtn</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&lt;i class=&quot;fas fa-expand&quot;&gt;&lt;/i&gt;&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Change to expand icon</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="drag-drop-video">
+<h2>Drag &amp; Drop Video<a class="headerlink" href="#drag-drop-video" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>startDrag: `EventListener`</strong>::
+Initiates the dragging process when the user starts interacting with the <cite>videoBox</cite>.
+Sets up the appropriate event listeners for mouse or touch events and disables transition during dragging.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Initiates the dragging process when the user starts interacting with the videoBox.</span>
+<span class="cm"> * Sets up the appropriate event listeners for mouse or touch events and disables transition during dragging.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Event} e - The event triggered by either a &quot;mousedown&quot; or &quot;touchstart&quot;.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">startDrag</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">isDragging</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;mousedown&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">offsetX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">().</span><span class="nx">left</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">offsetY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">().</span><span class="nx">top</span><span class="p">;</span>
+<span class="w">        </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;mousemove&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handleDrag</span><span class="p">);</span>
+<span class="w">        </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;mouseup&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">stopDrag</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;touchstart&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">touch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
+<span class="w">        </span><span class="nx">offsetX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">touch</span><span class="p">.</span><span class="nx">clientX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">().</span><span class="nx">left</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">offsetY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">touch</span><span class="p">.</span><span class="nx">clientY</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">().</span><span class="nx">top</span><span class="p">;</span>
+<span class="w">        </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;touchmove&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handleDrag</span><span class="p">);</span>
+<span class="w">        </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;touchend&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">stopDrag</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Disable transition while dragging</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>handleDrag: `EventListener`</strong>::
+Handles the dragging process as the user moves the mouse or touch across the screen.
+Updates the position of <cite>videoBox</cite> and constrains its movement within the container’s boundaries.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Handles the dragging process as the user moves the mouse or touch across the screen.</span>
+<span class="cm"> * Updates the position of videoBox and constrains its movement within the container&#39;s boundaries.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Event} e - The event triggered by either a &quot;mousemove&quot; or &quot;touchmove&quot;.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">handleDrag</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">isDragging</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">clientX</span><span class="p">,</span><span class="w"> </span><span class="nx">clientY</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;mousemove&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">clientX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">clientY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;touchmove&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">clientX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientX</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">clientY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientY</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">containerRect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">newLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clientX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">offsetX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">containerRect</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">newTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clientY</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">offsetY</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">containerRect</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Constrain within the container</span>
+<span class="w">    </span><span class="nx">newLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">containerRect</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">offsetWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">newLeft</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">newTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">containerRect</span><span class="p">.</span><span class="nx">height</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">,</span><span class="w"> </span><span class="nx">newTop</span><span class="p">));</span>
+
+<span class="w">    </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">newLeft</span><span class="si">}</span><span class="sb">px`</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">newTop</span><span class="si">}</span><span class="sb">px`</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>stopDrag: `EventListener`</strong>::
+Stops the dragging process and re-enables the transition on <cite>videoBox</cite>.
+Removes the event listeners for mouse and touch events once the dragging ends.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Stops the dragging process and re-enables the transition on videoBox.</span>
+<span class="cm"> * Removes the event listeners for mouse and touch events once the dragging ends.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Event} e - The event triggered by either a &quot;mouseup&quot; or &quot;touchend&quot;.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">stopDrag</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">isDragging</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">videoBox</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;box-shadow 0.3s ease&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Re-enable transition</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s2">&quot;mousemove&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handleDrag</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s2">&quot;mouseup&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">stopDrag</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s2">&quot;touchmove&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handleDrag</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s2">&quot;touchend&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">stopDrag</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="text-to-speech">
+<h2>Text To Speech<a class="headerlink" href="#text-to-speech" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>toggleTextToSpeech: `Function`</strong>::
+Toggles the Text-to-Speech (TTS) playback when the associated button is clicked.
+If the text is currently playing from the clicked button, it stops the playback. Otherwise, it stops any previous speech and starts the TTS from the clicked button.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Toggles the Text-to-Speech (TTS) playback when the associated button is clicked.</span>
+<span class="cm"> * If the text is currently playing from the clicked button, it stops the playback.</span>
+<span class="cm"> * Otherwise, it stops any previous speech and starts the TTS from the clicked button.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Event} event - The click event triggered on the TTS button.</span>
+<span class="cm"> * @param {string} text - The text to be read aloud.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">toggleTextToSpeech</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span><span class="w"> </span><span class="c1">// Get the button element that was clicked</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">playingTarget</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">button</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">stopTextToSpeech</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">playingTarget</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">stopTextToSpeech</span><span class="p">(</span><span class="nx">playingTarget</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">playingTarget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">button</span>
+<span class="w">        </span><span class="nx">requestTextToSpeech</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>requestTextToSpeech: `Function`</strong>::
+Requests the browser to speak the provided text using the Speech Synthesis API.
+Configures the voice, volume, rate, and pitch before speaking the text aloud. Also handles button state and audio controls.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Requests the browser to speak the provided text using the Speech Synthesis API.</span>
+<span class="cm"> * Configures the voice, volume, rate, and pitch before speaking the text aloud.</span>
+<span class="cm"> * Also handles button state and audio controls.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param {HTMLElement} button - The button that triggered the text-to-speech action.</span>
+<span class="cm"> * @param {string} text - The text to be read aloud.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">requestTextToSpeech</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">stopTextToSpeech</span><span class="p">();</span><span class="w"> </span><span class="c1">// Stop any previous audio</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">catch</span><span class="p">{}</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SpeechSynthesisUtterance</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">voices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">speechSynthesis</span><span class="p">.</span><span class="nx">getVoices</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Change the button text to &quot;Stop TTS&quot;</span>
+<span class="w">    </span><span class="nx">button</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;||&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">msg</span><span class="p">.</span><span class="nx">voice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">voices</span><span class="p">[</span><span class="mf">10</span><span class="p">];</span>
+<span class="w">    </span><span class="nx">msg</span><span class="p">.</span><span class="nx">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// From 0 to 1</span>
+<span class="w">    </span><span class="nx">msg</span><span class="p">.</span><span class="nx">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.8</span><span class="p">;</span><span class="w"> </span><span class="c1">// From 0.1 to 10</span>
+<span class="w">    </span><span class="nx">msg</span><span class="p">.</span><span class="nx">pitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// From 0 to 2</span>
+<span class="w">    </span><span class="nx">msg</span><span class="p">.</span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">text</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">msg</span><span class="p">.</span><span class="nx">lang</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;en&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// When the utterance ends, capture the audio</span>
+<span class="w">    </span><span class="nx">msg</span><span class="p">.</span><span class="nx">onend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">button</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;►&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">playingTarget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// Speak the utterance</span>
+<span class="w">    </span><span class="nx">speechSynthesis</span><span class="p">.</span><span class="nx">speak</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Play the audio</span>
+<span class="w">    </span><span class="nx">audio</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>stopTextToSpeech: `Function`</strong>::
+Stops the current Text-to-Speech playback and resets the audio state.
+Resets the button text to “Start TTS” and clears the playing target.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Stops the current Text-to-Speech playback and resets the audio state.</span>
+<span class="cm"> * Resets the button text to &quot;Start TTS&quot; and clears the playing target.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param {HTMLElement} button - The button element that initiated the stop action.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">stopTextToSpeech</span><span class="p">(</span><span class="nx">button</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">speechSynthesis</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span><span class="w"> </span><span class="c1">// Cancel the current speech synthesis</span>
+<span class="w">    </span><span class="nx">audio</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span><span class="w"> </span><span class="c1">// Pause the audio element</span>
+<span class="w">    </span><span class="nx">audio</span><span class="p">.</span><span class="nx">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Reset the audio element</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">button</span><span class="p">){</span>
+<span class="w">        </span><span class="c1">// Change the button text to &quot;Start TTS&quot;</span>
+<span class="w">        </span><span class="nx">button</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;►&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">playingTarget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">buttons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;#btn-tts&#39;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Loop through each button and log its text content</span>
+<span class="w">        </span><span class="nx">buttons</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">button</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;►&quot;</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="record-voice-message-with-speech-to-text">
+<h2>Record Voice Message With Speech To Text<a class="headerlink" href="#record-voice-message-with-speech-to-text" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>navigator.mediaDevices.getUserMedia: `Function`</strong>::
+Requests access to the user’s audio input device and initiates the recording process.
+The audio stream is passed to the handler function once access is granted.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Requests access to the user&#39;s audio input device and initiates the recording process.</span>
+<span class="cm"> * The audio stream is passed to the handler function once access is granted.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Object} options - The options for getting the media, specifying audio capture.</span>
+<span class="cm"> * @param {Function} handlerFunction - The function to handle the audio stream.</span>
+<span class="cm"> */</span>
+<span class="nx">navigator</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">mediaDevices</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">getUserMedia</span><span class="p">({</span><span class="nx">audio</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">})</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">stream</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handlerFunction</span><span class="p">(</span><span class="nx">stream</span><span class="p">)</span><span class="w"> </span><span class="p">});</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>handlerFunction: `Function`</strong>::
+Initializes a MediaRecorder to record the audio stream.
+When recording data is available, it pushes the data into an array. Once the recorder stops, the audio is converted into a Blob and sent via an AJAX request.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Initializes a MediaRecorder to record the audio stream.</span>
+<span class="cm"> * When recording data is available, it pushes the data into an array.</span>
+<span class="cm"> * Once the recorder stops, the audio is converted into a Blob and sent via an AJAX request.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param {MediaStream} stream - The audio stream from the user&#39;s device.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">handlerFunction</span><span class="p">(</span><span class="nx">stream</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">rec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MediaRecorder</span><span class="p">(</span><span class="nx">stream</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">rec</span><span class="p">.</span><span class="nx">ondataavailable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">audioChunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">rec</span><span class="p">.</span><span class="nx">state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">blob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Blob</span><span class="p">(</span><span class="nx">audioChunks</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;audio/mpeg-3&#39;</span><span class="p">});</span>
+<span class="w">            </span><span class="nx">sendData</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>sendData: `Function`</strong>::
+Sends the recorded audio data to the server via an AJAX POST request.
+The audio is packaged into a FormData object before sending, and the response updates the text input field with the result.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Sends the recorded audio data to the server via an AJAX POST request.</span>
+<span class="cm"> * The audio is packaged into a FormData object before sending.</span>
+<span class="cm"> * The response updates the text input field with the result.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param {Blob} data - The audio data to be sent to the server.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">sendData</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">form</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FormData</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;data.mp3&#39;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Ensure &#39;data&#39; is a valid File object</span>
+
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/save_record&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">form</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">cache</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">processData</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">contentType</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">resultText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">textInput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;textInput&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">textInput</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">textInput</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resultText</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;Textarea not found&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}).</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error processing the file:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>toggleRecording.onclick: `EventListener`</strong>::
+Toggles the start and stop of the audio recording when the associated button is clicked.
+Updates the button’s class and state based on whether recording is active or not.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Toggles the start and stop of the audio recording when the associated button is clicked.</span>
+<span class="cm"> * Updates the button&#39;s class and state based on whether recording is active or not.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Event} event - The click event triggered on the toggleRecording button.</span>
+<span class="cm"> */</span>
+<span class="nx">toggleRecording</span><span class="p">.</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">isRecording</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Stop recording</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Recording stopped.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">toggleRecording</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;recording&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">rec</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Start recording</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Recording started.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">toggleRecording</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;recording&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">audioChunks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">        </span><span class="nx">rec</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">isRecording</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="nx">isRecording</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="additional-functions">
+<h2>Additional Functions<a class="headerlink" href="#additional-functions" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>appendMessage: Function</strong>::
+Appends a message to the chat window, including the sender’s name, image, text, time, and an optional video URL.
+It also handles the rendering of the text-to-speech button for the message.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Appends a message to the chat window, including the sender&#39;s name, image, text, time, and an optional video URL.</span>
+<span class="cm"> * It also handles the rendering of the text-to-speech button for the message.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param {string} name - The name of the sender.</span>
+<span class="cm"> * @param {string} img - The image URL for the sender&#39;s avatar.</span>
+<span class="cm"> * @param {string} side - The side of the chat (either &quot;left&quot; or &quot;right&quot;).</span>
+<span class="cm"> * @param {string} [text=&quot;&quot;] - The message text to be displayed.</span>
+<span class="cm"> * @param {string} time - The time the message was sent.</span>
+<span class="cm"> * @param {string} [videoURL=&quot;&quot;] - The URL for an optional video to be displayed (if any).</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">appendMessage</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="nx">side</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">videoURL</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">msgHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span>
+<span class="sb">    &lt;div class=&quot;msg </span><span class="si">${</span><span class="nx">side</span><span class="si">}</span><span class="sb">-msg&quot;&gt;</span>
+<span class="sb">      &lt;div class=&quot;msg-img&quot; style=&quot;background-image: url(</span><span class="si">${</span><span class="nx">img</span><span class="si">}</span><span class="sb">)&quot;&gt;&lt;/div&gt;</span>
+<span class="sb">      &lt;div class=&quot;msg-bubble&quot;&gt;</span>
+<span class="sb">        &lt;div class=&quot;msg-info&quot;&gt;</span>
+<span class="sb">          &lt;div class=&quot;msg-info-name&quot;&gt;</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">&lt;/div&gt;</span>
+<span class="sb">          &lt;div class=&quot;msg-info-time&quot;&gt;</span><span class="si">${</span><span class="nx">time</span><span class="si">}</span><span class="sb">&lt;/div&gt;</span>
+<span class="sb">        &lt;/div&gt;</span>
+<span class="sb">        &lt;div class=&quot;msg-text&quot; style=&quot;word-break: break-all;&quot;&gt;</span><span class="si">${</span><span class="nx">text</span><span class="si">}</span><span class="sb">&lt;/div&gt;</span>
+<span class="sb">        &lt;div style=&quot;text-align: right; font-size:10pt;&quot;&gt;</span>
+<span class="sb">          &lt;button id=&quot;btn-tts&quot; style=&quot;text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;&quot; onclick=&quot;toggleTextToSpeech(event, &#39;</span><span class="si">${</span><span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\&quot;/g</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\&#39;/g</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="si">}</span><span class="sb">&#39;)&quot;&gt;►&lt;/button&gt;</span>
+<span class="sb">        &lt;/div&gt;</span>
+<span class="sb">      &lt;/div&gt;</span>
+<span class="sb">    &lt;/div&gt;</span>
+<span class="sb">  `</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">msgerChat</span><span class="p">.</span><span class="nx">insertAdjacentHTML</span><span class="p">(</span><span class="s2">&quot;beforeend&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">msgHTML</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">msgerChat</span><span class="p">.</span><span class="nx">scrollTop</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">500</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">videoURL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">video</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;videoFrame&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;videoSource&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">source</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">videoURL</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">muted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">load</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>myHandler: EventListener</strong>::
+Handles the ‘ended’ event of the avatar video and sets it to a default idle state.
+The video is switched to a default idle video and played again when the avatar video ends.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Handles the &#39;ended&#39; event of the avatar video and sets it to a default idle state.</span>
+<span class="cm"> * The video is switched to a default idle video and played again when the avatar video ends.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @event</span>
+<span class="cm"> * @param {Event} e - The &#39;ended&#39; event triggered when the avatar video finishes playing.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">myHandler</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">video</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;videoFrame&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;videoSource&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">source</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../static/video/emma_idle.mp4&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">video</span><span class="p">.</span><span class="nx">muted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">video</span><span class="p">.</span><span class="nx">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">video</span><span class="p">.</span><span class="nx">load</span><span class="p">();</span>
+<span class="w">  </span><span class="nx">video</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>botResponse: Function</strong>::
+Handles the bot’s response based on the user’s input message.
+It fetches the bot’s response from the server and appends it to the chat, along with any video URL (if applicable).</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Handles the bot&#39;s response based on the user&#39;s input message.</span>
+<span class="cm"> * It fetches the bot&#39;s response from the server and appends it to the chat, along with any video URL (if applicable).</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param {string} rawText - The raw input text from the user that triggers the bot&#39;s response.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">botResponse</span><span class="p">(</span><span class="nx">rawText</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">dateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">formatDate</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">());</span>
+<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/get&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">rawText</span><span class="p">,</span><span class="w"> </span><span class="nx">firstTime</span><span class="o">:</span><span class="w"> </span><span class="nx">firstTime</span><span class="p">,</span><span class="w"> </span><span class="nx">dateTime</span><span class="o">:</span><span class="w"> </span><span class="nx">dateTime</span><span class="p">,</span><span class="w"> </span><span class="nx">chatId</span><span class="o">:</span><span class="w"> </span><span class="nx">chatId</span><span class="w"> </span><span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">firstTime</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">firstTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">msgText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">encoded_bot_response</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">msgVideo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">avatar_video_url</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">appendMessage</span><span class="p">(</span><span class="nx">BOT_NAME</span><span class="p">,</span><span class="w"> </span><span class="nx">BOT_IMG</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;left&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">msgText</span><span class="p">,</span><span class="w"> </span><span class="nx">dateTime</span><span class="p">,</span><span class="w"> </span><span class="nx">msgVideo</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>get: Function</strong>::
+A utility function to select an element based on a given CSS selector.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * A utility function to select an element based on a given CSS selector.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param {string} selector - The CSS selector to query the DOM.</span>
+<span class="cm"> * @param {Element} [root=document] - The root element to query within (defaults to the document).</span>
+<span class="cm"> * @returns {Element} The DOM element that matches the selector.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">get</span><span class="p">(</span><span class="nx">selector</span><span class="p">,</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">root</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="nx">selector</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>formatDate: Function</strong>::
+Formats a Date object into a time string in the format of ‘HH:MM’.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Formats a Date object into a time string in the format of &#39;HH:MM&#39;.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param {Date} date - The Date object to be formatted.</span>
+<span class="cm"> * @returns {string} The formatted time string in the format &#39;HH:MM&#39;.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">formatDate</span><span class="p">(</span><span class="nx">date</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">hours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">date</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">minutes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">date</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">();</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">hours</span><span class="si">}</span><span class="sb">:</span><span class="si">${</span><span class="nx">minutes</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">minutes</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">minutes</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="js.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">JSDoc</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="js.chat_side_navbar.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chat Side Navbar</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-video-controls">Custom Video Controls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drag-drop-video">Drag &amp; Drop Video</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-to-speech">Text To Speech</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#record-voice-message-with-speech-to-text">Record Voice Message With Speech To Text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-functions">Additional Functions</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/orizem/ShrinkGPT.github.io/edit/main/js.chat.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/js.chat.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Ori Tsemach, Eldar Garrett, Sahar Amar.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

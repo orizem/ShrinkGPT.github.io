@@ -41,6 +41,7 @@
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/website/utils/utils';</script>
+    <link rel="icon" href="../../../_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -97,17 +98,25 @@
       <div class="navbar-item">
 
   
-    
+     
   
 
-<a class="navbar-brand logo" href="../../../index.html">
+<a class="navbar-brand logo" href="https://shrink-io-app-565593111121.me-west1.run.app">
   
   
   
   
   
+    
+    
+      
+    
+    
+    <img src="../../../_static/ShrinkGPT_logo.jpg" class="logo__image only-light" alt="Shrink.io - Home"/>
+    <img src="../../../_static/ShrinkGPT_logo.jpg" class="logo__image only-dark pst-js-only" alt="Shrink.io - Home"/>
   
-    <p class="title logo__title">Shrink.io 1.0.0 documentation</p>
+  
+    <p class="title logo__title">Shrink.io</p>
   
 </a></div>
     
@@ -153,6 +162,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
       
     </div>
     
@@ -221,6 +246,22 @@
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
   <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
         
       </div>
     
@@ -324,6 +365,36 @@
 
 <span class="c1"># PRIVATE</span>
 <span class="k">def</span> <span class="nf">__get_all_images</span><span class="p">(</span><span class="n">start_with</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get all images from a directory that match a prefix</span>
+
+<span class="sd">    This function searches the `website/static/image` directory for image </span>
+<span class="sd">    files that start with a specified prefix or a list of prefixes. It only </span>
+<span class="sd">    considers files with `.jpg`, `.jpeg`, or `.png` extensions and returns </span>
+<span class="sd">    the matching image filenames.</span>
+
+<span class="sd">    The function can accept a single prefix as a string or multiple prefixes </span>
+<span class="sd">    as a list of strings. If a list is not provided, the function treats the </span>
+<span class="sd">    prefix as a list with one element.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    start_with : Union[str, List]</span>
+<span class="sd">        A single prefix (str) or a list of prefixes (List[str]) to search for in the filenames.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List[str]</span>
+<span class="sd">        A list of image filenames (with `.jpg`, `.jpeg`, or `.png` extensions) </span>
+<span class="sd">        that start with the provided prefix or prefixes.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; __get_all_images(&quot;logo&quot;)</span>
+<span class="sd">    [&#39;logo1.jpg&#39;, &#39;logo2.png&#39;, &#39;logo3.jpeg&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; __get_all_images([&quot;thumb&quot;, &quot;banner&quot;])</span>
+<span class="sd">    [&#39;thumb1.jpg&#39;, &#39;thumb2.png&#39;, &#39;banner1.jpeg&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">IMAGE_PATH</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;website/static/image&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start_with</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -544,6 +615,28 @@
 <div class="viewcode-block" id="html_encode">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.html_encode">[docs]</a>
 <span class="k">def</span> <span class="nf">html_encode</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode HTML special characters</span>
+
+<span class="sd">    This function takes a string and converts all special HTML characters </span>
+<span class="sd">    (e.g., `&lt;`, `&gt;`, `&amp;`, etc.) into their corresponding HTML escape codes. </span>
+<span class="sd">    It uses Python&#39;s `html.escape` to ensure that the input text is safely </span>
+<span class="sd">    represented in HTML format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str</span>
+<span class="sd">        The input string that contains special HTML characters to be encoded.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The encoded string with HTML special characters replaced by their escape codes.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; html_encode(&quot;&lt;div&gt;Hello &amp; Welcome&lt;/div&gt;&quot;)</span>
+<span class="sd">    &#39;&amp;lt;div&amp;gt;Hello &amp;amp; Welcome&amp;lt;/div&amp;gt;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
 
 
@@ -551,6 +644,27 @@
 <div class="viewcode-block" id="html_decode">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.html_decode">[docs]</a>
 <span class="k">def</span> <span class="nf">html_decode</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode HTML escape codes into characters</span>
+
+<span class="sd">    This function takes a string containing HTML escape codes and converts </span>
+<span class="sd">    them back into their corresponding characters. It uses Python&#39;s `html.unescape` </span>
+<span class="sd">    to decode the HTML entities into their original form.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str</span>
+<span class="sd">        The input string containing HTML escape codes to be decoded.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The decoded string with HTML escape codes replaced by their corresponding characters.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; html_decode(&#39;&amp;lt;div&amp;gt;Hello &amp;amp; Welcome&amp;lt;/div&amp;gt;&#39;)</span>
+<span class="sd">    &#39;&lt;div&gt;Hello &amp; Welcome&lt;/div&gt;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">unescape</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
 
 
@@ -558,6 +672,29 @@
 <div class="viewcode-block" id="get_avatar_video">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.get_avatar_video">[docs]</a>
 <span class="k">def</span> <span class="nf">get_avatar_video</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">emotion</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate an avatar video with a given emotion and text</span>
+
+<span class="sd">    This function interacts with the D-ID API to generate a video where </span>
+<span class="sd">    a given avatar speaks the provided text with the specified emotion. </span>
+<span class="sd">    It returns the URL of the generated video.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str</span>
+<span class="sd">        The text that the avatar will speak.</span>
+<span class="sd">    emotion : str</span>
+<span class="sd">        The emotion (e.g., &quot;happy&quot;, &quot;sad&quot;) to apply to the avatar&#39;s expression.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The URL of the generated avatar video.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; get_avatar_video(&quot;Hello, how are you?&quot;, &quot;happy&quot;)</span>
+<span class="sd">    &#39;https://api.d-id.com/talks/xyz/result.mp4&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">load_dotenv</span><span class="p">()</span>
     <span class="n">D_ID_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;D_ID_API_KEY&quot;</span><span class="p">)</span>
     
@@ -608,6 +745,29 @@
 <div class="viewcode-block" id="allowed_file">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.allowed_file">[docs]</a>
 <span class="k">def</span> <span class="nf">allowed_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the file has an allowed extension</span>
+
+<span class="sd">    This function checks whether the given filename has an extension that </span>
+<span class="sd">    is allowed for uploading (e.g., audio or video files).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        The filename to check.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        True if the file has an allowed extension, False otherwise.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; allowed_file(&quot;song.mp3&quot;)</span>
+<span class="sd">    True</span>
+
+<span class="sd">    &gt;&gt;&gt; allowed_file(&quot;image.jpg&quot;)</span>
+<span class="sd">    False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ALLOWED_EXTENSIONS</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;flac&quot;</span><span class="p">,</span>
         <span class="s2">&quot;m4a&quot;</span><span class="p">,</span>
@@ -627,6 +787,27 @@
 <div class="viewcode-block" id="get_initial_chat_state_response">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.get_initial_chat_state_response">[docs]</a>
 <span class="k">def</span> <span class="nf">get_initial_chat_state_response</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the initial chat state response based on user status</span>
+
+<span class="sd">    This function generates the next response for the user based on their </span>
+<span class="sd">    current status. It returns a question or statement according to the user&#39;s </span>
+<span class="sd">    progress in the chat.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    user : User</span>
+<span class="sd">        The user object that contains the user&#39;s current status.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The response that corresponds to the user&#39;s current chat status.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; get_initial_chat_state_response(user)</span>
+<span class="sd">    &quot;Hello John, how can I assist you today?&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">status</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">QUESTIONS</span><span class="p">[</span><span class="n">status</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -659,10 +840,14 @@
 <div class="viewcode-block" id="random_date">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.random_date">[docs]</a>
 <span class="k">def</span> <span class="nf">random_date</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates a random date between two given dates.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a random date between May 1, 2024, and the current date.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns a random date calculated by generating a random number of days between the start and today.</span>
 
-<span class="sd">    :return: A random date between start and end.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    datetime</span>
+<span class="sd">        A random date between May 1, 2024, and the current date.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
@@ -675,6 +860,16 @@
 <div class="viewcode-block" id="create_test_users">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.create_test_users">[docs]</a>
 <span class="k">def</span> <span class="nf">create_test_users</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates and adds 383 test users to the database with random usernames, names, and statuses.</span>
+
+<span class="sd">    This function uses the Faker library to generate random names and usernames, then adds them to the</span>
+<span class="sd">    database. A random status is also assigned to each user along with a registration date.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">        The function does not return anything. It commits each user and their associated status to the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">383</span><span class="p">):</span>
         <span class="n">Faker</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100000</span><span class="p">))</span>
         <span class="n">fake</span> <span class="o">=</span> <span class="n">Faker</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
@@ -714,10 +909,16 @@
 <div class="viewcode-block" id="generate_random_review">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.generate_random_review">[docs]</a>
 <span class="k">def</span> <span class="nf">generate_random_review</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates a random review with title, content, and stars based on the star rating group.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a random review with a title, content, and star rating.</span>
 
-<span class="sd">    :return: A dictionary with title, content, and star rating.</span>
+<span class="sd">    Based on the randomly chosen star rating, the function generates a review title and content from</span>
+<span class="sd">    pre-defined categories: &#39;bad&#39;, &#39;good&#39;, or &#39;excellent&#39;. A random star rating is chosen, and </span>
+<span class="sd">    corresponding text for the review is generated.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        A tuple containing the title (str), content (str), and star rating (int) of the review.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Titles categorized by star rating groups</span>
     <span class="n">titles</span> <span class="o">=</span> <span class="p">{</span>
@@ -885,6 +1086,16 @@
 <div class="viewcode-block" id="create_test_reviews">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.create_test_reviews">[docs]</a>
 <span class="k">def</span> <span class="nf">create_test_reviews</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates random reviews for users and adds them to the database.</span>
+
+<span class="sd">    This function fetches all user IDs from the database, then selects a random subset of users.</span>
+<span class="sd">    For each selected user, a review is generated using `generate_random_review()` and added to the database.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">        The function does not return anything. It commits each generated review to the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Fetch all user IDs from the User model</span>
     <span class="n">user_ids</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 
@@ -919,6 +1130,16 @@
 <div class="viewcode-block" id="create_test_chats">
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.create_test_chats">[docs]</a>
 <span class="k">def</span> <span class="nf">create_test_chats</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates random chat entries for users and adds them to the database.</span>
+
+<span class="sd">    This function selects a random subset of users and generates a welcome message for each user</span>
+<span class="sd">    in a chat. The message and user data are then stored in the database as a new chat entry.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">        The function does not return anything. It commits each generated chat to the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Fetch all user IDs from the User model</span>
     <span class="n">user_ids</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 

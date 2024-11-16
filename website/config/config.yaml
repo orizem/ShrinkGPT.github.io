@@ -11,4 +11,4 @@ auth:
     Content-Type: image/svg+xml
 
 GPT:
-  API_KEY: "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" # "SET A KEY"
+  API_KEY: "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"
