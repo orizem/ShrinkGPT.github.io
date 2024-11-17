@@ -70,7 +70,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
                 width: 20pt;
                 height: 20pt;
               "
-              onclick="toggleTextToSpeech(event, `${text.replace(/\u0022/g, '').replace(/\'/g, '')}`)"
+              onclick="toggleTextToSpeech(event, '{{ welcome_msg }}')"
             >
               ►
             </button>
@@ -114,6 +114,45 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
   <!-- partial -->
   <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
   <script>
+      async function requestMicrophonePermission() {
+        try {
+          const permissionStatus = await navigator.permissions.query({ name: 'microphone' });
+      
+          if (permissionStatus.state === 'granted') {
+            console.log("Microphone access already granted.");
+            getUserMediaStream();
+          } else if (permissionStatus.state === 'prompt') {
+            console.log("Requesting microphone access...");
+            getUserMediaStream();
+          } else {
+            console.log("Microphone access denied. Inform the user or guide them to change settings.");
+          }
+      
+          // Optionally listen for permission changes
+          permissionStatus.onchange = () => {
+            console.log("Microphone permission state changed to:", permissionStatus.state);
+          };
+        } catch (error) {
+          console.error("Permissions API not supported or error occurred:", error);
+        }
+      }
+      
+      function getUserMediaStream() {
+        navigator.mediaDevices
+          .getUserMedia({ audio: true })
+          .then((stream) => {
+            console.log("Microphone access granted.");
+            // Handle the stream
+          })
+          .catch((error) => {
+            console.error("Failed to access microphone:", error);
+          });
+      }
+      
+      // Call the function to request permissions
+      requestMicrophonePermission();
+    
+
         try{
             stopTextToSpeech(); // Stop any previous audio
         } catch{}
@@ -325,18 +364,53 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
           }
           catch{}
 
-          var msg = new SpeechSynthesisUtterance();
-          var voices = window.speechSynthesis.getVoices();
+          const synth = window.speechSynthesis;
+
+          var msg = new SpeechSynthesisUtterance(text);
+          var voices = synth.getVoices();
           
           // Change the button text to "Stop TTS"
           button.innerText = '||';
           
-          msg.voice = voices[10]; 
-          msg.volume = 1; // From 0 to 1
-          msg.rate = 1.8; // From 0.1 to 10
-          msg.pitch = 2; // From 0 to 2
-          msg.text = text;
-          msg.lang = 'en';
+          function getVoices() {
+            voices = synth.getVoices();
+            if (voices.length === 0) {
+              synth.onvoiceschanged = function() {
+                voices = synth.getVoices();
+                setVoice(); 
+              };
+            } else {
+              setVoice(); 
+            }
+          }
+          
+          function setVoice() {
+            msg.volume = 1; 
+            msg.lang = 'en-US'; // Enforcing a specific locale
+
+            var userAgent = navigator.userAgent;
+
+            if (userAgent.indexOf('Edg') !== -1) {
+              // Edge-specific adjustments
+              msg.rate = 1.2; // Slightly slower rate for Edge (if needed)
+              msg.pitch = 2; // Set pitch to normal for Edge
+              msg.voice = voices[2];
+            } else if (navigator.brave) {
+              // Brave-specific adjustments
+              msg.rate = 1; // Set rate to normal for Brave
+              msg.pitch = 2; // Set pitch to normal for Brave
+              msg.voice = voices[2];
+            } else {
+              // Default for other browsers
+              msg.rate = 1; // Normal speed for others
+              msg.pitch = 1; // Normal pitch for others
+              msg.voice = voices[5];
+            }
+
+            synth.speak(msg);
+          }
+          
+          getVoices();
           
           // When the utterance ends, capture the audio
           msg.onend = function(event) {
@@ -344,17 +418,30 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
             playingTarget = null;
           };
           
-          // Speak the utterance
-          speechSynthesis.speak(msg);
-          
           // Play the audio
-          audio.play();
+          audio.addEventListener('play', () => {
+            console.log('Audio started playing');
+          });
+        }
+
+        // Ensure that play requests are not interrupted by simultaneous pause calls
+        function playAudio() {
+          // Check if the audio is already playing
+          if (audio.paused && !audio.ended) {
+            audio.play().catch((error) => {
+              console.error('Error during play:', error); // Catch and log any errors from the play request
+            });
+          }
         }
 
         function stopTextToSpeech(button) {
           speechSynthesis.cancel(); // Cancel the current speech synthesis
-          audio.pause(); // Pause the audio element
-          audio.currentTime = 0; // Reset the audio element
+          
+          // Check if the audio is playing before pausing it
+          if (!audio.paused) {
+            audio.pause(); // Pause the audio element
+            audio.currentTime = 0; // Reset the audio element
+          }
 
           if (button){
             // Change the button text to "Start TTS"
@@ -369,7 +456,6 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
               button.innerText = "►"
             });
           }
-          
         }
 
         // ============= [ End Text To Speech ] ===============
@@ -421,7 +507,10 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         navigator
             .mediaDevices
             .getUserMedia({audio: true})
-            .then(stream => { handlerFunction(stream) });
+            .then(stream => { handlerFunction(stream) })
+            .catch(error => {
+              console.log("Permission denied or another error occurred:", error);
+            });
 
         function handlerFunction(stream) {
             rec = new MediaRecorder(stream);
