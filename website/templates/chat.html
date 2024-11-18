@@ -7,14 +7,8 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
     content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"
   />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <!-- <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='styles/chat.css') }}"
-  /> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
   <link rel="icon" type="image/png" sizes="192x192" href="https://studio.d-id.com/favicon/favicon-192x192.png">
-
 
   <style>
 
@@ -80,7 +74,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
       {% endif %}
     </main>
 
-    <form class="msger-inputarea" enctype="multipart/form-data">
+    <form id="form" class="msger-inputarea" enctype="multipart/form-data">
       <textarea
         class="msger-input"
         id="textInput"
@@ -157,12 +151,25 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
             stopTextToSpeech(); // Stop any previous audio
         } catch{}
 
-        //  $("#textareaId").keypress(function (e) {
-        //    if(e.which === 13 && !e.shiftKey && !e.ctrlKey) {
-        //      e.preventDefault();
-        //      $(this).closest("form").submit();
-        //    }
-        //  });
+        // ============= [ Submit With Enter Key ] ===============
+
+        function submitOnEnter(event) {
+          if (event.which === 13 && !event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
+              if (!event.repeat) {
+                  const newEvent = new Event("submit", {cancelable: true});
+                  event.target.form.dispatchEvent(newEvent);
+              }
+      
+              event.preventDefault(); // Prevents the addition of a new line in the text field
+          }
+        }
+        
+        document.getElementById("textInput").addEventListener("keydown", submitOnEnter);
+        
+        document.getElementById("form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            console.log("form submitted");
+        });
 
         // ============= [ Custom Video Controls ] ===============
         const video = document.getElementById('videoFrame');
@@ -314,7 +321,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
           chatId = {{ chat_id }};
 
           for (var chat of messages) {
-            if (chat.identifier == "bot") {
+            if (["assistant", "bot"].includes(chat.identifier)) {
               var name =  BOT_NAME;
               var img = BOT_IMG;
               var side = "left";

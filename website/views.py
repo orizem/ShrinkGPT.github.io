@@ -38,6 +38,7 @@ from .utils.utils import (
     get_avatar_video,
     allowed_file,
     get_initial_chat_state_response,
+    get_previous_chats,
     QUESTIONS,
 )
 from .utils.gpt import (
@@ -293,7 +294,7 @@ def get_bot_response():
     elif user.status == 1:
         welcome_text = ""
         welcome_response = {
-            "identifier": "bot",
+            "identifier": "assistant",
             "text": welcome_text,
             "date_time": date_time,
         }
@@ -313,7 +314,7 @@ def get_bot_response():
                 welcome_text = f"Hi { user.name.title() }, welcome to Shrink.io! Go ahead and send me a message."
 
             welcome_response = {
-                "identifier": "bot",
+                "identifier": "assistant",
                 "text": welcome_text,
                 "date_time": date_time,
             }
@@ -335,8 +336,10 @@ def get_bot_response():
             format_chat_history_for_gpt(__chat) for __chat in existing_messages
         ]
 
+        db_chats_history = get_previous_chats(user)
+
         # Prepare messages for OpenAI API
-        messages = GPT_MESSAGES + chat_history
+        messages = GPT_MESSAGES + db_chats_history + chat_history
 
         # Interact with OpenAI GPT-4
         response = client.chat.completions.create(model="gpt-4o", messages=messages)
@@ -344,7 +347,7 @@ def get_bot_response():
     else:
         bot_response = get_initial_chat_state_response(user)
 
-    new_message = {"identifier": "bot", "text": bot_response, "date_time": date_time}
+    new_message = {"identifier": "assistant", "text": bot_response, "date_time": date_time}
     existing_messages.append(new_message)
 
     current_chat.chat = existing_messages

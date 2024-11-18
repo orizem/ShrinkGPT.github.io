@@ -44,13 +44,13 @@ from ..models import User, Admin
 def __get_all_images(start_with: Union[str, List]):
     """Get all images from a directory that match a prefix
 
-    This function searches the `website/static/image` directory for image 
-    files that start with a specified prefix or a list of prefixes. It only 
-    considers files with `.jpg`, `.jpeg`, or `.png` extensions and returns 
+    This function searches the `website/static/image` directory for image
+    files that start with a specified prefix or a list of prefixes. It only
+    considers files with `.jpg`, `.jpeg`, or `.png` extensions and returns
     the matching image filenames.
 
-    The function can accept a single prefix as a string or multiple prefixes 
-    as a list of strings. If a list is not provided, the function treats the 
+    The function can accept a single prefix as a string or multiple prefixes
+    as a list of strings. If a list is not provided, the function treats the
     prefix as a list with one element.
 
     Parameters
@@ -61,7 +61,7 @@ def __get_all_images(start_with: Union[str, List]):
     Returns
     -------
     List[str]
-        A list of image filenames (with `.jpg`, `.jpeg`, or `.png` extensions) 
+        A list of image filenames (with `.jpg`, `.jpeg`, or `.png` extensions)
         that start with the provided prefix or prefixes.
 
     Examples
@@ -277,9 +277,9 @@ def restricted_admin_route_decorator():
 def html_encode(text):
     """Encode HTML special characters
 
-    This function takes a string and converts all special HTML characters 
-    (e.g., `<`, `>`, `&`, etc.) into their corresponding HTML escape codes. 
-    It uses Python's `html.escape` to ensure that the input text is safely 
+    This function takes a string and converts all special HTML characters
+    (e.g., `<`, `>`, `&`, etc.) into their corresponding HTML escape codes.
+    It uses Python's `html.escape` to ensure that the input text is safely
     represented in HTML format.
 
     Parameters
@@ -303,8 +303,8 @@ def html_encode(text):
 def html_decode(text):
     """Decode HTML escape codes into characters
 
-    This function takes a string containing HTML escape codes and converts 
-    them back into their corresponding characters. It uses Python's `html.unescape` 
+    This function takes a string containing HTML escape codes and converts
+    them back into their corresponding characters. It uses Python's `html.unescape`
     to decode the HTML entities into their original form.
 
     Parameters
@@ -328,8 +328,8 @@ def html_decode(text):
 def get_avatar_video(text, emotion):
     """Generate an avatar video with a given emotion and text
 
-    This function interacts with the D-ID API to generate a video where 
-    a given avatar speaks the provided text with the specified emotion. 
+    This function interacts with the D-ID API to generate a video where
+    a given avatar speaks the provided text with the specified emotion.
     It returns the URL of the generated video.
 
     Parameters
@@ -351,8 +351,6 @@ def get_avatar_video(text, emotion):
     """
     load_dotenv()
     D_ID_API_KEY = os.environ.get("D_ID_API_KEY")
-    
-    print("~"*30, emotion)
 
     payload = {
         "source_url": "https://create-images-results.d-id.com/DefaultPresenters/Emma_f/thumbnail.jpeg",  #! Make this with other frameworks
@@ -360,8 +358,8 @@ def get_avatar_video(text, emotion):
             "type": "text",
             "input": text,
             "provider": {
-                "type": "microsoft", 
-                "voice_id": "en-US-JennyNeural",  
+                "type": "microsoft",
+                "voice_id": "en-US-JennyNeural",
             },
         },
         "config": {
@@ -389,7 +387,7 @@ def get_avatar_video(text, emotion):
 
     response = requests.get(url, headers=headers)
     response_json = response.json()
-    
+
     print("\n\n~~~~~~~~~~~~~~~~", response_json, "/n/n~~~~~~~~~~~~/n/n")
 
     return response_json.get("result_url")
@@ -398,7 +396,7 @@ def get_avatar_video(text, emotion):
 def allowed_file(filename):
     """Check if the file has an allowed extension
 
-    This function checks whether the given filename has an extension that 
+    This function checks whether the given filename has an extension that
     is allowed for uploading (e.g., audio or video files).
 
     Parameters
@@ -437,8 +435,8 @@ def allowed_file(filename):
 def get_initial_chat_state_response(user):
     """Get the initial chat state response based on user status
 
-    This function generates the next response for the user based on their 
-    current status. It returns a question or statement according to the user's 
+    This function generates the next response for the user based on their
+    current status. It returns a question or statement according to the user's
     progress in the chat.
 
     Parameters
@@ -468,6 +466,48 @@ def get_initial_chat_state_response(user):
     return response
 
 
+def get_previous_chats(user):
+    """Retrieve and format the previous chat history for a given user.
+
+    This function extracts all previous chats associated with the user, 
+    formats them into a standardized structure, and returns the chat history.
+
+    Parameters
+    ----------
+    user : User
+        The user object containing chat-related data.
+
+    Returns
+    -------
+    list of dict
+        A list of dictionaries representing the chat history, where each 
+        dictionary contains the role ('assistant' or 'user') and the content 
+        of the chat.
+
+    Examples
+    --------
+    >>> get_previous_chats(user)
+    [
+        {'role': 'user', 'content': 'Hello!'},
+        {'role': 'assistant', 'content': 'Hi there! How can I help?'}
+    ]
+    """
+    db_chats_history = []
+    for chat in user.chats:
+        db_chats_history += chat.chat
+
+    chats_history = []
+    for db_data in db_chats_history:
+        formatted_data = {
+            "role": (
+                "assistant" if db_data["identifier"] in ["bot", "assistant"] else "user"
+            ),
+            "content": db_data["text"],
+        }
+        chats_history.append(formatted_data)
+    return chats_history
+
+
 # Admin Utils
 # import os
 from flask import session
@@ -486,7 +526,7 @@ fake = Faker()
 
 def random_date() -> datetime:
     """Generates a random date between May 1, 2024, and the current date.
-    
+
     Returns a random date calculated by generating a random number of days between the start and today.
 
     Returns
@@ -551,7 +591,7 @@ def generate_random_review():
     """Generates a random review with a title, content, and star rating.
 
     Based on the randomly chosen star rating, the function generates a review title and content from
-    pre-defined categories: 'bad', 'good', or 'excellent'. A random star rating is chosen, and 
+    pre-defined categories: 'bad', 'good', or 'excellent'. A random star rating is chosen, and
     corresponding text for the review is generated.
 
     Returns
@@ -797,7 +837,7 @@ def create_test_chats():
             chat_json=dumps(
                 [
                     {
-                        "identifier": "bot",
+                        "identifier": "assistant",
                         "text": welcome_text,
                         "date_time": status.register_date + timedelta(days=random_days),
                     }
