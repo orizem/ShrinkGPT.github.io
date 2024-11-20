@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'website.auth';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="js.html">JSDoc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -385,7 +370,7 @@
 <span id="auth"></span><h1>Auth<a class="headerlink" href="#module-website.auth" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="website.auth.login">
-<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/auth.html#login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.login" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.login" title="Link to this definition">#</a></dt>
 <dd><p>User Login Route Handler</p>
 <p>Manages both GET and POST requests for user authentication. Validates user credentials
 and handles the user login process. Currently supports username/password authentication
@@ -396,6 +381,11 @@ with commented infrastructure for TOTP-based two-factor authentication.</p>
 3. Verifies user credentials
 4. Checks user account status
 5. Creates user session on successful login</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code>]</span></p>
+</dd>
+</dl>
 <section id="returns">
 <h2>Returns<a class="headerlink" href="#returns" title="Link to this heading">#</a></h2>
 <dl class="simple">
@@ -463,7 +453,7 @@ out and cannot access protected resources until they log in again.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.auth.qrcode">
-<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">qrcode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/website/auth.html#qrcode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.qrcode" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">qrcode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#qrcode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.qrcode" title="Link to this definition">#</a></dt>
 <dd><p>Generate QR Code for Two-Factor Authentication Setup</p>
 <p>Generates and returns a QR code image for setting up TOTP-based two-factor
 authentication. The QR code encodes the user’s TOTP URI which can be scanned
@@ -473,6 +463,11 @@ by authenticator apps like Google Authenticator or FreeOTP.</p>
 2. Removes username from session for security
 3. Generates QR code from user’s TOTP URI
 4. Returns QR code as SVG image stream</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></span></p>
+</dd>
+</dl>
 <section id="id2">
 <h2>Returns<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <dl class="simple">
@@ -511,7 +506,7 @@ STREAM_AUTH : Security headers for stream delivery</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.auth.register">
-<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/auth.html#register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.register" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.register" title="Link to this definition">#</a></dt>
 <dd><p>User Registration Route Handler</p>
 <p>This route manages both GET and POST requests for user registration.
 On GET requests, it displays the registration form.
@@ -524,6 +519,11 @@ On POST requests, it processes the form submission and creates a new user accoun
 5. Creates new user record in database
 6. Creates user status record
 7. Initiates two-factor authentication setup</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code>]</span></p>
+</dd>
+</dl>
 <section id="id4">
 <h2>Returns<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <dl class="simple">

@@ -226,12 +226,12 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #0F67B1;
+  background-color: #2b87ff;
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #3FA2F6;
+  background-color: #579ffb;
 }
 
 section {

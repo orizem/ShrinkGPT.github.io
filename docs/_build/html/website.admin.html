@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'website.admin';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="js.html">JSDoc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -385,9 +370,14 @@
 <span id="admin"></span><h1>Admin<a class="headerlink" href="#module-website.admin" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="website.admin.activate_user">
-<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">activate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/admin.html#activate_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.activate_user" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">activate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/admin.html#activate_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.activate_user" title="Link to this definition">#</a></dt>
 <dd><p>Activate User</p>
 <p>This route handles POST requests to activate a deactivated user account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></span></p>
+</dd>
+</dl>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
 <dl class="simple">
@@ -419,10 +409,15 @@ The function updates the user’s status to 0 (active).</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.admin.admin_dashboard">
-<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">admin_dashboard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/website/admin.html#admin_dashboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.admin_dashboard" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">admin_dashboard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/admin.html#admin_dashboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.admin_dashboard" title="Link to this definition">#</a></dt>
 <dd><p>Admin Dashboard</p>
 <p>This route handles GET requests for the admin dashboard page.
 It fetches various data points and renders the admin.html template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
+</dd>
+</dl>
 <section id="id1">
 <h2>Parameters<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <dl class="simple">
@@ -458,9 +453,14 @@ It performs the following operations:
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.admin.api_keys_form">
-<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">api_keys_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/website/admin.html#api_keys_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.api_keys_form" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">api_keys_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/admin.html#api_keys_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.api_keys_form" title="Link to this definition">#</a></dt>
 <dd><p>API Keys Form</p>
 <p>This route renders the API keys form page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
+</dd>
+</dl>
 <section id="id5">
 <h2>Parameters<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <dl class="simple">
@@ -491,9 +491,14 @@ It displays the current API keys stored in the system.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.admin.deactivate_user">
-<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">deactivate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/admin.html#deactivate_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.deactivate_user" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">deactivate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/admin.html#deactivate_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.deactivate_user" title="Link to this definition">#</a></dt>
 <dd><p>Deactivate User</p>
 <p>This route handles POST requests to deactivate an active user account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></span></p>
+</dd>
+</dl>
 <section id="id9">
 <h2>Parameters<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <dl class="simple">
@@ -525,9 +530,14 @@ The function updates the user’s status to -1 (deactivated).</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.admin.delete_user">
-<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">delete_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/admin.html#delete_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.delete_user" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">delete_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/admin.html#delete_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.delete_user" title="Link to this definition">#</a></dt>
 <dd><p>Delete User</p>
 <p>This route handles POST requests to delete a user from the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></span></p>
+</dd>
+</dl>
 <section id="id13">
 <h2>Parameters<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
 <dl class="simple">
@@ -559,10 +569,15 @@ The operation is irreversible and should be used cautiously.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.admin.generate_test_data">
-<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">generate_test_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/website/admin.html#generate_test_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.generate_test_data" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">generate_test_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/admin.html#generate_test_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.generate_test_data" title="Link to this definition">#</a></dt>
 <dd><p>Generate Test Data</p>
 <p>This route handles POST requests to generate test data for the application.
 It creates sample users, chats, and reviews to populate the database for testing purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span></p>
+</dd>
+</dl>
 <section id="id17">
 <h2>Parameters<a class="headerlink" href="#id17" title="Link to this heading">#</a></h2>
 <dl class="simple">
@@ -631,9 +646,14 @@ in the scope where the function is called.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.admin.update_keys">
-<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">update_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="reference internal" href="_modules/website/admin.html#update_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.update_keys" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.admin.</span></span><span class="sig-name descname"><span class="pre">update_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/admin.html#update_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.admin.update_keys" title="Link to this definition">#</a></dt>
 <dd><p>Update API Keys</p>
 <p>This route handles POST requests to update API keys stored in the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></span></p>
+</dd>
+</dl>
 <section id="id24">
 <h2>Parameters<a class="headerlink" href="#id24" title="Link to this heading">#</a></h2>
 <dl class="simple">

@@ -30,6 +30,7 @@
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -40,6 +41,8 @@
     <script src="../../../_static/documentation_options.js?v=8d563738"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/website/utils/utils';</script>
     <link rel="icon" href="../../../_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -300,9 +303,6 @@
     
     <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
     
-    
-    <li class="breadcrumb-item"><a href="../../website.html" class="nav-link">website</a></li>
-    
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">website.utils.utils</span></li>
   </ul>
 </nav>
@@ -367,13 +367,13 @@
 <span class="k">def</span> <span class="nf">__get_all_images</span><span class="p">(</span><span class="n">start_with</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get all images from a directory that match a prefix</span>
 
-<span class="sd">    This function searches the `website/static/image` directory for image </span>
-<span class="sd">    files that start with a specified prefix or a list of prefixes. It only </span>
-<span class="sd">    considers files with `.jpg`, `.jpeg`, or `.png` extensions and returns </span>
+<span class="sd">    This function searches the `website/static/image` directory for image</span>
+<span class="sd">    files that start with a specified prefix or a list of prefixes. It only</span>
+<span class="sd">    considers files with `.jpg`, `.jpeg`, or `.png` extensions and returns</span>
 <span class="sd">    the matching image filenames.</span>
 
-<span class="sd">    The function can accept a single prefix as a string or multiple prefixes </span>
-<span class="sd">    as a list of strings. If a list is not provided, the function treats the </span>
+<span class="sd">    The function can accept a single prefix as a string or multiple prefixes</span>
+<span class="sd">    as a list of strings. If a list is not provided, the function treats the</span>
 <span class="sd">    prefix as a list with one element.</span>
 
 <span class="sd">    Parameters</span>
@@ -384,7 +384,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    List[str]</span>
-<span class="sd">        A list of image filenames (with `.jpg`, `.jpeg`, or `.png` extensions) </span>
+<span class="sd">        A list of image filenames (with `.jpg`, `.jpeg`, or `.png` extensions)</span>
 <span class="sd">        that start with the provided prefix or prefixes.</span>
 
 <span class="sd">    Examples</span>
@@ -617,9 +617,9 @@
 <span class="k">def</span> <span class="nf">html_encode</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode HTML special characters</span>
 
-<span class="sd">    This function takes a string and converts all special HTML characters </span>
-<span class="sd">    (e.g., `&lt;`, `&gt;`, `&amp;`, etc.) into their corresponding HTML escape codes. </span>
-<span class="sd">    It uses Python&#39;s `html.escape` to ensure that the input text is safely </span>
+<span class="sd">    This function takes a string and converts all special HTML characters</span>
+<span class="sd">    (e.g., `&lt;`, `&gt;`, `&amp;`, etc.) into their corresponding HTML escape codes.</span>
+<span class="sd">    It uses Python&#39;s `html.escape` to ensure that the input text is safely</span>
 <span class="sd">    represented in HTML format.</span>
 
 <span class="sd">    Parameters</span>
@@ -646,8 +646,8 @@
 <span class="k">def</span> <span class="nf">html_decode</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode HTML escape codes into characters</span>
 
-<span class="sd">    This function takes a string containing HTML escape codes and converts </span>
-<span class="sd">    them back into their corresponding characters. It uses Python&#39;s `html.unescape` </span>
+<span class="sd">    This function takes a string containing HTML escape codes and converts</span>
+<span class="sd">    them back into their corresponding characters. It uses Python&#39;s `html.unescape`</span>
 <span class="sd">    to decode the HTML entities into their original form.</span>
 
 <span class="sd">    Parameters</span>
@@ -674,8 +674,8 @@
 <span class="k">def</span> <span class="nf">get_avatar_video</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">emotion</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate an avatar video with a given emotion and text</span>
 
-<span class="sd">    This function interacts with the D-ID API to generate a video where </span>
-<span class="sd">    a given avatar speaks the provided text with the specified emotion. </span>
+<span class="sd">    This function interacts with the D-ID API to generate a video where</span>
+<span class="sd">    a given avatar speaks the provided text with the specified emotion.</span>
 <span class="sd">    It returns the URL of the generated video.</span>
 
 <span class="sd">    Parameters</span>
@@ -697,8 +697,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">load_dotenv</span><span class="p">()</span>
     <span class="n">D_ID_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;D_ID_API_KEY&quot;</span><span class="p">)</span>
-    
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">emotion</span><span class="p">)</span>
 
     <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;source_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://create-images-results.d-id.com/DefaultPresenters/Emma_f/thumbnail.jpeg&quot;</span><span class="p">,</span>  <span class="c1">#! Make this with other frameworks</span>
@@ -706,8 +704,8 @@
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
             <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
             <span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;microsoft&quot;</span><span class="p">,</span> 
-                <span class="s2">&quot;voice_id&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US-JennyNeural&quot;</span><span class="p">,</span>  
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;microsoft&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;voice_id&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US-JennyNeural&quot;</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">},</span>
         <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -735,7 +733,7 @@
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
     <span class="n">response_json</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">~~~~~~~~~~~~~~~~&quot;</span><span class="p">,</span> <span class="n">response_json</span><span class="p">,</span> <span class="s2">&quot;/n/n~~~~~~~~~~~~/n/n&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">response_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result_url&quot;</span><span class="p">)</span></div>
@@ -747,7 +745,7 @@
 <span class="k">def</span> <span class="nf">allowed_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the file has an allowed extension</span>
 
-<span class="sd">    This function checks whether the given filename has an extension that </span>
+<span class="sd">    This function checks whether the given filename has an extension that</span>
 <span class="sd">    is allowed for uploading (e.g., audio or video files).</span>
 
 <span class="sd">    Parameters</span>
@@ -789,8 +787,8 @@
 <span class="k">def</span> <span class="nf">get_initial_chat_state_response</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the initial chat state response based on user status</span>
 
-<span class="sd">    This function generates the next response for the user based on their </span>
-<span class="sd">    current status. It returns a question or statement according to the user&#39;s </span>
+<span class="sd">    This function generates the next response for the user based on their</span>
+<span class="sd">    current status. It returns a question or statement according to the user&#39;s</span>
 <span class="sd">    progress in the chat.</span>
 
 <span class="sd">    Parameters</span>
@@ -821,6 +819,51 @@
 
 
 
+<div class="viewcode-block" id="get_previous_chats">
+<a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.get_previous_chats">[docs]</a>
+<span class="k">def</span> <span class="nf">get_previous_chats</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve and format the previous chat history for a given user.</span>
+
+<span class="sd">    This function extracts all previous chats associated with the user, </span>
+<span class="sd">    formats them into a standardized structure, and returns the chat history.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    user : User</span>
+<span class="sd">        The user object containing chat-related data.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list of dict</span>
+<span class="sd">        A list of dictionaries representing the chat history, where each </span>
+<span class="sd">        dictionary contains the role (&#39;assistant&#39; or &#39;user&#39;) and the content </span>
+<span class="sd">        of the chat.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; get_previous_chats(user)</span>
+<span class="sd">    [</span>
+<span class="sd">        {&#39;role&#39;: &#39;user&#39;, &#39;content&#39;: &#39;Hello!&#39;},</span>
+<span class="sd">        {&#39;role&#39;: &#39;assistant&#39;, &#39;content&#39;: &#39;Hi there! How can I help?&#39;}</span>
+<span class="sd">    ]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">db_chats_history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">chat</span> <span class="ow">in</span> <span class="n">user</span><span class="o">.</span><span class="n">chats</span><span class="p">:</span>
+        <span class="n">db_chats_history</span> <span class="o">+=</span> <span class="n">chat</span><span class="o">.</span><span class="n">chat</span>
+
+    <span class="n">chats_history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">db_data</span> <span class="ow">in</span> <span class="n">db_chats_history</span><span class="p">:</span>
+        <span class="n">formatted_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="s2">&quot;assistant&quot;</span> <span class="k">if</span> <span class="n">db_data</span><span class="p">[</span><span class="s2">&quot;identifier&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;bot&quot;</span><span class="p">,</span> <span class="s2">&quot;assistant&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;user&quot;</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">db_data</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">chats_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">formatted_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">chats_history</span></div>
+
+
+
 <span class="c1"># Admin Utils</span>
 <span class="c1"># import os</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">session</span>
@@ -841,7 +884,7 @@
 <a class="viewcode-back" href="../../../website.utils.html#website.utils.utils.random_date">[docs]</a>
 <span class="k">def</span> <span class="nf">random_date</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a random date between May 1, 2024, and the current date.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns a random date calculated by generating a random number of days between the start and today.</span>
 
 <span class="sd">    Returns</span>
@@ -912,7 +955,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a random review with a title, content, and star rating.</span>
 
 <span class="sd">    Based on the randomly chosen star rating, the function generates a review title and content from</span>
-<span class="sd">    pre-defined categories: &#39;bad&#39;, &#39;good&#39;, or &#39;excellent&#39;. A random star rating is chosen, and </span>
+<span class="sd">    pre-defined categories: &#39;bad&#39;, &#39;good&#39;, or &#39;excellent&#39;. A random star rating is chosen, and</span>
 <span class="sd">    corresponding text for the review is generated.</span>
 
 <span class="sd">    Returns</span>
@@ -1164,7 +1207,7 @@
             <span class="n">chat_json</span><span class="o">=</span><span class="n">dumps</span><span class="p">(</span>
                 <span class="p">[</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;bot&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
                         <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">welcome_text</span><span class="p">,</span>
                         <span class="s2">&quot;date_time&quot;</span><span class="p">:</span> <span class="n">status</span><span class="o">.</span><span class="n">register_date</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">random_days</span><span class="p">),</span>
                     <span class="p">}</span>

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat_side_navbar.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).on('click', '#msbo', function(){
             $('#msb').toggleClass('msb-x');
@@ -33,15 +33,18 @@
                 deleteButtonLogic($(this));
             });
 
-            $('.name_input').keypress(function(event) {
+
+            function submitOnEnter(event) {
                 if (event.which === 13) {
-                    // alert("key " + event.which + ` ${$(this).parent().find('.edit-chat-name')}`);
-                    // 13 is the key code for Enter
-                    // editButtonLogic($(this).parent().find('.edit-chat-name'));
-                    // $(this).parent().siblings().find('.edit-chat-name').click();
-                    editButtonLogic($(this).parent().find('.edit-chat-name'));
+                    if (!event.repeat) {
+                        editButtonLogic($(this).parent().find('.edit-chat-name'));
+                    }
+            
+                    event.preventDefault(); // Prevents the addition of a new line in the text field
                 }
-            });
+              }
+              
+              document.getElementById("name_input").addEventListener("keydown", submitOnEnter);
         });
 
         function editButtonLogic(elem) {
@@ -133,7 +136,7 @@
                     <li class="prev-chat" style="white-space: nowrap; padding-top:10pt; padding-bottom:10pt;">
                         <a href="{{ url_for('views.get_chat', chat_id=chat.id) }}" id="{{ chat.id }}" style="display:inline;" name={{ chat.name }} draggable="false">
                             <i class="fas fa-duotone fa-comments"></i> 
-                            {{ name_form.name(value=chat.name, style="all:unset; width:55%;", class="name_input", readonly=True) }}
+                            {{ name_form.name(value=chat.name, style="all:unset; width:55%;", class="name_input" ,id="name_input", readonly=True) }}
                         </a>
                         <button id="editButton" style="margin-left: 0pt;" class="fas fa-edit edit-chat-name" style="display: inline; color: white;"></button>
                         <button id="deleteButton" style="margin-left: 0pt;" class="fas fa-trash delete-chat" style="display: inline; color: white;"></button>

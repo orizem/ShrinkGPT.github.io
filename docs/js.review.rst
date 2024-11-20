@@ -1,5 +1,12 @@
+======
 Review
 ======
+
+Review Module
+=============
+
+Update Stars
+------------
 
 1. **updateStars: Function**::  
    Updates the star rating display when the user clicks or hovers over a star.  
@@ -29,6 +36,9 @@ Review
       }
 
 
+Show Tooltip
+------------
+
 2. **showTooltip: Function**::  
    Displays a tooltip when the user hovers over a star, showing the star rating.  
 
@@ -48,6 +58,9 @@ Review
       }
 
 
+Hide Tooltip
+------------
+
 3. **hideTooltip: Function**::  
    Hides the tooltip when the mouse leaves the star.  
 
@@ -63,6 +76,9 @@ Review
           tooltip.style.display = 'none';
       }
 
+
+Label Click
+-----------
 
 4. **label.addEventListener('click'): EventListener**::  
    Updates the star rating when a star is clicked.  
@@ -87,6 +103,9 @@ Review
       });
 
 
+Label Mouse Enter
+-----------------
+
 5. **label.addEventListener('mouseenter'): EventListener**::  
    Displays the tooltip and highlights the stars when hovered over.  
 
@@ -105,6 +124,9 @@ Review
           });
       });
 
+
+Label Mouse Leave
+-----------------
 
 6. **label.addEventListener('mouseleave'): EventListener**::  
    Removes the tooltip and resets the star rating when the mouse leaves the star.  

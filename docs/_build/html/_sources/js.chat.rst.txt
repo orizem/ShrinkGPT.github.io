@@ -1,5 +1,9 @@
+====
 Chat
 ====
+
+Chat Module
+===========
 
 Custom Video Controls
 ---------------------

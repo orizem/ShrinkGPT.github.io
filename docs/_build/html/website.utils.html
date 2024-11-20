@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'website.utils';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="js.html">JSDoc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -383,18 +368,20 @@
                   
   <section id="utils">
 <h1>Utils<a class="headerlink" href="#utils" title="Link to this heading">#</a></h1>
-</section>
-<section id="id1">
-<h1>Utils<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="module-website.utils.gpt">
 <span id="gpt"></span><h2>GPT<a class="headerlink" href="#module-website.utils.gpt" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.gpt.format_chat_history_for_gpt">
-<span class="sig-prename descclassname"><span class="pre">website.utils.gpt.</span></span><span class="sig-name descname"><span class="pre">format_chat_history_for_gpt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/website/utils/gpt.html#format_chat_history_for_gpt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.gpt.format_chat_history_for_gpt" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.gpt.</span></span><span class="sig-name descname"><span class="pre">format_chat_history_for_gpt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/gpt.html#format_chat_history_for_gpt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.gpt.format_chat_history_for_gpt" title="Link to this definition">#</a></dt>
 <dd><p>Format chat history for GPT input.</p>
 <p>This function takes a chat message and formats it into a structure suitable for GPT input.
 It determines the role of the speaker (user or assistant) based on the identifier and
 extracts the content of the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span></p>
+</dd>
+</dl>
 <section id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
 <dl class="simple">
@@ -435,12 +422,12 @@ The “content” key contains the text of the chat message.</p>
 <span id="text-to-speech"></span><h2>Text To Speech<a class="headerlink" href="#module-website.utils.text2speech" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="website.utils.text2speech.Text2Speech">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.utils.text2speech.</span></span><span class="sig-name descname"><span class="pre">Text2Speech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'male'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'female'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'female'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">website.utils.text2speech.</span></span><span class="sig-name descname"><span class="pre">Text2Speech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gender</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'female'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/text2speech.html#Text2Speech"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.text2speech.Text2Speech" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Text Two Speech</p>
 <p>Class for speech the provided text.</p>
-<section id="id2">
-<h3>Parameters<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>gender: Literal[“male”, “female”], default “female”</dt><dd><p>The gender of the person speaks.</p>
 </dd>
@@ -464,30 +451,30 @@ The “content” key contains the text of the chat message.</p>
 <dd></dd></dl>
 
 </section>
-<section id="id3">
-<h2>Utils<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="id2">
+<h2>Utils<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <dl class="py function" id="module-website.utils.utils">
 <dt class="sig sig-object py" id="website.utils.utils.allowed_file">
 <span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">allowed_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#allowed_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.allowed_file" title="Link to this definition">#</a></dt>
 <dd><p>Check if the file has an allowed extension</p>
-<p>This function checks whether the given filename has an extension that 
+<p>This function checks whether the given filename has an extension that
 is allowed for uploading (e.g., audio or video files).</p>
-<section id="id4">
-<h3>Parameters<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h3>Parameters<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>filename<span class="classifier">str</span></dt><dd><p>The filename to check.</p>
 </dd>
 </dl>
 </section>
-<section id="id5">
-<h3>Returns<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3>Returns<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>bool</dt><dd><p>True if the file has an allowed extension, False otherwise.</p>
 </dd>
 </dl>
 </section>
-<section id="id6">
-<h3>Examples<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h3>Examples<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">allowed_file</span><span class="p">(</span><span class="s2">&quot;song.mp3&quot;</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
@@ -505,8 +492,8 @@ is allowed for uploading (e.g., audio or video files).</p>
 <dd><p>Generates random chat entries for users and adds them to the database.</p>
 <p>This function selects a random subset of users and generates a welcome message for each user
 in a chat. The message and user data are then stored in the database as a new chat entry.</p>
-<section id="id7">
-<h3>Returns<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h3>Returns<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>None</dt><dd><p>The function does not return anything. It commits each generated chat to the database.</p>
 </dd>
@@ -520,8 +507,8 @@ in a chat. The message and user data are then stored in the database as a new ch
 <dd><p>Generates random reviews for users and adds them to the database.</p>
 <p>This function fetches all user IDs from the database, then selects a random subset of users.
 For each selected user, a review is generated using <cite>generate_random_review()</cite> and added to the database.</p>
-<section id="id8">
-<h3>Returns<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="id7">
+<h3>Returns<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>None</dt><dd><p>The function does not return anything. It commits each generated review to the database.</p>
 </dd>
@@ -535,8 +522,8 @@ For each selected user, a review is generated using <cite>generate_random_review
 <dd><p>Generates and adds 383 test users to the database with random usernames, names, and statuses.</p>
 <p>This function uses the Faker library to generate random names and usernames, then adds them to the
 database. A random status is also assigned to each user along with a registration date.</p>
-<section id="id9">
-<h3>Returns<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<section id="id8">
+<h3>Returns<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>None</dt><dd><p>The function does not return anything. It commits each user and their associated status to the database.</p>
 </dd>
@@ -549,10 +536,10 @@ database. A random status is also assigned to each user along with a registratio
 <span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">generate_random_review</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#generate_random_review"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.generate_random_review" title="Link to this definition">#</a></dt>
 <dd><p>Generates a random review with a title, content, and star rating.</p>
 <p>Based on the randomly chosen star rating, the function generates a review title and content from
-pre-defined categories: ‘bad’, ‘good’, or ‘excellent’. A random star rating is chosen, and 
+pre-defined categories: ‘bad’, ‘good’, or ‘excellent’. A random star rating is chosen, and
 corresponding text for the review is generated.</p>
-<section id="id10">
-<h3>Returns<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h3>Returns<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>tuple</dt><dd><p>A tuple containing the title (str), content (str), and star rating (int) of the review.</p>
 </dd>
@@ -562,7 +549,7 @@ corresponding text for the review is generated.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.generate_slide_show">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">generate_slide_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_with</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#generate_slide_show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.generate_slide_show" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">generate_slide_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_with</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#generate_slide_show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.generate_slide_show" title="Link to this definition">#</a></dt>
 <dd><p>Generate Slide Show</p>
 <p>Generate a slideshow of images.</p>
 <p>This generator function yields frames
@@ -571,8 +558,8 @@ It starts with the specified image or
 list of images and continues in a loop,
 adding a delay of 5 seconds
 between each image.</p>
-<section id="id11">
-<h3>Parameters<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<section id="id10">
+<h3>Parameters<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>start_with<span class="classifier">str | List</span></dt><dd><p>The starting image or list of images
 for the slideshow.</p>
@@ -587,8 +574,8 @@ with appropriate HTTP headers for streaming.</p>
 </dd>
 </dl>
 </section>
-<section id="id12">
-<h3>Notes<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<section id="id11">
+<h3>Notes<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The images are read from the ‘static/image’ directory in the project path.</p></li>
 <li><p>The slideshow continues indefinitely, looping through the specified images.</p></li>
@@ -601,11 +588,11 @@ with appropriate HTTP headers for streaming.</p>
 <dt class="sig sig-object py" id="website.utils.utils.get_avatar_video">
 <span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_avatar_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emotion</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_avatar_video"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_avatar_video" title="Link to this definition">#</a></dt>
 <dd><p>Generate an avatar video with a given emotion and text</p>
-<p>This function interacts with the D-ID API to generate a video where 
-a given avatar speaks the provided text with the specified emotion. 
+<p>This function interacts with the D-ID API to generate a video where
+a given avatar speaks the provided text with the specified emotion.
 It returns the URL of the generated video.</p>
-<section id="id13">
-<h3>Parameters<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<section id="id12">
+<h3>Parameters<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>text<span class="classifier">str</span></dt><dd><p>The text that the avatar will speak.</p>
 </dd>
@@ -613,15 +600,15 @@ It returns the URL of the generated video.</p>
 </dd>
 </dl>
 </section>
-<section id="id14">
-<h3>Returns<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<section id="id13">
+<h3>Returns<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>str</dt><dd><p>The URL of the generated avatar video.</p>
 </dd>
 </dl>
 </section>
-<section id="id15">
-<h3>Examples<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<section id="id14">
+<h3>Examples<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_avatar_video</span><span class="p">(</span><span class="s2">&quot;Hello, how are you?&quot;</span><span class="p">,</span> <span class="s2">&quot;happy&quot;</span><span class="p">)</span>
 <span class="go">&#39;https://api.d-id.com/talks/xyz/result.mp4&#39;</span>
 </pre></div>
@@ -634,8 +621,8 @@ It returns the URL of the generated video.</p>
 <span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_current_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_current_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_current_user" title="Link to this definition">#</a></dt>
 <dd><p>Get Current User</p>
 <p>Search the flask login current user.</p>
-<section id="id16">
-<h3>Returns<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<section id="id15">
+<h3>Returns<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>User | None</dt><dd><p>The model of flask login current user.
 Returns None if was not found.</p>
@@ -648,27 +635,61 @@ Returns None if was not found.</p>
 <dt class="sig sig-object py" id="website.utils.utils.get_initial_chat_state_response">
 <span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_initial_chat_state_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_initial_chat_state_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_initial_chat_state_response" title="Link to this definition">#</a></dt>
 <dd><p>Get the initial chat state response based on user status</p>
-<p>This function generates the next response for the user based on their 
-current status. It returns a question or statement according to the user’s 
+<p>This function generates the next response for the user based on their
+current status. It returns a question or statement according to the user’s
 progress in the chat.</p>
-<section id="id17">
-<h3>Parameters<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<section id="id16">
+<h3>Parameters<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>user<span class="classifier">User</span></dt><dd><p>The user object that contains the user’s current status.</p>
 </dd>
 </dl>
 </section>
-<section id="id18">
-<h3>Returns<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<section id="id17">
+<h3>Returns<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>str</dt><dd><p>The response that corresponds to the user’s current chat status.</p>
 </dd>
 </dl>
 </section>
-<section id="id19">
-<h3>Examples<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+<section id="id18">
+<h3>Examples<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_initial_chat_state_response</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 <span class="go">&quot;Hello John, how can I assist you today?&quot;</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="website.utils.utils.get_previous_chats">
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_previous_chats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#get_previous_chats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.get_previous_chats" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve and format the previous chat history for a given user.</p>
+<p>This function extracts all previous chats associated with the user, 
+formats them into a standardized structure, and returns the chat history.</p>
+<section id="id19">
+<h3>Parameters<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>user<span class="classifier">User</span></dt><dd><p>The user object containing chat-related data.</p>
+</dd>
+</dl>
+</section>
+<section id="id20">
+<h3>Returns<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>list of dict</dt><dd><p>A list of dictionaries representing the chat history, where each 
+dictionary contains the role (‘assistant’ or ‘user’) and the content 
+of the chat.</p>
+</dd>
+</dl>
+</section>
+<section id="id21">
+<h3>Examples<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_previous_chats</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="go">[</span>
+<span class="go">    {&#39;role&#39;: &#39;user&#39;, &#39;content&#39;: &#39;Hello!&#39;},</span>
+<span class="go">    {&#39;role&#39;: &#39;assistant&#39;, &#39;content&#39;: &#39;Hi there! How can I help?&#39;}</span>
+<span class="go">]</span>
 </pre></div>
 </div>
 </section>
@@ -678,25 +699,25 @@ progress in the chat.</p>
 <dt class="sig sig-object py" id="website.utils.utils.html_decode">
 <span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">html_decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#html_decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.html_decode" title="Link to this definition">#</a></dt>
 <dd><p>Decode HTML escape codes into characters</p>
-<p>This function takes a string containing HTML escape codes and converts 
-them back into their corresponding characters. It uses Python’s <cite>html.unescape</cite> 
+<p>This function takes a string containing HTML escape codes and converts
+them back into their corresponding characters. It uses Python’s <cite>html.unescape</cite>
 to decode the HTML entities into their original form.</p>
-<section id="id20">
-<h3>Parameters<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<section id="id22">
+<h3>Parameters<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>text<span class="classifier">str</span></dt><dd><p>The input string containing HTML escape codes to be decoded.</p>
 </dd>
 </dl>
 </section>
-<section id="id21">
-<h3>Returns<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+<section id="id23">
+<h3>Returns<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>str</dt><dd><p>The decoded string with HTML escape codes replaced by their corresponding characters.</p>
 </dd>
 </dl>
 </section>
-<section id="id22">
-<h3>Examples<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
+<section id="id24">
+<h3>Examples<a class="headerlink" href="#id24" title="Link to this heading">#</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">html_decode</span><span class="p">(</span><span class="s1">&#39;&amp;lt;div&amp;gt;Hello &amp;amp; Welcome&amp;lt;/div&amp;gt;&#39;</span><span class="p">)</span>
 <span class="go">&#39;&lt;div&gt;Hello &amp; Welcome&lt;/div&gt;&#39;</span>
 </pre></div>
@@ -708,26 +729,26 @@ to decode the HTML entities into their original form.</p>
 <dt class="sig sig-object py" id="website.utils.utils.html_encode">
 <span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">html_encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#html_encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.html_encode" title="Link to this definition">#</a></dt>
 <dd><p>Encode HTML special characters</p>
-<p>This function takes a string and converts all special HTML characters 
-(e.g., <cite>&lt;</cite>, <cite>&gt;</cite>, <cite>&amp;</cite>, etc.) into their corresponding HTML escape codes. 
-It uses Python’s <cite>html.escape</cite> to ensure that the input text is safely 
+<p>This function takes a string and converts all special HTML characters
+(e.g., <cite>&lt;</cite>, <cite>&gt;</cite>, <cite>&amp;</cite>, etc.) into their corresponding HTML escape codes.
+It uses Python’s <cite>html.escape</cite> to ensure that the input text is safely
 represented in HTML format.</p>
-<section id="id23">
-<h3>Parameters<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
+<section id="id25">
+<h3>Parameters<a class="headerlink" href="#id25" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>text<span class="classifier">str</span></dt><dd><p>The input string that contains special HTML characters to be encoded.</p>
 </dd>
 </dl>
 </section>
-<section id="id24">
-<h3>Returns<a class="headerlink" href="#id24" title="Link to this heading">#</a></h3>
+<section id="id26">
+<h3>Returns<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>str</dt><dd><p>The encoded string with HTML special characters replaced by their escape codes.</p>
 </dd>
 </dl>
 </section>
-<section id="id25">
-<h3>Examples<a class="headerlink" href="#id25" title="Link to this heading">#</a></h3>
+<section id="id27">
+<h3>Examples<a class="headerlink" href="#id27" title="Link to this heading">#</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">html_encode</span><span class="p">(</span><span class="s2">&quot;&lt;div&gt;Hello &amp; Welcome&lt;/div&gt;&quot;</span><span class="p">)</span>
 <span class="go">&#39;&amp;lt;div&amp;gt;Hello &amp;amp; Welcome&amp;lt;/div&amp;gt;&#39;</span>
 </pre></div>
@@ -737,11 +758,16 @@ represented in HTML format.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.random_date">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">random_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="reference internal" href="_modules/website/utils/utils.html#random_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.random_date" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">random_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#random_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.random_date" title="Link to this definition">#</a></dt>
 <dd><p>Generates a random date between May 1, 2024, and the current date.</p>
 <p>Returns a random date calculated by generating a random number of days between the start and today.</p>
-<section id="id26">
-<h3>Returns<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></span></p>
+</dd>
+</dl>
+<section id="id28">
+<h3>Returns<a class="headerlink" href="#id28" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>datetime</dt><dd><p>A random date between May 1, 2024, and the current date.</p>
 </dd>
@@ -759,8 +785,8 @@ to index page as well.</p>
 <p>Must define endpoint for each route using this decorator.
 The decorator should be right above the function in
 order to run properly.</p>
-<section id="id27">
-<h3>Parameters<a class="headerlink" href="#id27" title="Link to this heading">#</a></h3>
+<section id="id29">
+<h3>Parameters<a class="headerlink" href="#id29" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>func<span class="classifier">Callable</span></dt><dd><p>The function to wrap with authentication checking.</p>
 </dd>
@@ -770,7 +796,7 @@ order to run properly.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="website.utils.utils.restricted_route_decorator">
-<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">restricted_route_decorator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">check_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#restricted_route_decorator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.restricted_route_decorator" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">website.utils.utils.</span></span><span class="sig-name descname"><span class="pre">restricted_route_decorator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">check_session</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/utils/utils.html#restricted_route_decorator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.utils.utils.restricted_route_decorator" title="Link to this definition">#</a></dt>
 <dd><p>Restricted Route Decorator</p>
 <p>Check if the user session is valid, if not,
 it redirected to 404.
@@ -779,8 +805,8 @@ if not, will be redirected to index page.</p>
 <p>Must define endpoint for each route using this decorator.
 The decorator should be right above the function in
 order to run properly.</p>
-<section id="id28">
-<h3>Parameters<a class="headerlink" href="#id28" title="Link to this heading">#</a></h3>
+<section id="id30">
+<h3>Parameters<a class="headerlink" href="#id30" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>func<span class="classifier">Callable</span></dt><dd><p>The function to wrap with authentication checking.</p>
 </dd>
@@ -798,8 +824,8 @@ default image file is served securely.
 It checks if the provided path is
 within the expected base path to
 prevent directory traversal.</p>
-<section id="id29">
-<h3>Returns<a class="headerlink" href="#id29" title="Link to this heading">#</a></h3>
+<section id="id31">
+<h3>Returns<a class="headerlink" href="#id31" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>send_file or tuple</dt><dd><p>If the path is safe, the default
 image file is sent using Flask’s
@@ -865,8 +891,6 @@ status code 404 is returned.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Utils</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Utils</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-website.utils.gpt">GPT</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.gpt.format_chat_history_for_gpt"><code class="docutils literal notranslate"><span class="pre">format_chat_history_for_gpt()</span></code></a></li>
 </ul>
@@ -880,7 +904,7 @@ status code 404 is returned.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.text2speech.speak"><code class="docutils literal notranslate"><span class="pre">speak()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Utils</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Utils</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.allowed_file"><code class="docutils literal notranslate"><span class="pre">allowed_file()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.create_test_chats"><code class="docutils literal notranslate"><span class="pre">create_test_chats()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.create_test_reviews"><code class="docutils literal notranslate"><span class="pre">create_test_reviews()</span></code></a></li>
@@ -890,6 +914,7 @@ status code 404 is returned.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.get_avatar_video"><code class="docutils literal notranslate"><span class="pre">get_avatar_video()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.get_current_user"><code class="docutils literal notranslate"><span class="pre">get_current_user()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.get_initial_chat_state_response"><code class="docutils literal notranslate"><span class="pre">get_initial_chat_state_response()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.get_previous_chats"><code class="docutils literal notranslate"><span class="pre">get_previous_chats()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.html_decode"><code class="docutils literal notranslate"><span class="pre">html_decode()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.html_encode"><code class="docutils literal notranslate"><span class="pre">html_encode()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.utils.utils.random_date"><code class="docutils literal notranslate"><span class="pre">random_date()</span></code></a></li>
@@ -900,9 +925,6 @@ status code 404 is returned.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-website.utils">Module contents</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
   <div class="sidebar-secondary-item">

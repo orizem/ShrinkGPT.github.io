@@ -2,8 +2,11 @@
 User Guide
 ==========
 
+User Guide Module
+=================
+
 Welcome to ShrinkGPT - Your AI-Powered Therapeutic Companion
-============================================================
+------------------------------------------------------------
 **Check out our github reop:**
 
    * .. image:: https://img.shields.io/badge/version-1.0.0-blue.svg
@@ -14,12 +17,12 @@ Welcome to ShrinkGPT - Your AI-Powered Therapeutic Companion
    :depth: 3
 
 Introduction
-============
+------------
 
 ShrinkGPT is an innovative AI-powered therapeutic chatbot that combines advanced natural language processing with psychological principles to provide supportive conversations and guidance. This comprehensive guide will help you set up, configure, and make the most of your ShrinkGPT experience.
 
 System Requirements
-===================
+-------------------
 
 * Python 3.12 or higher
 * 4GB RAM minimum (8GB recommended)

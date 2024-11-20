@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'js.chat';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="js.html">JSDoc</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -383,8 +368,10 @@
                   
   <section id="chat">
 <h1>Chat<a class="headerlink" href="#chat" title="Link to this heading">#</a></h1>
+<section id="chat-module">
+<h2>Chat Module<a class="headerlink" href="#chat-module" title="Link to this heading">#</a></h2>
 <section id="custom-video-controls">
-<h2>Custom Video Controls<a class="headerlink" href="#custom-video-controls" title="Link to this heading">#</a></h2>
+<h3>Custom Video Controls<a class="headerlink" href="#custom-video-controls" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>muteBtn.click: `EventListener`</strong>::
 Toggles the mute/unmute state of the video when the muteBtn is clicked.
@@ -462,7 +449,7 @@ Changes the fullscreenBtn icon depending on whether the video is in fullscreen m
 </ol>
 </section>
 <section id="drag-drop-video">
-<h2>Drag &amp; Drop Video<a class="headerlink" href="#drag-drop-video" title="Link to this heading">#</a></h2>
+<h3>Drag &amp; Drop Video<a class="headerlink" href="#drag-drop-video" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>startDrag: `EventListener`</strong>::
 Initiates the dragging process when the user starts interacting with the <cite>videoBox</cite>.
@@ -556,7 +543,7 @@ Removes the event listeners for mouse and touch events once the dragging ends.</
 </ol>
 </section>
 <section id="text-to-speech">
-<h2>Text To Speech<a class="headerlink" href="#text-to-speech" title="Link to this heading">#</a></h2>
+<h3>Text To Speech<a class="headerlink" href="#text-to-speech" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>toggleTextToSpeech: `Function`</strong>::
 Toggles the Text-to-Speech (TTS) playback when the associated button is clicked.
@@ -665,7 +652,7 @@ Resets the button text to “Start TTS” and clears the playing target.</p>
 </ol>
 </section>
 <section id="record-voice-message-with-speech-to-text">
-<h2>Record Voice Message With Speech To Text<a class="headerlink" href="#record-voice-message-with-speech-to-text" title="Link to this heading">#</a></h2>
+<h3>Record Voice Message With Speech To Text<a class="headerlink" href="#record-voice-message-with-speech-to-text" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>navigator.mediaDevices.getUserMedia: `Function`</strong>::
 Requests access to the user’s audio input device and initiates the recording process.
@@ -775,7 +762,7 @@ Updates the button’s class and state based on whether recording is active or n
 </ol>
 </section>
 <section id="additional-functions">
-<h2>Additional Functions<a class="headerlink" href="#additional-functions" title="Link to this heading">#</a></h2>
+<h3>Additional Functions<a class="headerlink" href="#additional-functions" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>appendMessage: Function</strong>::
 Appends a message to the chat window, including the sender’s name, image, text, time, and an optional video URL.
@@ -902,6 +889,7 @@ Formats a Date object into a time string in the format of ‘HH:MM’.</p>
 </ol>
 </section>
 </section>
+</section>
 
 
                 </article>
@@ -950,11 +938,14 @@ Formats a Date object into a time string in the format of ‘HH:MM’.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-video-controls">Custom Video Controls</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drag-drop-video">Drag &amp; Drop Video</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-to-speech">Text To Speech</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#record-voice-message-with-speech-to-text">Record Voice Message With Speech To Text</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-functions">Additional Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-module">Chat Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-video-controls">Custom Video Controls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drag-drop-video">Drag &amp; Drop Video</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-to-speech">Text To Speech</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#record-voice-message-with-speech-to-text">Record Voice Message With Speech To Text</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-functions">Additional Functions</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

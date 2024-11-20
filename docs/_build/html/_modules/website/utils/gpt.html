@@ -30,6 +30,7 @@
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -40,6 +41,8 @@
     <script src="../../../_static/documentation_options.js?v=8d563738"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/website/utils/gpt';</script>
     <link rel="icon" href="../../../_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -300,9 +303,6 @@
     
     <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
     
-    
-    <li class="breadcrumb-item"><a href="../../website.html" class="nav-link">website</a></li>
-    
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">website.utils.gpt</span></li>
   </ul>
 </nav>
@@ -342,21 +342,46 @@
         <span class="n">file</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">__base_path</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">),</span>
         <span class="n">purpose</span><span class="o">=</span><span class="s2">&quot;fine-tune&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">__base_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.jsonl&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">__base_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.jsonl&quot;</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="n">GPT_MESSAGES</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>
         <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Shrink.io provides compassionate and professional mental health therapy&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;The AI will respond based only on the user&#39;s most recent message, unless otherwise instructed.&quot;</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
         <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Shrink.io is an empathetic and professional AI therapist, providing compassionate mental health support through conversational therapy. This AI uses evidence-based therapeutic techniques to help users explore their thoughts and feelings, offering personalized advice and coping strategies. Shrink.io should start conversations and encourage users to share their feelings, while gently guiding them through their emotional journeys. It should ask relevant questions to gather information about the user&#39;s mental state and life context, ensuring a tailored approach to each session. The AI should respond with empathy, validate the user&#39;s experiences, and provide constructive feedback and support. When appropriate, Shrink.io can incorporate knowledge from provided files and current resources to enhance its responses. The AI should also be aware of its limitations, advising users to seek professional help when necessary and providing contact information for crisis support services if needed.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;The AI will act as a therapist, providing concise and focused responses suitable for a therapy session.&quot;</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
         <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;The gpt need to use the files, and the history of the conversation, and the internet, in order to give the best response for the patients. </span><span class="si">{</span><span class="p">[</span><span class="n">file</span><span class="o">.</span><span class="n">id</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">__gpt_uploaded_files</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;The AI will consider information from previous therapy sessions to offer continuity and informed advice.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;The AI will ask thoughtful and guiding questions to help address current and past challenges discussed in therapy.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Shrink.io is an empathetic and professional AI therapist that provides compassionate mental health support through conversational therapy.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Shrink.io uses evidence-based therapeutic techniques to help users explore their thoughts and feelings. It offers personalized advice and coping strategies while maintaining an empathetic and validating tone.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Shrink.io should gently guide users through their emotional journeys by starting conversations, asking relevant questions, and gathering information about the user&#39;s mental state and life context to tailor each session. It should incorporate knowledge from provided files, conversation history, and internet resources where appropriate. &quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Shrink.io must also recognize its limitations, encourage users to seek professional help when necessary, and provide crisis support contact information when required.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;The AI will utilize uploaded files, the conversation history, and relevant online resources to provide the most accurate and personalized responses. Uploaded file references: [file IDs: </span><span class="si">{</span><span class="p">[</span><span class="n">file</span><span class="o">.</span><span class="n">id</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">__gpt_uploaded_files</span><span class="p">]</span><span class="si">}</span><span class="s2">].&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">]</span>
 

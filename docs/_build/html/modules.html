@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'modules';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="js.html">JSDoc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -380,274 +365,56 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="website.html">Website</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="website.admin.html">Admin</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="website.admin.html#website.admin.activate_user"><code class="docutils literal notranslate"><span class="pre">activate_user()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.admin.html#website.admin.admin_dashboard"><code class="docutils literal notranslate"><span class="pre">admin_dashboard()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.admin.html#website.admin.api_keys_form"><code class="docutils literal notranslate"><span class="pre">api_keys_form()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.admin.html#website.admin.deactivate_user"><code class="docutils literal notranslate"><span class="pre">deactivate_user()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.admin.html#website.admin.delete_user"><code class="docutils literal notranslate"><span class="pre">delete_user()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.admin.html#website.admin.generate_test_data"><code class="docutils literal notranslate"><span class="pre">generate_test_data()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.admin.html#website.admin.load_api_keys"><code class="docutils literal notranslate"><span class="pre">load_api_keys()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.admin.html#website.admin.update_keys"><code class="docutils literal notranslate"><span class="pre">update_keys()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.html#website-module">Website Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="website.html#modules-overview">Modules Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="website.html#modules">Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="website.admin.html">Admin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="website.auth.html">Auth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="website.views.html">Views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="website.models.html">Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="website.forms.html">Forms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="website.utils.html">Utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="website.config.html">Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="website.config.html#module-website.config">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="website.auth.html">Auth</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="website.auth.html#website.auth.login"><code class="docutils literal notranslate"><span class="pre">login()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.auth.html#website.auth.logout"><code class="docutils literal notranslate"><span class="pre">logout()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.auth.html#website.auth.qrcode"><code class="docutils literal notranslate"><span class="pre">qrcode()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.auth.html#website.auth.register"><code class="docutils literal notranslate"><span class="pre">register()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.auth.html#website.auth.two_factor_setup"><code class="docutils literal notranslate"><span class="pre">two_factor_setup()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="website.views.html">Views</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.chat"><code class="docutils literal notranslate"><span class="pre">chat()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.docs"><code class="docutils literal notranslate"><span class="pre">docs()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.docs_empty"><code class="docutils literal notranslate"><span class="pre">docs_empty()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.docs_index"><code class="docutils literal notranslate"><span class="pre">docs_index()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.docs_main"><code class="docutils literal notranslate"><span class="pre">docs_main()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.docs_static"><code class="docutils literal notranslate"><span class="pre">docs_static()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.get_bot_response"><code class="docutils literal notranslate"><span class="pre">get_bot_response()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.get_chat"><code class="docutils literal notranslate"><span class="pre">get_chat()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.get_chat_delete"><code class="docutils literal notranslate"><span class="pre">get_chat_delete()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.get_chat_edit"><code class="docutils literal notranslate"><span class="pre">get_chat_edit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.get_image"><code class="docutils literal notranslate"><span class="pre">get_image()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.page_not_found"><code class="docutils literal notranslate"><span class="pre">page_not_found()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.presentation"><code class="docutils literal notranslate"><span class="pre">presentation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.profile"><code class="docutils literal notranslate"><span class="pre">profile()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.reviews"><code class="docutils literal notranslate"><span class="pre">reviews()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.root_static"><code class="docutils literal notranslate"><span class="pre">root_static()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.save_record"><code class="docutils literal notranslate"><span class="pre">save_record()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.slideshow"><code class="docutils literal notranslate"><span class="pre">slideshow()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.text2speech"><code class="docutils literal notranslate"><span class="pre">text2speech()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.transcribe_audio"><code class="docutils literal notranslate"><span class="pre">transcribe_audio()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.views.html#website.views.user_image"><code class="docutils literal notranslate"><span class="pre">user_image()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="website.models.html#website.models.Admin"><code class="docutils literal notranslate"><span class="pre">Admin</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Admin.id"><code class="docutils literal notranslate"><span class="pre">Admin.id</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Admin.query"><code class="docutils literal notranslate"><span class="pre">Admin.query</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Admin.user_id"><code class="docutils literal notranslate"><span class="pre">Admin.user_id</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.models.html#website.models.Chat"><code class="docutils literal notranslate"><span class="pre">Chat</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Chat.chat"><code class="docutils literal notranslate"><span class="pre">Chat.chat</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Chat.chat_json"><code class="docutils literal notranslate"><span class="pre">Chat.chat_json</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Chat.id"><code class="docutils literal notranslate"><span class="pre">Chat.id</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Chat.name"><code class="docutils literal notranslate"><span class="pre">Chat.name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Chat.user_id"><code class="docutils literal notranslate"><span class="pre">Chat.user_id</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.models.html#website.models.Reviews"><code class="docutils literal notranslate"><span class="pre">Reviews</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Reviews.content"><code class="docutils literal notranslate"><span class="pre">Reviews.content</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Reviews.id"><code class="docutils literal notranslate"><span class="pre">Reviews.id</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Reviews.query"><code class="docutils literal notranslate"><span class="pre">Reviews.query</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Reviews.stars"><code class="docutils literal notranslate"><span class="pre">Reviews.stars</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Reviews.submitted_at"><code class="docutils literal notranslate"><span class="pre">Reviews.submitted_at</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Reviews.title"><code class="docutils literal notranslate"><span class="pre">Reviews.title</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Reviews.user_id"><code class="docutils literal notranslate"><span class="pre">Reviews.user_id</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.models.html#website.models.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Status.id"><code class="docutils literal notranslate"><span class="pre">Status.id</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Status.last_deactivate_date"><code class="docutils literal notranslate"><span class="pre">Status.last_deactivate_date</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Status.register_date"><code class="docutils literal notranslate"><span class="pre">Status.register_date</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Status.status"><code class="docutils literal notranslate"><span class="pre">Status.status</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.Status.user_id"><code class="docutils literal notranslate"><span class="pre">Status.user_id</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.models.html#website.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.chats"><code class="docutils literal notranslate"><span class="pre">User.chats</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.full_name"><code class="docutils literal notranslate"><span class="pre">User.full_name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.get_totp_uri"><code class="docutils literal notranslate"><span class="pre">User.get_totp_uri()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.id"><code class="docutils literal notranslate"><span class="pre">User.id</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.image_data"><code class="docutils literal notranslate"><span class="pre">User.image_data</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.image_filename"><code class="docutils literal notranslate"><span class="pre">User.image_filename</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.is_admin"><code class="docutils literal notranslate"><span class="pre">User.is_admin</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.lastname"><code class="docutils literal notranslate"><span class="pre">User.lastname</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.name"><code class="docutils literal notranslate"><span class="pre">User.name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.otp_secret"><code class="docutils literal notranslate"><span class="pre">User.otp_secret</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.password"><code class="docutils literal notranslate"><span class="pre">User.password</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.password_hash"><code class="docutils literal notranslate"><span class="pre">User.password_hash</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.reviews"><code class="docutils literal notranslate"><span class="pre">User.reviews</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.status"><code class="docutils literal notranslate"><span class="pre">User.status</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.verify_password"><code class="docutils literal notranslate"><span class="pre">User.verify_password()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.models.html#website.models.User.verify_totp"><code class="docutils literal notranslate"><span class="pre">User.verify_totp()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="website.forms.html#website.forms.ChatEdit"><code class="docutils literal notranslate"><span class="pre">ChatEdit</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.ChatEdit.name"><code class="docutils literal notranslate"><span class="pre">ChatEdit.name</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.forms.html#website.forms.LoginForm"><code class="docutils literal notranslate"><span class="pre">LoginForm</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.LoginForm.password"><code class="docutils literal notranslate"><span class="pre">LoginForm.password</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.LoginForm.submit"><code class="docutils literal notranslate"><span class="pre">LoginForm.submit</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.LoginForm.token"><code class="docutils literal notranslate"><span class="pre">LoginForm.token</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.LoginForm.username"><code class="docutils literal notranslate"><span class="pre">LoginForm.username</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.forms.html#website.forms.ProfileForm"><code class="docutils literal notranslate"><span class="pre">ProfileForm</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.ProfileForm.image"><code class="docutils literal notranslate"><span class="pre">ProfileForm.image</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.ProfileForm.lastname"><code class="docutils literal notranslate"><span class="pre">ProfileForm.lastname</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.ProfileForm.name"><code class="docutils literal notranslate"><span class="pre">ProfileForm.name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.ProfileForm.submit"><code class="docutils literal notranslate"><span class="pre">ProfileForm.submit</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.forms.html#website.forms.RegisterForm"><code class="docutils literal notranslate"><span class="pre">RegisterForm</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.RegisterForm.image"><code class="docutils literal notranslate"><span class="pre">RegisterForm.image</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.RegisterForm.lastname"><code class="docutils literal notranslate"><span class="pre">RegisterForm.lastname</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.RegisterForm.name"><code class="docutils literal notranslate"><span class="pre">RegisterForm.name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.RegisterForm.password"><code class="docutils literal notranslate"><span class="pre">RegisterForm.password</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.RegisterForm.password_again"><code class="docutils literal notranslate"><span class="pre">RegisterForm.password_again</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.RegisterForm.submit"><code class="docutils literal notranslate"><span class="pre">RegisterForm.submit</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.RegisterForm.username"><code class="docutils literal notranslate"><span class="pre">RegisterForm.username</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.forms.html#website.forms.ReviewForm"><code class="docutils literal notranslate"><span class="pre">ReviewForm</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.ReviewForm.anonymous"><code class="docutils literal notranslate"><span class="pre">ReviewForm.anonymous</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.ReviewForm.content"><code class="docutils literal notranslate"><span class="pre">ReviewForm.content</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.ReviewForm.stars"><code class="docutils literal notranslate"><span class="pre">ReviewForm.stars</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.ReviewForm.submit"><code class="docutils literal notranslate"><span class="pre">ReviewForm.submit</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.forms.html#website.forms.ReviewForm.title"><code class="docutils literal notranslate"><span class="pre">ReviewForm.title</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="website.utils.html#id1">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="website.utils.html#module-website.utils.gpt">GPT</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.gpt.format_chat_history_for_gpt"><code class="docutils literal notranslate"><span class="pre">format_chat_history_for_gpt()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.utils.html#module-website.utils.text2speech">Text To Speech</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.text2speech.Text2Speech"><code class="docutils literal notranslate"><span class="pre">Text2Speech</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.text2speech.speak"><code class="docutils literal notranslate"><span class="pre">speak()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.utils.html#id3">Utils</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.allowed_file"><code class="docutils literal notranslate"><span class="pre">allowed_file()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.create_test_chats"><code class="docutils literal notranslate"><span class="pre">create_test_chats()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.create_test_reviews"><code class="docutils literal notranslate"><span class="pre">create_test_reviews()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.create_test_users"><code class="docutils literal notranslate"><span class="pre">create_test_users()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.generate_random_review"><code class="docutils literal notranslate"><span class="pre">generate_random_review()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.generate_slide_show"><code class="docutils literal notranslate"><span class="pre">generate_slide_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.get_avatar_video"><code class="docutils literal notranslate"><span class="pre">get_avatar_video()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.get_current_user"><code class="docutils literal notranslate"><span class="pre">get_current_user()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.get_initial_chat_state_response"><code class="docutils literal notranslate"><span class="pre">get_initial_chat_state_response()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.html_decode"><code class="docutils literal notranslate"><span class="pre">html_decode()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.html_encode"><code class="docutils literal notranslate"><span class="pre">html_encode()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.random_date"><code class="docutils literal notranslate"><span class="pre">random_date()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.restricted_admin_route_decorator"><code class="docutils literal notranslate"><span class="pre">restricted_admin_route_decorator()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.restricted_route_decorator"><code class="docutils literal notranslate"><span class="pre">restricted_route_decorator()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.utils.html#website.utils.utils.safe_send_default_image"><code class="docutils literal notranslate"><span class="pre">safe_send_default_image()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.utils.html#module-website.utils">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="website.config.html#id1">Config</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.config.html#website.config.config.__Config"><code class="docutils literal notranslate"><span class="pre">__Config</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.config.html#website.config.config.__ConfigFileException"><code class="docutils literal notranslate"><span class="pre">__ConfigFileException</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="website.config.html#website.config.config.__NotInConfigException"><code class="docutils literal notranslate"><span class="pre">__NotInConfigException</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="website.config.html#module-website.config">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="website.html#module-website">Module contents</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="website.html#website.create_admin"><code class="docutils literal notranslate"><span class="pre">create_admin()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.html#website.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.html#website.create_database"><code class="docutils literal notranslate"><span class="pre">create_database()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="js.html">JSDoc</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="js.chat.html">Chat</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="js.chat.html#custom-video-controls">Custom Video Controls</a></li>
-<li class="toctree-l3"><a class="reference internal" href="js.chat.html#drag-drop-video">Drag &amp; Drop Video</a></li>
-<li class="toctree-l3"><a class="reference internal" href="js.chat.html#text-to-speech">Text To Speech</a></li>
-<li class="toctree-l3"><a class="reference internal" href="js.chat.html#record-voice-message-with-speech-to-text">Record Voice Message With Speech To Text</a></li>
-<li class="toctree-l3"><a class="reference internal" href="js.chat.html#additional-functions">Additional Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.html#jsdoc-module">JSDoc Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="js.html#modules-overview">Modules Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html#modules">Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="js.chat.html">Chat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="js.chat_side_navbar.html">Chat Side Navbar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="js.admin.html">Admin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="js.review.html">Review</a></li>
+<li class="toctree-l4"><a class="reference internal" href="js.index.html">Index</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="js.chat_side_navbar.html">Chat Side Navbar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="js.admin.html">Admin</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="js.admin.html#functions-used-in-admin-page">Functions Used In Admin page</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="js.review.html">Review</a></li>
-<li class="toctree-l2"><a class="reference internal" href="js.index.html">Index</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guide.html#welcome-to-shrinkgpt-your-ai-powered-therapeutic-companion">Welcome to ShrinkGPT - Your AI-Powered Therapeutic Companion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guide.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guide.html#system-requirements">System Requirements</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#local-installation">Local Installation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#docker-installation">Docker Installation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="guide.guide.html#usage-guide">Usage Guide</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#starting-the-application">Starting the Application</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#accessing-the-interface">Accessing the Interface</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="guide.guide.html#key-features">Key Features</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#therapeutic-conversation">Therapeutic Conversation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#session-management">Session Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="guide.guide.html#privacy-security">Privacy &amp; Security</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#data-protection">Data Protection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#user-privacy">User Privacy</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="guide.guide.html#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#common-issues">Common Issues</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="guide.guide.html#development-contribution">Development &amp; Contribution</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#contributing-guidelines">Contributing Guidelines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#documentation">Documentation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="guide.guide.html#deployment">Deployment</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#google-cloud-deployment">Google Cloud Deployment</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="guide.guide.html#support-resources">Support &amp; Resources</a></li>
-<li class="toctree-l4"><a class="reference internal" href="guide.guide.html#license">License</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#gnu-general-public-license-v3-0">GNU General Public License v3.0</a></li>
-<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#copyright-notice">Copyright Notice</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.README.html#getting-started">Getting Started 🚀</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="README.README.html#setting-up-your-virtual-environment">Setting Up Your Virtual Environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.README.html#install-dependencies">Install Dependencies 📦</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#user-guide-module">User Guide Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guide.html#welcome-to-shrinkgpt-your-ai-powered-therapeutic-companion">Welcome to ShrinkGPT - Your AI-Powered Therapeutic Companion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.html#system-requirements">System Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="guide.guide.html">Guide</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="README.README.html#docker-support">Docker Support 🐳</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.README.html#documentation-with-sphinx">Documentation with Sphinx 📚✨</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.README.html#deploy-flask-docker-app-to-google-cloud">Deploy Flask Docker App to Google Cloud ☁️</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="README.README.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.README.html#step-1-set-up-google-cloud-project">Step 1: Set Up Google Cloud Project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.README.html#step-2-enable-required-apis">Step 2: Enable Required APIs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.README.html#step-3-configure-gcloud-cli">Step 3: Configure gcloud CLI</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.README.html#step-4-push-docker-image-to-google-container-registry-gcr">Step 4: Push Docker Image to Google Container Registry (GCR)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.README.html#step-5-deploy-to-cloud-run">Step 5: Deploy to Cloud Run</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.README.html#step-6-test-and-share">Step 6: Test and Share</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">ShrinkGPT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#shrinkgpt-your-virtual-ai-shrink">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="README.html#modules">Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="README.README.html">README</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

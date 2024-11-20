@@ -1,11 +1,9 @@
-Utils
 =====
-
 Utils
 =====
 
 GPT
----
+===
 
 .. automodule:: website.utils.gpt
    :members:
@@ -13,7 +11,7 @@ GPT
    :show-inheritance:
 
 Text To Speech
---------------
+==============
 
 .. automodule:: website.utils.text2speech
    :members:
@@ -21,7 +19,7 @@ Text To Speech
    :show-inheritance:
 
 Utils
------
+=====
 
 .. automodule:: website.utils.utils
    :members:
@@ -29,7 +27,7 @@ Utils
    :show-inheritance:
 
 Module contents
----------------
+===============
 
 .. automodule:: website.utils
    :members:

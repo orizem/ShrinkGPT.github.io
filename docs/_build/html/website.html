@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'website';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="js.html">JSDoc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -380,6 +365,59 @@
                   
   <section id="website">
 <h1>Website<a class="headerlink" href="#website" title="Link to this heading">#</a></h1>
+<section id="website-module">
+<h2>Website Module<a class="headerlink" href="#website-module" title="Link to this heading">#</a></h2>
+<p>Comprehensive documentation for the website’s Python modules. Each section provides an overview of its purpose and detailed functionality.</p>
+<section id="modules-overview">
+<h3>Modules Overview<a class="headerlink" href="#modules-overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Admin Module</strong></dt><dd><p>Manages administrative tasks and site configurations.
+<a class="reference external" href="website.admin.html">Read more</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Authentication Module</strong></dt><dd><p>Handles user login, registration, and session management.
+<a class="reference external" href="website.auth.html">Read more</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Views Module</strong></dt><dd><p>Defines the app’s endpoints and page rendering logic.
+<a class="reference external" href="website.views.html">Read more</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Models Module</strong></dt><dd><p>Contains database models and relationships.
+<a class="reference external" href="website.models.html">Read more</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Forms Module</strong></dt><dd><p>Includes form handling and validation logic.
+<a class="reference external" href="website.forms.html">Read more</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Utilities Module</strong></dt><dd><p>Provides helper functions and reusable components.
+<a class="reference external" href="website.utils.html">Read more</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Configuration Module</strong></dt><dd><p>Manages app settings and environment variables.
+<a class="reference external" href="website.config.html">Read more</a></p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Detailed overview of the <cite>website</cite> module, including all its members, undocumented elements, and inheritance relationships.</p>
+</section>
+<section id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="website.admin.html">Admin</a><ul>
@@ -520,8 +558,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="website.utils.html">Utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="website.utils.html#id1">Utils</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="website.utils.html">Utils</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html#module-website.utils.gpt">GPT</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.gpt.format_chat_history_for_gpt"><code class="docutils literal notranslate"><span class="pre">format_chat_history_for_gpt()</span></code></a></li>
 </ul>
@@ -535,7 +572,7 @@
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.text2speech.speak"><code class="docutils literal notranslate"><span class="pre">speak()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="website.utils.html#id3">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="website.utils.html#id2">Utils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.utils.allowed_file"><code class="docutils literal notranslate"><span class="pre">allowed_file()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.utils.create_test_chats"><code class="docutils literal notranslate"><span class="pre">create_test_chats()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.utils.create_test_reviews"><code class="docutils literal notranslate"><span class="pre">create_test_reviews()</span></code></a></li>
@@ -545,6 +582,7 @@
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.utils.get_avatar_video"><code class="docutils literal notranslate"><span class="pre">get_avatar_video()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.utils.get_current_user"><code class="docutils literal notranslate"><span class="pre">get_current_user()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.utils.get_initial_chat_state_response"><code class="docutils literal notranslate"><span class="pre">get_initial_chat_state_response()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.utils.get_previous_chats"><code class="docutils literal notranslate"><span class="pre">get_previous_chats()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.utils.html_decode"><code class="docutils literal notranslate"><span class="pre">html_decode()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.utils.html_encode"><code class="docutils literal notranslate"><span class="pre">html_encode()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="website.utils.html#website.utils.utils.random_date"><code class="docutils literal notranslate"><span class="pre">random_date()</span></code></a></li>
@@ -557,121 +595,18 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="website.config.html">Config</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="website.config.html#id1">Config</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="website.config.html#website.config.config.__Config"><code class="docutils literal notranslate"><span class="pre">__Config</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="website.config.html#website.config.config.__Config.read"><code class="docutils literal notranslate"><span class="pre">__Config.read()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.config.html#website.config.config.__Config"><code class="docutils literal notranslate"><span class="pre">__Config</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="website.config.html#website.config.config.__Config.read"><code class="docutils literal notranslate"><span class="pre">__Config.read()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="website.config.html#website.config.config.__ConfigFileException"><code class="docutils literal notranslate"><span class="pre">__ConfigFileException</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="website.config.html#website.config.config.__NotInConfigException"><code class="docutils literal notranslate"><span class="pre">__NotInConfigException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.config.html#website.config.config.__ConfigFileException"><code class="docutils literal notranslate"><span class="pre">__ConfigFileException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.config.html#website.config.config.__NotInConfigException"><code class="docutils literal notranslate"><span class="pre">__NotInConfigException</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="website.config.html#module-website.config">Module contents</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="website.config.html#module-website.config">Module contents</a></li>
 </ul>
 </div>
-<section id="module-website">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-website" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="website.create_admin">
-<span class="sig-prename descclassname"><span class="pre">website.</span></span><span class="sig-name descname"><span class="pre">create_admin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website.html#create_admin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.create_admin" title="Link to this definition">#</a></dt>
-<dd><p>Create default admin user and admin entry</p>
-<p>This function checks if there are any existing admins in the database. 
-If no admins are found, it creates a default admin user and adds it 
-to the database, followed by creating an associated admin entry.</p>
-<p>It is useful for setting up a default administrative account on 
-the first run of the application.</p>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
-<dl class="simple">
-<dt>app<span class="classifier">Flask</span></dt><dd><p>The Flask application instance that provides the app context 
-for creating the admin user.</p>
-</dd>
-</dl>
 </section>
-<section id="returns">
-<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading">#</a></h3>
-<dl class="simple">
-<dt>None</dt><dd><p>This function does not return anything, it only modifies the 
-database by adding a default admin user and entry.</p>
-</dd>
-</dl>
-</section>
-<section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">create_admin</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-<span class="go">If no admins exist, a default admin user is created and added to </span>
-<span class="go">the database.</span>
-</pre></div>
-</div>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="website.create_app">
-<span class="sig-prename descclassname"><span class="pre">website.</span></span><span class="sig-name descname"><span class="pre">create_app</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website.html#create_app"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.create_app" title="Link to this definition">#</a></dt>
-<dd><p>Create and configure the Flask application</p>
-<p>This function sets up and initializes the Flask application with 
-the necessary configurations, extensions, and blueprints. It also 
-registers the user loader for the login manager and error handlers.</p>
-<p>The following components are initialized:
-- Flask application instance
-- Bootstrap for front-end styling
-- Database (SQLAlchemy)
-- Login Manager for user authentication
-- Error handler for 404 (page not found)
-- Blueprints for authentication, admin, and general views</p>
-<section id="id1">
-<h3>Returns<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<dl class="simple">
-<dt>Flask</dt><dd><p>The configured Flask application instance.</p>
-</dd>
-</dl>
-</section>
-<section id="id2">
-<h3>Examples<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
-<span class="go">The application is configured, and blueprints for auth, admin, and views </span>
-<span class="go">are registered, making it ready to run.</span>
-</pre></div>
-</div>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="website.create_database">
-<span class="sig-prename descclassname"><span class="pre">website.</span></span><span class="sig-name descname"><span class="pre">create_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/website.html#create_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.create_database" title="Link to this definition">#</a></dt>
-<dd><p>Create the database tables</p>
-<p>This function creates the necessary database tables by calling 
-<cite>db.create_all()</cite> within the app’s context.</p>
-<p>It is intended to be run when the application is first set up or 
-when new database models are added.</p>
-<section id="id3">
-<h3>Parameters<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
-<dl class="simple">
-<dt>app<span class="classifier">Flask</span></dt><dd><p>The Flask application instance that provides the app context 
-for creating the tables.</p>
-</dd>
-</dl>
-</section>
-<section id="id4">
-<h3>Returns<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
-<dl class="simple">
-<dt>None</dt><dd><p>This function does not return anything, it only modifies the 
-database.</p>
-</dd>
-</dl>
-</section>
-<section id="id5">
-<h3>Examples<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">create_database</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-<span class="go">Creates the tables defined by the app&#39;s models in the database.</span>
-</pre></div>
-</div>
-</section>
-</dd></dl>
-
 </section>
 </section>
 
@@ -722,10 +657,9 @@ database.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-website">Module contents</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.create_admin"><code class="docutils literal notranslate"><span class="pre">create_admin()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website.create_database"><code class="docutils literal notranslate"><span class="pre">create_database()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#website-module">Website Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules-overview">Modules Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
 </ul>
 </li>
 </ul>

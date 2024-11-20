@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,11 +42,13 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'README.README';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="ShrinkGPT - Your Virtual AI Shrink 🤖🧠" href="README.html" />
+    <link rel="prev" title="ShrinkGPT" href="README.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -284,8 +287,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="js.html">JSDoc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -298,28 +301,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -361,7 +346,7 @@
     <li class="breadcrumb-item"><a href="modules.html" class="nav-link">ShrinkGPT.github.io</a></li>
     
     
-    <li class="breadcrumb-item"><a href="README.html" class="nav-link">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a></li>
+    <li class="breadcrumb-item"><a href="README.html" class="nav-link">ShrinkGPT</a></li>
     
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">README</span></li>
   </ul>
@@ -382,11 +367,10 @@
                   
   <section id="readme">
 <h1>README<a class="headerlink" href="#readme" title="Link to this heading">#</a></h1>
-</section>
 <section id="getting-started">
-<h1>Getting Started 🚀<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<h2>Getting Started 🚀<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
 <section id="setting-up-your-virtual-environment">
-<h2>Setting Up Your Virtual Environment<a class="headerlink" href="#setting-up-your-virtual-environment" title="Link to this heading">#</a></h2>
+<h3>Setting Up Your Virtual Environment<a class="headerlink" href="#setting-up-your-virtual-environment" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Create a Virtual Environment:</strong></p>
 <ul class="simple">
@@ -406,7 +390,7 @@
 </ol>
 </section>
 <section id="install-dependencies">
-<h2>Install Dependencies 📦<a class="headerlink" href="#install-dependencies" title="Link to this heading">#</a></h2>
+<h3>Install Dependencies 📦<a class="headerlink" href="#install-dependencies" title="Link to this heading">#</a></h3>
 <ul>
 <li><p>Upgrade pip with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">pip</span></code>.</p></li>
 <li><p>Install project dependencies with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code>.</p></li>
@@ -420,14 +404,14 @@
 </section>
 </section>
 <section id="docker-support">
-<h1>Docker Support 🐳<a class="headerlink" href="#docker-support" title="Link to this heading">#</a></h1>
+<h2>Docker Support 🐳<a class="headerlink" href="#docker-support" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">-t</span> <span class="pre">shrink-io-app</span> <span class="pre">.</span></code></p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-p</span> <span class="pre">5000:5000</span> <span class="pre">shrink-io-app</span></code></p></li>
 </ol>
 </section>
 <section id="documentation-with-sphinx">
-<h1>Documentation with Sphinx 📚✨<a class="headerlink" href="#documentation-with-sphinx" title="Link to this heading">#</a></h1>
+<h2>Documentation with Sphinx 📚✨<a class="headerlink" href="#documentation-with-sphinx" title="Link to this heading">#</a></h2>
 <p>Our documentation is powered by Sphinx and is essential for understanding and contributing to the project. Follow these steps to keep it up-to-date:</p>
 <ol class="arabic simple">
 <li><p>Navigate to the project root folder (ShrinkGPT.github.io).</p></li>
@@ -439,10 +423,10 @@
 </ol>
 </section>
 <section id="deploy-flask-docker-app-to-google-cloud">
-<h1>Deploy Flask Docker App to Google Cloud ☁️<a class="headerlink" href="#deploy-flask-docker-app-to-google-cloud" title="Link to this heading">#</a></h1>
+<h2>Deploy Flask Docker App to Google Cloud ☁️<a class="headerlink" href="#deploy-flask-docker-app-to-google-cloud" title="Link to this heading">#</a></h2>
 <p>This guide provides step-by-step instructions on how to deploy a Docker image of a Flask web application to Google Cloud using Cloud Run.</p>
 <section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Google Cloud account and project.</p></li>
 <li><p>Docker image of your Flask web application.</p></li>
@@ -450,7 +434,7 @@
 </ol>
 </section>
 <section id="step-1-set-up-google-cloud-project">
-<h2>Step 1: Set Up Google Cloud Project<a class="headerlink" href="#step-1-set-up-google-cloud-project" title="Link to this heading">#</a></h2>
+<h3>Step 1: Set Up Google Cloud Project<a class="headerlink" href="#step-1-set-up-google-cloud-project" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Log in to `Google Cloud Console &lt;https://console.cloud.google.com/&gt;`_.</strong></p></li>
 <li><p><strong>Create a new project</strong> (or select an existing one):
@@ -459,7 +443,7 @@
 </ol>
 </section>
 <section id="step-2-enable-required-apis">
-<h2>Step 2: Enable Required APIs<a class="headerlink" href="#step-2-enable-required-apis" title="Link to this heading">#</a></h2>
+<h3>Step 2: Enable Required APIs<a class="headerlink" href="#step-2-enable-required-apis" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Enable Cloud Run</strong>:
 - In the search bar, type “Cloud Run” and open it.
@@ -469,7 +453,7 @@
 </ol>
 </section>
 <section id="step-3-configure-gcloud-cli">
-<h2>Step 3: Configure gcloud CLI<a class="headerlink" href="#step-3-configure-gcloud-cli" title="Link to this heading">#</a></h2>
+<h3>Step 3: Configure gcloud CLI<a class="headerlink" href="#step-3-configure-gcloud-cli" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p>Open a terminal and configure your project:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">auth</span> <span class="n">login</span>  <span class="c1"># Log in to your Google account</span>
@@ -481,7 +465,7 @@
 </ol>
 </section>
 <section id="step-4-push-docker-image-to-google-container-registry-gcr">
-<h2>Step 4: Push Docker Image to Google Container Registry (GCR)<a class="headerlink" href="#step-4-push-docker-image-to-google-container-registry-gcr" title="Link to this heading">#</a></h2>
+<h3>Step 4: Push Docker Image to Google Container Registry (GCR)<a class="headerlink" href="#step-4-push-docker-image-to-google-container-registry-gcr" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>Tag your Docker image</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker tag [IMAGE_NAME] gcr.io/[PROJECT_ID]/[IMAGE_NAME]:[TAG]
@@ -501,7 +485,7 @@ Replace:
 </ol>
 </section>
 <section id="step-5-deploy-to-cloud-run">
-<h2>Step 5: Deploy to Cloud Run<a class="headerlink" href="#step-5-deploy-to-cloud-run" title="Link to this heading">#</a></h2>
+<h3>Step 5: Deploy to Cloud Run<a class="headerlink" href="#step-5-deploy-to-cloud-run" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>Deploy your container image</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>gcloud run deploy [SERVICE_NAME] \
@@ -520,12 +504,13 @@ Replace:
 </ol>
 </section>
 <section id="step-6-test-and-share">
-<h2>Step 6: Test and Share<a class="headerlink" href="#step-6-test-and-share" title="Link to this heading">#</a></h2>
+<h3>Step 6: Test and Share<a class="headerlink" href="#step-6-test-and-share" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Copy the URL from the Cloud Run output.</p></li>
 <li><p>Share the URL with others to access your Flask app!</p></li>
 </ul>
 <p>Feel free to explore, contribute, and let ShrinkGPT guide you on your virtual therapy journey! 🌈✨</p>
+</section>
 </section>
 </section>
 
@@ -545,7 +530,7 @@ Replace:
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</p>
+        <p class="prev-next-title">ShrinkGPT</p>
       </div>
     </a>
 </div>
@@ -567,26 +552,24 @@ Replace:
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">README</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started 🚀</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-your-virtual-environment">Setting Up Your Virtual Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-dependencies">Install Dependencies 📦</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started 🚀</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-your-virtual-environment">Setting Up Your Virtual Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-dependencies">Install Dependencies 📦</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-support">Docker Support 🐳</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-with-sphinx">Documentation with Sphinx 📚✨</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-flask-docker-app-to-google-cloud">Deploy Flask Docker App to Google Cloud ☁️</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-set-up-google-cloud-project">Step 1: Set Up Google Cloud Project</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-enable-required-apis">Step 2: Enable Required APIs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-configure-gcloud-cli">Step 3: Configure gcloud CLI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-push-docker-image-to-google-container-registry-gcr">Step 4: Push Docker Image to Google Container Registry (GCR)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-deploy-to-cloud-run">Step 5: Deploy to Cloud Run</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-test-and-share">Step 6: Test and Share</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-support">Docker Support 🐳</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-with-sphinx">Documentation with Sphinx 📚✨</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-flask-docker-app-to-google-cloud">Deploy Flask Docker App to Google Cloud ☁️</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-set-up-google-cloud-project">Step 1: Set Up Google Cloud Project</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-enable-required-apis">Step 2: Enable Required APIs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-configure-gcloud-cli">Step 3: Configure gcloud CLI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-push-docker-image-to-google-container-registry-gcr">Step 4: Push Docker Image to Google Container Registry (GCR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-deploy-to-cloud-run">Step 5: Deploy to Cloud Run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-test-and-share">Step 6: Test and Share</a></li>
 </ul>
 </li>
 </ul>
-
   </nav></div>
 
   <div class="sidebar-secondary-item">

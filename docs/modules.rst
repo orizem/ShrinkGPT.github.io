@@ -1,5 +1,5 @@
 ShrinkGPT.github.io
-===================
+-------------------
 
 .. toctree::
    :maxdepth: 4

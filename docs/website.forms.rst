@@ -1,5 +1,5 @@
 Forms
-=====
+-----
 
 .. automodule:: website.forms
    :members:

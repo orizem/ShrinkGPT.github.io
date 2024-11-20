@@ -17,12 +17,13 @@ body {
 .msb {
   width: 200pt;
   background-color: #f5f7f9;
-  position: absolute;
+  position: fixed;
+  /* position: absolute; */
   left: 0;
   top: 0;
   right: auto;
   min-height: 100%;
-  overflow-y: auto;
+  overflow: hidden;
   white-space: nowrap;
   height: 100%;
   z-index: 1;
@@ -180,6 +181,39 @@ a:hover {
   transform-style: preserve-3d;
 }
 
+.msb::-webkit-scrollbar {
+  width: 8px;
+}
+.msb::-webkit-scrollbar-track {
+  background: var(--border-color);
+}
+.msb::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #579ffb;
+}
+.msb::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background: #2b87ff;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2b87ff;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #579ffb;
+}
+
 .bars-container {
   display: inline-block;
   cursor: pointer;
@@ -210,7 +244,7 @@ a:hover {
 }
 
 .slide-button {
-  position: absolute;
+  position: fixed;
   top: 40pt;
   left: 10pt;
   width: auto;

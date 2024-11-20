@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'js.review';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="js.html">JSDoc</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -383,6 +368,10 @@
                   
   <section id="review">
 <h1>Review<a class="headerlink" href="#review" title="Link to this heading">#</a></h1>
+<section id="review-module">
+<h2>Review Module<a class="headerlink" href="#review-module" title="Link to this heading">#</a></h2>
+<section id="update-stars">
+<h3>Update Stars<a class="headerlink" href="#update-stars" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>updateStars: Function</strong>::
 Updates the star rating display when the user clicks or hovers over a star.
@@ -410,6 +399,11 @@ Sets the appropriate filled or empty star class based on the clicked or hovered 
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="show-tooltip">
+<h3>Show Tooltip<a class="headerlink" href="#show-tooltip" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="2">
 <li><p><strong>showTooltip: Function</strong>::
 Displays a tooltip when the user hovers over a star, showing the star rating.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -427,6 +421,11 @@ Displays a tooltip when the user hovers over a star, showing the star rating.</p
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="hide-tooltip">
+<h3>Hide Tooltip<a class="headerlink" href="#hide-tooltip" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="3">
 <li><p><strong>hideTooltip: Function</strong>::
 Hides the tooltip when the mouse leaves the star.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -441,6 +440,11 @@ Hides the tooltip when the mouse leaves the star.</p>
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="label-click">
+<h3>Label Click<a class="headerlink" href="#label-click" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="4">
 <li><p><strong>label.addEventListener(‘click’): EventListener</strong>::
 Updates the star rating when a star is clicked.
 Sets the associated radio button as checked.</p>
@@ -462,6 +466,11 @@ Sets the associated radio button as checked.</p>
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="label-mouse-enter">
+<h3>Label Mouse Enter<a class="headerlink" href="#label-mouse-enter" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="5">
 <li><p><strong>label.addEventListener(‘mouseenter’): EventListener</strong>::
 Displays the tooltip and highlights the stars when hovered over.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -479,6 +488,11 @@ Displays the tooltip and highlights the stars when hovered over.</p>
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="label-mouse-leave">
+<h3>Label Mouse Leave<a class="headerlink" href="#label-mouse-leave" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="6">
 <li><p><strong>label.addEventListener(‘mouseleave’): EventListener</strong>::
 Removes the tooltip and resets the star rating when the mouse leaves the star.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -499,6 +513,8 @@ Removes the tooltip and resets the star rating when the mouse leaves the star.</
 </div>
 </li>
 </ol>
+</section>
+</section>
 </section>
 
 
@@ -539,6 +555,26 @@ Removes the tooltip and resets the star rating when the mouse leaves the star.</
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-module">Review Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-stars">Update Stars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-tooltip">Show Tooltip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-tooltip">Hide Tooltip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#label-click">Label Click</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#label-mouse-enter">Label Mouse Enter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#label-mouse-leave">Label Mouse Leave</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

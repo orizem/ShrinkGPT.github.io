@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'js';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">JSDoc</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -380,25 +365,96 @@
                   
   <section id="jsdoc">
 <h1>JSDoc<a class="headerlink" href="#jsdoc" title="Link to this heading">#</a></h1>
+<section id="jsdoc-module">
+<h2>JSDoc Module<a class="headerlink" href="#jsdoc-module" title="Link to this heading">#</a></h2>
+<p>Comprehensive documentation for the JavaScript components of the project. Each module is detailed to provide insights into its purpose and functionality.</p>
+<section id="modules-overview">
+<h3>Modules Overview<a class="headerlink" href="#modules-overview" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Chat Module</strong>
+Manages real-time messaging and user interactions.
+<a class="reference external" href="js.chat.html">Read more</a></p></li>
+<li><p><strong>Chat Sidebar Navbar</strong>
+Sidebar navigation for the chat interface, enabling seamless navigation between chats.
+<a class="reference external" href="js.chat_side_navbar.html">Read more</a></p></li>
+<li><p><strong>Admin Panel</strong>
+Tools for managing users, monitoring activity, and accessing dashboard functionality.
+<a class="reference external" href="js.admin.html">Read more</a></p></li>
+<li><p><strong>Review Module</strong>
+Supports review submission, rating functionality, and the display of user feedback.
+<a class="reference external" href="js.review.html">Read more</a></p></li>
+<li><p><strong>Index Module</strong>
+Manages the homepage functionality, including dynamic content rendering, user interactions, and navigation setup.
+<a class="reference external" href="js.index.html">Read more</a></p></li>
+</ul>
+</section>
+<section id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="js.chat.html">Chat</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="js.chat.html#custom-video-controls">Custom Video Controls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="js.chat.html#drag-drop-video">Drag &amp; Drop Video</a></li>
-<li class="toctree-l2"><a class="reference internal" href="js.chat.html#text-to-speech">Text To Speech</a></li>
-<li class="toctree-l2"><a class="reference internal" href="js.chat.html#record-voice-message-with-speech-to-text">Record Voice Message With Speech To Text</a></li>
-<li class="toctree-l2"><a class="reference internal" href="js.chat.html#additional-functions">Additional Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.chat.html#chat-module">Chat Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="js.chat.html#custom-video-controls">Custom Video Controls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat.html#drag-drop-video">Drag &amp; Drop Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat.html#text-to-speech">Text To Speech</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat.html#record-voice-message-with-speech-to-text">Record Voice Message With Speech To Text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat.html#additional-functions">Additional Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="js.chat_side_navbar.html">Chat Side Navbar</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="js.chat_side_navbar.html">Chat Side Navbar</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="js.chat_side_navbar.html#chat-side-navbar-module">Chat Side Navbar Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="js.chat_side_navbar.html#msbo">MSBO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat_side_navbar.html#edit-chat-name-button-hover">Edit Chat Name Button Hover</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat_side_navbar.html#delete-chat-button-hover">Delete Chat Button Hover</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat_side_navbar.html#edit-chat-name-button-click">Edit Chat Name Button Click</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat_side_navbar.html#delete-chat-button-click">Delete Chat Button Click</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat_side_navbar.html#name-input-key-press">Name Input Key Press</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat_side_navbar.html#edit-button-logic">Edit Button Logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat_side_navbar.html#delete-button-logic">Delete Button Logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.chat_side_navbar.html#bar-icon-animate">Bar Icon Animate</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="js.admin.html">Admin</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="js.admin.html#functions-used-in-admin-page">Functions Used In Admin page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.admin.html#admin-module">Admin Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="js.admin.html#generate-test-data">Generate Test Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.admin.html#delete">Delete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.admin.html#action-user-id">Action User ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.admin.html#pager">Pager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.admin.html#rows-per-page">Rows Per Page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.admin.html#page-button">Page Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.admin.html#get-url-for-table-order">Get Url For Table Order</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.admin.html#get-all-url-params">Get All Url Params</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="js.review.html">Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="js.index.html">Index</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="js.review.html">Review</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="js.review.html#review-module">Review Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="js.review.html#update-stars">Update Stars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.review.html#show-tooltip">Show Tooltip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.review.html#hide-tooltip">Hide Tooltip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.review.html#label-click">Label Click</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.review.html#label-mouse-enter">Label Mouse Enter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.review.html#label-mouse-leave">Label Mouse Leave</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="js.index.html">Index</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="js.index.html#index-module">Index Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="js.index.html#update-content">Update Content</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
+</section>
+</section>
 </section>
 
 
@@ -439,6 +495,22 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsdoc-module">JSDoc Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules-overview">Modules Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

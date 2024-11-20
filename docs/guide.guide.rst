@@ -1,3 +1,4 @@
+=====
 Guide
 =====
 
@@ -45,10 +46,10 @@ For containerized deployment::
     docker run -p 5000:5000 -e OPENAI_API_KEY="your-key" -e D_ID_API_KEY="your-key" shrinkgpt
 
 Usage Guide
------------
+===========
 
 Starting the Application
-========================
+------------------------
 
 1. **Local Development**::
 
@@ -59,17 +60,17 @@ Starting the Application
     gunicorn wsgi:app
 
 Accessing the Interface
-=======================
+-----------------------
 
 1. Open your web browser
 2. Navigate to ``http://localhost:5000``
 3. Create an account or log in
 
 Key Features
-------------
+============
 
 Therapeutic Conversation
-========================
+------------------------
 
 * Natural language processing for empathetic responses
 * Context-aware dialogue management
@@ -77,7 +78,7 @@ Therapeutic Conversation
 * Crisis detection and appropriate referral protocols
 
 Session Management
-==================
+------------------
 
 * Automatic session logging
 * Progress tracking
@@ -85,10 +86,10 @@ Session Management
 * Export functionality for personal records
 
 Privacy & Security
-------------------
+==================
 
 Data Protection
-===============
+---------------
 
 * End-to-end encryption for all conversations
 * GDPR and HIPAA compliance measures
@@ -96,7 +97,7 @@ Data Protection
 * Secure data storage and handling
 
 User Privacy
-============
+------------
 
 * Anonymous session options
 * Data retention controls
@@ -104,10 +105,10 @@ User Privacy
 * Transparent data usage policies
 
 Troubleshooting
----------------
+===============
 
 Common Issues
-=============
+-------------
 
 1. **Connection Issues**
    
@@ -128,10 +129,10 @@ Common Issues
    * Clear temporary files
 
 Development & Contribution
---------------------------
+==========================
 
 Contributing Guidelines
-=======================
+-----------------------
 
 1. Fork the repository
 2. Create a feature branch
@@ -140,7 +141,7 @@ Contributing Guidelines
 5. Include unit tests for new features
 
 Documentation
-=============
+-------------
 
 To generate documentation::
 
@@ -154,10 +155,10 @@ To generate documentation::
     open _build/html/index.html
 
 Deployment
-----------
+==========
 
 Google Cloud Deployment
-=======================
+-----------------------
 
 1. **Configure Google Cloud**::
 
@@ -181,7 +182,7 @@ Google Cloud Deployment
         --allow-unauthenticated
 
 Support & Resources
--------------------
+===================
 
 * `GitHub Issues <https://github.com/orizem/ShrinkGPT.github.io/issues>`_
 
@@ -191,7 +192,7 @@ License
 This project is licensed under the GNU General Public License v3.0 (GNU GPL v3) - see the LICENSE file for details.
 
 GNU General Public License v3.0
-===============================
+-------------------------------
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -205,7 +206,7 @@ This program is free software: you can redistribute it and/or modify it under th
 For the complete license text, see: https://www.gnu.org/licenses/gpl-3.0.en.html
 
 Copyright Notice
-================
+----------------
 
 Copyright (C) 2024 ShrinkGPT
 

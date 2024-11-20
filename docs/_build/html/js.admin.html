@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'js.admin';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="js.html">JSDoc</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -383,8 +368,10 @@
                   
   <section id="admin">
 <h1>Admin<a class="headerlink" href="#admin" title="Link to this heading">#</a></h1>
-<section id="functions-used-in-admin-page">
-<h2>Functions Used In Admin page<a class="headerlink" href="#functions-used-in-admin-page" title="Link to this heading">#</a></h2>
+<section id="admin-module">
+<h2>Admin Module<a class="headerlink" href="#admin-module" title="Link to this heading">#</a></h2>
+<section id="generate-test-data">
+<h3>Generate Test Data<a class="headerlink" href="#generate-test-data" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>$(“.test-data-btn”).click: EventListener</strong>::
 Sends a POST request to generate test data when the test data button is clicked.
@@ -408,6 +395,11 @@ After the request is successful, the page is redirected to the admin dashboard.<
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="delete">
+<h3>Delete<a class="headerlink" href="#delete" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="2">
 <li><p><strong>$(“.delete-btn”).click: EventListener</strong>::
 Sends a POST request to delete a user based on the user ID when the delete button is clicked.
 After the request is successful, the page is redirected to the admin dashboard.</p>
@@ -431,6 +423,11 @@ After the request is successful, the page is redirected to the admin dashboard.<
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="action-user-id">
+<h3>Action User ID<a class="headerlink" href="#action-user-id" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="3">
 <li><p><strong>$(“.active-btn”).click: EventListener</strong>::
 Sends a POST request to activate or deactivate a user based on the user ID and current user state.
 After the request is successful, the page is redirected to the admin dashboard.</p>
@@ -459,6 +456,11 @@ After the request is successful, the page is redirected to the admin dashboard.<
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="pager">
+<h3>Pager<a class="headerlink" href="#pager" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="4">
 <li><p><strong>$(“.column-order-btn”).click: EventListener</strong>::
 Updates the page URL with new parameters for table ordering based on the selected column and rows per page.
 The page is refreshed with the updated parameters.</p>
@@ -478,6 +480,11 @@ The page is refreshed with the updated parameters.</p>
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="rows-per-page">
+<h3>Rows Per Page<a class="headerlink" href="#rows-per-page" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="5">
 <li><p><strong>$(“#rows-per-page”).change: EventListener</strong>::
 Updates the page URL with new parameters for rows per page and reloads the page with the updated parameters.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -502,6 +509,11 @@ Updates the page URL with new parameters for rows per page and reloads the page 
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="page-button">
+<h3>Page Button<a class="headerlink" href="#page-button" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="6">
 <li><p><strong>$(“.page-btn”).click: EventListener</strong>::
 Updates the page URL with the selected page number and reloads the page with the updated parameters.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -526,6 +538,11 @@ Updates the page URL with the selected page number and reloads the page with the
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="get-url-for-table-order">
+<h3>Get Url For Table Order<a class="headerlink" href="#get-url-for-table-order" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="7">
 <li><p><strong>get_url_for_table_order: Function</strong>::
 Generates the URL for table ordering based on the page number, rows per page, and column.
 If the new URL is the same as the current path, it appends <cite>&amp;order=DESC</cite>.</p>
@@ -550,6 +567,11 @@ If the new URL is the same as the current path, it appends <cite>&amp;order=DESC
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="get-all-url-params">
+<h3>Get All Url Params<a class="headerlink" href="#get-all-url-params" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="8">
 <li><p><strong>getAllUrlParams: Function</strong>::
 Extracts and returns all URL parameters as an object, including handling array-like parameters.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -604,6 +626,7 @@ Extracts and returns all URL parameters as an object, including handling array-l
 </ol>
 </section>
 </section>
+</section>
 
 
                 </article>
@@ -652,7 +675,17 @@ Extracts and returns all URL parameters as an object, including handling array-l
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-used-in-admin-page">Functions Used In Admin page</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#admin-module">Admin Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-test-data">Generate Test Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete">Delete</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#action-user-id">Action User ID</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pager">Pager</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rows-per-page">Rows Per Page</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#page-button">Page Button</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-url-for-table-order">Get Url For Table Order</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-all-url-params">Get All Url Params</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

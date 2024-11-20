@@ -30,6 +30,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -40,6 +41,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="#" />
@@ -363,6 +366,8 @@
 </li>
       <li><a href="website.forms.html#website.forms.ChatEdit">ChatEdit (class in website.forms)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="website.models.html#website.models.User.chats">chats (website.models.User attribute)</a>
 </li>
       <li><a href="website.forms.html#website.forms.ReviewForm.content">content (website.forms.ReviewForm attribute)</a>
@@ -371,14 +376,6 @@
         <li><a href="website.models.html#website.models.Reviews.content">(website.models.Reviews attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="website.html#website.create_admin">create_admin() (in module website)</a>
-</li>
-      <li><a href="website.html#website.create_app">create_app() (in module website)</a>
-</li>
-      <li><a href="website.html#website.create_database">create_database() (in module website)</a>
-</li>
       <li><a href="website.utils.html#website.utils.utils.create_test_chats">create_test_chats() (in module website.utils.utils)</a>
 </li>
       <li><a href="website.utils.html#website.utils.utils.create_test_reviews">create_test_reviews() (in module website.utils.utils)</a>
@@ -448,6 +445,8 @@
       <li><a href="website.views.html#website.views.get_image">get_image() (in module website.views)</a>
 </li>
       <li><a href="website.utils.html#website.utils.utils.get_initial_chat_state_response">get_initial_chat_state_response() (in module website.utils.utils)</a>
+</li>
+      <li><a href="website.utils.html#website.utils.utils.get_previous_chats">get_previous_chats() (in module website.utils.utils)</a>
 </li>
       <li><a href="website.models.html#website.models.User.get_totp_uri">get_totp_uri() (website.models.User method)</a>
 </li>
@@ -533,8 +532,6 @@
     module
 
       <ul>
-        <li><a href="website.html#module-website">website</a>
-</li>
         <li><a href="website.admin.html#module-website.admin">website.admin</a>
 </li>
         <li><a href="website.auth.html#module-website.auth">website.auth</a>
@@ -781,13 +778,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
-    website
-
-      <ul>
-        <li><a href="website.html#module-website">module</a>
-</li>
-      </ul></li>
-      <li>
     website.admin
 
       <ul>
@@ -822,8 +812,6 @@
         <li><a href="website.forms.html#module-website.forms">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     website.models
 
@@ -831,6 +819,8 @@
         <li><a href="website.models.html#module-website.models">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     website.utils
 

@@ -1,5 +1,5 @@
 Admin
-=====
+-----
 
 .. automodule:: website.admin
    :members:

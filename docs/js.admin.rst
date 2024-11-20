@@ -1,8 +1,12 @@
+=====
 Admin
 =====
 
-Functions Used In Admin page
-----------------------------
+Admin Module
+============
+
+Generate Test Data
+------------------
 
 1. **$(".test-data-btn").click: EventListener**::  
    Sends a POST request to generate test data when the test data button is clicked.  
@@ -28,6 +32,9 @@ Functions Used In Admin page
       });
 
 
+Delete
+------
+
 2. **$(".delete-btn").click: EventListener**::  
    Sends a POST request to delete a user based on the user ID when the delete button is clicked.  
    After the request is successful, the page is redirected to the admin dashboard.
@@ -52,6 +59,8 @@ Functions Used In Admin page
           });
       });
 
+Action User ID
+--------------
 
 3. **$(".active-btn").click: EventListener**::  
    Sends a POST request to activate or deactivate a user based on the user ID and current user state.  
@@ -82,6 +91,8 @@ Functions Used In Admin page
           });
       });
 
+Pager
+-----
 
 4. **$(".column-order-btn").click: EventListener**::  
    Updates the page URL with new parameters for table ordering based on the selected column and rows per page.  
@@ -103,6 +114,9 @@ Functions Used In Admin page
           window.location.href = get_url_for_table_order(page, rows_per_page, column);
       });
 
+
+Rows Per Page
+-------------
 
 5. **$("#rows-per-page").change: EventListener**::  
    Updates the page URL with new parameters for rows per page and reloads the page with the updated parameters.
@@ -129,6 +143,8 @@ Functions Used In Admin page
           window.location.href = new_path;
       });
 
+Page Button
+-----------
 
 6. **$(".page-btn").click: EventListener**::  
    Updates the page URL with the selected page number and reloads the page with the updated parameters.
@@ -155,6 +171,8 @@ Functions Used In Admin page
           window.location.href = new_path;
       });
 
+Get Url For Table Order
+-----------------------
 
 7. **get_url_for_table_order: Function**::  
    Generates the URL for table ordering based on the page number, rows per page, and column.  
@@ -181,6 +199,8 @@ Functions Used In Admin page
           return new_path;
       }
 
+Get All Url Params
+------------------
 
 8. **getAllUrlParams: Function**::  
    Extracts and returns all URL parameters as an object, including handling array-like parameters.

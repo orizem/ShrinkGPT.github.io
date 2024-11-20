@@ -1,5 +1,5 @@
 Auth
-====
+----
 
 .. automodule:: website.auth
    :members:

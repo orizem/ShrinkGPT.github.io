@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guide';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="js.html">JSDoc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">User Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -380,8 +365,10 @@
                   
   <section id="user-guide">
 <h1><a class="toc-backref" href="#id1" role="doc-backlink">User Guide</a><a class="headerlink" href="#user-guide" title="Link to this heading">#</a></h1>
+<section id="user-guide-module">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">User Guide Module</a><a class="headerlink" href="#user-guide-module" title="Link to this heading">#</a></h2>
 <section id="welcome-to-shrinkgpt-your-ai-powered-therapeutic-companion">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Welcome to ShrinkGPT - Your AI-Powered Therapeutic Companion</a><a class="headerlink" href="#welcome-to-shrinkgpt-your-ai-powered-therapeutic-companion" title="Link to this heading">#</a></h2>
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Welcome to ShrinkGPT - Your AI-Powered Therapeutic Companion</a><a class="headerlink" href="#welcome-to-shrinkgpt-your-ai-powered-therapeutic-companion" title="Link to this heading">#</a></h3>
 <p><strong>Check out our github reop:</strong></p>
 <blockquote>
 <div><ul>
@@ -401,20 +388,24 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#user-guide" id="id1">User Guide</a></p>
 <ul>
-<li><p><a class="reference internal" href="#welcome-to-shrinkgpt-your-ai-powered-therapeutic-companion" id="id2">Welcome to ShrinkGPT - Your AI-Powered Therapeutic Companion</a></p></li>
-<li><p><a class="reference internal" href="#introduction" id="id3">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#system-requirements" id="id4">System Requirements</a></p></li>
+<li><p><a class="reference internal" href="#user-guide-module" id="id2">User Guide Module</a></p>
+<ul>
+<li><p><a class="reference internal" href="#welcome-to-shrinkgpt-your-ai-powered-therapeutic-companion" id="id3">Welcome to ShrinkGPT - Your AI-Powered Therapeutic Companion</a></p></li>
+<li><p><a class="reference internal" href="#introduction" id="id4">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#system-requirements" id="id5">System Requirements</a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </nav>
 </section>
 <section id="introduction">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">#</a></h3>
 <p>ShrinkGPT is an innovative AI-powered therapeutic chatbot that combines advanced natural language processing with psychological principles to provide supportive conversations and guidance. This comprehensive guide will help you set up, configure, and make the most of your ShrinkGPT experience.</p>
 </section>
 <section id="system-requirements">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">System Requirements</a><a class="headerlink" href="#system-requirements" title="Link to this heading">#</a></h2>
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">System Requirements</a><a class="headerlink" href="#system-requirements" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Python 3.12 or higher</p></li>
 <li><p>4GB RAM minimum (8GB recommended)</p></li>
@@ -424,45 +415,48 @@
 </ul>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#local-installation">Local Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#docker-installation">Docker Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#usage-guide">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.guide.html">Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#local-installation">Local Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#docker-installation">Docker Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#usage-guide">Usage Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#starting-the-application">Starting the Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#accessing-the-interface">Accessing the Interface</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#starting-the-application">Starting the Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#accessing-the-interface">Accessing the Interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#key-features">Key Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#therapeutic-conversation">Therapeutic Conversation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#session-management">Session Management</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#therapeutic-conversation">Therapeutic Conversation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#session-management">Session Management</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#privacy-security">Privacy &amp; Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#privacy-security">Privacy &amp; Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#data-protection">Data Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#user-privacy">User Privacy</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#data-protection">Data Protection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#user-privacy">User Privacy</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#common-issues">Common Issues</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#common-issues">Common Issues</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#development-contribution">Development &amp; Contribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#development-contribution">Development &amp; Contribution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#contributing-guidelines">Contributing Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#documentation">Documentation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#contributing-guidelines">Contributing Guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#documentation">Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#deployment">Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#google-cloud-deployment">Google Cloud Deployment</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#google-cloud-deployment">Google Cloud Deployment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#support-resources">Support &amp; Resources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html#support-resources">Support &amp; Resources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#license">License</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#gnu-general-public-license-v3-0">GNU General Public License v3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.guide.html#copyright-notice">Copyright Notice</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#gnu-general-public-license-v3-0">GNU General Public License v3.0</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide.guide.html#copyright-notice">Copyright Notice</a></li>
+</ul>
+</li>
 </ul>
 </div>
+</section>
 </section>
 </section>
 
@@ -513,9 +507,12 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome-to-shrinkgpt-your-ai-powered-therapeutic-companion">Welcome to ShrinkGPT - Your AI-Powered Therapeutic Companion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-requirements">System Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-guide-module">User Guide Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome-to-shrinkgpt-your-ai-powered-therapeutic-companion">Welcome to ShrinkGPT - Your AI-Powered Therapeutic Companion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-requirements">System Requirements</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

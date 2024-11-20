@@ -1,7 +1,4 @@
 Config
-======
-
-Config
 ------
 
 .. automodule:: website.config.config

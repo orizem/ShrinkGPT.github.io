@@ -39,11 +39,13 @@ body {
   justify-content: space-between;
   width: 100%;
   margin: 25px 10px;
-  height: calc(100% - 50px);
+  margin-top: 5%;
+  height: calc(100% - 120px);
   border: var(--border);
   border-radius: 5px;
   background: var(--msger-bg);
   box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
+  overflow-x: auto;
 }
 
 .msger-header {
@@ -62,7 +64,7 @@ body {
   padding: 10px;
 }
 .msger-chat::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 .msger-chat::-webkit-scrollbar-track {
   background: var(--border-color);
@@ -70,6 +72,10 @@ body {
 .msger-chat::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: #579ffb;
+}
+.msger-chat::-webkit-scrollbar-thumb:hover{
+  border-radius: 10px;
+  background: #2b87ff;
 }
 .msg {
   display: flex;

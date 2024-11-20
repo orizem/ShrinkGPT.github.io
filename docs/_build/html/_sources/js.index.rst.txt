@@ -1,5 +1,12 @@
+=====
 Index
 =====
+
+Index Module
+============
+
+Update Content
+--------------
 
 1. **DOMContentLoaded: EventListener**::  
    Initializes the table data and sets up the content update cycle.  

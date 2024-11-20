@@ -1,5 +1,5 @@
 Views
-=====
+-----
 
 .. automodule:: website.views
    :members:

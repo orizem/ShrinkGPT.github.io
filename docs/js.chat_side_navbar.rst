@@ -1,5 +1,12 @@
+================
 Chat Side Navbar
 ================
+
+Chat Side Navbar Module
+=======================
+
+MSBO
+----
 
 1. **#msbo.click: EventListener**::  
    Toggles the `msb-x` class on the `#msb` element when the `#msbo` element is clicked.  
@@ -17,6 +24,9 @@ Chat Side Navbar
       });
 
 
+Edit Chat Name Button Hover
+---------------------------
+
 2. **.prev-chat.hover: EventListener**::  
    Displays the `.edit-chat-name` button when hovering over a `.prev-chat` element.  
 
@@ -32,6 +42,9 @@ Chat Side Navbar
           $(this).find('.edit-chat-name').toggle();
       });
 
+
+Delete Chat Button Hover
+------------------------
 
 3. **.prev-chat.hover: EventListener**::  
    Displays the `.delete-chat` button when hovering over a `.prev-chat` element.  
@@ -49,6 +62,9 @@ Chat Side Navbar
       });
 
 
+Edit Chat Name Button Click
+---------------------------
+
 4. **.edit-chat-name.click: EventListener**::  
    Triggers the `editButtonLogic` function when the `.edit-chat-name` button is clicked.  
 
@@ -65,6 +81,9 @@ Chat Side Navbar
       });
 
 
+Delete Chat Button Click
+------------------------
+
 5. **.delete-chat.click: EventListener**::  
    Triggers the `deleteButtonLogic` function when the `.delete-chat` button is clicked.  
 
@@ -80,6 +99,9 @@ Chat Side Navbar
           deleteButtonLogic($(this));
       });
 
+
+Name Input Key Press
+--------------------
 
 6. **.name_input.keypress: EventListener**::  
    Triggers the `editButtonLogic` function when the 'Enter' key is pressed while typing in the `.name_input` field.  
@@ -98,6 +120,9 @@ Chat Side Navbar
           }
       });
 
+
+Edit Button Logic
+-----------------
 
 7. **editButtonLogic: Function**::  
    Handles the logic for editing the name of a chat.  
@@ -138,6 +163,9 @@ Chat Side Navbar
       }
 
 
+Delete Button Logic
+-------------------
+
 8. **deleteButtonLogic: Function**::  
    Handles the logic for deleting a chat.  
    Removes the chat element from the DOM and sends a GET request to delete the chat.  
@@ -165,6 +193,9 @@ Chat Side Navbar
           $.get("/chat-delete", { id: id });
       }
 
+
+Bar Icon Animate
+----------------
 
 9. **barIconAnimate: Function**::  
    Toggles the `change` class on the clicked icon to trigger animation.  

@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -41,6 +42,8 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'js.chat_side_navbar';</script>
     <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -285,8 +288,8 @@
 <li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="js.html">JSDoc</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -299,28 +302,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT - Your Virtual AI Shrink 🤖🧠</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
-
-
-
-
 </ul>
 </details></li>
 </ul>
@@ -383,6 +368,10 @@
                   
   <section id="chat-side-navbar">
 <h1>Chat Side Navbar<a class="headerlink" href="#chat-side-navbar" title="Link to this heading">#</a></h1>
+<section id="chat-side-navbar-module">
+<h2>Chat Side Navbar Module<a class="headerlink" href="#chat-side-navbar-module" title="Link to this heading">#</a></h2>
+<section id="msbo">
+<h3>MSBO<a class="headerlink" href="#msbo" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>#msbo.click: EventListener</strong>::
 Toggles the <cite>msb-x</cite> class on the <cite>#msb</cite> element when the <cite>#msbo</cite> element is clicked.</p>
@@ -398,6 +387,11 @@ Toggles the <cite>msb-x</cite> class on the <cite>#msb</cite> element when the <
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="edit-chat-name-button-hover">
+<h3>Edit Chat Name Button Hover<a class="headerlink" href="#edit-chat-name-button-hover" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="2">
 <li><p><strong>.prev-chat.hover: EventListener</strong>::
 Displays the <cite>.edit-chat-name</cite> button when hovering over a <cite>.prev-chat</cite> element.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -412,6 +406,11 @@ Displays the <cite>.edit-chat-name</cite> button when hovering over a <cite>.pre
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="delete-chat-button-hover">
+<h3>Delete Chat Button Hover<a class="headerlink" href="#delete-chat-button-hover" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="3">
 <li><p><strong>.prev-chat.hover: EventListener</strong>::
 Displays the <cite>.delete-chat</cite> button when hovering over a <cite>.prev-chat</cite> element.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -426,6 +425,11 @@ Displays the <cite>.delete-chat</cite> button when hovering over a <cite>.prev-c
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="edit-chat-name-button-click">
+<h3>Edit Chat Name Button Click<a class="headerlink" href="#edit-chat-name-button-click" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="4">
 <li><p><strong>.edit-chat-name.click: EventListener</strong>::
 Triggers the <cite>editButtonLogic</cite> function when the <cite>.edit-chat-name</cite> button is clicked.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -440,6 +444,11 @@ Triggers the <cite>editButtonLogic</cite> function when the <cite>.edit-chat-nam
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="delete-chat-button-click">
+<h3>Delete Chat Button Click<a class="headerlink" href="#delete-chat-button-click" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="5">
 <li><p><strong>.delete-chat.click: EventListener</strong>::
 Triggers the <cite>deleteButtonLogic</cite> function when the <cite>.delete-chat</cite> button is clicked.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -454,6 +463,11 @@ Triggers the <cite>deleteButtonLogic</cite> function when the <cite>.delete-chat
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="name-input-key-press">
+<h3>Name Input Key Press<a class="headerlink" href="#name-input-key-press" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="6">
 <li><p><strong>.name_input.keypress: EventListener</strong>::
 Triggers the <cite>editButtonLogic</cite> function when the ‘Enter’ key is pressed while typing in the <cite>.name_input</cite> field.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -470,6 +484,11 @@ Triggers the <cite>editButtonLogic</cite> function when the ‘Enter’ key is p
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="edit-button-logic">
+<h3>Edit Button Logic<a class="headerlink" href="#edit-button-logic" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="7">
 <li><p><strong>editButtonLogic: Function</strong>::
 Handles the logic for editing the name of a chat.
 Updates the input field’s readonly state and border styles, and sends a GET request to update the chat name if it has been changed.</p>
@@ -507,6 +526,11 @@ Updates the input field’s readonly state and border styles, and sends a GET re
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="delete-button-logic">
+<h3>Delete Button Logic<a class="headerlink" href="#delete-button-logic" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="8">
 <li><p><strong>deleteButtonLogic: Function</strong>::
 Handles the logic for deleting a chat.
 Removes the chat element from the DOM and sends a GET request to delete the chat.</p>
@@ -533,6 +557,11 @@ Removes the chat element from the DOM and sends a GET request to delete the chat
 </pre></div>
 </div>
 </li>
+</ol>
+</section>
+<section id="bar-icon-animate">
+<h3>Bar Icon Animate<a class="headerlink" href="#bar-icon-animate" title="Link to this heading">#</a></h3>
+<ol class="arabic" start="9">
 <li><p><strong>barIconAnimate: Function</strong>::
 Toggles the <cite>change</cite> class on the clicked icon to trigger animation.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -547,6 +576,8 @@ Toggles the <cite>change</cite> class on the clicked icon to trigger animation.<
 </div>
 </li>
 </ol>
+</section>
+</section>
 </section>
 
 
@@ -587,6 +618,29 @@ Toggles the <cite>change</cite> class on the clicked icon to trigger animation.<
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-side-navbar-module">Chat Side Navbar Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#msbo">MSBO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-chat-name-button-hover">Edit Chat Name Button Hover</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-chat-button-hover">Delete Chat Button Hover</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-chat-name-button-click">Edit Chat Name Button Click</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-chat-button-click">Delete Chat Button Click</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#name-input-key-press">Name Input Key Press</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-button-logic">Edit Button Logic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-button-logic">Delete Button Logic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-icon-animate">Bar Icon Animate</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

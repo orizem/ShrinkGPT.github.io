@@ -1,5 +1,5 @@
 Models
-======
+------
 
 .. automodule:: website.models
    :members:
