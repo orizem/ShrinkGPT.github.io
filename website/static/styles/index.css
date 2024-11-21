@@ -45,7 +45,7 @@ h1 {
   animation: shine 100s linear infinite;
 }
 
-img {
+.scroll-container img {
   width: 30vw;
   height: 30vw;
   border-radius: 10%;
