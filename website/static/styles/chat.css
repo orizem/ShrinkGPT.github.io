@@ -96,9 +96,10 @@ body {
 .msg-text {
   width: fit-content;
   white-space: normal;
-  overflow-wrap: break-all;
-  word-wrap: break-all;
-  word-break: break-all;
+  
+  max-width: 280pt; /* Adjust this value as needed */
+  word-wrap: break-word; /* Ensures long words break, but not normal words */
+  overflow-wrap: break-word; /* Also handles word breaking when necessary */
 }
 .msg-bubble {
   max-width: 300pt;
@@ -310,6 +311,9 @@ textarea {
   }
   .msg-bubble {
     max-width: 180pt;
+  }
+  .msg-text {
+    max-width: 160pt; 
   }
 
   .round-video {

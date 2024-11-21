@@ -13,9 +13,11 @@
     --transition-speed: 0.3s;
   }
 
-body {
+  body {
     background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+    background-size: cover; /* Ensures the gradient stretches to cover the entire page */
+    background-attachment: fixed; /* Keeps the background fixed when scrolling */
     color: var(--background-color);
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh; /* Ensure the body covers at least the viewport height */
+    margin: 0;
 }

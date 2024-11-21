@@ -480,7 +480,7 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
                   <div class="msg-info-time">${time}</div>
                 </div>
 
-                <div class="msg-text" style="word-break: break-all;">${text}</div>
+                <div class="msg-text">${text}</div>
                 <div style="text-align: right; font-size:10pt;">
                   <button id="btn-tts" style="text-align: center; background-color: transparent; color: black; border-radius: 100%; width: 20pt; height:20pt;" onclick="toggleTextToSpeech(event, '${text.replace(/\"/g, "").replace(/\'/g, "")}')">►</button>
                 </div>
