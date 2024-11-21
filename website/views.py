@@ -3,6 +3,7 @@
 import os
 import io
 import pytz
+import requests
 import threading
 from io import BytesIO
 from json import dumps
@@ -21,10 +22,6 @@ from flask import (
     abort,
 )
 from datetime import datetime
-
-# from transformers import AutoTokenizer, AutoModelForSequenceClassification
-# from torch.nn.functional import softmax
-# from torch import argmax
 
 # LOCAL IMPORTS
 from .models import User, Chat
@@ -57,12 +54,6 @@ DOCS_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "docs/_build/html")
 )
 STATIC_PATH = os.path.join(DOCS_PATH, "_static")
-
-# tokenizer = AutoTokenizer.from_pretrained("nateraw/bert-base-uncased-emotion")
-# model = AutoModelForSequenceClassification.from_pretrained(
-#     "nateraw/bert-base-uncased-emotion"
-# )
-
 
 # ROUTES
 @views.route("/")
@@ -359,18 +350,32 @@ def get_bot_response():
     encoded_bot_response = html_encode(bot_response)
 
     # Generate response avatar stream
-    try:
-        # Get emotion classification
-        # inputs = tokenizer(user_msg, return_tensors="pt")
-        # outputs = model(**inputs)
-        # probs = softmax(outputs.logits, dim=-1)
-
-        # # Map to emotion labels
-        # emotions = ["surprise", "happy", "serious", "neutral"]
-        # max_index = argmax(probs, dim=1).item()
-        # emotion = emotions[max_index]
-        emotion = "neutral"
-
+    try:      
+        API_URL = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
+        token = os.environ.get("HUGGINGFACE_API_KEY")
+        headers = {"Authorization": token}
+        payload = {
+            "inputs": user_msg,
+        }
+        
+        try:
+            response = requests.post(API_URL, headers=headers, json=payload)
+            res = response.json()[0]
+            
+            # Filter scores for list_labels
+            emotions = ["surprise", "joy", "neutral"]
+            filtered_data = [item for item in res if item['label'] in emotions]
+            
+            if filtered_data:
+                highest_score_label = max(filtered_data, key=lambda x: x['score'])['label']
+                emotion = highest_score_label
+                if emotion == "joy":
+                    emotion = "happy"
+            else:
+                emotion = "neutral"
+        except Exception:    
+            emotion = "neutral"
+            
         avatar_video_url = get_avatar_video(bot_response, emotion)
     except Exception as e:
         print("[D-ID Video Error]:", e)
