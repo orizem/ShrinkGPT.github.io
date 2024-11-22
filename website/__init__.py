@@ -1,11 +1,13 @@
 # init.py
 
-# import os
+import os
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask import session
 from datetime import datetime
+from sqlalchemy import create_engine
+import sqlitecloud
 
 # LOCAL IMPORTS
 from .models import Admin, User, Status, db
@@ -42,6 +44,19 @@ def create_app():
     app.static_folder = "static"
     app.config.from_object("config")
     Bootstrap(app)
+    
+    # Define your SQLiteCloud connection string
+    sqlitecloud_connection_string = os.environ.get("SQLITE_CLOUD")
+
+    # Use sqlitecloud to establish the connection
+    conn = sqlitecloud.connect(sqlitecloud_connection_string)
+
+    # Create an engine manually with SQLite cloud connection
+    engine = create_engine('sqlite://', creator=lambda: conn)
+
+    # Set up Flask app config
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # SQLite URI is required for Flask-SQLAlchemy
+    app.config['SQLALCHEMY_ENGINE'] = engine  # Use the custom engine
 
     db.init_app(app)
 
