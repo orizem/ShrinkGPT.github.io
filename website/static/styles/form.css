@@ -167,6 +167,25 @@ body {
       height: auto;
   }
 }
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2b87ff;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #579ffb;
+}
+
 /*Style for reviews:*/
 /* Stars in Displayed Reviews and Review Form */
 .star {

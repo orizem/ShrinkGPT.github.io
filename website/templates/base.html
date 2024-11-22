@@ -129,7 +129,7 @@ function googleTranslateElementInit() {
     color: var(--primary-color);
     text-decoration: none;
     position: fixed;
-    top: 30%;
+    top: 10vi;
     font-size: 100px;
     transition: color var(--transition-speed) ease;
   }
@@ -153,7 +153,7 @@ function googleTranslateElementInit() {
   <div class="spinner"></div>
 </div>
 
-<div id="google_translate_element" style="position: fixed; top: 65px; right: 25px;"></div>
+<div id="google_translate_element" style="position: fixed; top: 65px; right: 25px; z-index: 2;"></div>
 {% endblock %}
   {% block content %}
   <div class="container">
