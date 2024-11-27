@@ -285,6 +285,26 @@ textarea {
   font-style: normal;  /* To keep the microphone icon styled correctly */
 }
 
+/* Basic styles for emoji picker and text area */
+#emoji-picker {
+        
+  /*position: absolute;*/
+  padding: 10px;
+  display: none;
+  grid-template-columns: repeat(21, 1fr);
+  gap: 2px;
+
+  justify-content: space-between;
+  border: var(--border);
+  border-radius: 5px;
+  background: var(--msger-bg);
+  box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
+}
+.emoji {
+  cursor: pointer;
+  font-size: 20px;
+}
+
 @keyframes shine {
   from {
     background-position: center 0;
@@ -320,6 +340,13 @@ textarea {
     width: 40vi;
   } 
 
+  #emoji-picker {
+    /*position: absolute;*/
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(17, 1fr);
+  }
+
 }
 
 @media (max-width: 568px) {
@@ -350,5 +377,12 @@ textarea {
 
   .msg-bubble {
     max-width: 140pt;
+  }
+
+  #emoji-picker {
+    /*position: absolute;*/
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
   }
 }

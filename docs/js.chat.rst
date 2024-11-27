@@ -417,6 +417,99 @@ Record Voice Message With Speech To Text
       };
 
 
+
+Emoji Keyboard
+--------------
+
+1. **emojiBtn.addEventListener: `EventListener`**::  
+   Toggles the visibility of the emoji picker when the emoji button is clicked.  
+   If the emoji picker is visible, it is hidden; if it's hidden, it is shown.
+
+   .. code-block:: javascript
+
+      /**
+       * Toggles the visibility of the emoji picker when the emoji button is clicked.
+       * If the emoji picker is visible, it is hidden; if it's hidden, it is shown.
+       * 
+       * @event
+       * @param {Event} event - The click event triggered on the emoji button.
+       */
+      emojiBtn.addEventListener('click', () => {
+          emojiPicker.style.display = emojiPicker.style.display === 'none' || emojiPicker.style.display === '' ? 'grid' : 'none';
+      });
+
+
+2. **emojiGridCreation: `Function`**::  
+   Dynamically creates the emoji grid from a list of emojis and appends each emoji to the emoji picker.  
+   Each emoji is clickable and inserts the emoji into the chat input field when clicked.
+
+   .. code-block:: javascript
+
+      /**
+       * Dynamically creates the emoji grid from a list of emojis and appends each emoji to the emoji picker.
+       * Each emoji is clickable and inserts the emoji into the chat input field when clicked.
+       */
+      emojis.forEach(emoji => {
+          const emojiElement = document.createElement('span');
+          emojiElement.classList.add('emoji');
+          emojiElement.textContent = emoji;
+          emojiPicker.appendChild(emojiElement);
+
+          /**
+           * Inserts the selected emoji into the chat input field and hides the emoji picker.
+           * 
+           * @event
+           * @param {Event} event - The click event triggered when an emoji is selected.
+           */
+          emojiElement.addEventListener('click', () => {
+              chatInput.value += emoji; // Insert emoji into the textarea
+              emojiPicker.style.display = 'none'; // Close the emoji picker after selection
+          });
+      });
+
+
+3. **document.addEventListener: `EventListener`**::  
+   Closes the emoji picker if the user clicks outside of it.  
+   The emoji picker is hidden when a click occurs outside both the emoji button and the emoji picker.
+
+   .. code-block:: javascript
+
+      /**
+       * Closes the emoji picker if the user clicks outside of it.
+       * The emoji picker is hidden when a click occurs outside both the emoji button and the emoji picker.
+       * 
+       * @event
+       * @param {Event} event - The click event triggered when the user clicks anywhere on the document.
+       */
+      document.addEventListener('click', (e) => {
+          if (!emojiBtn.contains(e.target) && !emojiPicker.contains(e.target)) {
+              emojiPicker.style.display = 'none';
+          }
+      });
+
+4. **emojis: `const`**::  
+   The emojis included in keyboard.
+
+   .. code-block:: javascript
+
+        '🧝', '👻', '🕵️', '💅', '😟', '🤑', '☠️', '😓', '👩', '👯',
+        '😒', '🤵', '😛', '🤬', '👩', '🌞', '👳', '🛀', '😣', '😘',
+        '😙', '🧙', '😡', '🤫', '🧒', '👩', '😖', '💇', '🤳', '🦋',
+        '🤩', '👿', '✨', '👩', '☹️', '🧝', '🌱', '🧙', '😄', '😢',
+        '🕺', '😃', '😅', '💄', '🧛', '🌸', '🙃', '🧠', '💂', '👦',
+        '🤒', '😊', '💊', '😗', '🧚', '👩', '👵', '💩', '👨', '👩',
+        '😫', '🥳', '💂', '👰', '🤭', '😜', '🤔', '👧', '👹', '💉',
+        '🧔', '🙂', '💀', '🤧', '👲', '🥰', '🧖', '🧴', '🤣', '🌈',
+        '😍', '👯', '🧓', '🤕', '💆', '🤗', '💋', '😀', '🛋️', '👷',
+        '👨', '👨', '😈', '😂', '😉', '🏨', '😆', '😋', '🤡', '👀',
+        '🙁', '😔', '👶', '👷', '💇', '😝', '👨', '👮', '💆', '🏥',
+        '🧖', '🧘', '😌', '😚', '👨', '🌟', '👮', '🧑', '🧛', '👴',
+        '👩', '👨', '😩', '👺', '👨', '👩', '😏', '🩹', '😁', '💃',
+        '🕴️', '👳', '😭', '🧜', '👱', '😞', '😠', '🧜', '🧸', '🧑',
+        '👨', '👱', '😇', '💍', '👨', '🏩', '😤', '👨', '🕊️', '😕',
+        '😎', '😥', '🩺', '🕵️', '👩', '🧘', '👩', '🧝'
+
+
 Additional Functions
 --------------------
 

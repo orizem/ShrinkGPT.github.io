@@ -10,8 +10,10 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="icon" type="image/png" sizes="192x192" href="https://studio.d-id.com/favicon/favicon-192x192.png">
 
-  <style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-button@4.2.0/dist/index.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/emoji-button@4.2.0/dist/index.min.js"></script>
 
+  <style>
     .video-box {
       cursor: grab;
       position: absolute;
@@ -74,7 +76,12 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
       {% endif %}
     </main>
 
+    <!-- Emoji picker grid -->
+    <div id="emoji-picker">
+      <!-- Emoji items will be dynamically inserted here -->
+    </div>
     <form id="form" class="msger-inputarea" enctype="multipart/form-data">
+
       <textarea
         class="msger-input"
         id="textInput"
@@ -82,6 +89,9 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         rows="2"
         cols="20"
       ></textarea>
+      
+      <button type="button" id="emoji-btn">😊</button>
+
     
       <button type="submit" class="msger-send-btn">Send</button>
     
@@ -608,6 +618,60 @@ title %}Shrink.io - Chat{% endblock %} {% block page_content %}
         window.addEventListener('beforeunload', function(event) {
           stopTextToSpeech();
         });
+
+
+        // ============= [ Emoji Keyboard ] ===============
+        // List of emojis to display
+        const emojis = [
+            '🧝', '👻', '🕵️', '💅', '😟', '🤑', '☠️', '😓', '👩', '👯',
+            '😒', '🤵', '😛', '🤬', '👩', '🌞', '👳', '🛀', '😣', '😘',
+            '😙', '🧙', '😡', '🤫', '🧒', '👩', '😖', '💇', '🤳', '🦋',
+            '🤩', '👿', '✨', '👩', '☹️', '🧝', '🌱', '🧙', '😄', '😢',
+            '🕺', '😃', '😅', '💄', '🧛', '🌸', '🙃', '🧠', '💂', '👦',
+            '🤒', '😊', '💊', '😗', '🧚', '👩', '👵', '💩', '👨', '👩',
+            '😫', '🥳', '💂', '👰', '🤭', '😜', '🤔', '👧', '👹', '💉',
+            '🧔', '🙂', '💀', '🤧', '👲', '🥰', '🧖', '🧴', '🤣', '🌈',
+            '😍', '👯', '🧓', '🤕', '💆', '🤗', '💋', '😀', '🛋️', '👷',
+            '👨', '👨', '😈', '😂', '😉', '🏨', '😆', '😋', '🤡', '👀',
+            '🙁', '😔', '👶', '👷', '💇', '😝', '👨', '👮', '💆', '🏥',
+            '🧖', '🧘', '😌', '😚', '👨', '🌟', '👮', '🧑', '🧛', '👴',
+            '👩', '👨', '😩', '👺', '👨', '👩', '😏', '🩹', '😁', '💃',
+            '🕴️', '👳', '😭', '🧜', '👱', '😞', '😠', '🧜', '🧸', '🧑',
+            '👨', '👱', '😇', '💍', '👨', '🏩', '😤', '👨', '🕊️', '😕',
+            '😎', '😥', '🩺', '🕵️', '👩', '🧘', '👩', '🧝'
+        ];
+
+        // Get references to elements
+        const emojiBtn = document.getElementById('emoji-btn');
+        const emojiPicker = document.getElementById('emoji-picker');
+        const chatInput = document.getElementById('textInput');
+
+        // Toggle the emoji picker visibility
+        emojiBtn.addEventListener('click', () => {
+            emojiPicker.style.display = emojiPicker.style.display === 'none' || emojiPicker.style.display === '' ? 'grid' : 'none';
+        });
+
+        // Create emoji grid dynamically
+        emojis.forEach(emoji => {
+            const emojiElement = document.createElement('span');
+            emojiElement.classList.add('emoji');
+            emojiElement.textContent = emoji;
+            emojiPicker.appendChild(emojiElement);
+
+            // Add click event to insert emoji into the textarea
+            emojiElement.addEventListener('click', () => {
+                chatInput.value += emoji; // Insert emoji into the textarea
+                emojiPicker.style.display = 'none'; // Close the emoji picker after selection
+            });
+        });
+
+        // Close the emoji picker if user clicks outside of it
+        document.addEventListener('click', (e) => {
+            if (!emojiBtn.contains(e.target) && !emojiPicker.contains(e.target)) {
+                emojiPicker.style.display = 'none';
+            }
+        });
+
   </script>
 </div>
 
