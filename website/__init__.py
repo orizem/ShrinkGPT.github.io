@@ -55,8 +55,8 @@ def create_app():
     engine = create_engine('sqlite://', creator=lambda: conn)
 
     # Set up Flask app config
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("SQLALCHEMY_DATABASE_CLOUD")
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # SQLite URI is required for Flask-SQLAlchemy
+    # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("SQLALCHEMY_DATABASE_CLOUD")
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # SQLite URI is required for Flask-SQLAlchemy
     app.config['SQLALCHEMY_ENGINE'] = engine  # Use the custom engine
 
     db.init_app(app)
