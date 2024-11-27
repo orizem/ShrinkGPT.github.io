@@ -6,5 +6,6 @@ ShrinkGPT.github.io
 
    website
    js
+   important_functions
    guide
    README

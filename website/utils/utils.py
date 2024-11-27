@@ -388,8 +388,6 @@ def get_avatar_video(text, emotion):
     response = requests.get(url, headers=headers)
     response_json = response.json()
 
-    print("\n\n~~~~~~~~~~~~~~~~", response_json, "/n/n~~~~~~~~~~~~/n/n")
-
     return response_json.get("result_url")
 
 

@@ -27,6 +27,8 @@ extensions = [
     # "sphinxcontrib.autojs",
     "sphinx_copybutton",
     "sphinx_autodoc_typehints",
+    "sphinx_tabs.tabs",
+    "sphinx_toolbox.collapse",
 ]
 
 templates_path = ["_templates"]

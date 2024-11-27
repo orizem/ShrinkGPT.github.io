@@ -1,0 +1,1122 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Important Function &#8212; Shrink.io 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/tabs.js?v=3030b3cb"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'important_functions';</script>
+    <link rel="icon" href="_static/ShrinkGPT_logo.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User Guide" href="guide.html" />
+    <link rel="prev" title="Index" href="js.index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="https://shrink-io-app-565593111121.me-west1.run.app">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/ShrinkGPT_logo.jpg" class="logo__image only-light" alt="Shrink.io - Home"/>
+    <img src="_static/ShrinkGPT_logo.jpg" class="logo__image only-dark pst-js-only" alt="Shrink.io - Home"/>
+  
+  
+    <p class="title logo__title">Shrink.io</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    ShrinkGPT.github.io
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    ShrinkGPT.github.io
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/orizem/ShrinkGPT.github.io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="website.html">Website</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="website.admin.html">Admin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.auth.html">Auth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.forms.html">Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="website.config.html">Config</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="js.html">JSDoc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="js.chat.html">Chat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.chat_side_navbar.html">Chat Side Navbar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.admin.html">Admin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.review.html">Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js.index.html">Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Important Function</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide.guide.html">Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">ShrinkGPT</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.README.html">README</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">ShrinkGPT.github.io</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Important Function</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="important-function">
+<h1>Important Function<a class="headerlink" href="#important-function" title="Link to this heading">#</a></h1>
+<section id="chat">
+<h2>Chat<a class="headerlink" href="#chat" title="Link to this heading">#</a></h2>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Backend</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/get&quot;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;get&quot;</span><span class="p">)</span>
+<span class="nd">@restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_bot_response</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle GET request for bot response.</span>
+
+<span class="sd">    Process user input and generate a response from the AI model.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        dict: A dictionary containing the encoded bot response and avatar video URL.</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">        This endpoint requires authentication and appropriate permissions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">db</span>
+
+    <span class="n">user</span> <span class="o">=</span> <span class="n">get_current_user</span><span class="p">()</span>
+    <span class="n">chat_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;chatId&quot;</span><span class="p">))</span>
+    <span class="n">first_time</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;firstTime&quot;</span><span class="p">)</span>
+    <span class="n">user_msg</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;msg&quot;</span><span class="p">)</span>
+    <span class="n">date_time</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dateTime&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">chat_id</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">current_chat</span> <span class="o">=</span> <span class="n">Chat</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">chat_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">welcome_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">welcome_response</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">welcome_text</span><span class="p">,</span>
+            <span class="s2">&quot;date_time&quot;</span><span class="p">:</span> <span class="n">date_time</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">new_chat</span> <span class="o">=</span> <span class="n">Chat</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Chat_</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">chats</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">chat_json</span><span class="o">=</span><span class="n">dumps</span><span class="p">([</span><span class="n">welcome_response</span><span class="p">]),</span>
+            <span class="n">user_id</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_chat</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">current_chat</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">chats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">first_time</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">welcome_text</span> <span class="o">=</span> <span class="n">QUESTIONS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">full_name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">QUESTIONS</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">welcome_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Hi </span><span class="si">{</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="w"> </span><span class="si">}</span><span class="s2">, welcome to Shrink.io! Go ahead and send me a message.&quot;</span>
+
+            <span class="n">welcome_response</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">welcome_text</span><span class="p">,</span>
+                <span class="s2">&quot;date_time&quot;</span><span class="p">:</span> <span class="n">date_time</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">new_chat</span> <span class="o">=</span> <span class="n">Chat</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Chat_</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">chats</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">chat_json</span><span class="o">=</span><span class="n">dumps</span><span class="p">([</span><span class="n">welcome_response</span><span class="p">]),</span>
+                <span class="n">user_id</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_chat</span><span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">current_chat</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">chats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">existing_messages</span> <span class="o">=</span> <span class="n">current_chat</span><span class="o">.</span><span class="n">chat</span>
+    <span class="n">new_message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">user_msg</span><span class="p">,</span> <span class="s2">&quot;date_time&quot;</span><span class="p">:</span> <span class="n">date_time</span><span class="p">}</span>
+    <span class="n">existing_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_message</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">chat_history</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">format_chat_history_for_gpt</span><span class="p">(</span><span class="n">__chat</span><span class="p">)</span> <span class="k">for</span> <span class="n">__chat</span> <span class="ow">in</span> <span class="n">existing_messages</span>
+        <span class="p">]</span>
+
+        <span class="n">db_chats_history</span> <span class="o">=</span> <span class="n">get_previous_chats</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+
+        <span class="c1"># Prepare messages for OpenAI API</span>
+        <span class="n">messages</span> <span class="o">=</span> <span class="n">GPT_MESSAGES</span> <span class="o">+</span> <span class="n">db_chats_history</span> <span class="o">+</span> <span class="n">chat_history</span>
+
+        <span class="c1"># Interact with OpenAI GPT-4</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span> <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">)</span>
+        <span class="n">bot_response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bot_response</span> <span class="o">=</span> <span class="n">get_initial_chat_state_response</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+
+    <span class="n">new_message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">bot_response</span><span class="p">,</span> <span class="s2">&quot;date_time&quot;</span><span class="p">:</span> <span class="n">date_time</span><span class="p">}</span>
+    <span class="n">existing_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_message</span><span class="p">)</span>
+
+    <span class="n">current_chat</span><span class="o">.</span><span class="n">chat</span> <span class="o">=</span> <span class="n">existing_messages</span>
+
+    <span class="c1"># Update chat history</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current_chat</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="n">encoded_bot_response</span> <span class="o">=</span> <span class="n">html_encode</span><span class="p">(</span><span class="n">bot_response</span><span class="p">)</span>
+
+    <span class="c1"># Generate response avatar stream</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">API_URL</span> <span class="o">=</span> <span class="s2">&quot;https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base&quot;</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;HUGGINGFACE_API_KEY&quot;</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="n">token</span><span class="p">}</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="n">user_msg</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">API_URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Filter scores for list_labels</span>
+            <span class="n">emotions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;surprise&quot;</span><span class="p">,</span> <span class="s2">&quot;joy&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">]</span>
+            <span class="n">filtered_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">res</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">emotions</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">filtered_data</span><span class="p">:</span>
+                <span class="n">highest_score_label</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">])[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span>
+                <span class="n">emotion</span> <span class="o">=</span> <span class="n">highest_score_label</span>
+                <span class="k">if</span> <span class="n">emotion</span> <span class="o">==</span> <span class="s2">&quot;joy&quot;</span><span class="p">:</span>
+                    <span class="n">emotion</span> <span class="o">=</span> <span class="s2">&quot;happy&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">emotion</span> <span class="o">=</span> <span class="s2">&quot;neutral&quot;</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">emotion</span> <span class="o">=</span> <span class="s2">&quot;neutral&quot;</span>
+
+        <span class="n">avatar_video_url</span> <span class="o">=</span> <span class="n">get_avatar_video</span><span class="p">(</span><span class="n">bot_response</span><span class="p">,</span> <span class="n">emotion</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[D-ID Video Error]:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="n">avatar_video_url</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[avatar_video_url]:&quot;</span><span class="p">,</span> <span class="n">avatar_video_url</span><span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;encoded_bot_response&quot;</span><span class="p">:</span> <span class="n">encoded_bot_response</span><span class="p">,</span>
+        <span class="s2">&quot;avatar_video_url&quot;</span><span class="p">:</span> <span class="n">avatar_video_url</span><span class="p">,</span>
+        <span class="s2">&quot;emotion&quot;</span><span class="p">:</span> <span class="n">emotion</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="text-to-speech">
+<h2>Text To Speech<a class="headerlink" href="#text-to-speech" title="Link to this heading">#</a></h2>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">Frontend</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Audio</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">playingTarget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">toggleTextToSpeech</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span><span class="w"> </span><span class="c1">// Get the button element that was clicked</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">playingTarget</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">button</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">stopTextToSpeech</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">playingTarget</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">stopTextToSpeech</span><span class="p">(</span><span class="nx">playingTarget</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">playingTarget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">button</span>
+<span class="w">        </span><span class="nx">requestTextToSpeech</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">requestTextToSpeech</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">stopTextToSpeech</span><span class="p">();</span><span class="w"> </span><span class="c1">// Stop any previous audio</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">catch</span><span class="p">{}</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">synth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">speechSynthesis</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SpeechSynthesisUtterance</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">voices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">synth</span><span class="p">.</span><span class="nx">getVoices</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Change the button text to &quot;Stop TTS&quot;</span>
+<span class="w">    </span><span class="nx">button</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;||&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getVoices</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">voices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">synth</span><span class="p">.</span><span class="nx">getVoices</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">voices</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">synth</span><span class="p">.</span><span class="nx">onvoiceschanged</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">voices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">synth</span><span class="p">.</span><span class="nx">getVoices</span><span class="p">();</span>
+<span class="w">                </span><span class="nx">setVoice</span><span class="p">();</span>
+<span class="w">            </span><span class="p">};</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">setVoice</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setVoice</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">msg</span><span class="p">.</span><span class="nx">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">msg</span><span class="p">.</span><span class="nx">lang</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;en-US&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Enforcing a specific locale</span>
+
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">userAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;Edg&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Edge-specific adjustments</span>
+<span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.2</span><span class="p">;</span><span class="w"> </span><span class="c1">// Slightly slower rate for Edge (if needed)</span>
+<span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">pitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// Set pitch to normal for Edge</span>
+<span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">voice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">voices</span><span class="p">[</span><span class="mf">2</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">brave</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Brave-specific adjustments</span>
+<span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// Set rate to normal for Brave</span>
+<span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">pitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// Set pitch to normal for Brave</span>
+<span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">voice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">voices</span><span class="p">[</span><span class="mf">2</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Default for other browsers</span>
+<span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// Normal speed for others</span>
+<span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">pitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// Normal pitch for others</span>
+<span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">voice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">voices</span><span class="p">[</span><span class="mf">5</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nx">synth</span><span class="p">.</span><span class="nx">speak</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">getVoices</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// When the utterance ends, capture the audio</span>
+<span class="w">    </span><span class="nx">msg</span><span class="p">.</span><span class="nx">onend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">button</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;►&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">playingTarget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// Play the audio</span>
+<span class="w">    </span><span class="nx">audio</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;play&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Audio started playing&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// Ensure that play requests are not interrupted by simultaneous pause calls</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">playAudio</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Check if the audio is already playing</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">audio</span><span class="p">.</span><span class="nx">paused</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="nx">audio</span><span class="p">.</span><span class="nx">ended</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">audio</span><span class="p">.</span><span class="nx">play</span><span class="p">().</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error during play:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span><span class="w"> </span><span class="c1">// Catch and log any errors from the play request</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">stopTextToSpeech</span><span class="p">(</span><span class="nx">button</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">speechSynthesis</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span><span class="w"> </span><span class="c1">// Cancel the current speech synthesis</span>
+
+<span class="w">    </span><span class="c1">// Check if the audio is playing before pausing it</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">audio</span><span class="p">.</span><span class="nx">paused</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">audio</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span><span class="w"> </span><span class="c1">// Pause the audio element</span>
+<span class="w">        </span><span class="nx">audio</span><span class="p">.</span><span class="nx">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Reset the audio element</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">button</span><span class="p">){</span>
+<span class="w">        </span><span class="c1">// Change the button text to &quot;Start TTS&quot;</span>
+<span class="w">        </span><span class="nx">button</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;►&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">playingTarget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">buttons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;#btn-tts&#39;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Loop through each button and log its text content</span>
+<span class="w">        </span><span class="nx">buttons</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">button</span><span class="p">.</span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;►&quot;</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="record-voice-message-with-speech-to-text">
+<h2>Record Voice Message With Speech To Text<a class="headerlink" href="#record-voice-message-with-speech-to-text" title="Link to this heading">#</a></h2>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Frontend</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">Backend</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">navigator</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">mediaDevices</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">getUserMedia</span><span class="p">({</span><span class="nx">audio</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">})</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">stream</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handlerFunction</span><span class="p">(</span><span class="nx">stream</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
+<span class="w">    </span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Permission denied or another error occurred:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">handlerFunction</span><span class="p">(</span><span class="nx">stream</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">rec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MediaRecorder</span><span class="p">(</span><span class="nx">stream</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">rec</span><span class="p">.</span><span class="nx">ondataavailable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">audioChunks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">rec</span><span class="p">.</span><span class="nx">state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">blob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Blob</span><span class="p">(</span><span class="nx">audioChunks</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;audio/mpeg-3&#39;</span><span class="p">});</span>
+<span class="w">            </span><span class="nx">sendData</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">sendData</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">form</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FormData</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;data.mp3&#39;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Ensure &#39;data&#39; is a valid File object</span>
+
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/save_record&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">form</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">cache</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">processData</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">contentType</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">resultText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">textInput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;textInput&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">textInput</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">textInput</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resultText</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;Textarea not found&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}).</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error processing the file:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">toggleRecording</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;toggleRecording&#39;</span><span class="p">);</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">isRecording</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">audioChunks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+
+<span class="nx">toggleRecording</span><span class="p">.</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">isRecording</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Stop recording</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Recording stopped.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">toggleRecording</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;recording&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">rec</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Start recording</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Recording started.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">toggleRecording</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;recording&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">audioChunks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">        </span><span class="nx">rec</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">isRecording</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="nx">isRecording</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@views</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/save_record&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">save_record</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Audio File Transcription Endpoint</span>
+
+<span class="sd">    This endpoint accepts audio file uploads and transcribes them to text.</span>
+<span class="sd">    The audio file should be sent as a multipart form data with key &#39;file&#39;.</span>
+<span class="sd">    Only allowed audio file formats (as determined by allowed_file()) will be processed.</span>
+<span class="sd">    The audio data is processed in memory without saving to disk.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        A tuple containing two elements:</span>
+<span class="sd">        - First element: Either a JSON response with transcribed text or an error message string</span>
+<span class="sd">        - Second element: HTTP status code (200 for success, 400 for errors)</span>
+
+<span class="sd">    Example Response</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    Success: ({&quot;text&quot;: &quot;transcribed text content&quot;}, 200)</span>
+<span class="sd">    Error: (&quot;No file part&quot;, 400) or (&quot;Invalid file type&quot;, 400)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;file&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;No file part&quot;</span><span class="p">,</span> <span class="mi">400</span>
+
+    <span class="n">file</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">file</span> <span class="ow">and</span> <span class="n">allowed_file</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">file_bytes_data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">file_bytes_data</span><span class="p">)</span>  <span class="c1"># Read file data into memory</span>
+        <span class="n">buffer</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;file.mp3&quot;</span>
+        <span class="n">transcription</span> <span class="o">=</span> <span class="n">transcribe_audio</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>  <span class="c1"># Transcribe the audio in memory</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">transcription</span><span class="p">}),</span> <span class="mi">200</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid file type&quot;</span><span class="p">,</span> <span class="mi">400</span>
+
+
+<span class="k">def</span> <span class="nf">transcribe_audio</span><span class="p">(</span><span class="n">file_bytes</span><span class="p">:</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transcribe Audio to Text using OpenAI&#39;s Whisper Model</span>
+
+<span class="sd">    This function takes an audio file in bytes format and transcribes it to text</span>
+<span class="sd">    using OpenAI&#39;s Whisper ASR (Automatic Speech Recognition) model.</span>
+<span class="sd">    The file pointer is reset to the start before processing to ensure</span>
+<span class="sd">    complete file reading.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file_bytes : io.BytesIO</span>
+<span class="sd">        A BytesIO object containing the audio data to be transcribed.</span>
+<span class="sd">        The audio should be in a format supported by the Whisper model</span>
+<span class="sd">        (e.g., mp3, wav, m4a, etc.).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The transcribed text from the audio file.</span>
+<span class="sd">        Returns an empty string if transcription fails.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Uses OpenAI&#39;s &#39;whisper-1&#39; model for transcription</span>
+<span class="sd">    - Currently set to transcribe English language content only</span>
+<span class="sd">    - Requires valid OpenAI API credentials in the client object</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    Exception</span>
+<span class="sd">        May raise exceptions related to API calls, invalid audio format,</span>
+<span class="sd">        or authentication issues with the OpenAI client.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_bytes</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Reset pointer to the start of the file</span>
+    <span class="n">transcription</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">audio</span><span class="o">.</span><span class="n">transcriptions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;whisper-1&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file_bytes</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">transcription</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="d-id-avater">
+<h2>D-ID Avater<a class="headerlink" href="#d-id-avater" title="Link to this heading">#</a></h2>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-3-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-3-3-0" name="3-0" role="tab" tabindex="0">Frontend</button><button aria-controls="panel-3-3-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-3-3-1" name="3-1" role="tab" tabindex="-1">Backend</button></div><div aria-labelledby="tab-3-3-0" class="sphinx-tabs-panel" id="panel-3-3-0" name="3-0" role="tabpanel" tabindex="0"><div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// ============= [ D-ID Avater Default State ] ===============</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;videoFrame&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;ended&#39;</span><span class="p">,</span><span class="nx">myHandler</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">myHandler</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">video</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;videoFrame&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;videoSource&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">source</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../static/video/emma_idle.mp4&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">muted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">load</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="c1">// ============= [ End D-ID Avater Default State ] ===============</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">msgerForm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;.msger-inputarea&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">msgerInput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;.msger-input&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">msgerChat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;.msger-chat&quot;</span><span class="p">);</span>
+
+
+<span class="c1">// Icons made by Freepik from www.flaticon.com</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">BOT_IMG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://visualpharm.com/assets/825/Bot-595b40b65ba036ed117d3818.svg&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">PERSON_IMG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{{ url_for(&#39;views.get_image&#39;, username=user.username) }}&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">BOT_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Shrink.io&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">PERSON_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;You&quot;</span><span class="p">;</span>
+<span class="nx">firstTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="nx">chatId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">;</span>
+
+<span class="c1">// Load previous chats</span>
+<span class="nx">messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="nx">chat_data</span><span class="o">|</span><span class="nx">tojson</span><span class="o">|</span><span class="nx">safe</span><span class="w"> </span><span class="p">}};</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">messages</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">chatId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="nx">chat_id</span><span class="w"> </span><span class="p">}};</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">chat</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">messages</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">([</span><span class="s2">&quot;assistant&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;bot&quot;</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="nx">chat</span><span class="p">.</span><span class="nx">identifier</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="nx">BOT_NAME</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">BOT_IMG</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;left&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="nx">PERSON_NAME</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">PERSON_IMG</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;right&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">appendMessage</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="nx">side</span><span class="p">,</span><span class="w"> </span><span class="nx">chat</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">chat</span><span class="p">.</span><span class="nx">date_time</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">msgerForm</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;submit&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">msgText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msgerInput</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">msgText</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">appendMessage</span><span class="p">(</span><span class="nx">PERSON_NAME</span><span class="p">,</span><span class="w"> </span><span class="nx">PERSON_IMG</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;right&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">msgText</span><span class="p">,</span><span class="w"> </span><span class="nx">formatDate</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">()));</span>
+<span class="w">    </span><span class="nx">msgerInput</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">botResponse</span><span class="p">(</span><span class="nx">msgText</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+<span class="c1">// ============= [ Play D-ID Avater Stream ] ===============</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">videoURL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">video</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;videoFrame&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;videoSource&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// video.pause();</span>
+
+<span class="w">    </span><span class="nx">source</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">videoURL</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">muted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">load</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">video</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// ============= [ End Play D-ID Avater Stream ] ===============</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-3-1" class="sphinx-tabs-panel" hidden="true" id="panel-3-3-1" name="3-1" role="tabpanel" tabindex="0"><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_avatar_video</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">emotion</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate an avatar video with a given emotion and text</span>
+
+<span class="sd">    This function interacts with the D-ID API to generate a video where</span>
+<span class="sd">    a given avatar speaks the provided text with the specified emotion.</span>
+<span class="sd">    It returns the URL of the generated video.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str</span>
+<span class="sd">        The text that the avatar will speak.</span>
+<span class="sd">    emotion : str</span>
+<span class="sd">        The emotion (e.g., &quot;happy&quot;, &quot;sad&quot;) to apply to the avatar&#39;s expression.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The URL of the generated avatar video.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; get_avatar_video(&quot;Hello, how are you?&quot;, &quot;happy&quot;)</span>
+<span class="sd">    &#39;https://api.d-id.com/talks/xyz/result.mp4&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">load_dotenv</span><span class="p">()</span>
+    <span class="n">D_ID_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;D_ID_API_KEY&quot;</span><span class="p">)</span>
+
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;source_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://create-images-results.d-id.com/DefaultPresenters/Emma_f/thumbnail.jpeg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;script&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+            <span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;microsoft&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;voice_id&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US-JennyNeural&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;driver_expressions&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;expressions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span><span class="s2">&quot;start_frame&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;expression&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">emotion</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;intensity&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;accept&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Basic </span><span class="si">{</span><span class="n">D_ID_API_KEY</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://api.d-id.com/talks&quot;</span>
+
+    <span class="n">talks_response_json</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="n">talks_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">talks_response_json</span> <span class="o">=</span> <span class="n">talks_response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">talks_response_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">response_json</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">response_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result_url&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="util-decorator">
+<h2>Util Decorator<a class="headerlink" href="#util-decorator" title="Link to this heading">#</a></h2>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-4-4-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-4-4-0" name="4-0" role="tab" tabindex="0">Backend</button></div><div aria-labelledby="tab-4-4-0" class="sphinx-tabs-panel" id="panel-4-4-0" name="4-0" role="tabpanel" tabindex="0"><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">restricted_route_decorator</span><span class="p">(</span><span class="n">check_session</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restricted Route Decorator</span>
+
+<span class="sd">    Check if the user session is valid, if not,</span>
+<span class="sd">    it redirected to 404.</span>
+<span class="sd">    In addition, the decorator check if the user exists,</span>
+<span class="sd">    if not, will be redirected to index page.</span>
+
+<span class="sd">    Must define endpoint for each route using this decorator.</span>
+<span class="sd">    The decorator should be right above the function in</span>
+<span class="sd">    order to run properly.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : Callable</span>
+<span class="sd">        The function to wrap with authentication checking.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+        <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">check_session</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;username&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.index&quot;</span><span class="p">))</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.index&quot;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">current_user</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">):</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The page you where looking for could not be found.&quot;</span>
+                    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;404.html&quot;</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="n">msg</span><span class="p">),</span> <span class="mi">404</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">get_current_user</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;views.index&quot;</span><span class="p">))</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="js.index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Index</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">User Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chat">Chat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-to-speech">Text To Speech</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#record-voice-message-with-speech-to-text">Record Voice Message With Speech To Text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-id-avater">D-ID Avater</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#util-decorator">Util Decorator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/orizem/ShrinkGPT.github.io/edit/main/important_functions.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/important_functions.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Ori Tsemach, Eldar Garrett, Sahar Amar.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

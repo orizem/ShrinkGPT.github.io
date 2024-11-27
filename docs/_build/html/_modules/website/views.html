@@ -326,6 +326,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">io</span>
 <span class="kn">import</span> <span class="nn">pytz</span>
+<span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">threading</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
@@ -344,10 +345,6 @@
     <span class="n">abort</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-
-<span class="c1"># from transformers import AutoTokenizer, AutoModelForSequenceClassification</span>
-<span class="c1"># from torch.nn.functional import softmax</span>
-<span class="c1"># from torch import argmax</span>
 
 <span class="c1"># LOCAL IMPORTS</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Chat</span>
@@ -380,12 +377,6 @@
     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;docs/_build/html&quot;</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="n">STATIC_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DOCS_PATH</span><span class="p">,</span> <span class="s2">&quot;_static&quot;</span><span class="p">)</span>
-
-<span class="c1"># tokenizer = AutoTokenizer.from_pretrained(&quot;nateraw/bert-base-uncased-emotion&quot;)</span>
-<span class="c1"># model = AutoModelForSequenceClassification.from_pretrained(</span>
-<span class="c1">#     &quot;nateraw/bert-base-uncased-emotion&quot;</span>
-<span class="c1"># )</span>
-
 
 <span class="c1"># ROUTES</span>
 <div class="viewcode-block" id="index">
@@ -702,18 +693,32 @@
     <span class="n">encoded_bot_response</span> <span class="o">=</span> <span class="n">html_encode</span><span class="p">(</span><span class="n">bot_response</span><span class="p">)</span>
 
     <span class="c1"># Generate response avatar stream</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># Get emotion classification</span>
-        <span class="c1"># inputs = tokenizer(user_msg, return_tensors=&quot;pt&quot;)</span>
-        <span class="c1"># outputs = model(**inputs)</span>
-        <span class="c1"># probs = softmax(outputs.logits, dim=-1)</span>
-
-        <span class="c1"># # Map to emotion labels</span>
-        <span class="c1"># emotions = [&quot;surprise&quot;, &quot;happy&quot;, &quot;serious&quot;, &quot;neutral&quot;]</span>
-        <span class="c1"># max_index = argmax(probs, dim=1).item()</span>
-        <span class="c1"># emotion = emotions[max_index]</span>
-        <span class="n">emotion</span> <span class="o">=</span> <span class="s2">&quot;neutral&quot;</span>
-
+    <span class="k">try</span><span class="p">:</span>      
+        <span class="n">API_URL</span> <span class="o">=</span> <span class="s2">&quot;https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base&quot;</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;HUGGINGFACE_API_KEY&quot;</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="n">token</span><span class="p">}</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="n">user_msg</span><span class="p">,</span>
+        <span class="p">}</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">API_URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            
+            <span class="c1"># Filter scores for list_labels</span>
+            <span class="n">emotions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;surprise&quot;</span><span class="p">,</span> <span class="s2">&quot;joy&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">]</span>
+            <span class="n">filtered_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">res</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">emotions</span><span class="p">]</span>
+            
+            <span class="k">if</span> <span class="n">filtered_data</span><span class="p">:</span>
+                <span class="n">highest_score_label</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">])[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span>
+                <span class="n">emotion</span> <span class="o">=</span> <span class="n">highest_score_label</span>
+                <span class="k">if</span> <span class="n">emotion</span> <span class="o">==</span> <span class="s2">&quot;joy&quot;</span><span class="p">:</span>
+                    <span class="n">emotion</span> <span class="o">=</span> <span class="s2">&quot;happy&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">emotion</span> <span class="o">=</span> <span class="s2">&quot;neutral&quot;</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>    
+            <span class="n">emotion</span> <span class="o">=</span> <span class="s2">&quot;neutral&quot;</span>
+            
         <span class="n">avatar_video_url</span> <span class="o">=</span> <span class="n">get_avatar_video</span><span class="p">(</span><span class="n">bot_response</span><span class="p">,</span> <span class="n">emotion</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[D-ID Video Error]:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
