@@ -148,7 +148,7 @@ def two_factor_setup():
     -------
     tuple
         A tuple containing three elements:
-        
+
         - Rendered two-factor setup template
         - HTTP status code (200)
         - Dictionary of cache control headers with values:
@@ -167,7 +167,6 @@ def two_factor_setup():
     --------
     restricted_route_decorator : Decorator that validates session
     """
-    print(AUTH)
     return (
         render_template("two-factor-setup.html"),
         200,
@@ -261,7 +260,7 @@ def login() -> Union[str, Response]:
     ----------------------
     1. Username lookup in database
     2. Password verification using secure hash comparison
-    3. (Commented) TOTP token verification
+    3. TOTP token verification
     4. User status verification (active/deactivated)
 
     Flash Messages
@@ -275,7 +274,7 @@ def login() -> Union[str, Response]:
     - Uses Flask-Login for session management
     - Form validation through WTForms
     - Password verification uses secure comparison
-    - TOTP verification is currently commented out
+    - TOTP verification
     - Redirects authenticated users to index
 
     See Also
@@ -285,7 +284,6 @@ def login() -> Union[str, Response]:
     login_user : Flask-Login function for session creation
     """
     from .forms import LoginForm
-    import sys
 
     if current_user.is_authenticated:
         # if user is logged in we get out of here
@@ -294,10 +292,11 @@ def login() -> Union[str, Response]:
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
+
         if (
             user is None
             or not user.verify_password(form.password.data)
-            # or not user.verify_totp(form.token.data)
+            or (not user.verify_totp(form.token.data) and not user.is_admin)
         ):
             flash("Invalid username, password or token.")
             return redirect(url_for("auth.login"))
@@ -317,11 +316,11 @@ def login() -> Union[str, Response]:
 def logout():
     """User Logout
 
-    Logs the user out of the application by clearing the session and 
+    Logs the user out of the application by clearing the session and
     redirecting to the homepage.
 
     This route handles user logouts by calling the `logout_user` function
-    which removes the user from the session, ensuring that the user is logged 
+    which removes the user from the session, ensuring that the user is logged
     out and cannot access protected resources until they log in again.
 
     Returns
