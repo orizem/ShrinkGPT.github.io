@@ -46,18 +46,18 @@ def create_app():
     Bootstrap(app)
     
     # Define your SQLiteCloud connection string
-    sqlitecloud_connection_string = os.environ.get("SQLITE_CLOUD")
+    # sqlitecloud_connection_string = os.environ.get("SQLITE_CLOUD")
 
     # Use sqlitecloud to establish the connection
-    conn = sqlitecloud.connect(sqlitecloud_connection_string)
+    # conn = sqlitecloud.connect(sqlitecloud_connection_string)
 
     # Create an engine manually with SQLite cloud connection
-    engine = create_engine('sqlite://', creator=lambda: conn)
+    # engine = create_engine('sqlite://', creator=lambda: conn)
 
     # Set up Flask app config
     # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("SQLALCHEMY_DATABASE_CLOUD")
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # SQLite URI is required for Flask-SQLAlchemy
-    app.config['SQLALCHEMY_ENGINE'] = engine  # Use the custom engine
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # SQLite URI is required for Flask-SQLAlchemy
+    # app.config['SQLALCHEMY_ENGINE'] = engine  # Use the custom engine
 
     db.init_app(app)
 
