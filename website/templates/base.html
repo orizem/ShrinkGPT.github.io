@@ -50,31 +50,31 @@ function googleTranslateElementInit() {
       <a
         class="navbar-brand"
         style="font-size: 35px"
-        href="{{ url_for('views.index') }}"
+        href="{{ url_for('views.index') }}" id="navB"
         >Shrink.io</a
       >
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         {% if current_user.is_admin %}
-          <li><a href="{{ url_for('admin.admin_dashboard') }}">Admin</a></li>
-          <li><a href="{{ url_for('admin.api_keys_form') }}">APIs</a></li>
+          <li><a href="{{ url_for('admin.admin_dashboard') }}" id="navB-admin_dashboard">Admin</a></li>
+          <li><a href="{{ url_for('admin.api_keys_form') }}" id="navB-api">APIs</a></li>
         {% endif %}
         
-        <li><a href="{{ url_for('views.reviews') }}">Reviews</a></li>
+        <li><a href="{{ url_for('views.reviews') }}" id="navB-review">Reviews</a></li>
         <li><a href="{{ url_for('views.docs_index') }}" target="_blank">Docs</a></li>
         
         {% if current_user.is_authenticated %}
           <li>
-            <a href="{{ url_for('views.profile') }}"
+            <a href="{{ url_for('views.profile') }}" id="navB-profile"
               >{{ current_user.username.title() }}</a
             >
           </li>
-          <li><a href="{{ url_for('views.chat') }}">Chat</a></li>
+          <li><a href="{{ url_for('views.chat') }}" id="navB-chat">Chat</a></li>
           <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
         {% else %}
-          <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
-          <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+          <li><a href="{{ url_for('auth.login') }}" id="navB-login">Log In</a></li>
+          <li><a href="{{ url_for('auth.register') }}" id="navB-register">Register</a></li>
         {% endif %}
       </ul>
     </div>
@@ -133,6 +133,17 @@ function googleTranslateElementInit() {
     font-size: 100px;
     transition: color var(--transition-speed) ease;
   }
+
+  .nav_active {
+    background-color: var(--border-color);
+    color: var(--text-color) !important;
+    font-weight: bold !important;
+    font-size: 18px;
+  }
+
+  .nav_active:hover {
+    color: var(--background-color) !important;
+  }
 </style>
 
 <script>
@@ -145,6 +156,43 @@ function googleTranslateElementInit() {
         loadingScreen.style.display = "none"; // Hide after fade-out
     }, 500); // Match the duration of the fade-out
   };
+
+  // Define the route names
+  const routeNames = [
+      "/", "admin_dashboard", "api", "review", "profile", "chat", "login", "register"
+  ];
+
+  // Define the base ID prefix
+  const baseId = "navB";
+
+  // Dynamically create the mapping of routes to IDs
+  const routeToIdMap = routeNames.reduce((map, route) => {
+      const id = route === "/" ? `${baseId}` : `${baseId}-${route}`;
+      map[route === "/" ? route : `/${route}`] = id; // Add the route and ID to the map
+      return map;
+  }, {});
+
+  // Get the current route
+  const currentRoute = window.location.pathname;
+
+  // Find the ID corresponding to the current route
+  const currentId = routeToIdMap[currentRoute];
+
+  if (currentId) {
+      // Select the <a> tag with the corresponding ID
+      const activeLink = document.querySelector(`a[id="${currentId}"]`);
+      
+      if (activeLink) {
+          // Highlight the active link
+          activeLink.classList.add("nav_active");
+      } else {
+          console.error(`No <a> tag found with ID: ${currentId}`);
+      }
+  } else {
+      console.warn(`No mapping found for route: ${currentRoute}`);
+  }
+
+
 </script>
 
 
