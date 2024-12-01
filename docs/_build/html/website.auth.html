@@ -405,7 +405,7 @@ with commented infrastructure for TOTP-based two-factor authentication.</p>
 <ol class="arabic simple">
 <li><p>Username lookup in database</p></li>
 <li><p>Password verification using secure hash comparison</p></li>
-<li><p>(Commented) TOTP token verification</p></li>
+<li><p>TOTP token verification</p></li>
 <li><p>User status verification (active/deactivated)</p></li>
 </ol>
 </section>
@@ -423,7 +423,7 @@ with commented infrastructure for TOTP-based two-factor authentication.</p>
 <li><p>Uses Flask-Login for session management</p></li>
 <li><p>Form validation through WTForms</p></li>
 <li><p>Password verification uses secure comparison</p></li>
-<li><p>TOTP verification is currently commented out</p></li>
+<li><p>TOTP verification</p></li>
 <li><p>Redirects authenticated users to index</p></li>
 </ul>
 </section>
@@ -439,10 +439,10 @@ login_user : Flask-Login function for session creation</p>
 <dt class="sig sig-object py" id="website.auth.logout">
 <span class="sig-prename descclassname"><span class="pre">website.auth.</span></span><span class="sig-name descname"><span class="pre">logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/website/auth.html#logout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#website.auth.logout" title="Link to this definition">#</a></dt>
 <dd><p>User Logout</p>
-<p>Logs the user out of the application by clearing the session and 
+<p>Logs the user out of the application by clearing the session and
 redirecting to the homepage.</p>
 <p>This route handles user logouts by calling the <cite>logout_user</cite> function
-which removes the user from the session, ensuring that the user is logged 
+which removes the user from the session, ensuring that the user is logged
 out and cannot access protected resources until they log in again.</p>
 <section id="id1">
 <h2>Returns<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
