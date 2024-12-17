@@ -350,37 +350,39 @@ def get_bot_response():
     encoded_bot_response = html_encode(bot_response)
 
     # Generate response avatar stream
-    try:      
-        API_URL = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
-        token = os.environ.get("HUGGINGFACE_API_KEY")
-        headers = {"Authorization": token}
-        payload = {
-            "inputs": user_msg,
-        }
-        
-        try:
-            response = requests.post(API_URL, headers=headers, json=payload)
-            res = response.json()[0]
+    avatar_video_url = ""
+    if user.status == 0:
+        try:      
+            API_URL = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
+            token = os.environ.get("HUGGINGFACE_API_KEY")
+            headers = {"Authorization": token}
+            payload = {
+                "inputs": user_msg,
+            }
             
-            # Filter scores for list_labels
-            emotions = ["surprise", "joy", "neutral"]
-            filtered_data = [item for item in res if item['label'] in emotions]
-            
-            if filtered_data:
-                highest_score_label = max(filtered_data, key=lambda x: x['score'])['label']
-                emotion = highest_score_label
-                if emotion == "joy":
-                    emotion = "happy"
-            else:
+            try:
+                response = requests.post(API_URL, headers=headers, json=payload)
+                res = response.json()[0]
+                
+                # Filter scores for list_labels
+                emotions = ["surprise", "joy", "neutral"]
+                filtered_data = [item for item in res if item['label'] in emotions]
+                
+                if filtered_data:
+                    highest_score_label = max(filtered_data, key=lambda x: x['score'])['label']
+                    emotion = highest_score_label
+                    if emotion == "joy":
+                        emotion = "happy"
+                else:
+                    emotion = "neutral"
+            except Exception:    
                 emotion = "neutral"
-        except Exception:    
-            emotion = "neutral"
-            
-        avatar_video_url = get_avatar_video(bot_response, emotion)
-    except Exception as e:
-        print("[D-ID Video Error]:", e)
-        avatar_video_url = ""
-    print("[avatar_video_url]:", avatar_video_url)
+                
+            avatar_video_url = get_avatar_video(bot_response, emotion)
+        except Exception as e:
+            print("[D-ID Video Error]:", e)
+            avatar_video_url = ""
+        print("[avatar_video_url]:", avatar_video_url)
 
     response = {
         "encoded_bot_response": encoded_bot_response,
