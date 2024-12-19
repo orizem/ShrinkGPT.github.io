@@ -55,7 +55,7 @@ html_theme_options = {
     "logo": {
         "alt_text": "Shrink.io - Home",
         "text": "Shrink.io",
-        "link": "https://shrink-io-app-565593111121.me-west1.run.app",
+        "link": "https://shrink-io-19049486935.us-central1.run.app",
     },
     "use_edit_page_button": True,
     "icon_links": [
