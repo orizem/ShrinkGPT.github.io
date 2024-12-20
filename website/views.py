@@ -351,6 +351,7 @@ def get_bot_response():
 
     # Generate response avatar stream
     avatar_video_url = ""
+    emotion = "neutral"
     if user.status == 0:
         try:      
             API_URL = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
